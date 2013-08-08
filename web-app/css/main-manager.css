@@ -1,0 +1,45 @@
+body {
+    font-size: 12px;
+    padding-bottom: 40px;
+}
+
+.clear {
+    clear: both;
+}
+
+.dn {
+    display: none
+}
+.sidebar-nav {
+    padding: 9px 0;
+}
+.student-split{
+    border-bottom: 1px solid #E5E5E5;
+    margin-bottom: 18px;
+}
+label.valid {
+    width: 24px;
+    height: 24px;
+    background: url(../img/valid.png) center center no-repeat;
+    display: inline-block;
+    text-indent: -9999px;
+}
+label.error {
+    font-weight: bold;
+    color: red;
+    padding: 2px 8px;
+    margin-top: 2px;
+}
+
+.bm-search{
+    width:310px;
+    float: left;
+}
+.bm-search3{
+    width: auto;
+}
+.bm-search .search-lb{
+    width: 70px;
+    float: left;
+    padding-top: 5px;
+}

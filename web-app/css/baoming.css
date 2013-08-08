@@ -1,0 +1,452 @@
+
+#header {
+
+}
+
+.header-area {
+    background: url("../images/head_bg.jpg") repeat-x scroll center top transparent;
+    height: 85px;
+}
+
+#container {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-bottom: 1px solid #F0F1F3;
+    border-right: 1px solid #F0F1F3;
+    margin: 0 auto;
+    width: 1004px;
+}
+
+#headerLogo{
+    margin: 0 auto;
+    width: 1004px;
+    position: relative;
+    height: 85px;
+    background: url("../images/head_bg.jpg") repeat-x scroll center top transparent;
+ }
+
+#headerLogo a{
+    color: #fff;
+}
+
+#footer {
+    border-top: 1px solid #BBBBBB;
+    height: auto;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 0 0 50px;
+    width: 1004px;
+    color: #888888;
+}
+
+.content_left {
+
+    background: #F0F5FA;
+    border-color: -moz-use-text-color #D9DCE2 #D9DCE2;
+    border: 1px solid #D9DCE2;
+    border-style: none solid solid;
+    border-width: medium 1px 1px;
+    box-shadow: 0 2px 3px #D9DCE2;
+    height: 575px;
+    width: 220px;
+}
+
+.content_right {
+    min-height: 575px;
+    margin-right: 41px;
+    width: 700px;
+}
+
+.a {
+    background: url("../images/sidebar-bg.png") no-repeat left top rgb(235, 242, 250);
+    border-width: medium 1px 1px;
+    border-style: none solid solid;
+    border-color: currentColor rgb(212, 212, 212) rgb(170, 170, 170);
+    width: 220px;
+    height: 590px;
+    margin-top: -2px;
+    margin-right: 35px;
+    float: left;
+    position: relative;
+    box-shadow: 0px 1px 1px #ccc;
+}
+
+.login-form {
+    padding: 35px 15px 15px;
+}
+.login-form .caps-lock-tips {
+    height: 114px;
+    left: 15px;
+    margin-left: 5px;
+    position: absolute;
+    top: 110px;
+    width: 189px;
+    z-index: 1;
+}
+.login-form dl {
+    line-height: 20px;
+    position: relative;
+}
+.login-form dl.pwd {
+    margin: 15px 0 0;
+}
+.login-form dl.savepassword {
+    margin: 5px 0;
+}
+.login-form dl.top label, .login-form dl.pwd label {
+    background: url("../images/ico.png") no-repeat scroll 8px -84px transparent;
+    height: 25px;
+    left: 4px;
+    position: absolute;
+    text-indent: -9999em;
+    top: 4px;
+    width: 25px;
+    z-index: 2;
+}
+.login-form dl.pwd label {
+    background-position: 8px -112px;
+}
+.login-form dl.pwd .pwdtip, .login-form dl.code .codetip {
+    background: none repeat scroll 0 0 transparent;
+    color: #888888;
+    cursor: text;
+    font-size: 14px;
+    font-weight: normal;
+    left: 30px;
+    position: absolute;
+    text-indent: 0;
+    top: 7px;
+    visibility: visible;
+    width: 100px;
+}
+
+.login-form dl.top dd, .login-form dl.pwd dd, .login-form dl.code dd {
+    background: #FFFFFF;
+    border: 1px solid #ADB6C9;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 0 1px #FFFFFF;
+    height: 32px;
+    padding: 1px;
+    position: relative;
+    width: 186px;
+}
+.forgetPwd {
+    background-color: #67A54B;
+    border-radius: 3px 3px 3px 3px;
+    bottom: 3px;
+    color: #FFFFFF;
+    display: none;
+    height: 22px;
+    position: absolute;
+    right: 3px;
+    text-align: center;
+    width: 66px;
+}
+.login-form .getpassword {
+    float: right;
+    margin-top: 3px;
+}
+.login-form .labelCheckbox {
+    color: #333333;
+    float: left;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 27px;
+}
+.login-form .labelCheckbox input {
+    margin-right: 5px;
+    width: 13px;
+}
+.login-form .input-text {
+    background: none repeat scroll 0 0 transparent;
+    border: medium none;
+    font-size: 14px;
+    height: 32px;
+    line-height: 32px;
+    margin: 0 0 0 30px;
+    padding: 0;
+    width: 155px;
+}
+
+.login-form .errors_div {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    color: #E83827;
+    font-weight: bold;
+    left: 0;
+    margin: 0;
+    padding: 0 0 0 5px;
+    position: absolute;
+    text-align: center;
+    top: -25px;
+    width: 100%;
+}
+
+.login-btn {
+    background: url("../images/btn.png") no-repeat scroll 0 0 transparent;
+    border: medium none;
+    cursor: pointer;
+    height: 38px;
+    text-indent: -9999em;
+    width: 190px;
+}
+
+
+#regnow {
+    background-position: 0 -38px;
+    border: medium none;
+    padding: 0 0 3px;
+}
+.regnow {
+    background: url("../images/border.png") repeat-x scroll left top transparent;
+    margin: 0 15px;
+    padding: 17px 0 15px;
+}
+.login-btn {
+    background: url("../images/btn.png") no-repeat scroll 0 0 transparent;
+    border: medium none;
+    cursor: pointer;
+    height: 38px;
+    text-indent: -9999em;
+    width: 190px;
+}
+
+.reg-content{
+    display: inline;
+    height: 560px;
+    margin: 29px 0 0 74px;
+}
+
+.reg-header {
+    border-bottom: 1px solid #E8E8E8;
+    color: #005EAC;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0 20px 5px;
+    padding: 10px 0;
+}
+.reg_box {
+    padding:10px 0;
+}
+.reg_box li {
+    float: left;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.reg_box li .reg_tit {
+    width: 130px;
+}
+.reg_tit {
+    float: left;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: normal;
+    height: 28px;
+    line-height: 28px;
+    vertical-align: middle;
+    text-align: right;
+}
+.reg_element {
+    float: left;
+    position: relative;
+    width: 440px;
+}
+
+.reg_element .success input,.reg_element .success areatext,.reg_element .success select{
+    border-color: #468847;
+    color: #468847;
+}
+
+.reg_element .error input,.reg_element .error areatext,.reg_element .error select{
+    color: #B94A48;
+    border-color: #B94A48;
+}
+
+
+.reg_element label.valid{
+    width: 24px;
+    height: 24px;
+    background: url(../img/valid.png) center center no-repeat;
+    display: inline-block;
+    text-indent: -9999px;
+}
+
+.reg-content select {
+    border: 1px solid #BDC7D8;
+    font-size: 12px;
+    padding: 2px 3px;
+    vertical-align: middle;
+}
+
+.reg-content .txt{
+    border: 1px solid #BDC7D8;
+    font-size: 15px;
+    height: 18px;
+    line-height: 18px;
+    padding: 5px 4px;
+    vertical-align: middle;
+    width: 212px;
+}
+
+
+.regbtn {
+    background: url("../images/sub.gif") no-repeat scroll 0 0 transparent;
+    border: 0 none;
+    cursor: pointer;
+    display: block;
+    height: 40px;
+    margin: 10px 0;
+    text-indent: -9999em;
+    width: 130px;
+}
+
+.info-result {
+    background: #FFF9D7;
+    border: 1px solid #D8D8CF;
+    margin-bottom: 12px;
+    padding: 8px 2px;
+}
+
+.info-success {
+    border: 1px solid #D8D8CF;
+    padding: 20px;
+    width: 400px;
+    height: 50px;
+    margin-bottom: 12px;
+    margin: 0 auto;
+}
+
+label.valid {
+    width: 24px;
+    height: 24px;
+    background: url(../img/valid.png) center center no-repeat;
+    display: inline-block;
+    text-indent: -9999px;
+}
+label.error {
+    font-weight: bold;
+    color: red;
+    padding: 2px 8px;
+    margin-top: 2px;
+}
+
+.stu-left{
+    margin-right: 20px;
+    padding-top: 20px;
+    width: 159px;
+    min-height: 600px;
+}
+
+.stu-left li{
+    height: 24px;
+    line-height: 24px;
+}
+
+.stu-left li a{
+    padding-left: 25px;
+}
+
+.stu-right{
+    min-height: 600px;
+    width: 800px;
+    border-left: 1px solid #D9DCE2;
+    padding-left: 5px;
+    padding-bottom: 10px;
+
+}
+dl.login-button{
+    position: static;
+}
+.btn-large {
+    padding: 9px 0;
+    width:190px;
+    font-size: 15px;
+    line-height: normal;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+.btn {
+    border-color: #ccc;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+.btn {
+    background-color: #ffffff;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), color-stop(5%, #ffffff), to(#ffffff));
+    background-image: -webkit-linear-gradient(#ffffff, #ffffff 5%, #ffffff);
+    background-image: -moz-linear-gradient(top, #ffffff, #ffffff 5%, #ffffff);
+    background-image: -ms-linear-gradient(#ffffff, #ffffff 5%, #ffffff);
+    background-image: -o-linear-gradient(#ffffff, #ffffff 5%, #ffffff);
+    background-image: linear-gradient(#ffffff, #ffffff 5%, #ffffff);
+    background-repeat: no-repeat;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ffffff', GradientType=0);
+    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.btn-success {
+    background-color: #7bb33d;
+    background-image: -moz-linear-gradient(top, #80bb3f, #73a839);
+    background-image: -ms-linear-gradient(top, #80bb3f, #73a839);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#80bb3f), to(#73a839));
+    background-image: -webkit-linear-gradient(top, #80bb3f, #73a839);
+    background-image: -o-linear-gradient(top, #80bb3f, #73a839);
+    background-image: linear-gradient(top, #80bb3f, #73a839);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80bb3f', endColorstr='#73a839', GradientType=0);
+    border-color: #73a839 #73a839 #4c6f26;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    *background-color: #73a839;
+    /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+.btn-success:hover,
+.btn-success:active,
+.btn-success.active,
+.btn-success.disabled,
+.btn-success[disabled] {
+    background-color: #73a839;
+    *background-color: #669533;
+}
+.btn-success:active,
+.btn-success.active {
+    background-color: #59822c \9;
+}
+.btn:hover {
+    background-position: 0 0;
+}
+.btn-primary {
+    background-color: #43a1da;
+    background-image: -moz-linear-gradient(top, #4ba6db, #369bd7);
+    background-image: -ms-linear-gradient(top, #4ba6db, #369bd7);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4ba6db), to(#369bd7));
+    background-image: -webkit-linear-gradient(top, #4ba6db, #369bd7);
+    background-image: -o-linear-gradient(top, #4ba6db, #369bd7);
+    background-image: linear-gradient(top, #4ba6db, #369bd7);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4ba6db', endColorstr='#369bd7', GradientType=0);
+    border-color: #369bd7 #369bd7 #2071a1;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    *background-color: #369bd7;
+    /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary.disabled,
+.btn-primary[disabled] {
+    background-color: #369bd7;
+    *background-color: #288ecb;
+}
+.btn-primary:active,
+.btn-primary.active {
+    background-color: #2480b6 \9;
+}
+
+.stu-split{
+    border-bottom: 1px solid #E5E5E5;
+    padding-left: 18px;
+}
