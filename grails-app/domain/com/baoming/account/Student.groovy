@@ -66,6 +66,9 @@ class Student extends User{
     Date reviewDate //审核日期
     String reviewDescription //备注
 
+    Admission admission = Admission.NO   //录取状态
+    Registration registration = Registration.NO //报到 状态
+
     static hasMany = [studentPlans: StudentPlan]
 
     static constraints = {
@@ -74,7 +77,7 @@ class Student extends User{
         code(maxSize: 64, nullable: true)
         admissionTicketNumber(nullable: true, maxSize: 64,unique: true)
         birthday blank: false , nullable: true
-        number blank: false, maxSize: 18,unique: true
+        number blank: false, maxSize: 18
         politicalStatus nullable: true
         nation nullable: true
         address maxSize: 255  , nullable: true
@@ -124,6 +127,33 @@ class Student extends User{
             this.label = label
         }
     }
+
+    enum Admission {
+        OK(1,'录取'),
+        NO (2,'未录取')
+
+        Integer id
+        String label
+
+        Admission(Integer id,String label){
+            this.id = id
+            this.label = label
+        }
+    }
+
+    enum Registration {
+        OK(1,'报到'),
+        NO (2,'未报到')
+
+        Integer id
+        String label
+
+        Registration(Integer id,String label){
+            this.id = id
+            this.label = label
+        }
+    }
+
 
 /*
 GraduationType graduationType //毕业类别代码

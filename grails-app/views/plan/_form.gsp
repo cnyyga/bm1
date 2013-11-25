@@ -21,6 +21,16 @@
     </div>
 </div>
 
+<div class="control-group">
+    <label class="control-label" for="score">
+        <g:message code="plan.score.label" default="score" />
+    </label>
+
+    <div class="controls">
+        <g:textField name="score" value="${planInstance?.score}"/>
+    </div>
+</div>
+
 
 <div class="control-group">
     <label class="control-label" for="status">

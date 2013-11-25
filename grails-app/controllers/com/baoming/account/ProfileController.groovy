@@ -102,9 +102,10 @@ class ProfileController {
 
         if (!studentInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'student.label', default: 'Student'), id])
-            redirect(action: "list")
+            render(view: '/error')
             return
         }
+
 
         /*if(!planId){
             flash.message = "请选择专业"
@@ -136,6 +137,14 @@ class ProfileController {
         }
         if(district){
             studentInstance.district = district
+        }
+
+
+        def c = Student.countByAdmissionTicketNumberAndIdNotEqual(params.admissionTicketNumber,id)
+        if(c > 0) {
+            flash.message = message(code: 'student.admissionTicketNumber.not.unique.message')
+            render(view: v, model: [student: studentInstance])
+            return
         }
 
         def file = request.getFile("docPic")

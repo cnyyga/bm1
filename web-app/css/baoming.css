@@ -249,7 +249,7 @@
 .reg_element {
     float: left;
     position: relative;
-    width: 440px;
+    width: 540px;
 }
 
 .reg_element .success input,.reg_element .success areatext,.reg_element .success select{

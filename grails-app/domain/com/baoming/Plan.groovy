@@ -10,6 +10,7 @@ class Plan {
     String description //
     Status status
     Integer orderValue = 0
+    float score = 0 //需要报考的成绩线
     /*
     Batch batch //批次代码
     BranchCode branchCode //科类代码

@@ -77,7 +77,7 @@ $(function(){
     function schoolOpts(cityId) {
         var schoolUrl = $("#schoolUrl").val();
         var selectedId =  $("#schoolUrl").attr("title")
-        $("#middleSchooleId").load(schoolUrl+"?id="+cityId+"&selected="+selectedId);
+        $("#middleSchoolId").load(schoolUrl+"?id="+cityId+"&selected="+selectedId);
     }
 
     $("#paymentDate").datepicker({
@@ -127,12 +127,12 @@ $(function(){
             'nation.id':{
                 required: true
             },
-            districtId:{
-                required: true
-            },
-           // 'middleSchool.id':{
-           //     required: true
-           // },
+            //districtId:{
+               // required: true
+            //},
+           'middleSchoolId':{
+               required: true
+           },
             address:{
                 maxlength:80
             }

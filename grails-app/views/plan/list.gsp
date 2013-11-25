@@ -40,6 +40,7 @@
                         <th><g:message code="plan.code.label" default="Code" /></th>
 
                         <th><g:message code="plan.status.label" default="Status" /></th>
+                        <th><g:message code="plan.score.label" default="score" /></th>
                         
                         <th><g:message code="default.operator.label" default="Actions" /></th>
                     </tr>
@@ -54,6 +55,7 @@
                             <td class="center">${fieldValue(bean: planInstance, field: "code")}</td>
 
                             <td class="center">${planInstance.status.label}</td>
+                            <td class="center">${planInstance.score}</td>
                             
                             <td class="center">
                                     <g:link class="btn btn-success" action="show" id="${planInstance.id}">

@@ -64,6 +64,17 @@
                     </div>
                     </g:if>
 
+                    <div class="control-group">
+                        <label class="control-label">
+                            <g:message code="plan.score.label" default="score" />
+                        </label>
+                        <div class="controls">
+
+                            <span class="property-value" aria-labelledby="code-label">${planInstance.score}</span>
+
+                        </div>
+                    </div>
+
 
                     <div class="control-group">
                         <label class="control-label">

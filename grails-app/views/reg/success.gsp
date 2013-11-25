@@ -12,8 +12,8 @@
             </div>
 
                 <div class="info-success">
-                    <h3>恭喜您，注册成功！请尽快登陆完善您的信息！</h3>
-                    <p><g:link action="index" controller="login">跳转到登录页面</g:link></p>
+                    <h3>恭喜您，注册成功！</h3>
+                    <p><g:link action="index" controller="reg">重新注册</g:link></p>
                 </div>
 
 		</div>

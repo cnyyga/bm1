@@ -1,3 +1,4 @@
+<%@ page import="com.baoming.Plan" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,7 +58,7 @@
                 </div>
             </li>
 
-            <li class="password">
+          %{--  <li class="password">
                 <label class="reg_tit"><g:message code="user.password.label"/>：<span class="required-indicator">*</span></label>
 
                 <div class="reg_element">
@@ -65,7 +66,7 @@
                         <input type="password" name="password" class="txt" data-result="">
                     </span>
                 </div>
-            </li>
+            </li>--}%
             <li class="name">
                 <label class="reg_tit"><g:message code="student.name.label"/>：<span class="required-indicator">*</span></label>
 
@@ -76,7 +77,67 @@
                     </span>
                 </div>
             </li>
-            <li class="name">
+            <li class="code">
+                <label class="reg_tit"><g:message code="student.code.label"/>：<span class="required-indicator">*</span></label>
+
+                <div class="reg_element">
+                    <span class="inp_box">
+                        <input type="text" name="code" class="txt" data-result="" value="${student?.code}">
+                    </span>
+                </div>
+            </li>
+            <li class="score">
+                <label class="reg_tit"><g:message code="student.score.label"/>：<span class="required-indicator">*</span></label>
+
+                <div class="reg_element">
+                    <span class="inp_box">
+                        <input type="text" name="score" class="txt" data-result="" value="${student?.score}">
+                    </span>
+                </div>
+            </li>
+            <g:set var="sps" value="${planIds}"/>
+            <li class="planId1">
+                <label class="reg_tit"><g:message code="student.plans.label"/>1：<span class="required-indicator">*</span></label>
+
+                <div class="reg_element">
+                    <span class="inp_box">
+                        <g:select name="planId" id="planId1"  noSelection="${['':'请选择']}" from="${com.baoming.Plan.findAllByStatus(Plan.Status.RUNNING)}" optionValue="name" optionKey="id" value="${(sps && sps[0])?sps[0]:''}" />
+                    </span>
+                </div>
+            </li>
+            <li class="planId2">
+                <label class="reg_tit"><g:message code="student.plans.label"/>2：<span class="required-indicator">*</span></label>
+
+                <div class="reg_element">
+                    <span class="inp_box">
+                        <g:select name="planId" id="planId2"  noSelection="${['':'请选择']}" from="${com.baoming.Plan.findAllByStatus(Plan.Status.RUNNING)}" optionValue="name" optionKey="id" value="${(sps && sps[1])?sps[1]:''}"/>
+                    </span>
+                </div>
+            </li>
+            <li class="planId3">
+                <label class="reg_tit"><g:message code="student.plans.label"/>3：<span class="required-indicator">*</span></label>
+
+                <div class="reg_element">
+                    <span class="inp_box">
+                        <g:select name="planId" id="planId3"  noSelection="${['':'请选择']}" from="${com.baoming.Plan.findAllByStatus(Plan.Status.RUNNING)}" optionValue="name" optionKey="id" value="${(sps && sps[2])?sps[2]:''}"/>
+                    </span>
+                </div>
+            </li>
+
+            <li class="middleSchoolId">
+                <label class="reg_tit"><g:message code="middleSchool.label"/>：<span class="required-indicator">*</span></label>
+
+                <div class="reg_element">
+                    <span class="inp_box">
+                        <g:select id="province" name="provinceId" from="${com.baoming.Province.list()}" optionValue="name" optionKey="code"  value="${student?.province?.code}" noSelection="['': '请选择']" class="many-to-one"/>
+                        <g:select id="city" name="cityId" from="${[]}"  value="${student?.city?.code}" class="many-to-one"/>
+                        <g:select id="district" name="districtId" from="${[]}"  value="${student?.district?.code}" class="many-to-one"/>
+                        <g:select name="middleSchoolId" from="${[]}"  noSelection="['': '请选择']"/>
+                    </span>
+                </div>
+            </li>
+
+            <li class="phone">
                 <label class="reg_tit"><g:message code="student.phone.label"/>：<span class="required-indicator">*</span></label>
 
                 <div class="reg_element">
@@ -85,7 +146,7 @@
                     </span>
                 </div>
             </li>
-            <li class="name">
+            <li class="qq">
                 <label class="reg_tit"><g:message code="student.qq.label"/>：<span class="required-indicator">*</span></label>
 
                 <div class="reg_element">
@@ -94,17 +155,7 @@
                     </span>
                 </div>
             </li>
-          %{--  <li class="live">
-                <label class="reg_tit"><g:message code="student.number.label"/>： <span class="required-indicator">*</span>
-                </label>
 
-                <div class="reg_element">
-                    <span class="inp_box">
-                        <g:textField name="number" value="${student?.number}" class="txt"/>
-                    </span>
-                </div>
-            </li>
---}%
             <li class="captchadiv">
                 <label class="reg_tit "><g:message code="reg.validate.code.label"/>：<span class="required-indicator">*</span></label>
 
@@ -131,5 +182,9 @@
         </div>
     </g:form>
 </div>
+<g:hiddenField name="cityUrl" value="${createLink(action: 'cityOpts',controller: 'api')}" title="${student?.city?.code}"  />
+<g:hiddenField name="districtUrl" value="${createLink(action: 'districtOpts',controller: 'api')}"  title="${student?.district?.code}" />
+<g:hiddenField name="schoolUrl" value="${createLink(action: 'schoolOpts',controller: 'api')}"  title="${student?.middleSchool?.id}" />
+
 </body>
 </html>

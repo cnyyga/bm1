@@ -26,7 +26,7 @@
         <div id="header">
             <div class="header-area">
                 <div id="headerLogo">
-                    <g:img dir="images" file="logo.jpg" height="74"/>
+                   %{-- <g:img dir="images" file="logo.jpg" height="74"/>--}%
                     <sec:ifAllGranted roles='ROLE_STUDENT'>
                     <div style="position: absolute;bottom: 5px;right: 5px;">
                       %{--  <g:link action="edit" controller="profile">修改资料</g:link>

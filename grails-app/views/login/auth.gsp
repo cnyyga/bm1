@@ -2,14 +2,13 @@
 <head>
 	<meta name='layout' content='mainReg'/>
 	<title><g:message code="springSecurity.login.title"/></title>
-    <g:javascript src="baoming.js"/>
+
 </head>
 
 <body>
-
-    <div class="content_left fl">
-
-        <form action="${postUrl}" class="login-form" id="loginForm" method="post">
+    <div class="" style="width:220px;height:350px;margin: 0 auto;border: 0;">
+        <h2 style="text-align: center;padding: 5px;color: #43A1DA">报名后台管理登录</h2>
+        <form action="${postUrl}" class="login-form" id="loginForm" method="post" style="padding-top: 15px;">
             <g:if test='${flash.message}'>
             <dl class="top clearfix">
                     <span style="display: block;" class="errors_div">${flash.message}</span>
@@ -19,7 +18,7 @@
                 <dt><label for="username">帐号:</label></dt>
                 <dd style="border-color: rgb(173, 182, 201);">
                     <input type="text" id="username" class="input-text" name="j_username" style="color: rgb(136, 136, 136);">
-                    <label for="username" id="pwdUsername" class="codetip" style="visibility: visible;">请输入身份证号</label>
+                    <label for="username" id="pwdUsername" class="codetip" style="visibility: visible;">请输入用户名</label>
                 </dd>
             </dl>
             <dl class="pwd clearfix">
@@ -45,11 +44,11 @@
                 <button class="btn-large btn btn-primary" type="submit">登录</button>
             </dl>
         </form>
-        <div class="regnow">
+        %{--<div class="regnow">
             <button class="btn-large btn btn-success" onclick="location.href='${createLink(action: 'index',controller: 'reg')}'">注册</button>
-        </div>
+        </div>--}%
     </div>
-    <div class="content_right fr">
+    %{--<div class="content_right fr">
         <div style="padding: 20px 5px;line-height:normal ;">
             <p style="text-align: center">
             <g:img dir="images" file="home.jpg"/>
@@ -58,6 +57,6 @@
             <g:set var="welcome" value="${welcome?welcome[0]:null}"/>
             ${welcome?.content}
         </div>
-    </div>
+    </div>--}%
 </body>
 </html>
