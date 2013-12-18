@@ -30,6 +30,18 @@
                 <h2> <g:message code="default.list.label" args="[entityName]" /></h2>
             </div>
             <div class="box-content">
+                <div class="span12 well">
+                    <g:form action="list" >
+                        <div class="bm-search">
+                            <label class="search-lb"><g:message code="student.name.label"/> ：</label>
+                            <g:textField name="name"  value="${params.name}"/>
+                        </div>
+
+                        <div class="span2">
+                            <g:submitButton name="sub" value="${message(code:'default.button.search.label')}" class="btn btn-small btn-primary" />
+                        </div>
+                    </g:form>
+                </div><!--/span-->
                 <table class="table table-bordered table-striped table-condensed">
                     <thead>
                     <tr>

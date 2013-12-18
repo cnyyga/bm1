@@ -1,18 +1,44 @@
 package com.baoming
 
+import com.baoming.account.Role
+import com.baoming.account.Teacher
+import grails.converters.JSON
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 import org.springframework.dao.DataIntegrityViolationException
 
 class PreppyController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-
+    def springSecurityService
     def index() {
         redirect(action: "list", params: params)
     }
 
     def list(Integer max) {
+        def userId = springSecurityService.authentication.principal?.id
+        def name = params.name
+        def list
+        def total
+        if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)) {
+             def teacher = Teacher.get(userId)
+            list = Preppy.createCriteria().list(params) {
+                eq('teacher',teacher)
+                if(name) {
+                    like('name',"%${name}%")
+                }
+            }
+            total = Preppy.createCriteria().count {
+                eq('teacher',teacher)
+                if(name) {
+                    like('name',"%${name}%")
+                }
+            }
+        } else {
+            list =  name?Preppy.findAllByNameLike("%${name}%",params):Preppy.list(params)
+            total = name?Preppy.countByNameLike("%${name}%"):Preppy.count()
+        }
         params.max = Math.min(max ?: 10, 100)
-        [preppyInstanceList: Preppy.list(params), preppyInstanceTotal: Preppy.count()]
+        [preppyInstanceList: list, preppyInstanceTotal: total]
     }
 
     def create() {
@@ -21,6 +47,12 @@ class PreppyController {
 
     def save() {
         def preppyInstance = new Preppy(params)
+        def userId = springSecurityService.authentication.principal?.id
+        if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)) {
+            def teacher = Teacher.get(userId)
+            preppyInstance.teacher = teacher
+        }
+
         if (!preppyInstance.save(flush: true)) {
             render(view: "create", model: [preppyInstance: preppyInstance])
             return
@@ -82,21 +114,41 @@ class PreppyController {
     }
 
     def delete(Long id) {
-        def preppyInstance = Preppy.get(id)
+        def preppyInstance
+        if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)) {
+            def userId = springSecurityService.authentication.principal?.id
+            def teacher = Teacher.get(userId)
+            preppyInstance.teacher = teacher
+            preppyInstance = Preppy.findByIdAndTeacher(id,teacher)
+        }else{
+            preppyInstance = Preppy.get(id)
+        }
         if (!preppyInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'preppy.label', default: 'Preppy'), id])
-            redirect(action: "list")
+            if(params.act) {
+                redirect(action: 'list')
+                return
+            }
+            render(([status:0] as JSON) as String )
             return
         }
 
         try {
             preppyInstance.delete(flush: true)
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'preppy.label', default: 'Preppy'), id])
-            redirect(action: "list")
+            if(params.act) {
+                redirect(action: 'list')
+                return
+            }
+            render(([status:1] as JSON) as String )
         }
         catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'preppy.label', default: 'Preppy'), id])
-            redirect(action: "show", id: id)
+            if(params.act) {
+                redirect(action: 'list')
+                return
+            }
+            render(([status:0] as JSON) as String )
         }
     }
 }

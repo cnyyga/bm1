@@ -27,7 +27,7 @@
     </label>
 
     <div class="controls">
-        <g:select name="gender" from="${com.baoming.account.User$Gender?.values()}" keys="${com.baoming.account.User$Gender.values()*.name()}" required="" value="${preppyInstance?.gender?.name()}"/>
+        <g:select name="gender" from="${com.baoming.account.User$Gender?.values()}" keys="${com.baoming.account.User$Gender.values()*.name()}" optionValue="label" required="" value="${preppyInstance?.gender?.name()}"/>
     </div>
 </div>
 
@@ -38,7 +38,7 @@
 	</label>
 
     <div class="controls">
-	<g:select id="plan" name="plan.id" from="${com.baoming.Plan.list()}" optionKey="id" value="${preppyInstance?.plan?.id}" class="many-to-one" noSelection="['null': '']"/>
+	<g:select id="plan" name="plan.id" from="${com.baoming.Plan.list()}" optionKey="id" optionValue="name" value="${preppyInstance?.plan?.id}" class="many-to-one" noSelection="['': '请选择']"/>
     </div>
 </div>
 
@@ -48,7 +48,7 @@
 	</label>
 
     <div class="controls">
-	<g:select name="collegeType" from="${com.baoming.Preppy$CollegeType?.values()}" keys="${com.baoming.Preppy$CollegeType.values()*.name()}" required="" value="${preppyInstance?.collegeType?.name()}"/>
+	<g:select name="collegeType" from="${com.baoming.Preppy$CollegeType?.values()}" keys="${com.baoming.Preppy$CollegeType.values()*.name()}" optionValue="label" required="" value="${preppyInstance?.collegeType?.name()}"/>
     </div>
 </div>
 
@@ -58,7 +58,7 @@
 	</label>
 
     <div class="controls">
-	<g:select name="family" from="${com.baoming.Preppy$Family?.values()}" keys="${com.baoming.Preppy$Family.values()*.name()}" required="" value="${preppyInstance?.family?.name()}"/>
+	<g:select name="family" from="${com.baoming.Preppy$Family?.values()}" keys="${com.baoming.Preppy$Family.values()*.name()}" optionValue="label" required="" value="${preppyInstance?.family?.name()}"/>
     </div>
 </div>
 
@@ -109,17 +109,18 @@
 	</label>
 
     <div class="controls">
-	<g:select name="status" from="${com.baoming.Preppy$Status?.values()}" keys="${com.baoming.Preppy$Status.values()*.name()}" required="" value="${preppyInstance?.status?.name()}"/>
+	<g:select name="status" from="${com.baoming.Preppy$Status?.values()}" keys="${com.baoming.Preppy$Status.values()*.name()}" optionValue="label" required="" value="${preppyInstance?.status?.name()}"/>
     </div>
 </div>
-
+<sec:ifAllGranted roles="ROLE_ADMIN">
 <div class="control-group">
 	<label class="control-label" for="teacher">
 		<g:message code="preppy.teacher.label" default="Teacher" />
 	</label>
 
     <div class="controls">
-	<g:select id="teacher" name="teacher.id" from="${com.baoming.account.Teacher.list()}" optionKey="id" required="" value="${preppyInstance?.teacher?.id}" class="many-to-one"/>
+	<g:select id="teacher" name="teacher.id" from="${com.baoming.account.Teacher.list()}" optionKey="id" optionValue="name" required="" value="${preppyInstance?.teacher?.id}" class="many-to-one"/>
     </div>
 </div>
+</sec:ifAllGranted>
 

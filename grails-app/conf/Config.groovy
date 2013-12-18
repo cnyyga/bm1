@@ -69,7 +69,9 @@ grails.web.disable.multipart=false
 grails.exceptionresolver.params.exclude = ['password']
 
 // configure auto-caching of queries by default (if false you can cache individual queries with 'cache: true')
-grails.hibernate.cache.queries = false
+grails.hibernate.cache.queries = true
+
+grails.cache.enabled=true
 
 environments {
     development {
@@ -106,6 +108,7 @@ log4j = {
            'net.sf.ehcache.hibernate'
 }
 
+grails.plugins.springsecurity.logout.afterLogoutUrl = '/login'
 grails.plugins.springsecurity.dao.reflectionSaltSourceProperty = 'username'
 // Added by the Spring Security Core plugin:
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.baoming.account.User'
@@ -116,6 +119,7 @@ grails.plugins.springsecurity.securityConfigType = 'InterceptUrlMap'
 grails.plugins.springsecurity.interceptUrlMap = [
         '/home/**': ['ROLE_ADMIN','ROLE_TEACHER','ROLE_FINANCE'],
         '/student/edit/**': ['ROLE_ADMIN','ROLE_FINANCE'],
+        '/preppy/**': ['ROLE_ADMIN','ROLE_TEACHER'],
         '/student/delete/**': ['ROLE_ADMIN','ROLE_FINANCE'],
         '/student/create/**': ['ROLE_ADMIN','ROLE_FINANCE'],
         '/student/save/**': ['ROLE_ADMIN','ROLE_FINANCE'],

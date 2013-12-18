@@ -39,8 +39,28 @@ class RegController {
         student.district=district
         student.middleSchool = MiddleSchool.get(params.middleSchoolId)
 
+        def score = params.float('score')
+        if(!score || score < 0) {
+            flash.message = "请填写正确高考成绩"
+            render(view: 'index', model: [student: student,planIds:planId])
+            return
+        }
         if(!planId || planId.empty){
             flash.message = "请选择专业"
+            render(view: 'index', model: [student: student,planIds:planId])
+            return
+        }
+
+        def scoreStr = ''
+        planId.each {p->
+            def plan = Plan.get(p)
+            def planScore = plan.score
+            if(score < planScore) {
+                scoreStr += plan.name + ' '
+            }
+        }
+        if(scoreStr) {
+            flash.message = "高考分数未达到填报专业【${scoreStr}】分数要求，注册失败。 "
             render(view: 'index', model: [student: student,planIds:planId])
             return
         }
@@ -54,28 +74,20 @@ class RegController {
                 render(view: 'index', model: [student: student,planIds:planId])
                 return
             }
+            def s = userService.saveStudent(student,planId)
+
+            if (s.status == 0) {
+                flash.message = '出现不明异常，保存失败'
+                render(view: 'index', model: [student: student,planIds:planId])
+                return
+            }
+
+            session[UsernamePasswordAuthenticationFilter.SPRING_SECURITY_LAST_USERNAME_KEY]= student.username
+            render(view: 'success')
         } catch (Exception e) {
             flash.message = "拒绝重复提交"
             render(view: 'index', model: [student: student,planIds:planId])
             return
         }
-
-       // def c = Student.countByUsername(params.number)
-        //if(c > 0) {
-        //    flash.message = message(code: 'student.number.not.unique.message')
-        //    render(view: 'index', model: [student: student])
-        //    return
-       // }
-
-        def s = userService.saveStudent(student,planId)
-
-        if (s.status == 0) {
-            flash.message = '出现不明异常，保存失败'
-            render(view: 'index', model: [student: student,planIds:planId])
-            return
-        }
-
-        session[UsernamePasswordAuthenticationFilter.SPRING_SECURITY_LAST_USERNAME_KEY]= student.username
-        render(view: 'success')
     }
 }

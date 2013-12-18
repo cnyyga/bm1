@@ -31,6 +31,7 @@ class Preppy {
         qq nullable: true
         tel nullable: true
         plan nullable: true
+        teacher nullable: true
     }
 
     enum CollegeType {

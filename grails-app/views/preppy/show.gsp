@@ -72,7 +72,7 @@
                             </label>
                             <div class="controls">
 
-                                <span class="property-value" aria-labelledby="gender-label"><g:fieldValue bean="${preppyInstance}" field="gender"/></span>
+                                <span class="property-value" aria-labelledby="gender-label">${preppyInstance?.gender?.label}</span>
 
                             </div>
                         </div>
@@ -85,7 +85,7 @@
                         </label>
                         <div class="controls">
                             
-                            <span class="property-value" aria-labelledby="plan-label"><g:link controller="plan" action="show" id="${preppyInstance?.plan?.id}">${preppyInstance?.plan?.encodeAsHTML()}</g:link></span>
+                            <span class="property-value" aria-labelledby="plan-label"><g:link controller="plan" action="show" id="${preppyInstance?.plan?.id}">${preppyInstance?.plan?.name}</g:link></span>
                             
                         </div>
                     </div>
@@ -98,7 +98,7 @@
                         </label>
                         <div class="controls">
                             
-                            <span class="property-value" aria-labelledby="collegeType-label"><g:fieldValue bean="${preppyInstance}" field="collegeType"/></span>
+                            <span class="property-value" aria-labelledby="collegeType-label">${preppyInstance?.collegeType?.label}</span>
                             
                         </div>
                     </div>
@@ -111,7 +111,7 @@
                         </label>
                         <div class="controls">
                             
-                            <span class="property-value" aria-labelledby="family-label"><g:fieldValue bean="${preppyInstance}" field="family"/></span>
+                            <span class="property-value" aria-labelledby="family-label">${preppyInstance?.family?.label}</span>
                             
                         </div>
                     </div>
@@ -139,24 +139,12 @@
                         </label>
                         <div class="controls">
                             
-                            <span class="property-value" aria-labelledby="status-label"><g:fieldValue bean="${preppyInstance}" field="status"/></span>
+                            <span class="property-value" aria-labelledby="status-label">${preppyInstance?.status?.label}</span>
                             
                         </div>
                     </div>
                     </g:if>
-                    
-                    <g:if test="${preppyInstance?.teacher}">
-                    <div class="control-group">
-                        <label class="control-label">
-                            <g:message code="preppy.teacher.label" default="Teacher" />
-                        </label>
-                        <div class="controls">
-                            
-                            <span class="property-value" aria-labelledby="teacher-label"><g:link controller="teacher" action="show" id="${preppyInstance?.teacher?.id}">${preppyInstance?.teacher?.encodeAsHTML()}</g:link></span>
-                            
-                        </div>
-                    </div>
-                    </g:if>
+
 
                     <g:if test="${preppyInstance?.phone}">
                         <div class="control-group">
@@ -196,6 +184,18 @@
                             </div>
                         </div>
                     </g:if>
+                    <sec:ifAllGranted roles="ROLE_ADMIN">
+                    <g:if test="${preppyInstance?.teacher}">
+                        <div class="control-group">
+                            <label class="control-label">
+                                <g:message code="preppy.teacher.label" default="Teacher" />
+                            </label>
+                            <div class="controls">
+                                <span class="property-value" aria-labelledby="teacher-label"><g:link controller="teacher" action="show" id="${preppyInstance?.teacher?.id}">${preppyInstance?.teacher?.name}</g:link></span>
+                            </div>
+                        </div>
+                    </g:if>
+                        </sec:ifAllGranted>
                     <div class="form-actions">
                         <g:form>
                                 <g:hiddenField name="id" value="${preppyInstance?.id}" />
@@ -203,6 +203,7 @@
                                     <i class="icon-edit icon-white"></i>
                                     <g:message code="default.button.edit.label" default="Edit" />
                                 </g:link>
+                            <g:hiddenField name="act" value="1" />
                                 <g:actionSubmit class="btn btn-primary" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
                         </g:form>
                     </div>

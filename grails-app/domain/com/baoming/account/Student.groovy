@@ -75,7 +75,7 @@ class Student extends User{
         name(blank: false, maxSize: 32)
         gender(maxSize: 1, nullable: true)
         code(maxSize: 64, nullable: true)
-        admissionTicketNumber(nullable: true, maxSize: 64,unique: true)
+        admissionTicketNumber(nullable: true, maxSize: 64)
         birthday blank: false , nullable: true
         number blank: false, maxSize: 18
         politicalStatus nullable: true

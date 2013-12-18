@@ -3,17 +3,26 @@
     <div class="well nav-collapse sidebar-nav">
         <ul class="nav nav-tabs nav-stacked main-menu">
             <li class="nav-header hidden-tablet">Main</li>
+            <sec:access controller="student" method="createNew">
+                <li class="${(params.controller == 'student' && params.action == 'createNew')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'student',action: 'createNew')}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'student.create.new.label')}</span></a></li>
+            </sec:access>
+            <sec:access controller="preppy">
+                <li class="${(params.controller == 'preppy' && params.action == 'create')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'preppy',action:'create')}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'preppy.create.label')}</span></a></li>
+            </sec:access>
             <sec:access controller="student">
                 <sec:ifAllGranted roles="${Role.AUTHORITY_ADMIN}">
-                    <li class="${params.controller == 'student'?'active':''}"><a class="ajax-link" href="${createLink(controller: 'student')}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'default.manager.label',args: ["${message(code: 'student.label')}"])}</span></a></li>
+                    <li class="${(params.controller == 'student'&& params.action != 'createNew')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'student')}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'default.manager.label',args: ["${message(code: 'student.label')}"])}</span></a></li>
                 </sec:ifAllGranted>
                 <sec:ifAllGranted roles="${Role.AUTHORITY_TEACHER}">
-                    <li class="${params.controller == 'student'?'active':''}"><a class="ajax-link" href="${createLink(controller: 'student')}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'default.manager.label',args: ["${message(code: 'student.label')}"])}</span></a></li>
+                    <li class="${(params.controller == 'student'&& params.action != 'createNew')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'student')}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'default.manager.label',args: ["${message(code: 'student.label')}"])}</span></a></li>
                 </sec:ifAllGranted>
                 <sec:ifAllGranted roles="${Role.AUTHORITY_FINANCE}">
-                    <li class="${params.controller == 'student'?'active':''}"><a class="ajax-link" href="${createLink(controller: 'student')}"><i class="icon-user"></i><span class="hidden-tablet">
+                    <li class="${(params.controller == 'student'&& params.action != 'createNew')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'student')}"><i class="icon-user"></i><span class="hidden-tablet">
                         ${message(code: 'student.label')}${message(code: 'student.review.label')}</span></a></li>
                 </sec:ifAllGranted>
+            </sec:access>
+            <sec:access controller="preppy">
+                <li class="${(params.controller == 'preppy' && params.action != 'create')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'preppy')}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'default.manager.label',args: ["${message(code: 'preppy.label')}"])}</span></a></li>
             </sec:access>
             <sec:access controller="statistics">
             <li class="${(params.controller == 'statistics' && params.action == 'index')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'statistics')}"><i class="icon-tag"></i><span class="hidden-tablet"> ${message(code: 'statistics.label')}</span></a></li>

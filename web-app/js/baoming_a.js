@@ -111,6 +111,7 @@ $(function(){
             }
             ,
             score:{
+                required:true,
                 maxlength:8,
                 digits:true
             } ,
@@ -168,6 +169,9 @@ $(function(){
                 accept: ['jpg','gif','png','bmp','JPG','GIF','PNG','BMP']
             }  ,
             admissionTicketPicInp:{
+                required:function(){
+                    return !$("#admissionTicketPic").val()
+                },
                 accept: ['jpg','gif','png','bmp','JPG','GIF','PNG','BMP']
             }
         },

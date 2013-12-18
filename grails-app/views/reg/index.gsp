@@ -26,16 +26,18 @@
     <g:if test="${flash.message}">
         <div class="info-result ">
             <label class="error">${flash.message}</label>
+            <g:hasErrors bean="${student}">
+
+                <ul class="errors" role="alert">
+                    <g:eachError bean="${student}" var="error">
+                        <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message
+                                error="${error}"/></li>
+                    </g:eachError>
+                </ul>
+            </g:hasErrors>
         </div>
     </g:if>
-    <g:hasErrors bean="${student}">
-        <ul class="errors" role="alert">
-            <g:eachError bean="${student}" var="error">
-                <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message
-                        error="${error}"/></li>
-            </g:eachError>
-        </ul>
-    </g:hasErrors>
+
     <g:form action="save" controller="reg" name="regForm">
         <ul class="reg_box">
             %{--<li class="accounts">

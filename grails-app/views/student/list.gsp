@@ -52,9 +52,7 @@
         <div class="alert alert-error">${flash.message}</div>
     </g:if>
     <div>
-        <sec:ifAllGranted roles="${Role.AUTHORITY_ADMIN}">
-         <g:link action="create"  class="btn btn-small btn-primary"><i class="icon-chevron-left icon-white"></i><g:message code="default.add.label" args="[entityName]" /></g:link>
-        </sec:ifAllGranted>
+         <g:link action="createNew"  class="btn btn-small btn-primary"><i class="icon-chevron-left icon-white"></i><g:message code="default.add.label" args="[entityName]" /></g:link>
     </div>
     <div class="row-fluid sortable">
         <div class="box span12">
@@ -88,19 +86,16 @@
                             <g:select id="district" name="districtId" from="${[]}" />
                         </div>
                         </sec:ifNotGranted>
-                        <div class="bm-search">
-                            <label class="search-lb"><g:message code="middleSchool.label"/>：</label>
-                            <g:select id="middleSchooleId" name="middleSchoolId"  from="${[]}" value="${params?.middleSchoolId}"  noSelection="['null': '请选择']"/>
-                        </div>
+
                         <div class="bm-search ">
                             <label class="search-lb"><g:message code="plan.label"/>：</label>
                             <g:select name="planId" from="${com.baoming.Plan.findAllByStatus(Plan.Status.RUNNING)}" data-rel="chosen"  optionValue="name" optionKey="id"  value="${params?.planId}"  noSelection="${['':'请选择']}"/>
                         </div>
+                        <sec:ifNotGranted roles="${Role.AUTHORITY_TEACHER}">
                         <div class="bm-search">
                             <label class="search-lb"><g:message code="department.label"/> ：</label>
                             <g:select name="departmentId" from="${com.baoming.Department.list()}"  optionKey="id" optionValue="name" value="${params.departmentId}" data-rel="chosen" noSelection="${['':'请选择']}"/>
                         </div>
-                               <sec:ifNotGranted roles="${Role.AUTHORITY_TEACHER}">
                                    <div class="span12" style="margin-left: 0">
                                    <div class="bm-search">
                                        <label class="search-lb"><g:message code="teacher.label"/>： </label>
@@ -142,13 +137,10 @@
                         <th><g:message code="student.code.label" default="考生号" /></th>
 
                         <th><g:message code="student.number.label" default="身份证号" /></th>
+
                         <th><g:message code="student.recommend.teacher.label" default="Teacher" /></th>
 
-                        <th><g:message code="district.label" default="地区" /></th>
-
-                        <th><g:message code="middleSchool.label" default="学校" /></th>
-
-                        <th><g:message code="user.enabled.label" default="enabled" /></th>
+                        <th><g:message code="student.district.label" default="地区" /></th>
 
                         <th><g:message code="student.review.label" default="Audit" /></th>
 
@@ -175,15 +167,6 @@
                                 ${studentInstance.district?.name}
                             </td>
 
-                            <td class="center">${studentInstance.middleSchool?.name}</td>
-
-                            <td class="center">
-                                <span class="label  ${studentInstance.enabled?'label-success':''}">
-                                    <g:formatBoolean boolean="${studentInstance.enabled}" />
-                                </span>
-
-                            </td>
-
                             <td class="center">
                                 <span class="label  ${studentInstance.reviewStatus == Student.ReviewStatus.NO_AUDIT ?'label-important':(studentInstance.reviewStatus == Student.ReviewStatus.PASS?'label-success':'label-warning')}">
                                     ${studentInstance.reviewStatus?.label}
@@ -195,16 +178,16 @@
                                         <i class="icon-zoom-in icon-white"></i>
                                         <g:message code="default.button.view.label" default="View" />
                                     </g:link>
+
+                            <sec:ifAllGranted roles="${Role.AUTHORITY_ADMIN}">
+                                    <g:link class="btn btn-info" action="createNew" id="${studentInstance.id}">
+                                        <i class="icon-edit icon-white"></i>
+                                        <g:message code="default.button.edit.label" default="Edit" />
+                                    </g:link>
                                 <g:link class="btn btn-danger" action="delete" id="${studentInstance.id}">
                                     <i class="icon-trash icon-white"></i>
                                     <g:message code="default.button.delete.label" default="Delete" />
                                 </g:link>
-                            <sec:ifAllGranted roles="${Role.AUTHORITY_ADMIN}">
-                                    <g:link class="btn btn-info" action="edit" id="${studentInstance.id}">
-                                        <i class="icon-edit icon-white"></i>
-                                        <g:message code="default.button.edit.label" default="Edit" />
-                                    </g:link>
-
 
                             </sec:ifAllGranted>
                             <sec:ifAllGranted roles="${Role.AUTHORITY_FINANCE}">

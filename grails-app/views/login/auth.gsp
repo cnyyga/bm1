@@ -2,7 +2,33 @@
 <head>
 	<meta name='layout' content='mainReg'/>
 	<title><g:message code="springSecurity.login.title"/></title>
+    <script type="text/javascript">
+        $(function(){
+            $("#loginForm .input-text").focus(function(){
+                var t = $(this);
+                var id = t.attr("id");
+                if(id == 'username') {
+                    $("#loginForm #pwdUsername").hide();
+                }else if(id == 'password') {
+                    $("#loginForm #pwdTip").hide();
+                }
+            })
+            $("#loginForm .input-text").blur(function(){
+                var t = $(this);
+                var v = t.val();
+                if(v && $.trim(v)!='') {
+                    return;
+                }
 
+                var id = t.attr("id");
+                if(id == 'username') {
+                    $("#loginForm #pwdUsername").show();
+                }else if(id == 'password') {
+                    $("#loginForm #pwdTip").show();
+                }
+            })
+        })
+    </script>
 </head>
 
 <body>

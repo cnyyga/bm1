@@ -31,6 +31,135 @@ class StudentController {
         [studentInstanceList: map?.students, studentInstanceTotal: map?.total,teachers:teachers]
     }
 
+    def createNew(Long id) {
+        def studentInstance
+        if(id) {
+            def userId = springSecurityService.authentication.principal?.id
+
+            if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)) {
+                studentInstance = Student.findByIdAndTeacher(id,Teacher.get(userId))
+            }else{
+                studentInstance = Student.get(id)
+            }
+            if (!studentInstance) {
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'student.label', default: 'Student'), id])
+                redirect(action: "list")
+                return
+            }
+        }else{
+            studentInstance = new Student(params)
+        }
+
+        [studentInstance: studentInstance]
+    }
+
+    def saveNew(Long id) {
+        def planIds = params.list('planId')
+
+        def msg = ""
+        if(!params.name) {
+            msg += "姓名不能为空,"
+        }
+        if(!params.code) {
+            msg += "考生号不能为空,"
+        }
+        if(!params.number) {
+            msg += "身份证号不能为空,"
+        }
+        if(!params.provinceId || !params.cityId || !params.districtId){
+            msg += "学籍所在地不能为空,"
+        }
+        if(!params.score || !params.int('score')) {
+            msg += "高考成绩请输入整数,"
+        }
+        if(!planIds || planIds.empty){
+            msg += "请选择专业,"
+        }
+        def file1 = request.getFile("admissionTicketPicInp")
+        if(!params.admissionTicketPic &&  (!file1 || file1.empty)) {
+            msg += "准考证照片不能为空,"
+        }
+        if(msg) {
+            flash.message = msg
+            render(view: 'createNew', model: [studentInstance: studentInstance,planIds:planIds])
+            return
+        }
+
+        def studentInstance
+        def teacher
+        def userId = springSecurityService.authentication.principal?.id
+        if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)) {
+            teacher = Teacher.get(userId as Long)
+        }
+
+        if(id) {
+            if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)) {
+                studentInstance = Student.findByIdAndTeacher(id,teacher)
+            }else{
+                studentInstance = Student.get(id)
+            }
+
+            if (!studentInstance) {
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'student.label', default: 'Student'), id])
+                redirect(action: "list")
+                return
+            }
+        }else{
+            studentInstance = new Student()
+        }
+        studentInstance.properties = params
+
+        if(file1 &&  !file1.empty) {
+            def cal = Calendar.instance
+            def fileName1 = file1.originalFilename
+            def suffix1 = fileName1.substring(fileName1.lastIndexOf('.'))
+            def storeName1 = "admission_ticket_${cal.timeInMillis}${suffix1}"
+            def url1 = grailsApplication.config.baoming.image.storage.path
+            def storageFilePath1 = url1 +'/'+storeName1
+            def f1 = new File(storageFilePath1)
+            if(!f1.exists()) {
+                FileUtils.forceMkdir(f1)
+            }
+            file1.transferTo(f1)
+            studentInstance.admissionTicketPic = storeName1
+        }
+
+        if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)) {
+            //teacher = Teacher.get(userId as Long)
+        }else{
+            if(params.teacherId){
+                teacher = Teacher.get(params.long('teacherId'))
+            }
+            if(params.reviewStatus != Student.ReviewStatus.NO_AUDIT){
+                studentInstance.reviewDate = new Date()
+                studentInstance.reviewPerson = User.get(userId as Long)
+            }
+        }
+        studentInstance.teacher = teacher
+
+
+        studentInstance.province = Province.findByCode(params.provinceId)
+        studentInstance.city = City.findByCode(params.cityId)
+        studentInstance.district = District.findByCode(params.districtId)
+        def u
+        if(studentInstance.id) {
+            u = userService.updateStudent(studentInstance,planIds)
+        } else {
+            studentInstance.username = UUID.randomUUID().toString()
+            studentInstance.password = "1"
+            u = userService.saveStudent(studentInstance,planIds)
+        }
+
+        if ( u?.status == 0){
+            render(view: "createNew", model: [studentInstance: studentInstance,planIds:planIds])
+            return
+        }
+
+        flash.message = id?message(code: 'student.updated.message', args: [message(code: 'student.label', default: 'Student'), studentInstance.name]):message(code: 'default.created.message', args: [message(code: 'student.label', default: 'Student'), studentInstance.id])
+        redirect(action: "show", id: studentInstance.id)
+
+    }
+
     def create() {
         def studentInstance = new Student(params)
         if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)) {
@@ -126,7 +255,8 @@ class StudentController {
         if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)) {
             def userId = springSecurityService.authentication.principal?.id
             def teacher = Teacher.get(userId as Long)
-            def districts = teacher.teacherDistricts*.district
+            studentInstance = Student.findByIdAndTeacher(id,teacher)
+            /*def districts = teacher.teacherDistricts*.district
             studentInstance = Student.createCriteria().get {
                 eq("id",id)
                 or{
@@ -135,7 +265,7 @@ class StudentController {
                     }
                     eq('teacher',teacher)
                 }
-            }
+            }*/
         }else{
             studentInstance = Student.get(id)
         }
