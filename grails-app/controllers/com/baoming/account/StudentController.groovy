@@ -256,16 +256,6 @@ class StudentController {
             def userId = springSecurityService.authentication.principal?.id
             def teacher = Teacher.get(userId as Long)
             studentInstance = Student.findByIdAndTeacher(id,teacher)
-            /*def districts = teacher.teacherDistricts*.district
-            studentInstance = Student.createCriteria().get {
-                eq("id",id)
-                or{
-                    if(districts){
-                        'in'('district',districts)
-                    }
-                    eq('teacher',teacher)
-                }
-            }*/
         }else{
             studentInstance = Student.get(id)
         }

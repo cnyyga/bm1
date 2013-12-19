@@ -72,19 +72,19 @@ class UserService {
         def list = []
         def total = 0
 
-        def districts
+        //def districts
         if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)) {
             teacher = Teacher.get(userId)
-            districts = teacher?.teacherDistricts*.district
-            if(!districts || districts.empty){
+           // districts = teacher?.teacherDistricts*.district
+           // if(!districts || districts.empty){
                // return [students: list, total: total]
-            }
+            //}
         }else if(params.teacherId){
             teacher = Teacher.get(params.teacherId)
-            districts = teacher?.teacherDistricts*.district
-            if(!districts || districts.empty){
+            //districts = teacher?.teacherDistricts*.district
+            //if(!districts || districts.empty){
                // return [students: list, total: total]
-            }
+           // }
         }
 
         def closure = {
@@ -112,14 +112,14 @@ class UserService {
             if (params.name)
                 like('name', "%${params.name}%")
 
-            or{
-                if(districts){
-                    'in'('district',districts)
-                }
+           // or{
+               // if(districts){
+                //    'in'('district',districts)
+               /// }
                 if(teacher) {
                     eq('teacher',teacher)
                 }
-            }
+           // }
 
             if(teachers && !teachers.empty) {
                 and{
