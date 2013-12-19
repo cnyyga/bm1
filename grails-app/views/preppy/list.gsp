@@ -33,6 +33,14 @@
                 <div class="span12 well">
                     <g:form action="list" >
                         <div class="bm-search">
+                            <label class="search-lb"><g:message code="student.year.label"/>：</label>
+                            <%
+                                def cal = Calendar.instance
+                                def year = cal.get(Calendar.YEAR)
+                            %>
+                            <g:select name="year" from="${(year-10)..year}" value="${params.year?:year}" class="input-small"/>
+                        </div>
+                        <div class="bm-search">
                             <label class="search-lb"><g:message code="student.name.label"/> ：</label>
                             <g:textField name="name"  value="${params.name}"/>
                         </div>

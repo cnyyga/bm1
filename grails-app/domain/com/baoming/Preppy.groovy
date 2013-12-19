@@ -24,6 +24,9 @@ class Preppy {
     String tel
     Teacher teacher  //推荐老师
 
+    Date dateCreated
+    Date lastUpdated
+
     static constraints = {
         district nullable: true
         city nullable: true
