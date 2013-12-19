@@ -68,6 +68,42 @@
     </div>
 </div>
 
+<div class="control-group">
+    <label class="control-label">
+        <g:message code="middleSchool.label" default="Middle School"/>
+    </label>
+
+    <div class="controls">
+
+        <span class="property-value" aria-labelledby="middleSchool-label">${studentInstance?.middleSchool?.name}</span>
+
+    </div>
+</div>
+
+    <div class="control-group">
+        <label class="control-label">
+            <g:message code="student.phone.label" default="phone"/>
+        </label>
+
+        <div class="controls">
+
+            <span class="property-value" aria-labelledby="tel-label"><g:fieldValue bean="${studentInstance}"
+                                                                                   field="phone"/></span>
+
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">
+            <g:message code="student.qq.label" default="Qq"/>
+        </label>
+
+        <div class="controls">
+
+            <span class="property-value" aria-labelledby="qq-label"><g:fieldValue bean="${studentInstance}"
+                                                                                  field="qq"/></span>
+
+        </div>
+    </div>
 
     <div class="control-group">
         <label class="control-label">
@@ -108,7 +144,7 @@
         </label>
         <div class="controls">
             <span class="property-value">
-                ${studentInstance?.payment?.type?.label}
+                ${studentInstance?.payment?.type?.label?:"未缴费"}
             </span>
         </div>
     </div>

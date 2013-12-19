@@ -1,5 +1,6 @@
 package com.baoming.account
 
+import com.baoming.Plan
 import org.springframework.dao.DataIntegrityViolationException
 import com.baoming.Province
 import com.baoming.City
@@ -79,11 +80,7 @@ class StudentController {
         if(!params.admissionTicketPic &&  (!file1 || file1.empty)) {
             msg += "准考证照片不能为空,"
         }
-        if(msg) {
-            flash.message = msg
-            render(view: 'createNew', model: [studentInstance: studentInstance,planIds:planIds])
-            return
-        }
+
 
         def studentInstance
         def teacher
@@ -108,6 +105,25 @@ class StudentController {
             studentInstance = new Student()
         }
         studentInstance.properties = params
+
+        if(msg) {
+            flash.message = msg
+            render(view: 'createNew', model: [studentInstance: studentInstance,planIds:planIds])
+            return
+        }
+        def scoreStr = ''
+        planIds.each {p->
+            def plan = Plan.get(p)
+            def planScore = plan?.score?:0
+            if(params.int('score') < planScore) {
+                scoreStr += plan.name + ' '
+            }
+        }
+        if(scoreStr) {
+            flash.message = "高考分数未达到填报专业【${scoreStr}】分数要求，添加失败。 "
+            render(view: 'createNew', model: [studentInstance: studentInstance,planIds:planIds])
+            return
+        }
 
         if(file1 &&  !file1.empty) {
             def cal = Calendar.instance
