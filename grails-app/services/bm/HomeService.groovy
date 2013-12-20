@@ -24,15 +24,7 @@ class HomeService {
              if(endDate)
                  lt('dateCreated',endDate)
              if(teacher) {
-                 def citys = teacher?.teacherDistricts*.district
-                 if(citys){
-                     or{
-                         'in'('district',citys)
-                         eq('teacher',teacher)
-                     }
-                 }else{
-                     eq('teacher',teacher)
-                 }
+                 eq('teacher',teacher)
              }
 
              if(reviewStatus)
@@ -66,20 +58,7 @@ class HomeService {
         str += ") as cc from user u where u.class='com.baoming.account.Teacher' order by cc desc ; "
         def sql = new Sql(dataSource)
         return sql.rows(str,params,offset,max)
-        /*
-        return Student.createCriteria().list {
-            if(startDate)
-                ge('dateCreated',startDate)
-            if(endDate)
-                lt('dateCreated',endDate)
-            isNotNull('teacher')
-            projections {
-                groupProperty('teacher')
-                count('id','cc')
-                order('cc','desc')
-            }
-            maxResults(10)
-        }*/
+
     }
 
     def getStudentCountForDistrict(int offset,int max,Date startDate = null,Date endDate = null,Teacher teacher=null) {
@@ -95,7 +74,7 @@ class HomeService {
         def sql = "select a.code,a.name,c.code as cityCode,c.name as cityName,c.province_id as provinceCode," +
                 "(select count(b.id) from user b where b.class='com.baoming.account.Student' and   b.district_id=a.code "
         if(teacher) {
-            sql += " and (b.district_id in(select c.district_id from teacher_district c where c.teacher_id=:teacherId) or b.teacher_id=:teacherId) "
+            sql += " and ( b.teacher_id=:teacherId) "
             params.teacherId=teacher.id
         }
         if(startDate)  {
@@ -122,16 +101,7 @@ class HomeService {
         }
         def r =  Student.createCriteria().list {
             if(teacher){
-                def citys = teacher?.teacherDistricts*.district
-                if(citys){
-                    or{
-                        'in'('district',citys)
-                        eq('teacher',teacher)
-                    }
-
-                }else{
-                    eq('teacher',teacher)
-                }
+                eq('teacher',teacher)
             }
             if(startDate)
                 ge('dateCreated',startDate)
@@ -163,7 +133,7 @@ class HomeService {
         def sql = "select a.id,a.name," +
                 "(select count(b.student_id) from student_plan b inner join user u on b.student_id=u.id  where  b.plan_id=a.id and u.class='com.baoming.account.Student' "
         if(teacher) {
-            sql += " and (u.district_id in(select c.district_id from teacher_district c where c.teacher_id=:teacherId) or u.teacher_id=:teacherId )"
+            sql += " and ( u.teacher_id=:teacherId )"
             params.teacherId=teacher.id
         }
         if(startDate)  {
@@ -186,17 +156,8 @@ class HomeService {
         }
         def sps = StudentPlan.createCriteria().list {
              if(teacher){
-                 def citys = teacher?.teacherDistricts*.district
                  student{
-                     if(citys){
-                         or{
-                             'in'('district',citys)
-                             eq('teacher',teacher)
-                         }
-
-                     }else{
-                         eq('teacher',teacher)
-                     }
+                     eq('teacher',teacher)
                  }
              }
              if(startDate)
@@ -276,15 +237,7 @@ class HomeService {
         def startYear = endYear - 10
         def sts = Student.createCriteria().list {
             if(teacher){
-                def citys = teacher?.teacherDistricts*.district
-                if(citys){
-                    or{
-                        'in'('district',citys)
-                        eq('teacher',teacher)
-                    }
-                }else{
-                    eq('teacher',teacher)
-                }
+                eq('teacher',teacher)
             }
             if(city)
                 eq('city',city)
@@ -308,19 +261,14 @@ class HomeService {
     }
 
     def getStudentNumberChartOfGender(Date startDate = null,Date endDate = null, Teacher teacher=null,City city = null,ReviewStatus reviewStatus = null) {
-        def citys
         def sts = []
         if(teacher){
-            citys = teacher?.teacherDistricts*.district
             sts = Student.createCriteria().list {
                 if (startDate)
                     ge('dateCreated', startDate)
                 if (endDate)
                     lt('dateCreated', endDate)
                 or {
-                    if (citys && !citys.empty) {
-                        'in'('district', citys)
-                    }
                     eq('teacher', teacher)
                 }
                 if (city)
@@ -375,15 +323,7 @@ class HomeService {
             if(endDate)
                 lt('dateCreated',endDate)
             if(teacher){
-                def citys = teacher?.teacherDistricts*.district
-                if(citys){
-                    or{
-                        'in'('district',citys)
-                        eq('teacher',teacher)
-                    }
-                }else{
-                    eq('teacher',teacher)
-                }
+                eq('teacher',teacher)
             }
             if(city)
                 eq('city',city)
@@ -412,15 +352,7 @@ class HomeService {
             if(endDate)
                 lt('dateCreated',endDate)
             if(teacher){
-                def citys = teacher?.teacherDistricts*.district
-                if(citys){
-                    or{
-                        'in'('district',citys)
-                        eq('teacher',teacher)
-                    }
-                }else{
-                    eq('teacher',teacher)
-                }
+                eq('teacher',teacher)
             }
             if(city)
                 eq('city',city)
@@ -448,15 +380,7 @@ class HomeService {
             if(endDate)
                 lt('dateCreated',endDate)
             if(teacher){
-                def citys = teacher?.teacherDistricts*.district
-                if(citys){
-                    or{
-                        'in'('district',citys)
-                        eq('teacher',teacher)
-                    }
-                }else{
-                    eq('teacher',teacher)
-                }
+                eq('teacher',teacher)
             }
             if(city)
                 eq('city',city)
@@ -503,15 +427,7 @@ class HomeService {
             if(endDate)
                 lt('dateCreated',endDate)
             if(teacher){
-                def citys = teacher?.teacherDistricts*.district
-                if(citys){
-                    or{
-                        'in'('district',citys)
-                        eq('teacher',teacher)
-                    }
-                }else{
-                    eq('teacher',teacher)
-                }
+                eq('teacher',teacher)
             }
             if(city)
                 eq('city',city)
@@ -528,15 +444,7 @@ class HomeService {
             if(endDate)
                 lt('dateCreated',endDate)
             if(teacher){
-                def citys = teacher?.teacherDistricts*.district
-                if(citys){
-                    or{
-                        'in'('district',citys)
-                        eq('teacher',teacher)
-                    }
-                }else{
-                    eq('teacher',teacher)
-                }
+                eq('teacher',teacher)
             }
             if(city)
                 eq('city',city)
