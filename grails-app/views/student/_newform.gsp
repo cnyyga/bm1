@@ -167,6 +167,27 @@
                 <g:textArea name="description" cols="40" rows="5" maxlength="1024" value="${studentInstance?.description}"/>
             </div>
         </div>
+    <sec:ifAllGranted roles="ROLE_ADMIN">
+        <div class="control-group">
+            <label class="control-label" for="studentType.id">
+                <g:message code="student.admission.label" default="admission" />
+                <span class="required-indicator">*</span>
+            </label>
+            <div class="controls">
+                <g:select name="admission" from="${com.baoming.account.Student.Admission.values()}"   optionValue="label"   value="${studentInstance?.admission}"/>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="studentType.id">
+                <g:message code="student.registration.label" default="StudentType" />
+                <span class="required-indicator">*</span>
+            </label>
+            <div class="controls">
+                <g:select name="registration" from="${com.baoming.account.Student.Registration.values()}"   optionValue="label"   value="${studentInstance?.registration}" />
+            </div>
+        </div>
+    </sec:ifAllGranted>
 <g:hiddenField name="cityUrl" value="${createLink(action: 'cityOpts',controller: 'api')}" title="${studentInstance?.city?.code?:params.cityId}"  />
 <g:hiddenField name="districtUrl" value="${createLink(action: 'districtOpts',controller: 'api')}"  title="${studentInstance?.district?.code?:params.districtId}" />
 <g:hiddenField name="schoolUrl" value="${createLink(action: 'schoolOpts',controller: 'api')}"  title="${studentInstance?.middleSchool?.id}" />
