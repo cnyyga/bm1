@@ -209,6 +209,33 @@
 
         </div>
     </div>
+
+<div class="control-group">
+    <label class="control-label">
+        <g:message code="student.admission.label" default="admission"/>
+    </label>
+
+    <div class="controls">
+
+        <span class="property-value" aria-labelledby="dateCreated-label">
+            ${studentInstance.admission?.label?: com.baoming.account.Student.Admission.NO.label}
+        </span>
+
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label">
+        <g:message code="student.registration.label" default="registration"/>
+    </label>
+
+    <div class="controls">
+
+        <span class="property-value" aria-labelledby="dateCreated-label">${studentInstance.registration?.label?: com.baoming.account.Student.Registration.NO.label}</span>
+
+    </div>
+</div>
+
 <div class="control-group">
     <label class="control-label">
         <g:message code="student.review.status.label" default="status" />

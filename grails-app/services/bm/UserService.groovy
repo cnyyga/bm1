@@ -28,65 +28,57 @@ class UserService {
         def districtId = params.districtId
         def departmentId = params.departmentId
         def middleSchoolId = params.long('middleSchoolId')
+        def admission = params.admission?Student.Admission."${params.admission}":null
+        def registration = params.registration?Student.Registration."${params.registration}":null
 
         def startDate = params.date('startDate', 'yyyy-MM-dd')
         def endDate = params.date('endDate', 'yyyy-MM-dd')
         def cal = Calendar.instance
         cal.clearTime()
-        if(!year){
-            cal.set(Calendar.DAY_OF_YEAR,1)
-            cal.set(Calendar.MONTH,0)
+        if (!year) {
+            cal.set(Calendar.DAY_OF_YEAR, 1)
+            cal.set(Calendar.MONTH, 0)
             startDate = cal.time
-            cal.add(Calendar.YEAR,1)
+            cal.add(Calendar.YEAR, 1)
             endDate = cal.time
-        }else{
+        } else {
             cal.time = year
-            cal.add(Calendar.YEAR,1)
+            cal.add(Calendar.YEAR, 1)
             startDate = year
             endDate = cal.time
         }
 
         def plan
-        if(planId){
+        if (planId) {
             plan = Plan.get(planId)
         }
         def district
-        if(districtId){
+        if (districtId) {
             district = District.findByCode(districtId)
         }
         def city
-        if(cityId){
+        if (cityId) {
             city = City.findByCode(cityId)
         }
         def middleSchool
-        if(middleSchoolId){
+        if (middleSchoolId) {
             middleSchool = MiddleSchool.get(middleSchoolId)
         }
 
         def teachers
-        if(departmentId) {
-            teachers = Teacher.findAll("from Teacher where department.id=:departmentId",[departmentId:departmentId as long])
+        if (departmentId) {
+            teachers = Teacher.findAll("from Teacher where department.id=:departmentId", [departmentId: departmentId as long])
         }
 
         def teacher
 
         def reviewStatus = params.audit
-        def list = []
-        def total = 0
 
         //def districts
         if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)) {
             teacher = Teacher.get(userId)
-           // districts = teacher?.teacherDistricts*.district
-           // if(!districts || districts.empty){
-               // return [students: list, total: total]
-            //}
-        }else if(params.teacherId){
+        } else if (params.teacherId) {
             teacher = Teacher.get(params.teacherId)
-            //districts = teacher?.teacherDistricts*.district
-            //if(!districts || districts.empty){
-               // return [students: list, total: total]
-           // }
         }
 
         def closure = {
@@ -97,44 +89,46 @@ class UserService {
             if (reviewStatus) {
                 eq('reviewStatus', Student.ReviewStatus."${reviewStatus}")
             }
-            if(district)   {
-                eq("district",district)
+            if (district) {
+                eq("district", district)
             }
-            if(city){
-                eq('city',city)
+            if (city) {
+                eq('city', city)
             }
-            if(middleSchool){
-                eq('middleSchool',middleSchool)
+            if (middleSchool) {
+                eq('middleSchool', middleSchool)
             }
-            if(plan){
-                studentPlans{
-                    eq('plan',plan)
+            if (plan) {
+                studentPlans {
+                    eq('plan', plan)
                 }
             }
             if (params.name)
                 like('name', "%${params.name}%")
 
-           // or{
-               // if(districts){
-                //    'in'('district',districts)
-               /// }
-                if(teacher) {
-                    eq('teacher',teacher)
-                }
-           // }
+            if (teacher) {
+                eq('teacher', teacher)
+            }
 
-            if(teachers && !teachers.empty) {
-                and{
+            if(admission) {
+                eq("admission",admission)
+            }
+            if(registration) {
+                eq("registration",registration)
+            }
+
+            if (teachers && !teachers.empty) {
+                and {
                     isNotNull('teacher')
-                    'in'('teacher',teachers)
+                    'in'('teacher', teachers)
                 }
             }
 
-            order('id','desc')
+            order('id', 'desc')
         }
 
-        list = Student.createCriteria().list(params,closure)
-        total = Student.createCriteria().count(closure)
+        def list = Student.createCriteria().list(params, closure)
+        def total = Student.createCriteria().count(closure)
 
         [students: list, total: total]
     }

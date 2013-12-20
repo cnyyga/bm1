@@ -97,6 +97,18 @@
                             <label class="search-lb"><g:message code="plan.label"/>：</label>
                             <g:select name="planId" from="${plans}" data-rel="chosen"  optionValue="name" optionKey="id"  value="${params?.planId}"  noSelection="${['':'请选择']}"/>
                         </div>
+
+                        <div class="bm-search ">
+                            <label class="search-lb"><g:message code="student.admission.label"/>：</label>
+                            <g:select name="admission" from="${com.baoming.account.Student.Admission.values()}"   optionValue="label"   value="${params?.admission}"  noSelection="${['':'请选择']}"/>
+                        </div>
+
+                        <div class="bm-search ">
+                            <label class="search-lb"><g:message code="student.registration.label"/>：</label>
+                            <g:select name="registration" from="${com.baoming.account.Student.Registration.values()}"   optionValue="label"   value="${params?.registration}"  noSelection="${['':'请选择']}"/>
+                        </div>
+
+
                         <sec:ifNotGranted roles="${Role.AUTHORITY_TEACHER}">
                         <div class="bm-search">
                             <label class="search-lb"><g:message code="department.label"/> ：</label>
@@ -148,6 +160,10 @@
 
                         <th><g:message code="student.district.label" default="地区" /></th>
 
+                        <th><g:message code="student.admission.label" default="admission" /></th>
+
+                        <th><g:message code="student.registration.label" default="registration" /></th>
+
                         <th><g:message code="student.review.label" default="Audit" /></th>
 
                         <th><g:message code="default.operator.label" default="操作" /></th>
@@ -172,6 +188,10 @@
                                 ${studentInstance.city?.name}
                                 ${studentInstance.district?.name}
                             </td>
+
+                            <td class="center">${studentInstance.admission?.label?: com.baoming.account.Student.Admission.NO.label}</td>
+
+                            <td class="center">${studentInstance.registration?.label?: com.baoming.account.Student.Registration.NO.label}</td>
 
                             <td class="center td-review" id="studentTd${studentInstance.id}">
                                 <span class="label  ${studentInstance.reviewStatus == Student.ReviewStatus.NO_AUDIT ?'label-important':(studentInstance.reviewStatus == Student.ReviewStatus.PASS?'label-success':'label-warning')}">
