@@ -332,13 +332,22 @@ class HomeService {
             }
             projections {
                 groupProperty('city')
-                count('id')
+                count('id','cc')
+                order('cc','desc')
             }
         }
 
         def list = []
+        int mx = 10
+        if(sts.size() > mx) {
+            def others = sts[mx..<sts.size()]
+            def othersC = others.sum {it[1]}
+            sts = sts[0..<mx]
+            list << [label:'其它地区',data: othersC]
+        }
         sts.each {ele->
-            def name = ele[0]?ele[0].name:'other'
+            println(ele)
+            def name = ele[0]?ele[0].name:'未选择地区'
             def num = ele[1]
             list << [label:name,data: num]
         }

@@ -14,40 +14,7 @@ class StatisticsController {
     def homeService
 
     def index() {
-       /* def year = params.date('year','yyyy')
-        def teacherId = params.long('teacherId')
-        def cityId = params.get('cityId')
-        def gender = params.get('gender') //性别
-        def middleSchool = params.long('middleSchooleId')
-        def planId = params.long('plandId') //专业
-        def reviewStatus = params.get('reviewStatus')
-        def teacher
-        def city
-        def startDate
-        def endDate
-        def cal = Calendar.instance
-        cal.clearTime()
-        if(!year){
-            cal.set(Calendar.DAY_OF_YEAR,1)
-            cal.set(Calendar.MONTH,0)
-            startDate = cal.time
-            cal.add(Calendar.YEAR,1)
-            endDate = cal.time
-        }else{
-            cal.time = year
-            cal.add(Calendar.YEAR,1)
-            startDate = year
-            endDate = cal.time
-        }
-        if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)) {
-            def userId = springSecurityService.authentication.principal?.id
-            teacher = Teacher.get(userId)
-        }else if (teacherId)  {
-            teacher = Teacher.get(teacherId)
-        }
-        if(cityId){
-            city = City.findByCode(cityId)
-        }*/
+
 
     }
 

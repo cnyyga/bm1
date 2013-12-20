@@ -45,53 +45,7 @@
     </div><!--/span-->
 
     <div class="row-fluid sortable">
-       %{-- <div class="box span3">
-            <div class="box-header well" data-original-title>
-                <h2><i class="icon-th"></i><g:message code="home.student.teacher.more.label"/></h2>
 
-            </div>
-            <div class="box-content">
-                <div class="row-fluid">
-
-                </div>
-            </div>
-        </div><!--/span-->
-
-        <div class="box span3">
-            <div class="box-header well" data-original-title>
-                <h2><i class="icon-th"></i> <g:message code="home.student.city.more.label"/></h2>
-
-            </div>
-            <div class="box-content">
-                <div class="row-fluid">
-
-                </div>
-            </div>
-        </div><!--/span-->
-
-        <div class="box span3">
-            <div class="box-header well" data-original-title>
-                <h2><i class="icon-th"></i><g:message code="home.student.middleSchool.more.label"/></h2>
-
-            </div>
-            <div class="box-content">
-                <div class="row-fluid">
-
-                </div>
-            </div>
-        </div><!--/span-->
-
-        <div class="box span3">
-            <div class="box-header well" data-original-title>
-                <h2><i class="icon-th"></i><g:message code="plan.student.count.label"/></h2>
-
-            </div>
-            <div class="box-content">
-                <div class="row-fluid">
-
-                </div>
-            </div>
-        </div><!--/span-->--}%
 
     </div><!--/row-->
 

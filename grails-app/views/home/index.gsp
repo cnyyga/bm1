@@ -6,11 +6,7 @@
 		<g:set var="entityName" value="${message(code: 'default.sys.name', default: 'Plan')}" />
 		<title>${entityName}</title>
         <g:javascript src="student-home.js"  />
-        <g:javascript src="excanvas.js"  />
-        <g:javascript src="jquery.dataTables.min.js"  />
-        <g:javascript src="jquery.flot.min.js"  />
-        <g:javascript src="jquery.flot.stack.js"  />
-        <g:javascript src="jquery.flot.resize.min.js"  />
+
 	</head>
 	<body>
     <div>
