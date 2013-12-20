@@ -346,7 +346,6 @@ class HomeService {
             list << [label:'其它地区',data: othersC]
         }
         sts.each {ele->
-            println(ele)
             def name = ele[0]?ele[0].name:'未选择地区'
             def num = ele[1]
             list << [label:name,data: num]

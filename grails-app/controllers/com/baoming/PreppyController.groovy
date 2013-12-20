@@ -37,8 +37,6 @@ class PreppyController {
             endDate = cal.time
         }
 
-        println(startDate.format('yyyy-MM-dd'))
-        println(endDate.format('yyyy-MM-dd'))
         def teacher
         if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)) {
             teacher = Teacher.get(userId)

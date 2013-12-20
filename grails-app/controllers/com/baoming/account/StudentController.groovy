@@ -745,9 +745,6 @@ class StudentController {
             render(([status:'0'] as JSON) as String)
             return
         }
-        println(params.reviewStatus)
-        println(Student.ReviewStatus.NO_AUDIT.name())
-        println(params.reviewDescription)
         if (params.reviewStatus == Student.ReviewStatus.NO_AUDIT.name()) {
             render(([status: '1'] as JSON) as String)
             return
