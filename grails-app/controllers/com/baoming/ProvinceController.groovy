@@ -6,6 +6,7 @@ import grails.converters.JSON
 class ProvinceController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    def provinceService
 
     def index() {
         //render(view: 'index')
@@ -88,6 +89,15 @@ class ProvinceController {
             redirect(action: 'create',params: [t:t,id:id])
             return
         }
+        if(t == 'city' && id)  {
+            provinceService.clearCitys(id)
+        }
+        if(t == 'district' && id) {
+            provinceService.clearDistricts(id)
+        }
+        if (!t || t == 'province') {
+            provinceService.clearProvinces()
+        }
         flash.message = message(code: 'default.created.message', args: [message(code: 'district.label', default: 'Student'), instance.code])
         redirect(action: 'list',params: [t:t,id:id])
 
@@ -148,6 +158,7 @@ class ProvinceController {
                 redirect(action: 'edit',params: [t:t,id:id,pid:pid])
                 return
             }
+            provinceService.clearProvinces()
 
         }
         if(t == 'city') {
@@ -166,7 +177,7 @@ class ProvinceController {
                 redirect(action: 'edit',params: [t:t,id:id,pid: pid,pt:'province'])
                 return
             }
-
+            provinceService.clearCitys(instance?.code)
         }
         if(t == 'district') {
             def district = District.findByCode(id)
@@ -184,7 +195,7 @@ class ProvinceController {
                 redirect(action: 'edit',params: [t:t,id:id,pid: pid,pt: 'city'])
                 return
             }
-
+            provinceService.clearDistricts(instance?.code)
         }
         flash.message = message(code: 'default.updated.message', args: [message(code: 'district.label', default: 'Student'), id])
         redirect(action: 'list',params: [t:t,id:instance?.code])
@@ -213,6 +224,16 @@ class ProvinceController {
 
         try {
             instace.delete(flush: true)
+            if(!params.t || params.t == 'province'){
+                provinceService.clearProvinces()
+            }
+            if(params.t == 'city'){
+                provinceService.clearCitys(params.id)
+            }
+            if(params.t == 'district'){
+                provinceService.clearDistricts(params.id)
+            }
+
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'district.label', default: 'district'), id])
             //redirect(action: 'list',params: [t:params.t,id:pid])
             render(([status:1] as JSON) as String)

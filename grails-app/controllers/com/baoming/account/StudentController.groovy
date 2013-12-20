@@ -16,6 +16,9 @@ class StudentController {
 
     def userService
     def springSecurityService
+    def planService
+    def provinceService
+    def studentTypeService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -28,8 +31,7 @@ class StudentController {
         def userId = springSecurityService.authentication.principal?.id
         params.max = Math.min(max ?: 10, 100)
         def map = userService.getStudents(userId as Long,params)
-        def teachers = Teacher.findAllByEnabled(Boolean.TRUE)
-        [studentInstanceList: map?.students, studentInstanceTotal: map?.total,teachers:teachers]
+        [studentInstanceList: map?.students, studentInstanceTotal: map?.total,plans:planService.getPlans()]
     }
 
     def createNew(Long id) {
@@ -51,7 +53,7 @@ class StudentController {
             studentInstance = new Student(params)
         }
 
-        [studentInstance: studentInstance]
+        [studentInstance: studentInstance,plans:planService.getPlans(),provinces:provinceService.getProvinces(),studentTypes:studentTypeService.getStudentTypes()]
     }
 
     def saveNew(Long id) {
@@ -722,5 +724,35 @@ class StudentController {
         }
         flash.message = message(code: 'student.updated.audit.message', args: [message(code: 'student.label', default: 'Student'), studentInstance.name])
         redirect(action: "show", id: studentInstance.id)
+    }
+
+    def ajaxAudit(Long id) {
+        if(!id) {
+            render(([status:'0'] as JSON) as String)
+            return
+        }
+        def studentInstance = Student.get(id)
+        if (!studentInstance) {
+            render(([status:'0'] as JSON) as String)
+            return
+        }
+        println(params.reviewStatus)
+        println(Student.ReviewStatus.NO_AUDIT.name())
+        println(params.reviewDescription)
+        if (params.reviewStatus == Student.ReviewStatus.NO_AUDIT.name()) {
+            render(([status: '1'] as JSON) as String)
+            return
+        }
+        def userId = springSecurityService.authentication.principal?.id
+        studentInstance.reviewDate = new Date()
+        studentInstance.reviewPerson = User.get(userId as Long)
+        studentInstance.reviewStatus = Student.ReviewStatus."${params.reviewStatus}"
+        studentInstance.reviewDescription = params.reviewDescription
+
+        if (!studentInstance.save()) {
+            render(([status: '0'] as JSON) as String)
+            return
+        }
+        render(([status: '1', reviewStatusId:studentInstance.reviewStatus?.id,reviewStatusLab:studentInstance.reviewStatus?.label] as JSON) as String)
     }
 }

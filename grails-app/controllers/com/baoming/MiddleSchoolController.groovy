@@ -9,6 +9,8 @@ class MiddleSchoolController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def downloadService
+    def middleSchoolService
+
     def index() {
         redirect(action: "list", params: params)
     }
@@ -58,7 +60,7 @@ class MiddleSchoolController {
             render(view: "create", model: [middleSchoolInstance: middleSchoolInstance])
             return
         }
-
+        middleSchoolService.clearMiddleSchools(params.districtId)
         flash.message = message(code: 'default.created.message', args: [message(code: 'middleSchool.label', default: 'MiddleSchool'), middleSchoolInstance.id])
         redirect(action: "show", id: middleSchoolInstance.id)
     }
@@ -100,7 +102,7 @@ class MiddleSchoolController {
             render(view: "edit", model: [middleSchoolInstance: middleSchoolInstance])
             return
         }
-
+        middleSchoolService.clearMiddleSchools(params.districtId)
         flash.message = message(code: 'default.updated.message', args: [message(code: 'middleSchool.label', default: 'MiddleSchool'), middleSchoolInstance.id])
         redirect(action: "show", id: middleSchoolInstance.id)
     }
@@ -118,7 +120,9 @@ class MiddleSchoolController {
         }
 
         try {
+            def district = middleSchoolInstance.district
             middleSchoolInstance.delete(flush: true)
+            middleSchoolService.clearMiddleSchools(district?.id)
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'middleSchool.label', default: 'MiddleSchool'), id])
             if(params.act) {
                 redirect(action: 'list')

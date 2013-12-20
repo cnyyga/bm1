@@ -108,7 +108,7 @@ class TeacherController {
             render(view: "create", model: [adminInstance: teacherInstance])
             return
         }
-
+        userService.clearTeachers()
         flash.message = message(code: 'default.created.message', args: [message(code: 'teacher.label', default: 'Teacher'), teacherInstance.id])
         redirect(action: "show", id: teacherInstance.id)
     }
@@ -154,7 +154,7 @@ class TeacherController {
             render(view: "edit", model: [teacherInstance: teacherInstance])
             return
         }
-
+        userService.clearTeachers()
         flash.message = message(code: 'default.updated.message', args: [message(code: 'teacher.label', default: 'Teacher'), teacherInstance.id])
         redirect(action: "show", id: teacherInstance.id)
     }
@@ -173,6 +173,7 @@ class TeacherController {
 
         try {
             userService.removeUser(teacherInstance)
+            userService.clearTeachers()
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'teacher.label', default: 'Teacher'), id])
             if(params.act) {
                 redirect(action: 'list')

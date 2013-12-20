@@ -6,7 +6,7 @@ import grails.converters.JSON
 class StudentTypeController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-
+    def studentTypeService
     def index() {
         redirect(action: "list", params: params)
     }
@@ -26,7 +26,7 @@ class StudentTypeController {
             render(view: "create", model: [studentTypeInstance: studentTypeInstance])
             return
         }
-
+        studentTypeService.clearStudentTypes()
         flash.message = message(code: 'default.created.message', args: [message(code: 'studentType.label', default: 'StudentType'), studentTypeInstance.id])
         redirect(action: "show", id: studentTypeInstance.id)
     }
@@ -77,7 +77,7 @@ class StudentTypeController {
             render(view: "edit", model: [studentTypeInstance: studentTypeInstance])
             return
         }
-
+        studentTypeService.clearStudentTypes()
         flash.message = message(code: 'default.updated.message', args: [message(code: 'studentType.label', default: 'StudentType'), studentTypeInstance.id])
         redirect(action: "show", id: studentTypeInstance.id)
     }
@@ -96,6 +96,7 @@ class StudentTypeController {
 
         try {
             studentTypeInstance.delete(flush: true)
+            studentTypeService.clearStudentTypes()
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'studentType.label', default: 'StudentType'), id])
             if(params.act) {
                 redirect(action: 'list')

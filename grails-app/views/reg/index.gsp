@@ -103,7 +103,7 @@
 
                 <div class="reg_element">
                     <span class="inp_box">
-                        <g:select name="planId" id="planId1"  noSelection="${['':'请选择']}" from="${com.baoming.Plan.findAllByStatus(Plan.Status.RUNNING)}" optionValue="name" optionKey="id" value="${(sps && sps[0])?sps[0]:''}" />
+                        <g:select name="planId" id="planId1"  noSelection="${['':'请选择']}" from="${plans}" optionValue="name" optionKey="id" value="${(sps && sps[0])?sps[0]:''}" />
                     </span>
                 </div>
             </li>
@@ -112,7 +112,7 @@
 
                 <div class="reg_element">
                     <span class="inp_box">
-                        <g:select name="planId" id="planId2"  noSelection="${['':'请选择']}" from="${com.baoming.Plan.findAllByStatus(Plan.Status.RUNNING)}" optionValue="name" optionKey="id" value="${(sps && sps[1])?sps[1]:''}"/>
+                        <g:select name="planId" id="planId2"  noSelection="${['':'请选择']}" from="${plans}" optionValue="name" optionKey="id" value="${(sps && sps[1])?sps[1]:''}"/>
                     </span>
                 </div>
             </li>
@@ -121,7 +121,7 @@
 
                 <div class="reg_element">
                     <span class="inp_box">
-                        <g:select name="planId" id="planId3"  noSelection="${['':'请选择']}" from="${com.baoming.Plan.findAllByStatus(Plan.Status.RUNNING)}" optionValue="name" optionKey="id" value="${(sps && sps[2])?sps[2]:''}"/>
+                        <g:select name="planId" id="planId3"  noSelection="${['':'请选择']}" from="${plans}" optionValue="name" optionKey="id" value="${(sps && sps[2])?sps[2]:''}"/>
                     </span>
                 </div>
             </li>
@@ -131,9 +131,9 @@
 
                 <div class="reg_element">
                     <span class="inp_box">
-                        <g:select id="province" name="provinceId" from="${com.baoming.Province.list()}" optionValue="name" optionKey="code"  value="${student?.province?.code}" noSelection="['': '请选择']" class="many-to-one"/>
-                        <g:select id="city" name="cityId" from="${[]}"  value="${student?.city?.code}" class="many-to-one"/>
-                        <g:select id="district" name="districtId" from="${[]}"  value="${student?.district?.code}" class="many-to-one"/>
+                        <g:select id="province" name="provinceId" from="${provinces}" optionValue="name" optionKey="code"  value="${student?.province?.code}" noSelection="['': '请选择']" class="many-to-one"/>
+                        <g:select id="city" name="cityId" from="${[]}"  value="" class="many-to-one"/>
+                        <g:select id="district" name="districtId" from="${[]}"  value="" class="many-to-one"/>
                         <g:select name="middleSchoolId" from="${[]}"  noSelection="['': '请选择']"/>
                     </span>
                 </div>

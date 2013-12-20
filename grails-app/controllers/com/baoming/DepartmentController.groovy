@@ -5,6 +5,7 @@ import org.springframework.dao.DataIntegrityViolationException
 class DepartmentController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    def departmentService
 
     def index() {
         redirect(action: "list", params: params)
@@ -25,7 +26,7 @@ class DepartmentController {
             render(view: "create", model: [departmentInstance: departmentInstance])
             return
         }
-
+        departmentService.clearDepartments()
         flash.message = message(code: 'default.created.message', args: [message(code: 'department.label', default: 'Department'), departmentInstance.id])
         redirect(action: "show", id: departmentInstance.id)
     }
@@ -76,7 +77,7 @@ class DepartmentController {
             render(view: "edit", model: [departmentInstance: departmentInstance])
             return
         }
-
+        departmentService.clearDepartments()
         flash.message = message(code: 'default.updated.message', args: [message(code: 'department.label', default: 'Department'), departmentInstance.id])
         redirect(action: "show", id: departmentInstance.id)
     }
@@ -91,6 +92,7 @@ class DepartmentController {
 
         try {
             departmentInstance.delete(flush: true)
+            departmentService.clearDepartments()
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'department.label', default: 'Department'), id])
             redirect(action: "list")
         }

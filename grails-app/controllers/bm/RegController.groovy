@@ -13,8 +13,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 class RegController {
     def userService
     def jcaptchaService
+    def planService
+    def provinceService
+
     def index() {
-        // [student: new Student(params)]
+         [student: new Student(params),plans:planService.getPlans(),provinces:provinceService.getProvinces()]
     }
 
     def save() {

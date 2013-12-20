@@ -15,6 +15,9 @@ import grails.plugin.jxl.builder.ExcelBuilder
 
 class ApiController {
 
+    def provinceService
+    def middleSchoolService
+
     def dataInit(){
       // def filePath = "classpath:all.sql"
        def filePath = ApiController.class.getResource('/all.sql')?.getPath()
@@ -29,13 +32,12 @@ class ApiController {
 
     def cityOpts() {
         def selectedId = params.selected
-        def province = Province.findByCode(params.id)
         def opts =  "<option value=''>${message(code: 'default.select.zd.message')}</option>"
-        if(!province) {
+        if(!params.id) {
              render opts
             return
         }
-        def citys = province.citys
+        def citys = provinceService.getCitys(params.id)
 
         citys?.each {c->
             if(c.code == selectedId) {
@@ -50,13 +52,12 @@ class ApiController {
 
     def districtOpts() {
         def selectedId = params.selected
-        def city = City.findByCode(params.id)
         def opts = "<option value=''>${message(code: 'default.select.zd.message')}</option>"
-        if(!city) {
+        if(!params.id) {
             render opts
             return
         }
-        def districts = city.districts
+        def districts = provinceService.getDistricts(params.id)
 
         districts?.each {c->
             if(c.code == selectedId) {
@@ -94,13 +95,13 @@ class ApiController {
 
     def schoolOpts() {
         def selectedId = params.long('selected')
-        def city = District.findByCode(params.id)
         def opts = "<option value=''>${message(code: 'default.select.zd.message')}</option>"
-        if(!city) {
+        if(!params.id) {
             render opts
             return
         }
-        def schools = MiddleSchool.findAllByDistrict(city)
+
+        def schools = middleSchoolService.getMiddleSchools(params.id)
         schools?.each {c->
             if(c.id == selectedId) {
                 opts += "<option value='${c.id}' selected='selected'>${c.name}</option>"

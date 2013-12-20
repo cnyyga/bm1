@@ -7,6 +7,8 @@ import com.baoming.account.Role
 import com.baoming.Plan
 import com.baoming.account.Teacher
 import com.baoming.StudentPlan
+import grails.plugin.cache.CacheEvict
+import grails.plugin.cache.Cacheable
 import org.springframework.dao.DataIntegrityViolationException
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 import com.baoming.account.Admin
@@ -299,5 +301,15 @@ class UserService {
     def removeUser(User user){
         UserRole.removeAll(user)
         user.delete(flush: true)
+    }
+
+    @Cacheable('teachers')
+    def getTeachers() {
+        Teacher.findAllByEnabled(Boolean.TRUE)
+    }
+
+    @CacheEvict(value='teachers', allEntries = true)
+    def clearTeachers() {
+
     }
 }

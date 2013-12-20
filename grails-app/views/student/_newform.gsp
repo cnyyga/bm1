@@ -51,12 +51,15 @@
             </label>
 
             <div class="controls">
-                <g:select id="province" name="provinceId" from="${com.baoming.Province.list()}" optionValue="name" optionKey="code"  value="${studentInstance?.province?.code?:params.provinceId}" noSelection="['': '请选择']" class="many-to-one"/>
-                <g:select id="city" name="cityId" from="${[]}"  value="${studentInstance?.city?.code}" class="many-to-one"/>
-                <g:select id="district" name="districtId" from="${[]}"  value="${studentInstance?.district?.code}" class="many-to-one"/>
+                <g:select id="province" name="provinceId" from="${provinces}" optionValue="name" optionKey="code"  value="${studentInstance?.province?.code?:params.provinceId}" noSelection="['': '请选择']" class="many-to-one"/>
+                <g:select id="city" name="cityId" from="${[]}"  value="" class="many-to-one"/>
+                <g:select id="district" name="districtId" from="${[]}"  value="" class="many-to-one"/>
             </div>
         </div>
         <sec:ifNotGranted roles="ROLE_TEACHER">
+            <%
+                def userService = grailsApplication.mainContext.getBean("userService");
+            %>
             <div class="control-group">
                 <label class="control-label" for="combobox">
                     <g:message code="student.recommend.teacher.label" default="Description" />
@@ -67,7 +70,7 @@
                     <div class="ui-widget">
                         <select id="combobox" name="teacherId">
                             <option value="">请选择</option>
-                            <g:each in="${Teacher.findAllByEnabled(true,[sort:id])}" var="teah">
+                            <g:each in="${userService.getTeachers()}" var="teah">
                                 <g:if test="${studentInstance?.teacher?.id == teah.id}">
                                     <option value="${teah.id}" title="${teah.name}${com.bm.utils.PinyinUtils.getPinyin(teah.name)}" selected="true" >${teah.name}</option>
                                 </g:if>
@@ -87,7 +90,7 @@
                 <span class="required-indicator">*</span>
             </label>
             <div class="controls">
-                <g:select from="${com.baoming.StudentType.list()}" name="studentType.id" optionKey="id" optionValue="name" value="${studentInstance?.studentType?.id}" />
+                <g:select from="${studentTypes}" name="studentType.id" optionKey="id" optionValue="name" value="${studentInstance?.studentType?.id}" />
             </div>
         </div>
         <div class="control-group">
@@ -109,7 +112,7 @@
                 <g:message code="student.plans.label" default="Student Plans" />1
             </label>
             <div class="controls">
-                <g:select name="planId" id="planId"  value="${(sps && sps[0])?sps[0]:''}" noSelection="${['':'请选择']}" from="${com.baoming.Plan.findAllByStatus(Plan.Status.RUNNING)}" optionValue="name" optionKey="id" />
+                <g:select name="planId" id="planId"  value="${(sps && sps[0])?sps[0]:''}" noSelection="${['':'请选择']}" from="${plans}" optionValue="name" optionKey="id" />
             </div>
         </div>
         <div class="control-group">
@@ -117,7 +120,7 @@
                 <g:message code="student.plans.label" default="Student Plans" />2
             </label>
             <div class="controls">
-                <g:select name="planId" id="planId2"  value="${(sps && sps[1])?sps[1]:''}" noSelection="${['':'请选择']}" from="${com.baoming.Plan.findAllByStatus(Plan.Status.RUNNING)}" optionValue="name" optionKey="id" />
+                <g:select name="planId" id="planId2"  value="${(sps && sps[1])?sps[1]:''}" noSelection="${['':'请选择']}" from="${plans}" optionValue="name" optionKey="id" />
             </div>
         </div>
         <div class="control-group">
@@ -125,7 +128,7 @@
                 <g:message code="student.plans.label" default="Student Plans" />3
             </label>
             <div class="controls">
-                <g:select name="planId" id="planId3"  value="${(sps && sps[2])?sps[2]:''}" noSelection="${['':'请选择']}" from="${com.baoming.Plan.findAllByStatus(Plan.Status.RUNNING)}" optionValue="name" optionKey="id" />
+                <g:select name="planId" id="planId3"  value="${(sps && sps[2])?sps[2]:''}" noSelection="${['':'请选择']}" from="${plans}" optionValue="name" optionKey="id" />
             </div>
         </div>
         <div class="control-group">

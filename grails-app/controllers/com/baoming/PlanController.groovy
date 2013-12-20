@@ -7,6 +7,8 @@ class PlanController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
+    def planService
+
     def index() {
         redirect(action: "list", params: params)
     }
@@ -26,7 +28,7 @@ class PlanController {
             render(view: "create", model: [planInstance: planInstance])
             return
         }
-
+        planService.clearPlans()
         flash.message = message(code: 'default.created.message', args: [message(code: 'plan.label', default: 'Plan'), planInstance.id])
         redirect(action: "show", id: planInstance.id)
     }
@@ -77,7 +79,7 @@ class PlanController {
             render(view: "edit", model: [planInstance: planInstance])
             return
         }
-
+        planService.clearPlans()
         flash.message = message(code: 'default.updated.message', args: [message(code: 'plan.label', default: 'Plan'), planInstance.id])
         redirect(action: "show", id: planInstance.id)
     }
@@ -96,6 +98,7 @@ class PlanController {
 
         try {
             planInstance.delete(flush: true)
+            planService.clearPlans()
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'plan.label', default: 'Plan'), id])
             if(params.act) {
                 redirect(action: 'list')

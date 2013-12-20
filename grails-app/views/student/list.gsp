@@ -1,4 +1,9 @@
 <%@ page import="com.baoming.Plan; com.baoming.account.Student; com.baoming.account.Role" %>
+<%
+    def departmentService = grailsApplication.mainContext.getBean("departmentService");
+    def userService = grailsApplication.mainContext.getBean("userService");
+    def provinceService = grailsApplication.mainContext.getBean("provinceService");
+%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
 	<head>
@@ -8,6 +13,7 @@
         <g:javascript src="district_select.js"/>
         <g:javascript src="export.js"/>
         <g:javascript src="remove-more.js"/>
+        <g:javascript src="student-review.js"/>
         <g:javascript src="tj.js"/>
         <style>
         .ui-combobox {
@@ -81,7 +87,7 @@
                         <sec:ifNotGranted roles="${Role.AUTHORITY_TEACHER}">
                         <div class="bm-search bm-search3">
                             <label class="search-lb"><g:message code="district.label"/>： </label>
-                            <g:select id="province" name="provinceId" from="${com.baoming.Province.list()}" optionValue="name" optionKey="code"  value="${params?.provinceId}" class="many-to-one" noSelection="${['':'请选择']}"/>
+                            <g:select id="province" name="provinceId" from="${provinceService.getProvinces()}" optionValue="name" optionKey="code"  value="${params?.provinceId}" class="many-to-one" noSelection="${['':'请选择']}"/>
                             <g:select id="city" name="cityId" from="${[]}"  />
                             <g:select id="district" name="districtId" from="${[]}" />
                         </div>
@@ -89,12 +95,12 @@
 
                         <div class="bm-search ">
                             <label class="search-lb"><g:message code="plan.label"/>：</label>
-                            <g:select name="planId" from="${com.baoming.Plan.findAllByStatus(Plan.Status.RUNNING)}" data-rel="chosen"  optionValue="name" optionKey="id"  value="${params?.planId}"  noSelection="${['':'请选择']}"/>
+                            <g:select name="planId" from="${plans}" data-rel="chosen"  optionValue="name" optionKey="id"  value="${params?.planId}"  noSelection="${['':'请选择']}"/>
                         </div>
                         <sec:ifNotGranted roles="${Role.AUTHORITY_TEACHER}">
                         <div class="bm-search">
                             <label class="search-lb"><g:message code="department.label"/> ：</label>
-                            <g:select name="departmentId" from="${com.baoming.Department.list()}"  optionKey="id" optionValue="name" value="${params.departmentId}" data-rel="chosen" noSelection="${['':'请选择']}"/>
+                            <g:select name="departmentId" from="${departmentService.getDepartments()}"  optionKey="id" optionValue="name" value="${params.departmentId}" data-rel="chosen" noSelection="${['':'请选择']}"/>
                         </div>
                                    <div class="span12" style="margin-left: 0">
                                    <div class="bm-search">
@@ -103,7 +109,7 @@
                                    <div class="ui-widget">
                                        <select id="combobox" name="teacherId">
                                            <option value="">请选择</option>
-                                           <g:each in="${teachers}" var="teah">
+                                           <g:each in="${userService.getTeachers()}" var="teah">
                                                <g:if test="${params?.teacherId == teah.id as String }">
                                                    <option value="${teah.id}" title="${teah.name}${com.bm.utils.PinyinUtils.getPinyin(teah.name)}" selected="true" >${teah.name}</option>
                                                </g:if>
@@ -167,7 +173,7 @@
                                 ${studentInstance.district?.name}
                             </td>
 
-                            <td class="center">
+                            <td class="center td-review" id="studentTd${studentInstance.id}">
                                 <span class="label  ${studentInstance.reviewStatus == Student.ReviewStatus.NO_AUDIT ?'label-important':(studentInstance.reviewStatus == Student.ReviewStatus.PASS?'label-success':'label-warning')}">
                                     ${studentInstance.reviewStatus?.label}
                                 </span>
@@ -191,9 +197,9 @@
 
                             </sec:ifAllGranted>
                             <sec:ifAllGranted roles="${Role.AUTHORITY_FINANCE}">
-                                <g:link class="btn btn-info" action="show" id="${studentInstance.id}" params="${[t:'au']}">
+                                <g:link class="btn btn-info btn-stu-review" action="ajaxAudit" rel="${studentInstance.id}" id="${studentInstance.id}" params="${[t:'au']}">
                                     <i class="icon-edit icon-white"></i>
-                                    <g:message code="student.review.label" default="Edit" />
+                                    <g:message code="student.review.label" default="Review" />
                                 </g:link>
                             </sec:ifAllGranted>
                             </td>
@@ -227,5 +233,22 @@
     </div>
     <div id="dialog-del">
     </div>
+
+    <div id="reviewModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel"><g:message code="student.review.label"/> </h3>
+        </div>
+        <div class="modal-body">
+            <div id="reviewFormContent">
+            <g:render template="reviewForm"/>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true"><g:message code="default.button.close.label"/></button>
+            <button class="btn btn-primary save-student-review" data-loading-text="Loading..."><g:message code="default.button.update.label"/></button>
+        </div>
+    </div>
+
     </body>
 </html>

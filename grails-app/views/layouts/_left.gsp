@@ -3,7 +3,7 @@
     <div class="well nav-collapse sidebar-nav">
         <ul class="nav nav-tabs nav-stacked main-menu">
             <li class="nav-header hidden-tablet">Main</li>
-            <sec:access controller="student" method="createNew">
+            <sec:access url="/student/createNew">
                 <li class="${(params.controller == 'student' && params.action == 'createNew')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'student',action: 'createNew')}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'student.create.new.label')}</span></a></li>
             </sec:access>
             <sec:access controller="preppy">
