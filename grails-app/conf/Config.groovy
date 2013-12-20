@@ -94,6 +94,16 @@ log4j = {
     //appenders {
     //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
     //}
+    appenders {
+        console name: "stdout",
+                layout: pattern(conversionPattern: "%d{HH:mm:ss} %l %n[%5p] %m%n")
+        environments {
+            production {
+                new org.apache.log4j.DailyRollingFileAppender(name: "dailyAppender",
+                        layout: pattern(conversionPattern: '%d{HH:mm:ss} %l %n[%5p] %m%n'), fileName: "/d:/log/bm.log", datePattern: "yyyy-MM-dd")
+            }
+        }
+    }
 
     error  'org.codehaus.groovy.grails.web.servlet',        // controllers
            'org.codehaus.groovy.grails.web.pages',          // GSP
