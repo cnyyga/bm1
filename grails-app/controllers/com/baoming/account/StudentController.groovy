@@ -476,6 +476,15 @@ class StudentController {
         render(([status:1] as JSON) as String)
     }
 
+    def imp() {
+
+    }
+
+    def saveImp() {
+        flash.message = message(code: 'default.save.success.label')
+        render(view: 'imp')
+    }
+
     def export() {
         def userId = springSecurityService.authentication.principal?.id
         def map = userService.getStudents(userId as Long,params)

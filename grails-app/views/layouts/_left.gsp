@@ -11,10 +11,10 @@
             </sec:access>
             <sec:access controller="student">
                 <sec:ifAllGranted roles="${Role.AUTHORITY_ADMIN}">
-                    <li class="${(params.controller == 'student'&& params.action != 'createNew')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'student')}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'default.manager.label',args: ["${message(code: 'student.label')}"])}</span></a></li>
+                    <li class="${(params.controller == 'student'&& params.action != 'createNew'&& params.action != 'imp')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'student')}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'default.manager.label',args: ["${message(code: 'student.label')}"])}</span></a></li>
                 </sec:ifAllGranted>
                 <sec:ifAllGranted roles="${Role.AUTHORITY_TEACHER}">
-                    <li class="${(params.controller == 'student'&& params.action != 'createNew')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'student')}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'default.manager.label',args: ["${message(code: 'student.label')}"])}</span></a></li>
+                    <li class="${(params.controller == 'student'&& params.action != 'createNew'&& params.action != 'imp')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'student')}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'default.manager.label',args: ["${message(code: 'student.label')}"])}</span></a></li>
                 </sec:ifAllGranted>
                 <sec:ifAllGranted roles="${Role.AUTHORITY_FINANCE}">
                     <li class="${(params.controller == 'student'&& params.action != 'createNew')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'student')}"><i class="icon-user"></i><span class="hidden-tablet">
@@ -24,6 +24,11 @@
             <sec:access controller="preppy">
                 <li class="${(params.controller == 'preppy' && params.action != 'create')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'preppy')}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'default.manager.label',args: ["${message(code: 'preppy.label')}"])}</span></a></li>
             </sec:access>
+
+            <sec:access url="/student/imp" >
+                <li class="${(params.controller == 'student' && params.action == 'imp')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'student',action: 'imp')}"><i class="icon-tag"></i><span class="hidden-tablet"> ${message(code: 'default.button.import.label')}</span></a></li>
+            </sec:access>
+
             <sec:access controller="statistics">
             <li class="${(params.controller == 'statistics' && params.action == 'index')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'statistics')}"><i class="icon-tag"></i><span class="hidden-tablet"> ${message(code: 'statistics.label')}</span></a></li>
             </sec:access>
