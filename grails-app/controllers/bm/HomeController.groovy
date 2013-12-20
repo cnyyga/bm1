@@ -38,13 +38,56 @@ class HomeController {
         def pass = homeService.getStudentCount(startDate,endDate,teacher,Student.ReviewStatus.PASS)
         def audit = homeService.getStudentCount(startDate,endDate,teacher,Student.ReviewStatus.NO_AUDIT)
         def nopass = homeService.getStudentCount(startDate,endDate,teacher,Student.ReviewStatus.NO_PASS)
-        def teachers = homeService.getSutdentsForTeacher(0,10,startDate,endDate)
+        /*def teachers = homeService.getSutdentsForTeacher(0,10,startDate,endDate)
         def districts = homeService.getSutdentsForCity(startDate,endDate,teacher)
         def plans = homeService.getStudentsForPlan(startDate,endDate,teacher)
         def citys = SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)?[]:homeService.getStudentCountForCity1(startDate,endDate)
-        def middles = SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)?[]:homeService.getStudentsForMiddleSchool(0,10,startDate,endDate)
-        [total:total,pass:pass,audit:audit,noPass:nopass,teachers:teachers,citys:citys,plans:plans,districts:districts,middleSchools:middles]
+        def middles = SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)?[]:homeService.getStudentsForMiddleSchool(0,10,startDate,endDate)*/
+        [total:total,pass:pass,audit:audit,noPass:nopass,year: params.year]
     }
+
+
+    def teacherAjax() {
+        def se = getSE(params.date('year','yyyy'))
+        def teachers = homeService.getSutdentsForTeacher(0,10,se[0],se[1])
+        [teachers:teachers,year:params.year]
+    }
+
+    def districtAjax() {
+        def teacher
+        if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)) {
+            def userId = springSecurityService.authentication.principal?.id
+            teacher = Teacher.get(userId)
+        }
+        def se = getSE(params.date('year','yyyy'))
+        def districts = homeService.getSutdentsForCity(se[0],se[1],teacher)
+        [districts:districts,year:params.year]
+    }
+
+    def planAjax() {
+        def teacher
+        if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)) {
+            def userId = springSecurityService.authentication.principal?.id
+            teacher = Teacher.get(userId)
+        }
+        def se = getSE(params.date('year','yyyy'))
+        def plans = homeService.getStudentsForPlan(se[0],se[1],teacher)
+        [plans:plans,year:params.year]
+    }
+
+    def cityAjax() {
+
+        def se = getSE(params.date('year','yyyy'))
+        def citys = homeService.getStudentCountForCity1(se[0],se[1])
+        [citys:citys,year:params.year]
+    }
+
+    def schoolAjax() {
+        def se = getSE(params.date('year','yyyy'))
+        def schools = homeService.getStudentsForMiddleSchool(0,10,se[0],se[1])
+        [middleSchools:schools,year:params.year]
+    }
+
 
     def rank(Integer max) {
         def t = params.t
@@ -185,5 +228,26 @@ class HomeController {
             IOUtils.closeQuietly(outputStream)
         }
         return
+    }
+
+
+    private getSE(def year) {
+        def startDate
+        def endDate
+        def cal = Calendar.instance
+        cal.clearTime()
+        if(!year){
+            cal.set(Calendar.DAY_OF_YEAR,1)
+            cal.set(Calendar.MONTH,0)
+            startDate = cal.time
+            cal.add(Calendar.YEAR,1)
+            endDate = cal.time
+        }else{
+            cal.time = year
+            cal.add(Calendar.YEAR,1)
+            startDate = year
+            endDate = cal.time
+        }
+        [startDate,endDate]
     }
 }

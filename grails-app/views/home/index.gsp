@@ -1,9 +1,11 @@
+<%@ page import="com.baoming.account.Role" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'default.sys.name', default: 'Plan')}" />
 		<title>${entityName}</title>
+        <g:javascript src="student-home.js"  />
         <g:javascript src="excanvas.js"  />
         <g:javascript src="jquery.dataTables.min.js"  />
         <g:javascript src="jquery.flot.min.js"  />
@@ -33,6 +35,7 @@
             <g:submitButton name="sub" value="${message(code:'default.button.search.label')}" class="btn btn-small btn-primary" />
         </g:form>
     </div>
+    %{--审核记录--}%
     <div class="sortable row-fluid">
         <a class="well span3 top-block" href="${createLink(controller: 'student',action: 'list',params: [year:params.year?:year])}">
             <span class="icon32 icon-red icon-user"></span>
@@ -58,121 +61,18 @@
             <div>${noPass}</div>
         </a>
     </div>
-
-    <div class="row-fluid sortable">
-        <g:if test="${teachers}">
-        <div class="box span4">
-            <div class="box-header well" data-original-title>
-                <h2><i class="icon-th"></i> <g:message code="home.student.teacher.more.label"/> </h2>
-                <div style="float: right;">
-                    <a href="${createLink(controller: 'home',action: 'rank',params: [t:'teacher',year:params.year?:year])}" class=" btn-mini">more</a>
-                </div>
-            </div>
-            <div class="box-content">
-                <ul class="dashboard-list">
-                    <g:each in="${teachers}" var="tea" status="tc">
-                    <li>
-                        <a href="${createLink(controller: 'student',action: 'list',params: [teacherId:tea.id,year:params.year?:year])}">
-                            <span class="green">${tc+1}</span>
-                            ${tea.name}<strong style="padding-left: 10px;">${tea.cc}</strong>
-                        </a>
-                    </li>
-                    </g:each>
-                </ul>
-            </div>
-        </div><!--/span-->
-        </g:if>
-        <g:if test="${citys}">
-            <div class="box span4">
-                <div class="box-header well" data-original-title>
-                    <h2><i class="icon-th"></i>  <g:message code="home.student.city.more.label"/></h2>
-                    <div style="float: right;">
-                        <a href="${createLink(controller: 'home',action: 'rank',params: [t:'city',year:params.year?:year])}" class=" btn-mini">more</a>
-                    </div>
-                </div>
-                <div class="box-content">
-                    <ul class="dashboard-list">
-                        <g:each in="${citys}" var="city" status="tc">
-                            <li>
-                                <a href="${createLink(controller: 'student',action: 'list',params: [provinceId:city?.provinceId,cityId:city?.id,year:params.year?:year])}">
-                                    <span class="green">${tc+1}</span>
-                                    ${city.name}<strong style="padding-left: 10px;">${city.cc}</strong>
-                                </a>
-                            </li>
-                        </g:each>
-                    </ul>
-                </div>
-            </div><!--/span-->
-        </g:if>
-        <g:if test="${districts}">
-        <div class="box span4">
-            <div class="box-header well" data-original-title>
-                <h2><i class="icon-th"></i>  <g:message code="home.student.district.more.label"/></h2>
-                <div style="float: right;">
-                    <a href="${createLink(controller: 'home',action: 'rank',params: [t:'district',year:params.year?:year])}" class=" btn-mini">more</a>
-                </div>
-            </div>
-            <div class="box-content">
-                <ul class="dashboard-list">
-                    <g:each in="${districts}" var="district" status="tc">
-                        <li>
-                            <a href="${createLink(controller: 'student',action: 'list',params: [provinceId:district?.provinceCode,cityId:district?.cityCode,districtId:district.code,year:params.year?:year])}">
-                                <span class="green">${tc+1}</span>
-                                ${district.cityName}${district.name}<strong style="padding-left: 10px;">${district.cc}</strong>
-                            </a>
-                        </li>
-                    </g:each>
-                </ul>
-            </div>
-        </div><!--/span-->
-        </g:if>
-    </div>
-        <div class="row-fluid sortable">
-        <g:if test="${middleSchools}">
-            <div class="box span6">
-                <div class="box-header well" data-original-title>
-                    <h2><i class="icon-th"></i>  <g:message code="home.student.middleSchool.more.message"/></h2>
-                    <div style="float: right;">
-                        <a href="${createLink(controller: 'home',action: 'rank',params: [t:'middleSchool',year:params.year?:year])}" class=" btn-mini">more</a>
-                    </div>
-                </div>
-                <div class="box-content">
-                    <ul class="dashboard-list">
-                        <g:each in="${middleSchools}" var="ms" status="tc">
-                            <li>
-                                <a href="${createLink(controller: 'student',action: 'list',params: [middleSchoolId:ms.id,year:params.year?:year])}">
-                                    <span class="green">${tc+1}</span>
-                                    ${ms.name}<strong style="padding-left: 10px;">${ms.cc}</strong>
-                                </a>
-                            </li>
-                        </g:each>
-                    </ul>
-                </div>
-            </div><!--/span-->
-        </g:if>
-        <g:if test="${plans}">
-            <div class="box span6">
-                <div class="box-header well" data-original-title>
-                    <h2><i class="icon-th"></i>  <g:message code="home.student.plan.more.label"/></h2>
-                    <div style="float: right;">
-                        <a href="${createLink(controller: 'home',action: 'rank',params: [t:'plan',year:params.year?:year])}" class=" btn-mini">more</a>
-                    </div>
-                </div>
-                <div class="box-content">
-                    <ul class="dashboard-list">
-                        <g:each in="${plans}" var="plan" status="tc">
-                            <li>
-                                <a href="${createLink(controller: 'student',action: 'list',params: [planId:plan.id,year:params.year?:year])}">
-                                    <span class="green">${tc+1}</span>
-                                    ${plan.name}<strong style="padding-left: 10px;">${plan.cc}</strong>
-                                </a>
-                            </li>
-                        </g:each>
-                    </ul>
-                </div>
-            </div><!--/span-->
-        </g:if>
-    </div><!--/row-->
-
+    %{--审核记录结束 --}%
+    <sec:ifAllGranted roles="${Role.AUTHORITY_TEACHER}">
+        %{--老师统计 --}%
+          <g:render template="teacherSt"  />
+    </sec:ifAllGranted>
+    <sec:ifAllGranted roles="${Role.AUTHORITY_ADMIN}">
+    %{--管理员统计 --}%
+         <g:render template="adminSt"  />
+    </sec:ifAllGranted>
+    <sec:ifAllGranted roles="${Role.AUTHORITY_FINANCE}">
+    %{--管理员统计 --}%
+        <g:render template="adminSt"  />
+    </sec:ifAllGranted>
 	</body>
 </html>

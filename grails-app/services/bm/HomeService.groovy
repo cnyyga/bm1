@@ -93,9 +93,9 @@ class HomeService {
     }
 
     def getSutdentsForCity(Date startDate = null,Date endDate = null,Teacher teacher=null){
-        if(!teacher) {
-            return getSutdentsForCity(0,10,startDate,endDate)
-        }
+        //if(!teacher) {
+            return getSutdentsForCity(0,10,startDate,endDate,teacher)
+       //}
         if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)) {
             //return
         }
@@ -116,9 +116,9 @@ class HomeService {
         }
         return r?r?.collect {
             try {
-                return [id:it[0].code,name:it[0].name,total: it[1]]
+                return [id:it[0].code,name:it[0].name,cc: it[1]]
             } catch (Exception e) {
-                return [id:null,name:'Other',total: it[0]]
+                return [id:null,name:'Other',cc: it[1]]
             }
         }:[]
     }
@@ -151,9 +151,9 @@ class HomeService {
     }
 
     def getStudentsForPlan(Date startDate = null,Date endDate = null,Teacher teacher=null){
-        if(!teacher){
-            return getStudentsForPlan(0,10,startDate,endDate)
-        }
+        //if(!teacher){
+            return getStudentsForPlan(0,10,startDate,endDate,teacher)
+        //}
         def sps = StudentPlan.createCriteria().list {
              if(teacher){
                  student{

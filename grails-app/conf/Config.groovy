@@ -117,6 +117,7 @@ grails.plugins.springsecurity.authority.className = 'com.baoming.account.Role'
 grails.plugins.springsecurity.requestMap.className = 'com.baoming.account.Requestmap'
 grails.plugins.springsecurity.securityConfigType = 'InterceptUrlMap'
 grails.plugins.springsecurity.interceptUrlMap = [
+        '/': ['ROLE_ADMIN','ROLE_TEACHER','ROLE_FINANCE'],
         '/home/**': ['ROLE_ADMIN','ROLE_TEACHER','ROLE_FINANCE'],
         '/student/edit/**': ['ROLE_ADMIN','ROLE_FINANCE'],
         '/preppy/**': ['ROLE_ADMIN','ROLE_TEACHER'],
