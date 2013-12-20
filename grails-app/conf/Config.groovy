@@ -100,7 +100,7 @@ log4j = {
         environments {
             production {
                 new org.apache.log4j.DailyRollingFileAppender(name: "dailyAppender",
-                        layout: pattern(conversionPattern: '%d{HH:mm:ss} %l %n[%5p] %m%n'), fileName: "d:/log/bm.log", datePattern: "yyyy-MM-dd")
+                        layout: pattern(conversionPattern: '%d{HH:mm:ss} %l %n[%5p] %m%n'), fileName: "d:/logs/bm.log", datePattern: "yyyy-MM-dd")
             }
         }
     }

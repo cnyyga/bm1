@@ -265,9 +265,7 @@ img.grayscale{
 -moz-filter: grayscale(100%);
 -ms-filter: grayscale(100%);
 -o-filter: grayscale(100%);
-/*filter: url(desaturate.svg#grayscale);
-filter: gray;
-filter: grayscale(100%); */
+
 }
 
 .thumbnail .gallery-controls{
