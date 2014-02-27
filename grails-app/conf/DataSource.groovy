@@ -14,7 +14,7 @@ environments {
             pooled = true
             driverClassName = "com.mysql.jdbc.Driver"
             //url = "jdbc:mysql:///seven_magic"
-            url = "jdbc:mysql://localhost:3306/bm4"
+            url = "jdbc:mysql://localhost:3306/bm5"
             //url = "jdbc:mysql://221.226.68.70:3306/seven_magic"
             username = "root"
             password = "1"

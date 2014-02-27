@@ -57,7 +57,7 @@ class RegController {
         def scoreStr = ''
         planId.each {p->
             def plan = Plan.get(p)
-            def planScore = plan.score
+            def planScore = plan?.score
             if(score < planScore) {
                 scoreStr += plan.name + ' '
             }
