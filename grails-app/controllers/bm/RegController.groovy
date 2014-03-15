@@ -24,7 +24,7 @@ class RegController {
 
         def planId = params.list('planId')
         def student = new Student(params)
-        student.username = params.number
+        student.username = "${params.number}${new Date().time}"
         student.password = '111111'
 
 
@@ -45,12 +45,12 @@ class RegController {
         def score = params.float('score')
         if(!score || score < 0) {
             flash.message = "请填写正确高考成绩"
-            render(view: 'index', model: [student: student,planIds:planId])
+            render(view: 'index', model: [student: student,planIds:planId,plans:planService.getPlans(),provinces:provinceService.getProvinces()])
             return
         }
         if(!planId || planId.empty){
             flash.message = "请选择专业"
-            render(view: 'index', model: [student: student,planIds:planId])
+            render(view: 'index', model: [student: student,planIds:planId,plans:planService.getPlans(),provinces:provinceService.getProvinces()])
             return
         }
 
@@ -64,7 +64,7 @@ class RegController {
         }
         if(scoreStr) {
             flash.message = "高考分数未达到填报专业【${scoreStr}】分数要求，注册失败。 "
-            render(view: 'index', model: [student: student,planIds:planId])
+            render(view: 'index', model: [student: student,planIds:planId,plans:planService.getPlans(),provinces:provinceService.getProvinces()])
             return
         }
 
@@ -74,22 +74,23 @@ class RegController {
              */
             if (!jcaptchaService.validateResponse("imageCaptcha", session.id, params.val_code)) {
                 flash.message = "验证码错误"
-                render(view: 'index', model: [student: student,planIds:planId])
+                render(view: 'index', model: [student: student,planIds:planId,plans:planService.getPlans(),provinces:provinceService.getProvinces()])
                 return
             }
             def s = userService.saveStudent(student,planId)
 
             if (s.status == 0) {
                 flash.message = '出现不明异常，保存失败'
-                render(view: 'index', model: [student: student,planIds:planId])
+                render(view: 'index', model: [student: student,planIds:planId,plans:planService.getPlans(),provinces:provinceService.getProvinces()])
                 return
             }
 
             session[UsernamePasswordAuthenticationFilter.SPRING_SECURITY_LAST_USERNAME_KEY]= student.username
             render(view: 'success')
         } catch (Exception e) {
+            log.error(e.message,e)
             flash.message = "拒绝重复提交"
-            render(view: 'index', model: [student: student,planIds:planId])
+            render(view: 'index', model: [student: student,planIds:planId,plans:planService.getPlans(),provinces:provinceService.getProvinces()])
             return
         }
     }

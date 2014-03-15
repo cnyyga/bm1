@@ -5,6 +5,9 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'preppy.label', default: 'Preppy')}" />
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
+        <g:javascript src="jquery.validate.min.js"/>
+        <g:javascript src="messages_zh.js"/>
+        <g:javascript src="app-preppy.js"/>
 	</head>
 	<body>
         <div>
@@ -34,7 +37,7 @@
                     <h2><i class="icon-edit"></i> <g:message code="default.add.label" args="[entityName]" /></h2>
                 </div>
                 <div class="box-content">
-                    <g:form class="form-horizontal" action="save" >
+                    <g:form class="form-horizontal" action="save" name="editForm">
 
                     <fieldset>
                          <g:render template="form"/>

@@ -205,7 +205,7 @@
         <div class="controls">
 
             <span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate
-                    date="${studentInstance?.dateCreated}" format="yyyy-MM-dd"/></span>
+                    date="${studentInstance?.dateCreated}" format="yyyy-MM-dd HH:mm"/></span>
 
         </div>
     </div>

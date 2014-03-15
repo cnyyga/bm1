@@ -196,6 +196,16 @@
                         </div>
                     </g:if>
                         </sec:ifAllGranted>
+                    <div class="control-group">
+                        <label class="control-label">
+                            <g:message code="default.dateCreated.label" default="dateCreated" />
+                        </label>
+                        <div class="controls">
+                            <span class="property-value" aria-labelledby="teacher-label"><g:formatDate
+                                    date="${preppyInstance?.dateCreated}" format="yyyy-MM-dd HH:mm"/></span>
+                        </div>
+                    </div>
+
                     <div class="form-actions">
                         <g:form>
                                 <g:hiddenField name="id" value="${preppyInstance?.id}" />

@@ -38,7 +38,7 @@
 	</label>
 
     <div class="controls">
-	<g:select id="plan" name="plan.id" from="${com.baoming.Plan.list()}" optionKey="id" optionValue="name" value="${preppyInstance?.plan?.id}" class="many-to-one" noSelection="['': '请选择']"/>
+	<g:select id="plan" name="plan.id" from="${com.baoming.Plan.list()}" optionKey="id" optionValue="name" value="${preppyInstance?.plan?.id}" class="many-to-one" />
     </div>
 </div>
 
