@@ -106,6 +106,7 @@ class Student extends User{
     }
 
     static mapping = {
+        number(index: 'user_number_Idx')
     }
 
     static embedded = ['payment']

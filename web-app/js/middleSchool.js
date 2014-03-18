@@ -28,7 +28,10 @@ $(function(){
         var t = $(this);
         cityOpts(t.val())
     })
-
+    $("#city").change(function(){
+        var t = $(this);
+        distOpts(t.val());
+    })
     cityOpts($("#province").val())
     function cityOpts(provinceId) {
         var cityUrl = $("#cityUrl").val();

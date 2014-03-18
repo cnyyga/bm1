@@ -476,11 +476,22 @@ class StudentController {
         render(([status:1] as JSON) as String)
     }
 
+    def excelService
     def imp() {
 
     }
 
-    def saveImp() {
+    def saveImp(String type) {
+        def file1 = request.getFile("docFile")
+        def r
+        if(file1 &&  !file1.empty) {
+            r = excelService.imp(file1,type)
+        }
+        if(!r) {
+            flash.message = message(code: 'default.save.failure.label')
+            render(view: 'imp')
+            return
+        }
         flash.message = message(code: 'default.save.success.label')
         render(view: 'imp')
     }
