@@ -13,9 +13,7 @@
         <g:message code="student.review.description.label" default="description" />
     </label>
     <div class="controls">
-        <g:textArea name="reviewDescription" rows="5" cols="30" style="width: 400px;">
-            ${studentInstance?.reviewDescription}</g:textArea>
-
+        <g:textArea name="reviewDescription" rows="5" cols="30" style="width: 400px;">${studentInstance?.reviewDescription}</g:textArea>
     </div>
 </div>
 </sec:ifAnyGranted>
