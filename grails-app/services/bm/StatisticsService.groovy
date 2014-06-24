@@ -23,6 +23,7 @@ class StatisticsService {
         cal.clearTime()
         def sd = cal.time
         def ed = sd + 1
+
         return getStudentCountByDepartment(sd,ed,max,offset)
     }
 
@@ -34,7 +35,14 @@ class StatisticsService {
      * @return
      */
     def getStudentCountInDate(Date startDate,Date endDate,int max = 20,int offset = 0) {
-        def params = [reviewStatus:Student.ReviewStatus.PASS,max:max,offset:offset]
+        def cal = Calendar.instance
+        cal.time = startDate
+        cal.clearTime()
+        cal.set(Calendar.MONTH,1)
+        cal.set(Calendar.DAY_OF_MONTH,1)
+        def yearFirstDay = cal.time
+
+        def params = [yearFirstDay:yearFirstDay,reviewStatus:Student.ReviewStatus.PASS,max:max,offset:offset]
         def sql = "select a,"
         sql += "(select count(b.id) from a.students b where a=b.teacher and b.reviewStatus=:reviewStatus "
         if(startDate) {
@@ -46,7 +54,7 @@ class StatisticsService {
             sql += " and b.reviewDate <:endDate"
         }
         sql += "), "
-        sql += "(select count(b.id) from a.students b where a=b.teacher and b.reviewStatus=:reviewStatus) as ccc "
+        sql += "(select count(b.id) from a.students b where a=b.teacher and b.reviewStatus=:reviewStatus and b.reviewDate >=:yearFirstDay) as ccc "
         sql += "from Teacher a order by ccc desc "
         Teacher.executeQuery(sql,params)
     }
@@ -69,7 +77,13 @@ class StatisticsService {
      * @return
      */
     def getStudentCountByDepartment(Date startDate,Date endDate,int max = 20,int offset = 0) {
-        def params = [reviewStatus:Student.ReviewStatus.PASS,max:max,offset:offset]
+        def cal = Calendar.instance
+        cal.time = startDate
+        cal.clearTime()
+        cal.set(Calendar.MONTH,1)
+        cal.set(Calendar.DAY_OF_MONTH,1)
+        def yearFirstDay = cal.time
+        def params = [yearFirstDay:yearFirstDay,reviewStatus:Student.ReviewStatus.PASS,max:max,offset:offset]
         def sql = "select a.name,a.taskNumber,"
         sql +="(select count(b.id) from Student b inner join b.teacher c where c.department=a and b.reviewStatus=:reviewStatus "
         if(startDate) {
@@ -80,7 +94,7 @@ class StatisticsService {
             params.endDate = endDate
             sql += " and b.reviewDate <:endDate"
         }
-        sql += "),(select count(b.id) from Student b inner join b.teacher c where c.department=a and b.reviewStatus=:reviewStatus) as ccc "
+        sql += "),(select count(b.id) from Student b inner join b.teacher c where c.department=a and b.reviewStatus=:reviewStatus and b.reviewDate >=:yearFirstDay) as ccc "
         sql += " from Department a order by ccc desc "
         Department.executeQuery(sql,params)
     }

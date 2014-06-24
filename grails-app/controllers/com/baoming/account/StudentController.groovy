@@ -27,7 +27,11 @@ class StudentController {
     }
 
     def list(Integer max) {
+        params.regType = params.regType?:1
 
+        if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)) {
+            params.regType = null
+        }
         def userId = springSecurityService.authentication.principal?.id
         params.max = Math.min(max ?: 10, 100)
         def map = userService.getStudents(userId as Long,params)
@@ -165,6 +169,8 @@ class StudentController {
         } else {
             studentInstance.username = UUID.randomUUID().toString()
             studentInstance.password = "1"
+            studentInstance.regType = 1 as Short
+
             u = userService.saveStudent(studentInstance,planIds)
         }
 
@@ -406,6 +412,10 @@ class StudentController {
     }
 
     def delete(Long id) {
+        if(SpringSecurityUtils.ifNotGranted(Role.AUTHORITY_ADMIN)){
+            render(([status:0] as JSON) as String )
+            return
+        }
         def studentInstance = Student.get(id)
         if (!studentInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'student.label', default: 'Student'), id])
@@ -437,6 +447,10 @@ class StudentController {
     }
 
     def delMore() {
+        if(SpringSecurityUtils.ifNotGranted(Role.AUTHORITY_ADMIN)){
+            render(([status:0] as JSON) as String )
+            return
+        }
         def ids = params.ids
         if(!ids) {
             render(([status:0] as JSON) as String )
@@ -499,6 +513,7 @@ class StudentController {
     def export() {
         def userId = springSecurityService.authentication.principal?.id
         def map = userService.getStudents(userId as Long,params)
+        println(params)
         def f = params.f
         if(!f) {
             render(message(code: 'student.select.zd.message'))
@@ -704,13 +719,21 @@ class StudentController {
                 if(i ==0 ){
                     title << message(code: 'student.plans.label')
                 }
-                data << stu.plans*.name?.join(',')   ?:''
+                try {
+                    data << stu.plans*.name?.join(',')   ?:''
+                } catch (Exception e) {
+                    data << ''
+                }
             }
             if(fs.count('recommend') > 0)  {
                 if(i ==0 ){
                     title << message(code: 'student.recommend.teacher.label')
                 }
-                data << stu.teacher?.name
+                try {
+                    data << stu.teacher?.name
+                } catch (Exception e) {
+                    data << ''
+                }
             }
             if(fs.count('dateCreated') > 0)  {
                 if(i ==0 ){

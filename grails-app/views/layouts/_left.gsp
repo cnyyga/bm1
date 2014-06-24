@@ -11,7 +11,8 @@
             </sec:access>
             <sec:access controller="student">
                 <sec:ifAllGranted roles="${Role.AUTHORITY_ADMIN}">
-                    <li class="${(params.controller == 'student'&& params.action != 'createNew'&& params.action != 'imp')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'student')}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'default.manager.label',args: ["${message(code: 'student.label')}"])}</span></a></li>
+                    <li class="${(params.controller == 'student'&& params.action != 'createNew'&& params.action != 'imp' && params.regType!= '0')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'student' ,params: [regType:1])}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'default.manager.label',args: ["${message(code: 'student.label')}"])}</span></a></li>
+                    <li class="${(params.controller == 'student'&& params.action != 'createNew'&& params.action != 'imp' && params.regType== '0')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'student' ,params: [regType:0])}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'default.manager.label',args: ["${message(code: 'student.reg.label')}"])}</span></a></li>
                 </sec:ifAllGranted>
                 <sec:ifAllGranted roles="${Role.AUTHORITY_TEACHER}">
                     <li class="${(params.controller == 'student'&& params.action != 'createNew'&& params.action != 'imp')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'student')}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'default.manager.label',args: ["${message(code: 'student.label')}"])}</span></a></li>

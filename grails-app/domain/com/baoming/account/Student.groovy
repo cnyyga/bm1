@@ -68,6 +68,7 @@ class Student extends User{
 
     Admission admission = Admission.NO   //录取状态
     Registration registration = Registration.NO //报到 状态
+    Short regType = 0 //0表示前台学生注册，1=表示老师添加
 
     static hasMany = [studentPlans: StudentPlan]
 

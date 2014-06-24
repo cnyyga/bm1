@@ -67,7 +67,8 @@
             </div>
             <div class="box-content">
                 <div class="span12 well">
-                    <g:form action="list" >
+                    <g:form action="list" name="searchForm"  >
+                        <g:hiddenField name="regType" value="${params.regType}"/>
                         <div class="bm-search">
                             <label class="search-lb"><g:message code="student.name.label"/> ：</label>
                             <g:textField name="name"  value="${params.name}"/>
@@ -141,8 +142,10 @@
                        </div>
                    </g:form>
                 </div><!--/span-->
+                <sec:ifAllGranted roles="ROLE_ADMIN">
                 <div> <input type="button" name='delAllBtn' id="delAllBtn" value="${message(code:'default.button.more.delete.label')}"
                              class="btn btn-small btn-warning" url="${createLink(action: 'delMore')}" /></div>
+                </sec:ifAllGranted>
                 <table class="table table-bordered table-striped table-condensed">
                     <thead>
                     <tr>
@@ -181,7 +184,14 @@
 
                             <td class="center">${studentInstance.number}</td>
 
-                            <td class="center">${studentInstance.teacher?.name}</td>
+                            <td class="center">
+                            <%
+                                try {
+                                    out.print(studentInstance.teacher?.name)
+                                }catch (Exception e){}
+
+                                %>
+                            </td>
 
                             <td class="center">
                                 ${studentInstance.province?.name}

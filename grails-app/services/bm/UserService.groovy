@@ -30,6 +30,8 @@ class UserService {
         def middleSchoolId = params.long('middleSchoolId')
         def admission = params.admission?Student.Admission."${params.admission}":null
         def registration = params.registration?Student.Registration."${params.registration}":null
+        def regType = params.regType
+
 
         def startDate = params.date('startDate', 'yyyy-MM-dd')
         def endDate = params.date('endDate', 'yyyy-MM-dd')
@@ -122,6 +124,10 @@ class UserService {
                     isNotNull('teacher')
                     'in'('teacher', teachers)
                 }
+            }
+
+            if(regType){
+                eq("regType",regType as Short)
             }
 
             order('id', 'desc')

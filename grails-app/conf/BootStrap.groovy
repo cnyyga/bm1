@@ -12,6 +12,7 @@ class BootStrap {
         def adminUser = new Admin(name: '系统管理员', username: 'admin', enabled: true, password: '1') .save(flush: true)
         UserRole.create adminUser, adminRole, true
 
+
     }
     def destroy = {
     }

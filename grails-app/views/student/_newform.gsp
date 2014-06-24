@@ -70,8 +70,14 @@
                     <div class="ui-widget">
                         <select id="combobox" name="teacherId">
                             <option value="">请选择</option>
+                            <%  def studTeacherId
+                                try {
+                                 studTeacherId = studentInstance.teacher?.id
+                            }catch (Exception e){
+
+                            }%>
                             <g:each in="${userService.getTeachers()}" var="teah">
-                                <g:if test="${studentInstance?.teacher?.id == teah.id}">
+                                <g:if test="${studTeacherId == teah.id}">
                                     <option value="${teah.id}" title="${teah.name}${com.bm.utils.PinyinUtils.getPinyin(teah.name)}" selected="true" >${teah.name}</option>
                                 </g:if>
                                 <g:else>

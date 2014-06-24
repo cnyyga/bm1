@@ -190,7 +190,11 @@
         <div class="controls">
 
             <span class="property-value" aria-labelledby="dateCreated-label">
-                ${studentInstance?.teacher?.name}
+<%     try {
+    out.print(studentInstance.teacher?.name)
+}catch (Exception e){}%>
+
+
             </span>
 
         </div>
