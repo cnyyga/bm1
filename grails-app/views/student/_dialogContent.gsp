@@ -40,6 +40,16 @@
 <div class="control-group">
 
     <label class="checkbox inline">
+        <input type="checkbox" name="phone" value="1">
+        <g:message code="student.phone.label" default="phone" />
+    </label>
+
+    <label class="checkbox inline">
+        <input type="checkbox" name="qq" value="1">
+        <g:message code="student.qq.label" default="qq" />
+    </label>
+
+    <label class="checkbox inline">
         <input type="checkbox" name="plans" value="1">
         <g:message code="student.plans.label" default="Student Plans" />
     </label>

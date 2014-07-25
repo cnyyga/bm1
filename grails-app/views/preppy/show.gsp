@@ -1,5 +1,5 @@
 
-<%@ page import="com.baoming.Preppy" %>
+<%@ page import="com.baoming.account.Role; com.baoming.Preppy" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -185,13 +185,21 @@
                         </div>
                     </g:if>
                     <sec:ifAllGranted roles="ROLE_ADMIN">
-                    <g:if test="${preppyInstance?.teacher}">
+                        <%
+                            def ttt
+                            try {
+                                ttt = preppyInstance?.teacher
+                            } catch (Exception e) {
+
+                            }
+                            %>
+                    <g:if test="${ttt}">
                         <div class="control-group">
                             <label class="control-label">
                                 <g:message code="preppy.teacher.label" default="Teacher" />
                             </label>
                             <div class="controls">
-                                <span class="property-value" aria-labelledby="teacher-label"><g:link controller="teacher" action="show" id="${preppyInstance?.teacher?.id}">${preppyInstance?.teacher?.name}</g:link></span>
+                                <span class="property-value" aria-labelledby="teacher-label"><g:link controller="teacher" action="show" id="${ttt?.id}">${ttt?.name}</g:link></span>
                             </div>
                         </div>
                     </g:if>
@@ -207,6 +215,7 @@
                     </div>
 
                     <div class="form-actions">
+                        <sec:ifNotGranted roles="${Role.AUTHORITY_FINANCE}">
                         <g:form>
                                 <g:hiddenField name="id" value="${preppyInstance?.id}" />
                                 <g:link class="btn btn-info" action="edit" id="${preppyInstance?.id}">
@@ -216,6 +225,7 @@
                             <g:hiddenField name="act" value="1" />
                                 <g:actionSubmit class="btn btn-primary" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
                         </g:form>
+                            </sec:ifNotGranted>
                     </div>
                 </fieldset>
                     </div>

@@ -26,6 +26,7 @@ class HomeService {
              if(teacher) {
                  eq('teacher',teacher)
              }
+             eq("regType", 1 as Short)
 
              if(reviewStatus)
                  eq('reviewStatus',reviewStatus)
@@ -41,12 +42,13 @@ class HomeService {
         if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)) {
             return
         }
+
         def params = [:]
 
         def str = "select u.id,u.name,(" +
                 "select count(distinct a.id) from user a " +
                 "where a.class='com.baoming.account.Student' and (a.teacher_id=u.id " +
-                "or a.district_id in(select b.district_id from teacher_district b where b.teacher_id=u.id)) "
+                ") and a.reg_type = 1 and a.review_status=2 "
         if(startDate)  {
             str += " and a.date_created>=:startDate"
             params.startDate = startDate
@@ -72,7 +74,7 @@ class HomeService {
         }
         def params = [:]
         def sql = "select a.code,a.name,c.code as cityCode,c.name as cityName,c.province_id as provinceCode," +
-                "(select count(b.id) from user b where b.class='com.baoming.account.Student' and   b.district_id=a.code "
+                "(select count(b.id) from user b where b.class='com.baoming.account.Student'  and b.reg_type = 1  and b.review_status=2 and b.district_id=a.code "
         if(teacher) {
             sql += " and ( b.teacher_id=:teacherId) "
             params.teacherId=teacher.id
@@ -144,7 +146,7 @@ class HomeService {
             sql += " and b.date_created <:endDate"
             params.endDate = endDate
         }
-        sql +=" ) as cc from plan a"
+        sql +=" and u.reg_type = 1 and u.review_status=2 ) as cc from plan a"
         sql += " order by cc desc"
         def db = new Sql(dataSource)
         return db.rows(sql,params,offset,max)
@@ -158,6 +160,8 @@ class HomeService {
              if(teacher){
                  student{
                      eq('teacher',teacher)
+                     eq("regType",1 as Short)
+                     eq("reviewStatus",ReviewStatus.PASS)
                  }
              }
              if(startDate)
@@ -211,7 +215,7 @@ class HomeService {
         }
         def params = [:]
         def sql = "select a.code as id,a.name,a.province_id as provinceId," +
-                "(select count(u.id) from user u where u.class='com.baoming.account.Student' and u.city_id = a.code"
+                "(select count(u.id) from user u where u.class='com.baoming.account.Student'  and u.reg_type = 1 and u.review_status=2  and u.city_id = a.code"
         if(startDate)  {
             sql += " and u.date_created>=:startDate"
             params.startDate = startDate

@@ -7,7 +7,9 @@
                 <li class="${(params.controller == 'student' && params.action == 'createNew')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'student',action: 'createNew')}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'student.create.new.label')}</span></a></li>
             </sec:access>
             <sec:access controller="preppy">
+                <sec:ifNotGranted roles="${Role.AUTHORITY_FINANCE}">
                 <li class="${(params.controller == 'preppy' && params.action == 'create')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'preppy',action:'create')}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'preppy.create.label')}</span></a></li>
+                </sec:ifNotGranted>
             </sec:access>
             <sec:access controller="student">
                 <sec:ifAllGranted roles="${Role.AUTHORITY_ADMIN}">
@@ -18,8 +20,9 @@
                     <li class="${(params.controller == 'student'&& params.action != 'createNew'&& params.action != 'imp')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'student')}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'default.manager.label',args: ["${message(code: 'student.label')}"])}</span></a></li>
                 </sec:ifAllGranted>
                 <sec:ifAllGranted roles="${Role.AUTHORITY_FINANCE}">
-                    <li class="${(params.controller == 'student'&& params.action != 'createNew')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'student')}"><i class="icon-user"></i><span class="hidden-tablet">
-                        ${message(code: 'student.label')}${message(code: 'student.review.label')}</span></a></li>
+                    <li class="${(params.controller == 'student'&& params.action != 'createNew'&& params.action != 'imp' && params.regType!= '0')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'student')}"><i class="icon-user"></i><span class="hidden-tablet">
+                        <g:message code='student.label' /><g:message code='student.review.label' /></span></a></li>
+                    <li class="${(params.controller == 'student'&& params.action != 'createNew'&& params.action != 'imp' && params.regType== '0')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'student' ,params: [regType:0])}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'default.manager.label',args: ["${message(code: 'student.reg.label')}"])}</span></a></li>
                 </sec:ifAllGranted>
             </sec:access>
             <sec:access controller="preppy">

@@ -513,7 +513,6 @@ class StudentController {
     def export() {
         def userId = springSecurityService.authentication.principal?.id
         def map = userService.getStudents(userId as Long,params)
-        println(params)
         def f = params.f
         if(!f) {
             render(message(code: 'student.select.zd.message'))

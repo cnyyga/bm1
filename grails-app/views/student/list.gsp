@@ -58,7 +58,9 @@
         <div class="alert alert-error">${flash.message}</div>
     </g:if>
     <div>
+        <sec:ifNotGranted roles="${Role.AUTHORITY_FINANCE}">
          <g:link action="createNew"  class="btn btn-small btn-primary"><i class="icon-chevron-left icon-white"></i><g:message code="default.add.label" args="[entityName]" /></g:link>
+        </sec:ifNotGranted>
     </div>
     <div class="row-fluid sortable">
         <div class="box span12">
@@ -227,10 +229,11 @@
 
                             </sec:ifAllGranted>
                             <sec:ifAllGranted roles="${Role.AUTHORITY_FINANCE}">
+                                <g:if test="${params.regType == 1}">
                                 <g:link class="btn btn-info btn-stu-review" action="ajaxAudit" rel="${studentInstance.id}" id="${studentInstance.id}" params="${[t:'au']}">
                                     <i class="icon-edit icon-white"></i>
                                     <g:message code="student.review.label" default="Review" />
-                                </g:link>
+                                </g:link></g:if>
                             </sec:ifAllGranted>
                             </td>
                         </tr>

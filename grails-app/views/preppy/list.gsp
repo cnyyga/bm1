@@ -1,11 +1,20 @@
 
-<%@ page import="com.baoming.Preppy" %>
+<%@ page import="com.baoming.account.Role; com.baoming.Preppy" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'preppy.label', default: 'Preppy')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
+        <script>
+            $(function(){
+                $("#exportBtn").click(function(){
+                    var _year = $("#year").val();
+                    var _url = "${createLink(action: 'exp')}?year="+_year
+                    window.open(_url)
+                })
+            })
+        </script>
 	</head>
 	<body>
     <div>
@@ -22,7 +31,9 @@
         <div class="alert alert-error">${flash.message}</div>
     </g:if>
     <div>
+        <sec:ifNotGranted roles="${Role.AUTHORITY_FINANCE}">
          <g:link action="create"  class="btn btn-small btn-primary"><i class="icon-chevron-left icon-white"></i><g:message code="default.add.label" args="[entityName]" /></g:link>
+        </sec:ifNotGranted>
     </div>
     <div class="row-fluid sortable">
         <div class="box span12">
@@ -47,6 +58,8 @@
 
                         <div class="span2">
                             <g:submitButton name="sub" value="${message(code:'default.button.search.label')}" class="btn btn-small btn-primary" />
+                            <input type="button" name='exportBtn' id="exportBtn" value="${message(code:'default.button.export.label')}" class="btn btn-small btn-inverse"   />
+
                         </div>
                     </g:form>
                 </div><!--/span-->
@@ -90,7 +103,7 @@
                                         <i class="icon-zoom-in icon-white"></i>
                                         <g:message code="default.button.view.label" default="View" />
                                     </g:link>
-
+                                <sec:ifNotGranted roles="${Role.AUTHORITY_FINANCE}">
                                     <g:link class="btn btn-info" action="edit" id="${preppyInstance.id}">
                                         <i class="icon-edit icon-white"></i>
                                         <g:message code="default.button.edit.label" default="Edit" />
@@ -100,6 +113,7 @@
                                         <i class="icon-trash icon-white"></i>
                                         <g:message code="default.button.delete.label" default="Delete" />
                                     </g:link>
+                                </sec:ifNotGranted>
                             </td>
                         </tr>
                     </g:each>
