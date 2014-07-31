@@ -115,13 +115,13 @@
         </g:else>
         <div class="control-group">
             <label class="control-label" for="planId">
-                <g:message code="student.plans.label" default="Student Plans" />1
+                <g:message code="student.plans.label" default="Student Plans" />
             </label>
             <div class="controls">
                 <g:select name="planId" id="planId"  value="${(sps && sps[0])?sps[0]:''}" noSelection="${['':'请选择']}" from="${plans}" optionValue="name" optionKey="id" />
             </div>
         </div>
-        <div class="control-group">
+        %{--<div class="control-group">
             <label class="control-label" for="planId2">
                 <g:message code="student.plans.label" default="Student Plans" />2
             </label>
@@ -136,7 +136,7 @@
             <div class="controls">
                 <g:select name="planId" id="planId3"  value="${(sps && sps[2])?sps[2]:''}" noSelection="${['':'请选择']}" from="${plans}" optionValue="name" optionKey="id" />
             </div>
-        </div>
+        </div>--}%
         <div class="control-group">
             <label class="control-label" for="payment.type">
                 <g:message code="student.payment.type.label" default="type" />

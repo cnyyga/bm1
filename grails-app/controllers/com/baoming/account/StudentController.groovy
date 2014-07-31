@@ -740,6 +740,12 @@ class StudentController {
                 }
                 data << stu.dateCreated?.format('yyyy-MM-dd HH:mm:ss')
             }
+            if(fs.count('description') > 0)  {
+                if(i ==0 ){
+                    title << message(code: 'student.description.label')
+                }
+                data << stu.description?:''
+            }
 
             datas << data
         }

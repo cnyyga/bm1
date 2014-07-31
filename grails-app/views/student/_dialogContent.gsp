@@ -59,4 +59,9 @@
         <g:message code="student.recommend.teacher.label" default="recommend" />
     </label>
 
+    <label class="checkbox inline">
+        <input type="checkbox" name="description" value="1">
+        <g:message code="student.description.label" default="description" />
+    </label>
+
 </div>
