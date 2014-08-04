@@ -77,7 +77,16 @@
                             <td class="center">
                                 <g:set var="tds" value="${teacherInstance?.teacherDistricts}"/>
                                 <g:each in="${tds}" var="td">
-                                    ${td.district?.city?.name}${td.district?.name}
+
+                                    <%
+                                        try{
+                                            out.println(td.district?.city?.name)
+                                            out.println(td.district?.name)
+                                        }catch (e){
+
+                                        }
+
+                                        %>
                                 </g:each>
                             </td>
                             <td class="center">${teacherInstance.department?.name}</td>
@@ -109,7 +118,7 @@
                     </tbody>
                 </table>
                 <div class="pagination pagination-centered">
-                    <g:paginate total="${teacherInstanceTotal}" params="${[name:params.name,districtId:params.districtId,cityId:params.cityId,provinceId:params.provinceId]}" />
+                    <g:paginate total="${teacherInstanceTotal}" params="${[name:params.name,districtId:params.districtId,cityId:params.cityId,provinceId:params.provinceId,departmentId:params.departmentId]}" />
                 </div>
             </div>
         </div><!--/span-->

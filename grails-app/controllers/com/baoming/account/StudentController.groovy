@@ -531,7 +531,7 @@ class StudentController {
             new ExcelBuilder().workbook(outputStream) {
                 sheet {
                     titles.eachWithIndex {e,i->
-                         cell(i,0,e)
+                         cell(i,0,e).bold()
                      }
                     datas.eachWithIndex {de,k->
                         def kk = k+1
@@ -734,12 +734,58 @@ class StudentController {
                     data << ''
                 }
             }
+
+            if(fs.count('department') > 0)  {
+                if(i ==0 ){
+                    title << message(code: 'department.label')
+                }
+                try {
+                    data << stu.teacher?.department?.name
+                } catch (Exception e) {
+                    data << ''
+                }
+            }
+
+            if(fs.count('review') > 0)  {
+                if(i ==0 ){
+                    title << message(code: 'student.review.label')
+                }
+                try {
+                    data << stu.reviewStatus.label
+                } catch (Exception e) {
+                    data << ''
+                }
+            }
+
+            if(fs.count('admission') > 0)  {
+                if(i ==0 ){
+                    title << message(code: 'student.admission.label')
+                }
+                try {
+                    data << stu.admission.label
+                } catch (Exception e) {
+                    data << ''
+                }
+            }
+
+            if(fs.count('registration') > 0)  {
+                if(i ==0 ){
+                    title << message(code: 'student.registration.label')
+                }
+                try {
+                    data << stu.registration.label
+                } catch (Exception e) {
+                    data << ''
+                }
+            }
+
             if(fs.count('dateCreated') > 0)  {
                 if(i ==0 ){
                     title << message(code: 'student.created.label')
                 }
                 data << stu.dateCreated?.format('yyyy-MM-dd HH:mm:ss')
             }
+
             if(fs.count('description') > 0)  {
                 if(i ==0 ){
                     title << message(code: 'student.description.label')

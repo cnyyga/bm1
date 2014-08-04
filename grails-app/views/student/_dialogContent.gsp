@@ -60,6 +60,26 @@
     </label>
 
     <label class="checkbox inline">
+        <input type="checkbox" name="department" value="1">
+        <g:message code="department.label" default="Department" />
+    </label>
+
+    <label class="checkbox inline">
+        <input type="checkbox" name="review" value="1">
+        <g:message code="student.review.label" default="Review" />
+    </label>
+
+    <label class="checkbox inline">
+        <input type="checkbox" name="admission" value="1">
+        <g:message code="student.admission.label" default="Admission" />
+    </label>
+
+    <label class="checkbox inline">
+        <input type="checkbox" name="registration" value="1">
+        <g:message code="student.registration.label" default="Registration" />
+    </label>
+
+    <label class="checkbox inline">
         <input type="checkbox" name="description" value="1">
         <g:message code="student.description.label" default="description" />
     </label>
