@@ -63,46 +63,7 @@
             </div>
             <div class="box-content ">
                 <g:render template="newshow"/>
-            %{--<ul id="myTab" class="nav nav-tabs">
-                <li class="active"><a href="#info"><g:message code="reg.student.info.label"/></a></li>
-                <li><a href="#plansInfo"><g:message code="student.plans.label"/></a></li>
-                <li><a href="#paymentInfo"><g:message code="student.payment.label"/></a></li>
-                <li><a href="#reviewInfo"><g:message code="student.review.label"/></a></li>
-            </ul>
 
-            <div class="tab-content">
-                <div class="tab-pane active" id="info">
-
-                    <g:render template="infoShow"/>
-
-                </div>
-                <div class="tab-pane" id="plansInfo">
-                    <g:render template="planShow"/>
-                </div>
-                <div class="tab-pane" id="paymentInfo">
-                    <g:render template="paymentShow"/>
-                </div>
-                <div class="tab-pane" id="reviewInfo">
-                    <g:if test="${params.t}">
-                        <g:form action="audit">
-                            <g:hiddenField name="id" value="${studentInstance?.id}" />
-                            <fieldset>
-                        <g:render template="reviewForm"/>
-                                <div class="form-actions">
-                                    <button type="submit" class="btn btn-primary">
-                                        <g:message code="default.button.update.label" default="Save changes" />
-                                    </button>
-                                </div>
-                            </fieldset>
-
-                        </g:form>
-
-                    </g:if>
-                    <g:else>
-                        <g:render template="reviewShow"/>
-                    </g:else>
-                </div>
-            </div>--}%
 
         <sec:ifAllGranted roles="${Role.AUTHORITY_ADMIN}">
             <div class="form-actions">

@@ -61,9 +61,21 @@
     <div class="controls">
 
         <span class="property-value" aria-labelledby="district-label">
-            ${studentInstance?.province?.name}
-            ${studentInstance?.city?.name}
-            ${studentInstance?.district?.name}</span>
+            <%
+                try {
+                    out.print(studentInstance?.province?.name)
+                } catch (Exception e) {
+                }
+                try {
+                    out.print(studentInstance?.city?.name)
+                } catch (Exception e) {
+                }
+                try {
+                    out.print(studentInstance?.district?.name)
+                } catch (Exception e) {
+                }
+                %>
+            </span>
 
     </div>
 </div>
@@ -75,7 +87,13 @@
 
     <div class="controls">
 
-        <span class="property-value" aria-labelledby="middleSchool-label">${studentInstance?.middleSchool?.name}</span>
+        <span class="property-value" aria-labelledby="middleSchool-label">
+            <%
+                try {
+                    out.print(studentInstance?.middleSchool?.name)
+                } catch (Exception e) {
+                }%>
+            </span>
 
     </div>
 </div>
@@ -111,7 +129,12 @@
         </label>
         <div class="controls">
             <span class="property-value" aria-labelledby="middleSchool-label">
-                ${studentInstance?.studentType?.name}
+                <%
+                    try {
+                        out.print(studentInstance?.studentType?.name)
+                    } catch (Exception e) {
+                    }%>
+
             </span>
         </div>
     </div>
@@ -133,7 +156,11 @@
             </label>
             <div class="controls">
                 <span class="property-value">
-                    ${plan.name}
+                    <%
+                        try {
+                            out.print(plan?.name)
+                        } catch (Exception e) {
+                        }%>
                 </span>
             </div>
         </div>
@@ -256,7 +283,10 @@
     </label>
     <div class="controls">
         <span class="property-value">
-            ${studentInstance?.reviewPerson?.username}
+
+            <%     try {
+                out.print(studentInstance.reviewPerson?.username)
+            }catch (Exception e){}%>
         </span>
     </div>
 </div>
