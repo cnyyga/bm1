@@ -1,5 +1,6 @@
 package bm
 
+import com.baoming.Comp
 import com.baoming.account.Student
 import jxl.Workbook
 import jxl.read.biff.BiffException
@@ -35,6 +36,59 @@ class ExcelService {
         }
 
         return update(type,list)
+    }
+
+    def toList(def file,def t) {
+
+        def work
+        try {
+            InputStream is = file.getInputStream();
+            work = Workbook.getWorkbook(is);
+        } catch (Exception e) {
+            log.error(e.message,e)
+            return
+        }
+        def sheet
+        try {
+            sheet = work.getSheet(0);
+        } catch (IndexOutOfBoundsException e) {
+            log.error(e.message,e)
+            return
+        }
+        int totalRow = sheet.getRows();
+        int totalCol = sheet.getColumns();
+        println("totalRow:${totalRow},totalCol:$totalCol")
+        def list = []
+        def titles = []
+        for (int i = 0; i < totalRow; i++) {
+
+            def cols = []
+            for(int j = 0 ;j < totalCol;j++){
+                //if(i == 0){
+                    String str = sheet.getCell(j, i).getContents();
+                    cols << str
+
+
+                //}else{
+                //    String str = sheet.getCell(j, i).getContents();
+                //    list << str
+                //}
+
+            }
+            if(i > 0 && cols && !cols.empty){
+                try {
+                    new Comp(num: cols[0],content: cols.join(','),type: t).save()
+                } catch (Exception e) {
+                }
+                list << cols[0]
+            }
+        }
+        if(list.empty) {
+            return
+        }
+
+        return list
+
     }
 
     def update(def type,def nums) {

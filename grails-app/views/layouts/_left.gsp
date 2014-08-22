@@ -32,6 +32,9 @@
             <sec:access url="/student/imp" >
                 <li class="${(params.controller == 'student' && params.action == 'imp')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'student',action: 'imp')}"><i class="icon-tag"></i><span class="hidden-tablet"> ${message(code: 'default.button.import.label')}</span></a></li>
             </sec:access>
+            <sec:access controller="comparison" >
+                <li class="${(params.controller == 'comparison')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'comparison')}"><i class="icon-tag"></i><span class="hidden-tablet"> ${message(code: 'comparison.label')}</span></a></li>
+            </sec:access>
 
             <sec:access controller="statistics">
             <li class="${(params.controller == 'statistics' && params.action == 'index')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'statistics')}"><i class="icon-tag"></i><span class="hidden-tablet"> ${message(code: 'statistics.label')}</span></a></li>
