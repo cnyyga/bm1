@@ -33,6 +33,7 @@ $(function(){
         var name = $("#name").val()    ;
         var year = $("#year").val();
         var audit = $("#audit").val();
+        var regType = $("#regType").val();
         var city = $("#city");
         if(city) {
             city = $("#city").val();
@@ -48,7 +49,7 @@ $(function(){
             teacherId = teacherId.val()
         }
         url += "?f="+p+"&name="+name+"&year="+year+"&cityId="+city+"&districtId="+district+"&audit="+audit+"&middleSchooleId="+middleSchooleId
-        url += "&planId="+planId+ "&teacherId="+teacherId  ;
+        url += "&planId="+planId+ "&teacherId="+teacherId+"&regType="+regType  ;
         $("#dialog-export").dialog("close")
         window.open(url)
 
