@@ -17,7 +17,7 @@ environments {
             url = "jdbc:mysql://localhost:3306/bm"
             //url = "jdbc:mysql://221.226.68.70:3306/seven_magic"
             username = "root"
-            password = "111111"
+            password = "1111"
             logSql = 'true'
         }
     }

@@ -38,7 +38,7 @@ class ExcelService {
         return update(type,list)
     }
 
-    def toList(def file,def t) {
+    def toList(def file,def t,def uid) {
 
         def work
         try {
@@ -64,20 +64,17 @@ class ExcelService {
 
             def cols = []
             for(int j = 0 ;j < totalCol;j++){
-                //if(i == 0){
+                if(i == 0){
+                    String str = sheet.getCell(j, i).getContents();
+                    titles << str
+                }else{
                     String str = sheet.getCell(j, i).getContents();
                     cols << str
-
-
-                //}else{
-                //    String str = sheet.getCell(j, i).getContents();
-                //    list << str
-                //}
-
+                }
             }
             if(i > 0 && cols && !cols.empty){
                 try {
-                    new Comp(num: cols[0],content: cols.join(','),type: t).save()
+                    new Comp(num: cols[0],content: cols.join(','),type: t,uid:uid).save()
                 } catch (Exception e) {
                 }
                 list << cols[0]
@@ -87,7 +84,7 @@ class ExcelService {
             return
         }
 
-        return list
+        return [titles:titles,list:list]
 
     }
 
