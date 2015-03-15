@@ -277,12 +277,12 @@
 
 <g:hiddenField name="cityUrl" value="${createLink(action: 'cityOpts',controller: 'api')}" title="${preppyInstance?.city?.code?:params.cityId}"  />
 <g:hiddenField name="districtUrl" value="${createLink(action: 'districtOpts',controller: 'api')}"  title="${preppyInstance?.district?.code?:params.districtId}" />
-<g:textArea name="pugaoArea" rows="1" cols="1">
+<g:textArea name="pugaoArea" rows="1" cols="1" style="display: none">
     <g:select id="plan" name="plan.id" from="${plans}" optionKey="id" optionValue="name" value="${preppyInstance?.plan?.id}" class="many-to-one" />
 </g:textArea>
-<g:textArea name="zhongzhiArea" rows="1" cols="1">
+<g:textArea name="zhongzhiArea" rows="1" cols="1" style="display: none">
     <g:select id="plan" name="plan.id" from="${zhongPlans}" optionKey="id" optionValue="name" value="${preppyInstance?.plan?.id}" class="many-to-one" />
 </g:textArea>
-<g:textArea name="waiArea" rows="1" cols="1">
+<g:textArea name="waiArea" rows="1" cols="1" style="display: none">
     <g:select id="plan" name="plan.id" from="${waiPlans}" optionKey="id" optionValue="name" value="${preppyInstance?.plan?.id}" class="many-to-one" />
 </g:textArea>

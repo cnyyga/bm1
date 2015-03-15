@@ -210,8 +210,8 @@
 
                                 <%
                                        try{
-                                           preppyInstance.preppyPlan.name
-                                       }catch(Exception e){}
+                                          println preppyInstance.preppyPlan.name
+                                       }catch(Exception e){dd}
                                     %>
                             </span>
 
