@@ -1,13 +1,14 @@
 $(function(){
+
     $("#province").change(function(){
-        var t = $(this);
+         var t = $(this);
         cityOpts(t.val())
     })
 
     $("#city").change(function(){
         var t = $(this);
         distOpts(t.val());
-        // schoolOpts(t.val()) ;
+       // schoolOpts(t.val()) ;
     })
 
     cityOpts($("#province").val())
@@ -46,45 +47,56 @@ $(function(){
     }
     function studentDistOpts(cityId) {
         var districtUrl = $("#districtUrl").val();
-        var selectedId =  $("#studentDistrictVal").val()    ;
+        var selectedId =  $("#studentDistrictVal").val()  ;
         $("#studentDistrict").load(districtUrl+"?id="+cityId+"&selected="+selectedId);
     }
 
+
     $('#editForm').validate({
         rules: {
-            name: {
+
+            name:{
+                maxlength:8,
+                required: true
+            } ,
+            code:{
+                maxlength:32,
                 required: true
             },
             number:{
+                isIdCardNo:true,
                 required: true
-            }
-            ,
+            },
+            gener:{
+                required: true
+            },
+            districtId:{
+                required: true
+            },
+            teacherId:{
+                required: true
+            },
+
+            'mediumPlan.id':{
+                required: true
+            },
             plan:{
                 required: true
-            }  ,
-            phone:{
+            },
+            studentDistrictId:{
                 required: true
-            }  ,
-            parentPhone:{
-                required: true
-            }  ,
-            school:{
-                required: true
-            }  ,
-            address:{
-                required: true
-            }  ,
-            deposit:{
-                required: true,
-                number:true
-            }  ,
-            middlePlan:{
-                required:function(){
-                    var studentCateories = $("#studentCateories").val()
-                    return  studentCateories== 'WG'
-                }
-            }
+            },
 
+            description:{
+                maxlength:256
+            }
+             ,
+            voucherPathInp:{
+                required:function(){
+                    return !$("#voucherPath").val()
+                },
+                accept: ['jpg','gif','png','bmp','JPG','GIF','PNG','BMP']
+            }
         },
         highlight: function(label) {
             $(label).closest('.control-group').addClass('error');
@@ -96,39 +108,4 @@ $(function(){
                 .closest('.control-group').addClass('success');
         }
     })
-
-    $("#studentCateories").change(function(){
-        category($(this).val());
-    });
-
-    category($("#studentCateories").val());
-    function category(cate) {
-        if(cate == 'SG')  {
-             $(".pugao").show();
-            $(".waisheng").hide();
-            $(".zhongzhi").hide();
-            $(".zhongzhi").hide();
-            $(".plan-area").html($("#pugaoArea").val())
-        }else  if(cate == 'WG'){
-            $(".pugao").hide();
-            $(".waisheng").hide();
-            $(".zhongzhi").show();
-            $(".plan-area").html($("#zhongzhiArea").val())
-        }else  if(cate == 'SZ'){
-            $(".pugao").hide();
-            $(".zhongzhi").hide();
-            $(".waisheng").show();
-            $(".plan-area").html($("#waiArea").val())
-        }
-    }
-
-
-    $("#birthday_year").change(function(){
-        setage($(this).val());
-    }) ;
-    setage($("#birthday_year").val());
-    function setage(year){
-         var thisyear= $("#age").attr("this-year-attr");
-        $("#age").val(thisyear-year);
-    }
 })

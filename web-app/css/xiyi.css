@@ -1,0 +1,15 @@
+@charset "utf-8";
+/* CSS Document */
+
+.zhongzhi{ font-family:"微软雅黑"; font-size:14px; }
+.zhongzhi td{ line-height:32px;}
+.f_16{ font-size:16px;}
+.f_20{ font-size:20px;}
+.f_26{ font-size:26px;}
+.inp_red{ font-size:18px; color:#cc0000; border-bottom:#888888 1px solid;border-left-width:0px;border-right-width:0px;border-top-width:0px; font-family:"微软雅黑"; text-align:center; }
+.xy_xuzhi{ width:700px; border:1px solid #cccccc; padding:5px 10px; line-height:22px; margin-top:10px; }
+
+.tianxie{ font-family:"微软雅黑"; font-size:18px;  }
+.tianxie td{ border-bottom:1px dashed #cccccc; padding-bottom:8px;}
+.inp_gray{ font-size:14px; color:#000000; border:#d1d1d1 1px solid; height:24px;  font-family:"微软雅黑";  }
+.sel_gray{ font-size:14px; font-family:"微软雅黑";} 
