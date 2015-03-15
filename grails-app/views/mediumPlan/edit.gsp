@@ -1,44 +1,10 @@
-<%@ page import="com.baoming.Preppy" %>
+<%@ page import="com.baoming.MediumPlan" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'preppy.label', default: 'Preppy')}" />
+		<g:set var="entityName" value="${message(code: 'mediumPlan.label', default: 'MediumPlan')}" />
 		<title><g:message code="default.edit.label" args="[entityName]" /></title>
-        <g:javascript src="jquery.validate.min.js"/>
-        <g:javascript src="messages_zh.js"/>
-        <g:javascript src="tj.js"/>
-        <g:javascript src="app-preppy.js"/>
-        <style>
-        .ui-combobox {
-            position: relative;
-            display: inline-block;
-        }
-        .ui-combobox-toggle {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            margin-left: -1px;
-            padding: 0;
-            /* adjust styles for IE 6/7 */
-            *height: 1.7em;
-            *top: 0.1em;
-        }
-        .ui-combobox-input {
-            margin: 0;
-            padding: 0.3em;
-        }
-        .ui-widget-content {
-            text-align: left;
-        }
-        ul.ui-widget-content {
-            height: 200px;
-            overflow: auto;
-        }
-        .tab-content {
-            overflow: visible;
-        }
-        </style>
 	</head>
 	<body>
         <div>
@@ -54,9 +20,9 @@
         <g:if test="${flash.message}">
             <div class="alert alert-error">${flash.message}</div>
         </g:if>
-        <g:hasErrors bean="${preppyInstance}">
+        <g:hasErrors bean="${mediumPlanInstance}">
             <ul class="alert alert-error" >
-                <g:eachError bean="${preppyInstance}" var="error">
+                <g:eachError bean="${mediumPlanInstance}" var="error">
                     <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
                 </g:eachError>
             </ul>
@@ -69,8 +35,8 @@
                 </div>
                 <div class="box-content">
                     <g:form class="form-horizontal" action="update" >
-                    <g:hiddenField name="id" value="${preppyInstance?.id}" />
-                    <g:hiddenField name="version" value="${preppyInstance?.version}" />
+                    <g:hiddenField name="id" value="${mediumPlanInstance?.id}" />
+                    <g:hiddenField name="version" value="${mediumPlanInstance?.version}" />
                     <fieldset>
                         <g:render template="form"/>
                         <div class="form-actions">

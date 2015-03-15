@@ -1,14 +1,16 @@
-<%@ page import="com.baoming.Preppy" %>
+<%@ page import="com.baoming.Medium" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'preppy.label', default: 'Preppy')}" />
+		<g:set var="entityName" value="${message(code: 'medium.label', default: 'Medium')}" />
 		<title><g:message code="default.edit.label" args="[entityName]" /></title>
         <g:javascript src="jquery.validate.min.js"/>
+        <g:javascript src="card.js"/>
+        <g:javascript src="additional-methods.js"/>
         <g:javascript src="messages_zh.js"/>
         <g:javascript src="tj.js"/>
-        <g:javascript src="app-preppy.js"/>
+        <g:javascript src="medium.js"/>
         <style>
         .ui-combobox {
             position: relative;
@@ -54,9 +56,9 @@
         <g:if test="${flash.message}">
             <div class="alert alert-error">${flash.message}</div>
         </g:if>
-        <g:hasErrors bean="${preppyInstance}">
+        <g:hasErrors bean="${mediumInstance}">
             <ul class="alert alert-error" >
-                <g:eachError bean="${preppyInstance}" var="error">
+                <g:eachError bean="${mediumInstance}" var="error">
                     <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
                 </g:eachError>
             </ul>
@@ -68,9 +70,9 @@
                     <h2><i class="icon-edit"></i> <g:message code="default.edit.label" args="[entityName]" /></h2>
                 </div>
                 <div class="box-content">
-                    <g:form class="form-horizontal" action="update" >
-                    <g:hiddenField name="id" value="${preppyInstance?.id}" />
-                    <g:hiddenField name="version" value="${preppyInstance?.version}" />
+                    <g:uploadForm class="form-horizontal" action="update" name="editForm">
+                    <g:hiddenField name="id" value="${mediumInstance?.id}" />
+                    <g:hiddenField name="version" value="${mediumInstance?.version}" />
                     <fieldset>
                         <g:render template="form"/>
                         <div class="form-actions">
@@ -79,7 +81,7 @@
                     <button type="reset" class="btn"><g:message code="default.button.reset.label" /> </button>
                         </div>
                     </fieldset>
-                    </g:form>
+                    </g:uploadForm>
 
                 </div>
             </div><!--/span-->

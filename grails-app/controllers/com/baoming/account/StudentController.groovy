@@ -35,7 +35,7 @@ class StudentController {
         def userId = springSecurityService.authentication.principal?.id
         params.max = Math.min(max ?: 10, 100)
         def map = userService.getStudents(userId as Long,params)
-        [studentInstanceList: map?.students, studentInstanceTotal: map?.total,plans:planService.getPlans()]
+        [studentInstanceList: map?.students, studentInstanceTotal: map?.total,plans:planService.getStuPlans()]
     }
 
     def createNew(Long id) {
@@ -57,7 +57,7 @@ class StudentController {
             studentInstance = new Student(params)
         }
 
-        [studentInstance: studentInstance,plans:planService.getPlans(),provinces:provinceService.getProvinces(),studentTypes:studentTypeService.getStudentTypes()]
+        [studentInstance: studentInstance,plans:planService.getStuPlans(),provinces:provinceService.getProvinces(),studentTypes:studentTypeService.getStudentTypes()]
     }
 
     def saveNew(Long id) {

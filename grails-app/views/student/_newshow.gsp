@@ -14,6 +14,22 @@
     </div>
 </div>
 
+<g:if test="${studentInstance.studentCateories}">
+<div class="control-group">
+    <label class="control-label">
+        考生类型
+    </label>
+
+    <div class="controls">
+
+        <span class="property-value" aria-labelledby="name-label">
+            ${studentInstance.studentCateories?.label}
+        </span>
+
+    </div>
+</div>
+</g:if>
+
 <div class="control-group">
     <label class="control-label">
         <g:message code="student.gender.label" default="性别"/>

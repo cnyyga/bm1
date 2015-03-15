@@ -154,6 +154,9 @@
                         <th><g:checkBox name="chk_all" value="1" checked="false"/>
                            </th>
                         <th><g:message code="student.name.label" default="姓名" /></th>
+                        <g:if test="${params.regType=='0'}">
+                            <th>考生类型</th>
+                        </g:if>
 
                         <th><g:message code="student.gender.label" default="性别" /></th>
 
@@ -180,6 +183,9 @@
                             <td class="center" ><g:checkBox name="chk_student_id" class="student-chk" checked="false" value="${studentInstance?.id}"/></td>
                             <td class="center">${fieldValue(bean: studentInstance, field: "name")}</td>
 
+                        <g:if test="${params.regType=='0'}">
+                            <td class="center">${studentInstance?.studentCateories?.label}</td>
+                            </g:if>
                             <td class="center">${studentInstance?.gender?.label}</td>
 
                             <td class="center">${studentInstance.code}</td>

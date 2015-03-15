@@ -11,6 +11,11 @@
                 <li class="${(params.controller == 'preppy' && params.action == 'create')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'preppy',action:'create')}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'preppy.create.label')}</span></a></li>
                 </sec:ifNotGranted>
             </sec:access>
+            <sec:access controller="medium">
+                <sec:ifNotGranted roles="${Role.AUTHORITY_FINANCE}">
+                    <li class="${(params.controller == 'medium' && params.action == 'create')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'medium',action:'create')}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'medium.create.label')}</span></a></li>
+                </sec:ifNotGranted>
+            </sec:access>
             <sec:access controller="student">
                 <sec:ifAllGranted roles="${Role.AUTHORITY_ADMIN}">
                     <li class="${(params.controller == 'student'&& params.action != 'createNew'&& params.action != 'imp' && params.regType!= '0')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'student' ,params: [regType:1])}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'default.manager.label',args: ["${message(code: 'student.label')}"])}</span></a></li>
@@ -26,7 +31,10 @@
                 </sec:ifAllGranted>
             </sec:access>
             <sec:access controller="preppy">
-                <li class="${(params.controller == 'preppy' && params.action != 'create')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'preppy')}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'default.manager.label',args: ["${message(code: 'preppy.label')}"])}</span></a></li>
+                <li class="${(params.controller == 'preppy' && params.action != 'create')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'preppy')}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'preppy.label')}${message(code: 'student.review.label')}</span></a></li>
+            </sec:access>
+            <sec:access controller="medium">
+                <li class="${(params.controller == 'medium' && params.action != 'create')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'medium')}"><i class="icon-user"></i><span class="hidden-tablet">  ${message(code: 'default.manager.label',args: ["${message(code: 'medium.label')}"])}</span></a></li>
             </sec:access>
 
             <sec:access url="/student/imp" >
@@ -68,6 +76,8 @@
                 ${message(code: 'default.manager.label',args: ["${message(code: 'default.menu.sys.label')}"])}
             </li>
             <li class="${params.controller == 'plan'?'active':''}"><a class="ajax-link" href="${createLink(controller: 'plan')}"><i class="icon-flag"></i><span class="hidden-tablet">  ${message(code: 'default.manager.label',args: ["${message(code: 'plan.label')}"])}</span></a></li>
+            <li class="${params.controller == 'mediumPlan'?'active':''}"><a class="ajax-link" href="${createLink(controller: 'mediumPlan')}"><i class="icon-flag"></i><span class="hidden-tablet">  ${message(code: 'default.manager.label',args: ["${message(code: 'mediumPlan.label')}"])}</span></a></li>
+            <li class="${params.controller == 'preppyPlan'?'active':''}"><a class="ajax-link" href="${createLink(controller: 'preppyPlan')}"><i class="icon-flag"></i><span class="hidden-tablet">  ${message(code: 'default.manager.label',args: ["${message(code: 'preppyPlan.label')}"])}</span></a></li>
             <li class="${params.controller == 'province'?'active':''}"><a class="ajax-link" href="${createLink(controller: 'province')}"><i class="icon-flag"></i><span class="hidden-tablet">  ${message(code: 'default.manager.label',args: ["${message(code: 'district.label')}"])}</span></a></li>
             <li class="${params.controller == 'nation'?'active':''}"><a class="ajax-link" href="${createLink(controller: 'nation')}"><i class="icon-flag"></i><span class="hidden-tablet">  ${message(code: 'default.manager.label',args: ["${message(code: 'nation.label')}"])}</span></a></li>
             <li class="${params.controller == 'politicalStatus'?'active':''}"><a class="ajax-link" href="${createLink(controller: 'politicalStatus')}"><i class="icon-flag"></i><span class="hidden-tablet">  ${message(code: 'default.manager.label',args: ["${message(code: 'politicalStatus.label')}"])}</span></a></li>

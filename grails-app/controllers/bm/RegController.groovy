@@ -17,7 +17,7 @@ class RegController {
     def provinceService
 
     def index() {
-         [student: new Student(params),plans:planService.getPlans(),provinces:provinceService.getProvinces()]
+         [student: new Student(params),plans:planService.getStuPlans(),provinces:provinceService.getProvinces()]
     }
 
     def save() {
@@ -42,29 +42,10 @@ class RegController {
         student.district=district
         student.middleSchool = MiddleSchool.get(params.middleSchoolId)
 
-        def score = params.float('score')
-        if(!score || score < 0) {
-            flash.message = "请填写正确高考成绩"
-            render(view: 'index', model: [student: student,planIds:planId,plans:planService.getPlans(),provinces:provinceService.getProvinces()])
-            return
-        }
+
         if(!planId || planId.empty){
             flash.message = "请选择专业"
-            render(view: 'index', model: [student: student,planIds:planId,plans:planService.getPlans(),provinces:provinceService.getProvinces()])
-            return
-        }
-
-        def scoreStr = ''
-        planId.each {p->
-            def plan = Plan.get(p)
-            def planScore = plan?.score
-            if(score < planScore) {
-                scoreStr += plan.name + ' '
-            }
-        }
-        if(scoreStr) {
-            flash.message = "高考分数未达到填报专业【${scoreStr}】分数要求，注册失败。 "
-            render(view: 'index', model: [student: student,planIds:planId,plans:planService.getPlans(),provinces:provinceService.getProvinces()])
+            render(view: 'index', model: [student: student,planIds:planId,plans:planService.getStuPlans(),provinces:provinceService.getProvinces()])
             return
         }
 
@@ -74,14 +55,14 @@ class RegController {
              */
             if (!jcaptchaService.validateResponse("imageCaptcha", session.id, params.val_code)) {
                 flash.message = "验证码错误"
-                render(view: 'index', model: [student: student,planIds:planId,plans:planService.getPlans(),provinces:provinceService.getProvinces()])
+                render(view: 'index', model: [student: student,planIds:planId,plans:planService.getStuPlans(),provinces:provinceService.getProvinces()])
                 return
             }
             def s = userService.saveStudent(student,planId)
 
             if (s.status == 0) {
                 flash.message = '出现不明异常，保存失败'
-                render(view: 'index', model: [student: student,planIds:planId,plans:planService.getPlans(),provinces:provinceService.getProvinces()])
+                render(view: 'index', model: [student: student,planIds:planId,plans:planService.getStuPlans(),provinces:provinceService.getProvinces()])
                 return
             }
 
@@ -90,7 +71,7 @@ class RegController {
         } catch (Exception e) {
             log.error(e.message,e)
             flash.message = "拒绝重复提交"
-            render(view: 'index', model: [student: student,planIds:planId,plans:planService.getPlans(),provinces:provinceService.getProvinces()])
+            render(view: 'index', model: [student: student,planIds:planId,plans:planService.getStuPlans(),provinces:provinceService.getProvinces()])
             return
         }
     }

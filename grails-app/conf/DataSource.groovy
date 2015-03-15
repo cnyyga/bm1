@@ -13,11 +13,9 @@ environments {
             dbCreate = "update"
             pooled = true
             driverClassName = "com.mysql.jdbc.Driver"
-            //url = "jdbc:mysql:///seven_magic"
-            url = "jdbc:mysql://localhost:3306/bm"
-            //url = "jdbc:mysql://221.226.68.70:3306/seven_magic"
+            url = "jdbc:mysql://localhost:3306/bm?useUnicode=true&characterEncoding=UTF-8"
             username = "root"
-            password = "1111"
+            password = "1"
             logSql = 'true'
         }
     }

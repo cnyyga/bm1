@@ -49,6 +49,7 @@
                                 def cal = Calendar.instance
                                 def year = cal.get(Calendar.YEAR)
                             %>
+                            <g:set var="thisYear" value="${year}"/>
                             <g:select name="year" from="${(year-10)..year}" value="${params.year?:year}" class="input-small"/>
                         </div>
                         <div class="bm-search">
@@ -72,12 +73,12 @@
                         <th><g:message code="preppy.gender.label" default="gender" /></th>
 
                         <th><g:message code="preppy.number.label" default="number" /></th>
-                        
-                        <th><g:message code="preppy.family.label" default="family" /></th>
-                        
-                        <th><g:message code="preppy.collegeType.label" default="collegeType" /></th>
-                        
-                        <th><g:message code="preppy.status.label" default="status" /></th>
+
+                        <th><g:message code="preppy.birthday.label" default="number" /></th>
+
+                        <th><g:message code="preppy.studentCateories.label" default="collegeType" /></th>
+
+                        <th>报警</th>
                         
                         <th><g:message code="default.operator.label" default="Actions" /></th>
                     </tr>
@@ -92,17 +93,45 @@
                             
                             <td class="center">${preppyInstance.number}</td>
                             
-                            <td class="center">${preppyInstance.family?.label}</td>
+                            <td class="center"><g:formatDate date="${preppyInstance.birthday}" format="yyyy-MM-dd"/> </td>
                             
-                            <td class="center">${preppyInstance.collegeType?.label}</td>
-                            
-                            <td class="center">${preppyInstance.status?.label}</td>
+                            <td class="center">${preppyInstance.studentCateories?.label}</td>
+
+                            <td class="center red">
+                              <g:if test="${preppyInstance.studentCateories.name() == com.baoming.Preppy.StudentCateories.SG.name()}">
+                                      <g:set var="joinYear" value="${preppyInstance.academicYear}"/>
+
+                                     <g:if test="${!joinYear || (thisYear - (joinYear as int)) > 2}">
+                                          学业水平测试过期<br/>
+                                      </g:if>
+                                    <g:if test="${preppyInstance.skill?.name() == com.baoming.Preppy.Skill.NO.name()}">
+                                        计算机不合格
+                                    </g:if>
+                                </g:if>
+                                 <g:else>
+                                    <g:set var="birthdayYear" value="${preppyInstance.birthday?.format("yyyy")}"/>
+                                    <g:set var="birthdayYear" value="${birthdayYear as int}"/>
+                                    <g:if test="${birthdayYear < (thisYear-19) || birthdayYear > (thisYear-17)}">
+                                        年龄不符<br/>
+                                    </g:if>
+                                    <g:if test="${preppyInstance.family == Preppy.Family.JIANGSU || preppyInstance.studentFamily == Preppy.Family.JIANGSU }">
+                                        符合江苏报考条件 <br/>
+                                    </g:if>
+                                    <g:if test="${preppyInstance.family != Preppy.Family.JIANGSU && preppyInstance.studentFamily != Preppy.Family.JIANGSU }">
+                                        挂学籍
+                                    </g:if>
+                                </g:else>
+                            </td>
                             
                             <td class="center">
                                     <g:link class="btn btn-success" action="show" id="${preppyInstance.id}">
                                         <i class="icon-zoom-in icon-white"></i>
                                         <g:message code="default.button.view.label" default="View" />
                                     </g:link>
+                                <g:link class="btn btn-success" action="xy" id="${preppyInstance.id}">
+                                    <i class="icon-zoom-in  icon-white"></i>
+                                    <g:message code="preppy.xy.label" default="Xy" />
+                                </g:link>
                                 <sec:ifNotGranted roles="${Role.AUTHORITY_FINANCE}">
                                     <g:link class="btn btn-info" action="edit" id="${preppyInstance.id}">
                                         <i class="icon-edit icon-white"></i>
@@ -114,6 +143,7 @@
                                         <g:message code="default.button.delete.label" default="Delete" />
                                     </g:link>
                                 </sec:ifNotGranted>
+
                             </td>
                         </tr>
                     </g:each>

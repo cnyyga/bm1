@@ -4,13 +4,17 @@ package com.baoming
  */
 class Plan {
 
+
+
     String code // 代码
     String name //名称
     Date dateCreated
     String description //
-    Status status
+    Status status =   Status.RUNNING
     Integer orderValue = 0
     float score = 0 //需要报考的成绩线
+
+    static hasMany = [planUses:PlanUse]
     /*
     Batch batch //批次代码
     BranchCode branchCode //科类代码

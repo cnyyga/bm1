@@ -19,6 +19,7 @@ class PlanController {
     }
 
     def create() {
+
         [planInstance: new Plan(params)]
     }
 
@@ -27,6 +28,12 @@ class PlanController {
         if (!planInstance.save(flush: true)) {
             render(view: "create", model: [planInstance: planInstance])
             return
+        }
+        def flgs = params.list('flg')
+        if(flgs) {
+            flgs.each {
+                new PlanUse(flg: it as short,plan: planInstance).save()
+            }
         }
         planService.clearPlans()
         flash.message = message(code: 'default.created.message', args: [message(code: 'plan.label', default: 'Plan'), planInstance.id])
@@ -51,7 +58,6 @@ class PlanController {
             redirect(action: "list")
             return
         }
-
         [planInstance: planInstance]
     }
 
@@ -78,6 +84,14 @@ class PlanController {
         if (!planInstance.save(flush: true)) {
             render(view: "edit", model: [planInstance: planInstance])
             return
+        }
+
+        PlanUse.executeUpdate("delete PlanUse a where a.plan=?",[planInstance])
+        def flgs = params.list('flg')
+        if(flgs) {
+            flgs.each {
+                new PlanUse(flg: it as short,plan: planInstance).save()
+            }
         }
         planService.clearPlans()
         flash.message = message(code: 'default.updated.message', args: [message(code: 'plan.label', default: 'Plan'), planInstance.id])

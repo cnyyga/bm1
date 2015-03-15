@@ -50,6 +50,17 @@
                 </div>
             </li>--}%
             <li class="live">
+                <label class="reg_tit"><g:message code="studentType.label"/>： <span class="required-indicator">*</span>
+                </label>
+
+                <div class="reg_element">
+                    <span class="inp_box">
+                        <g:select name="studentCateories" from="${com.baoming.account.Student.StudentCateories.values()}" optionValue="label" value="${student?.studentCateories}"/>
+                    </span>
+                </div>
+            </li>
+
+            <li class="live">
                 <label class="reg_tit"><g:message code="student.number.label"/>： <span class="required-indicator">*</span>
                 </label>
 
@@ -79,7 +90,7 @@
                     </span>
                 </div>
             </li>
-            <li class="code">
+           %{-- <li class="code">
                 <label class="reg_tit"><g:message code="student.code.label"/>：<span class="required-indicator">*</span></label>
 
                 <div class="reg_element">
@@ -96,10 +107,10 @@
                         <input type="text" name="score" class="txt" data-result="" value="${student?.score}">
                     </span>
                 </div>
-            </li>
+            </li>--}%
             <g:set var="sps" value="${planIds}"/>
             <li class="planId1">
-                <label class="reg_tit"><g:message code="student.plans.label"/>1：<span class="required-indicator">*</span></label>
+                <label class="reg_tit"><g:message code="student.plans.label"/>：<span class="required-indicator">*</span></label>
 
                 <div class="reg_element">
                     <span class="inp_box">
@@ -107,7 +118,7 @@
                     </span>
                 </div>
             </li>
-            <li class="planId2">
+          %{--  <li class="planId2">
                 <label class="reg_tit"><g:message code="student.plans.label"/>2：<span class="required-indicator">*</span></label>
 
                 <div class="reg_element">
@@ -124,7 +135,7 @@
                         <g:select name="planId" id="planId3"  noSelection="${['':'请选择']}" from="${plans}" optionValue="name" optionKey="id" value="${(sps && sps[2])?sps[2]:''}"/>
                     </span>
                 </div>
-            </li>
+            </li>--}%
 
             <li class="middleSchoolId">
                 <label class="reg_tit"><g:message code="middleSchool.label"/>：<span class="required-indicator">*</span></label>

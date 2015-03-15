@@ -45,6 +45,8 @@ class Student extends User{
     Province province//省
     String description
 
+    StudentCateories studentCateories
+
     Date dateCreated
     Date lastUpdated
 
@@ -104,6 +106,7 @@ class Student extends User{
         reviewDescription nullable: true
         reviewStatus nullable: true
         admissionTicketPic nullable: true
+        studentCateories nullable: true
     }
 
     static mapping = {
@@ -151,6 +154,22 @@ class Student extends User{
         String label
 
         Registration(Integer id,String label){
+            this.id = id
+            this.label = label
+        }
+    }
+
+    enum StudentCateories {
+        //江苏高中生、外省高中生、江苏中专生、外省中专生
+        SG(1,'江苏高中生'),
+        WG (2,'外省高中生'),
+        SZ (3,'江苏中专生'),
+        WZ (4,'外省中专生')
+
+        Integer id
+        String label
+
+        StudentCateories(Integer id,String label){
             this.id = id
             this.label = label
         }

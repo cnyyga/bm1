@@ -62,4 +62,19 @@
     </div>
 </div>
 
+<div class="control-group">
+    <label class="control-label" for="code">
+           使用范围
+    </label>
+    <g:set var="planUses" value="${planInstance.planUses?planInstance.planUses*.flg:[]}"/>
+
+    <div class="controls">
+        <label  class="checkbox-inline">学生<input type="checkbox" name="flg" value="1" <g:if test="${planUses.count(1)>0}">checked="checked"</g:if> /> </label>
+        <label  class="checkbox-inline">中职<input type="checkbox" name="flg" value="2" <g:if test="${planUses.count(2)>0}">checked="checked"</g:if> /></label>
+            <label  class="checkbox-inline">旁听生江苏普高<input type="checkbox" name="flg" value="3" <g:if test="${planUses.count(3)>0}">checked="checked"</g:if> />  </label>
+            <label  class="checkbox-inline">旁听生江苏中职<input type="checkbox" name="flg" value="4" <g:if test="${planUses.count(4)>0}">checked="checked"</g:if> /></label>
+            <label  class="checkbox-inline">旁听生外省<input type="checkbox" name="flg" value="5" <g:if test="${planUses.count(5)>0}">checked="checked"</g:if> />  </label>
+    </div>
+</div>
+
 

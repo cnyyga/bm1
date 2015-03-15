@@ -2,6 +2,7 @@ package com.baoming
 
 import com.baoming.account.Role
 import com.baoming.account.Teacher
+import com.baoming.account.User
 import grails.converters.JSON
 import grails.plugin.jxl.builder.ExcelBuilder
 import org.apache.commons.io.IOUtils
@@ -12,8 +13,12 @@ class PreppyController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
     def springSecurityService
+    def planService
+    def provinceService
+    def preppyService
 
     def index() {
+
         redirect(action: "list", params: params)
     }
 
@@ -70,19 +75,57 @@ class PreppyController {
     }
 
     def create() {
-        [preppyInstance: new Preppy(params)]
+        [preppyInstance: new Preppy(params),plans:planService.getPgPlans(),zhongPlans:planService.getZzPlans(),
+                waiPlans:planService.getWsPlans(),provinces:provinceService.getProvinces(),
+                preppyPlans:planService.getPreppyPlans()]
     }
 
     def save() {
         def preppyInstance = new Preppy(params)
         def userId = springSecurityService.authentication.principal?.id
+        def teacher = null
         if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)) {
-            def teacher = Teacher.get(userId)
+            teacher = Teacher.get(userId)
             preppyInstance.teacher = teacher
+        }else{
+            if(params.teacherId){
+                teacher = Teacher.get(params.long('teacherId'))
+            }
+            if(params.reviewStatus != Preppy.ReviewStatus.NO_AUDIT.name()){
+                preppyInstance.reviewDate = new Date()
+                preppyInstance.reviewPerson = User.get(userId as Long)
+            }
         }
 
+        preppyInstance.teacher = teacher
+
+        def province = Province.findByCode(params.provinceId)
+        if(province && province.name.count('江苏') > 0) {
+            preppyInstance.family = Preppy.Family.JIANGSU
+        }else{
+            preppyInstance.family = Preppy.Family.OTHER
+        }
+        preppyInstance.province = province
+        preppyInstance.city = City.findByCode(params.cityId)
+        preppyInstance.district = District.findByCode(params.districtId)
+
+        def studentProvince = Province.findByCode(params.studentProvinceId)
+        if(studentProvince && studentProvince.name.count('江苏') > 0) {
+            preppyInstance.studentFamily = Preppy.Family.JIANGSU
+        } else{
+            preppyInstance.studentFamily = Preppy.Family.OTHER
+        }
+        preppyInstance.studentProvince = studentProvince
+        preppyInstance.studentCity = City.findByCode(params.studentCityId)
+        preppyInstance.studentDistrict = District.findByCode(params.studentDistrictId)
+
+        def academicScores = params.list('academicScore')
+        academicScores = academicScores.join(",")
+        preppyInstance.academicScore = academicScores
+        preppyInstance.protocolCode = preppyService.buildProtocolCode()
         if (!preppyInstance.save(flush: true)) {
-            render(view: "create", model: [preppyInstance: preppyInstance])
+            render(view: "create", model: [preppyInstance: preppyInstance,plans:planService.getPgPlans(),zhongPlans:planService.getZzPlans(),
+                    waiPlans:planService.getWsPlans(),provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()])
             return
         }
 
@@ -98,6 +141,7 @@ class PreppyController {
             return
         }
 
+
         [preppyInstance: preppyInstance]
     }
 
@@ -109,7 +153,8 @@ class PreppyController {
             return
         }
 
-        [preppyInstance: preppyInstance]
+        [preppyInstance: preppyInstance,plans:planService.getPgPlans(),zhongPlans:planService.getZzPlans(),
+                waiPlans:planService.getWsPlans(),provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()]
     }
 
     def update(Long id, Long version) {
@@ -125,15 +170,56 @@ class PreppyController {
                 preppyInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                         [message(code: 'preppy.label', default: 'Preppy')] as Object[],
                         "Another user has updated this Preppy while you were editing")
-                render(view: "edit", model: [preppyInstance: preppyInstance])
+                render(view: "edit", model: [preppyInstance: preppyInstance,plans:planService.getPgPlans(),zhongPlans:planService.getZzPlans(),
+                        waiPlans:planService.getWsPlans(),provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()])
                 return
             }
         }
 
         preppyInstance.properties = params
+        def userId = springSecurityService.authentication.principal?.id
+        def teacher
+        if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)) {
+            teacher = Teacher.get(userId)
+            preppyInstance.teacher = teacher
+        }else{
+            if(params.teacherId){
+                teacher = Teacher.get(params.long('teacherId'))
+            }
+            if(params.reviewStatus != Preppy.ReviewStatus.NO_AUDIT.name()){
+                preppyInstance.reviewDate = new Date()
+                preppyInstance.reviewPerson = User.get(userId as Long)
+            }
+        }
+        preppyInstance.teacher = teacher
+
+        def province = Province.findByCode(params.provinceId)
+        if(province && province.name.count('江苏') > 0) {
+            preppyInstance.family = Preppy.Family.JIANGSU
+        }    else{
+            preppyInstance.family = Preppy.Family.OTHER
+        }
+        preppyInstance.province = province
+        preppyInstance.city = City.findByCode(params.cityId)
+        preppyInstance.district = District.findByCode(params.districtId)
+
+        def studentProvince = Province.findByCode(params.studentProvinceId)
+        if(studentProvince && studentProvince.name.count('江苏') > 0) {
+            preppyInstance.studentFamily = Preppy.Family.JIANGSU
+        }else{
+            preppyInstance.studentFamily = Preppy.Family.OTHER
+        }
+        preppyInstance.studentProvince = studentProvince
+        preppyInstance.studentCity = City.findByCode(params.studentCityId)
+        preppyInstance.studentDistrict = District.findByCode(params.studentDistrictId)
+
+        def academicScores = params.list('academicScore')
+        academicScores = academicScores.join(",")
+        preppyInstance.academicScore = academicScores
 
         if (!preppyInstance.save(flush: true)) {
-            render(view: "edit", model: [preppyInstance: preppyInstance])
+            render(view: "edit", model: [preppyInstance: preppyInstance,plans:planService.getPgPlans(),zhongPlans:planService.getZzPlans(),
+                    waiPlans:planService.getWsPlans(),provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()])
             return
         }
 
@@ -180,6 +266,20 @@ class PreppyController {
         }
     }
 
+    def xy(Long id) {
+        def preppyInstance = Preppy.get(id)
+        if (!preppyInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'preppy.label', default: 'Preppy'), id])
+            redirect(action: "list")
+            return
+        }
+        def cal = Calendar.instance
+        def year = cal.get(Calendar.YEAR)
+        def birthday = preppyInstance.birthday
+        cal.time = birthday
+        [preppyInstance: preppyInstance,year:year,age:(year - cal.get(Calendar.YEAR))]
+    }
+
     def exp(Integer max) {
         def userId = springSecurityService.authentication.principal?.id
         def name = params.name
@@ -219,10 +319,13 @@ class PreppyController {
 
         }
         def titles = [message(code: 'preppy.name.label'),message(code: 'preppy.gender.label'),message(code: 'preppy.number.label'),
-                      message(code: 'preppy.collegeType.label'),message(code: 'preppy.status.label'),message(code: 'preppy.middlePlan.label'),
-                      message(code: 'preppy.plan.label'),message(code: 'preppy.family.label'),message(code: 'preppy.phone.label'),
-                      message(code: 'preppy.qq.label'),message(code: 'preppy.tel.label'),message(code: 'preppy.teacher.label'),
-                      message(code: 'default.lastUpdated.label')]
+                      message(code: 'preppy.birthday.label'),message(code: 'medium.district.label'),message(code: 'preppy.studentDistrict.label'),
+                      message(code: 'preppy.school.label'),message(code: 'preppy.type.label'),message(code: 'preppy.schoolType.label'),
+                      message(code: 'preppy.academicYear.label'),message(code: 'preppy.academicScore.label'),message(code: 'preppy.skill.label'),
+                      message(code: 'preppy.middlePlan.label'),message(code: 'preppyPlan.label'),message(code: 'preppy.plan.label'),
+                message(code: 'preppy.deposit.label'),message(code: 'preppy.phone.label'),message(code: 'preppy.parentPhone.label'),
+                message(code: 'preppy.address.label'),message(code: 'preppy.studentCateories.label'),
+                message(code: 'preppy.teacher.label'),message(code: 'default.lastUpdated.label')]
         def outputStream
         try {
 
@@ -236,23 +339,63 @@ class PreppyController {
                     }
                     list.eachWithIndex {de,k->
                         def kk = k+1
+                        def district = de.province?.name?:''
+                        district += de.city?.name?:''
+                        district += de.district?.name?:''
+
+                        def studentDistrict = de.studentProvince?.name?:''
+                        studentDistrict += de.studentCity?.name?:''
+                        studentDistrict += de.studentDistrict?.name?:''
+
+                        def academicScore = de.academicScore
+                        if(academicScore) {
+                            def acss = academicScore.tokenize(",")
+                            academicScore = "物理${acss[0]} 化学${acss[1]} 生物${acss[2]} 地理${acss[3]} 历史${acss[4]} 政治${acss[5]}"
+                        }
+
                         cell(0,kk,de.name?:'')
                         cell(1,kk,de.gender?.label?:'')
                         cell(2,kk,de.number?:'')
-                        cell(3,kk,de.collegeType?.label?:'')
-                        cell(4,kk,de.status?.label?:'')
-                        cell(5,kk,de.middlePlan?:'')
-                        cell(6,kk,de.plan?.name?:'')
-                        cell(7,kk,de.family?.label?:'')
-                        cell(8,kk,de.phone?:'')
-                        cell(9,kk,de.qq?:'')
-                        cell(10,kk,de.tel?:'')
-                        try {
-                            cell(11,kk,de.teacher?.name?:'')
-                        } catch (Exception e) {
+                        cell(3,kk,de.birthday?de.birthday.format('yyyy-MM-dd'):'')
+                        cell(4,kk,district?:'')
+                        cell(5,kk,studentDistrict?:'')
+                        cell(6,kk,de.school?:'')
+                        cell(7,kk,de.type?.label?:'')
+                        if(de.studentCateories?.name() == Preppy.StudentCateories.SG.name()){
+                            cell(8,kk,'')
+                            cell(9,kk,de.academicYear?:'未参加')
+                            cell(10,kk,academicScore?:'')
+                            cell(11,kk,de.skill?.label?:'')
+                        }else{
+                            cell(8,kk,de.schoolType?.label?:'')
+                            cell(9,kk,'')
+                            cell(10,kk,'')
                             cell(11,kk,'')
                         }
-                        cell(12,kk,de.lastUpdated.format('yyyy-MM-dd HH:mm:ss'))
+
+                        if(de.studentCateories?.name() == Preppy.StudentCateories.WG.name()){
+                            cell(12,kk,de.middlePlan?:'')
+                        }else{
+                            cell(12,kk,'')
+                        }
+
+                        try {
+                            cell(13,kk,de.preppyPlan?.name?:'')
+                        } catch (ee) {
+                            cell(13,kk,'')
+                        }
+                        cell(14,kk,de.plan?.name?:'')
+                        cell(15,kk,de.deposit?:'')
+                        cell(16,kk,de.phone?:'')
+                        cell(17,kk,de.parentPhone?:'')
+                        cell(18,kk,de.address?:'')
+                        cell(19,kk,de.studentCateories?.label?:'')
+                        try {
+                            cell(20,kk,de.teacher?.name?:'')
+                        } catch (Exception e) {
+                            cell(20,kk,'')
+                        }
+                        cell(21,kk,de.lastUpdated.format('yyyy-MM-dd HH:mm:ss'))
                     }
                 }
             }

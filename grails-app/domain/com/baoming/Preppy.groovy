@@ -8,18 +8,43 @@ import com.baoming.account.User
  */
 class Preppy {
 
-    String name
+    String name    //姓名
     String number //身份证号
+    Date birthday //出生日期
     User.Gender gender //性别
     District district//考生户口所在地区
     City city //市
     Province province//省
-    Family family //户籍类型
-    CollegeType collegeType  //高考类型
-    Status status //上学状态
-    String middlePlan //中学 专业
-    Plan plan //大学拟就读专业
-    String phone
+    District studentDistrict//学籍学所在地区
+    City studentCity //市
+    Province studentProvince//省
+    String school //学籍学所在地区学校
+
+    Type type//考生类别
+
+    String academicYear //学业水平测试
+    String academicScore//学业水平测试成绩 ,eg:物理,化学,生物,地理,历史,政治
+    Skill skill //技术
+
+    SchoolType schoolType //学校类别
+    String middlePlan //原就读专业
+    PreppyPlan preppyPlan//所属科目组
+    Plan plan //申请就读专业
+    BigDecimal deposit//缴纳保证金
+    String phone//学生手机
+    String parentPhone//家长手机
+    String address//家庭住址
+
+    ReviewStatus reviewStatus
+    Date reviewDate
+    User reviewPerson
+    StudentCateories studentCateories   //考生类型
+    String protocolCode //协议号
+    //////old/////////////
+    Family family = Family.OTHER //户籍类型
+    Family studentFamily = Family.OTHER //学籍类型
+    CollegeType collegeType =  CollegeType.HIGH //高考类型
+    Status status = Status.DROP //上学状态
     String qq
     String tel
     Teacher teacher  //推荐老师
@@ -28,6 +53,10 @@ class Preppy {
     Date lastUpdated
 
     static constraints = {
+        name()
+        number()
+        birthday nullable: true
+        gender()
         district nullable: true
         city nullable: true
         province nullable: true
@@ -35,6 +64,17 @@ class Preppy {
         tel nullable: true
         plan nullable: true
         teacher nullable: true
+        reviewStatus nullable: true
+        reviewDate nullable: true
+        reviewPerson nullable: true
+        studentCateories nullable: true
+        studentFamily nullable: true
+        collegeType nullable: true
+        family(nullable: true)
+        studentFamily nullable: true
+        status nullable: true
+        collegeType nullable: true
+        protocolCode nullable: true
     }
 
     enum CollegeType {
@@ -45,6 +85,47 @@ class Preppy {
         String label
 
         CollegeType(Integer id,String label){
+            this.id = id
+            this.label = label
+        }
+    }
+
+    enum Skill {
+        YES(0,'合格'),
+        NO (1,'不合格')
+
+        Integer id
+        String label
+
+        Skill(Integer id,String label){
+            this.id = id
+            this.label = label
+        }
+    }
+
+    enum Type {
+        FRESH(1,'应届生'),
+        PREVIONS  (2,'往届生 ') ,
+        DROPOUT (3,'肄业生')
+
+        Integer id
+        String label
+
+        Type(Integer id,String label){
+            this.id = id
+            this.label = label
+        }
+    }
+
+    enum SchoolType {
+        SECONDARY(1,'中职生'),
+        INDUSTRIAL(2,'技校生 ') ,
+        HIGH(3,' 高中生')
+
+        Integer id
+        String label
+
+        SchoolType(Integer id,String label){
             this.id = id
             this.label = label
         }
@@ -72,6 +153,35 @@ class Preppy {
         String label
 
         Status(Integer id,String label){
+            this.id = id
+            this.label = label
+        }
+    }
+
+    enum ReviewStatus{
+        NO_AUDIT(1,'未审核'),
+        JSPG(2,'参加江苏省普高注册入学'),
+        JSZZ(3,'参加江苏省中职注册入学') ,
+        GJSZZ(4,'挂江苏中职学籍')
+
+        Integer id
+        String label
+
+        ReviewStatus(Integer id,String label){
+            this.id = id
+            this.label = label
+        }
+    }
+    enum StudentCateories {
+        //江苏普高、江苏中职、外省
+        SG(1,'江苏普高'),
+        WG (2,'江苏中职'),
+        SZ (3,'外省')
+
+        Integer id
+        String label
+
+        StudentCateories(Integer id,String label){
             this.id = id
             this.label = label
         }
