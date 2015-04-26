@@ -1,50 +1,84 @@
 package bm
 
 import com.baoming.MediumPlan
+import com.baoming.MediumPlanDetail
 import com.baoming.Plan
 import com.baoming.PlanUse
 import com.baoming.PreppyPlan
+import com.baoming.PreppyPlanDetail
 import grails.plugin.cache.CacheEvict
 import grails.plugin.cache.Cacheable
 
 class PlanService {
 
     @Cacheable('plans')
-    def getPlans(def flg) {
-        if(!flg) {
+    def getPlans() {
             return Plan.findAllByStatus(Plan.Status.RUNNING,[sort:'orderValue',order:'desc'])
-        }
-        return Plan.createCriteria().list {
-            planUses {
-                eq('flg',flg)
-            }
-            eq('status',Plan.Status.RUNNING)
-            order('orderValue','desc')
-        }
     }
 
     def getStuPlans() {
-        def plans = getPlans(PlanUse.USE_FLG_STU)
+        def plans = Plan.createCriteria().list {
+            eq("status",(Plan.Status.RUNNING))
+            planUses {
+                 eq("flg",PlanUse.USE_FLG_STU)
+            }
+        }
         if(!plans) {
-            return   getPlans()
+            return getPlans()
         }
         return plans
     }
 
-    def getMedPlans() {
-        return getPlans(PlanUse.USE_FLG_MED)
+    def getMediumPlanList(MediumPlan mediumPlan){
+        def plans = MediumPlanDetail.createCriteria().list {
+            eq('mediumPlan',mediumPlan)
+            projections {
+                property('plan')
+            }
+        }
+        if(!plans) {
+            return
+        }
+        plans = plans.findAll {
+            it.status.name() ==  Plan.Status.RUNNING.name()
+        }.sort {p,p1->
+            p1.orderValue-p.orderValue}
+        return plans
     }
 
-    def getPgPlans() {
-        return getPlans(PlanUse.USE_FLG_PUGAO)
+    def getMediumPlanPlans(){
+        Plan.createCriteria().list {
+            eq("status",(Plan.Status.RUNNING))
+            planUses {
+                eq("flg",PlanUse.USE_FLG_MED)
+            }
+        }
     }
 
-    def getZzPlans() {
-        return getPlans(PlanUse.USE_FLG_ZHONG)
+    def getPreppyPlanPlans(){
+        Plan.createCriteria().list {
+            eq("status",(Plan.Status.RUNNING))
+            planUses {
+                eq("flg",PlanUse.USE_FLG_PREPPY)
+            }
+        }
     }
 
-    def getWsPlans() {
-        return getPlans(PlanUse.USE_FLG_WAI)
+    def getPreppyPlanList(PreppyPlan preppyPlan){
+        def plans = PreppyPlanDetail.createCriteria().list {
+            eq("preppyPlan",preppyPlan)
+            projections {
+                property('plan')
+            }
+        }
+        if(!plans) {
+            return
+        }
+        plans = plans.findAll {
+            it.status.name() ==  Plan.Status.RUNNING.name()
+        }.sort {p,p1->
+            p1.orderValue-p.orderValue}
+        return plans
     }
 
     @CacheEvict(value='plans', allEntries = true)

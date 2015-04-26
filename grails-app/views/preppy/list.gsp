@@ -13,6 +13,10 @@
                     var _url = "${createLink(action: 'exp')}?year="+_year
                     window.open(_url)
                 })
+
+                $("#printBtn").click(function(){
+                    window.print();
+                })
             })
         </script>
 	</head>
@@ -60,6 +64,7 @@
                         <div class="span2">
                             <g:submitButton name="sub" value="${message(code:'default.button.search.label')}" class="btn btn-small btn-primary" />
                             <input type="button" name='exportBtn' id="exportBtn" value="${message(code:'default.button.export.label')}" class="btn btn-small btn-inverse"   />
+                            <input type="button" name='printBtn' id="printBtn" value="${message(code:'default.button.print.label')}" class="btn btn-small btn-info"   />
 
                         </div>
                     </g:form>

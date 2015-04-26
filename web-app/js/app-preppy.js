@@ -108,18 +108,44 @@ $(function(){
             $(".waisheng").hide();
             $(".zhongzhi").hide();
             $(".zhongzhi").hide();
-            $(".plan-area").html($("#pugaoArea").val())
+           // $(".plan-area").html($("#pugaoArea").val())
         }else  if(cate == 'WG'){
             $(".pugao").hide();
             $(".waisheng").hide();
             $(".zhongzhi").show();
-            $(".plan-area").html($("#zhongzhiArea").val())
+            //$(".plan-area").html($("#zhongzhiArea").val())
         }else  if(cate == 'SZ'){
             $(".pugao").hide();
             $(".zhongzhi").hide();
             $(".waisheng").show();
-            $(".plan-area").html($("#waiArea").val())
+            //$(".plan-area").html($("#waiArea").val())
         }
+
+        setPlans(cate,$("#preppyPlan").val())
+    }
+
+    $("#preppyPlan").change(function(){
+        setPlans($("#studentCateories").val(),$(this).val())
+    });
+
+    function setPlans(type,preppyPlanId) {
+        var _url = $("#preppyPlanUrl").val();
+        var _selected =   $("#preppyPlanUrl").attr("title");
+        _url += "/"+preppyPlanId;
+        $("#planId").html('');
+        $.getJSON(_url,{type:type},function(data){
+            var str = "";
+            $.each(data,function(index,val){
+                var id = val['id'];
+                var name = val['name'];
+                var sel = "";
+                if(id == _selected) {
+                    sel = "selected='selected'";
+                }
+                str += "<option "+sel+" value=\""+id+"\">"+val.name+"</option>";
+            })
+            $("#planId").html(str);
+        })
     }
 
 
@@ -131,4 +157,30 @@ $(function(){
          var thisyear= $("#age").attr("this-year-attr");
         $("#age").val(thisyear-year);
     }
+
+
+    _show_material($("#reviewStatus").val());
+    $("#reviewStatus").change(function(){
+        _show_material($(this).val());
+    });
+    function _show_material(rsval) {
+        var id=-1;
+        if(rsval == 'JSPG'){
+            id=2;
+        }else if(rsval == 'JSZZ'){
+            id=3;
+        }else if(rsval == 'GJSZZ'){
+            id=4;
+        }
+        $(".material-content").hide();
+        $(".material-content li").hide();
+        $(".material-content li").each(function(){
+            var _class = $(this).attr("class");
+            if(_class.indexOf(id) != -1){
+                $(this).show();
+                $(".material-content").show();
+            }
+        })
+    }
+
 })

@@ -1,5 +1,6 @@
 package com.baoming
 
+import grails.converters.JSON
 import org.springframework.dao.DataIntegrityViolationException
 
 class PreppyPlanController {
@@ -18,16 +19,22 @@ class PreppyPlanController {
     }
 
     def create() {
-        [preppyPlanInstance: new PreppyPlan(params)]
+        [preppyPlanInstance: new PreppyPlan(params),plans:planService.getPreppyPlanPlans()]
     }
 
     def save() {
         def preppyPlanInstance = new PreppyPlan(params)
         if (!preppyPlanInstance.save(flush: true)) {
-            render(view: "create", model: [preppyPlanInstance: preppyPlanInstance])
+            render(view: "create", model: [preppyPlanInstance: preppyPlanInstance,plans:planService.getPreppyPlanPlans()])
             return
         }
-        planService.clearPreppyPlans()
+        def plans = params.list('plan')
+        if(plans) {
+            plans.each {p->
+                def plan = Plan.get(p)
+                PreppyPlanDetail.create(preppyPlanInstance,plan)
+            }
+        }
         flash.message = message(code: 'default.created.message', args: [message(code: 'preppyPlan.label', default: 'PreppyPlan'), preppyPlanInstance.id])
         redirect(action: "show", id: preppyPlanInstance.id)
     }
@@ -51,7 +58,7 @@ class PreppyPlanController {
             return
         }
 
-        [preppyPlanInstance: preppyPlanInstance]
+        [preppyPlanInstance: preppyPlanInstance,plans:planService.getPreppyPlanPlans()]
     }
 
     def update(Long id, Long version) {
@@ -67,7 +74,7 @@ class PreppyPlanController {
                 preppyPlanInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                         [message(code: 'preppyPlan.label', default: 'PreppyPlan')] as Object[],
                         "Another user has updated this PreppyPlan while you were editing")
-                render(view: "edit", model: [preppyPlanInstance: preppyPlanInstance])
+                render(view: "edit", model: [preppyPlanInstance: preppyPlanInstance,plans:planService.getPreppyPlanPlans()])
                 return
             }
         }
@@ -75,10 +82,17 @@ class PreppyPlanController {
         preppyPlanInstance.properties = params
 
         if (!preppyPlanInstance.save(flush: true)) {
-            render(view: "edit", model: [preppyPlanInstance: preppyPlanInstance])
+            render(view: "edit", model: [preppyPlanInstance: preppyPlanInstance,plans:planService.getPreppyPlanPlans()])
             return
         }
-        planService.clearPreppyPlans()
+        def plans = params.list('plan')
+        PreppyPlanDetail.removeAll(preppyPlanInstance)
+        if(plans) {
+            plans.each {p->
+                def plan = Plan.get(p)
+                PreppyPlanDetail.create(preppyPlanInstance,plan)
+            }
+        }
         flash.message = message(code: 'default.updated.message', args: [message(code: 'preppyPlan.label', default: 'PreppyPlan'), preppyPlanInstance.id])
         redirect(action: "show", id: preppyPlanInstance.id)
     }
@@ -100,5 +114,35 @@ class PreppyPlanController {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'preppyPlan.label', default: 'PreppyPlan'), id])
             redirect(action: "show", id: id)
         }
+    }
+
+    def getPlans(Long id) {
+        def type = params.type
+        if(!type) {
+            render(([] as JSON) as String)
+            return
+        }
+        def plans
+        if(type != 'WG') {
+            plans = planService.getPreppyPlanPlans() ;
+        }else{
+            def preppyPlanInstance = PreppyPlan.get(id)
+
+            if (!preppyPlanInstance) {
+                render(([] as JSON) as String)
+                return
+            }
+            plans = planService.getPreppyPlanList(preppyPlanInstance)
+        }
+
+        if(!plans) {
+            render(([] as JSON) as String)
+            return
+        }
+        plans = plans.collect {
+            [id:it.id,name:it.name]
+        }
+        render((plans as JSON) as String)
+
     }
 }

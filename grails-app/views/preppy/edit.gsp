@@ -73,6 +73,39 @@
                     <g:hiddenField name="version" value="${preppyInstance?.version}" />
                     <fieldset>
                         <g:render template="form"/>
+                        <div class="control-group">
+                        <label class="control-label red" style="padding-left:140px;" >
+                            <%
+                                def cal = Calendar.instance
+                                def year = cal.get(Calendar.YEAR)
+                            %>
+                            <g:set var="thisYear" value="${year}"/>
+                            <g:if test="${preppyInstance.studentCateories.name() == com.baoming.Preppy.StudentCateories.SG.name()}">
+                                <g:set var="joinYear" value="${preppyInstance.academicYear}"/>
+
+                                <g:if test="${!joinYear || (thisYear - (joinYear as int)) > 2}">
+                                    学业水平测试过期<br/>
+                                </g:if>
+                                <g:if test="${preppyInstance.skill?.name() == com.baoming.Preppy.Skill.NO.name()}">
+                                    计算机不合格
+                                </g:if>
+                            </g:if>
+                            <g:else>
+                                <g:set var="birthdayYear" value="${preppyInstance.birthday?.format("yyyy")}"/>
+                                <g:set var="birthdayYear" value="${birthdayYear as int}"/>
+                                <g:if test="${birthdayYear < (thisYear-19) || birthdayYear > (thisYear-17)}">
+                                    年龄不符<br/>
+                                </g:if>
+                                <g:if test="${preppyInstance.family == Preppy.Family.JIANGSU || preppyInstance.studentFamily == Preppy.Family.JIANGSU }">
+                                    符合江苏报考条件 <br/>
+                                </g:if>
+                                <g:if test="${preppyInstance.family != Preppy.Family.JIANGSU && preppyInstance.studentFamily != Preppy.Family.JIANGSU }">
+                                    挂学籍
+                                </g:if>
+                            </g:else>
+                        </label>
+
+                        </div>
                         <div class="form-actions">
 
                     <button type="submit" class="btn btn-primary"><g:message code="default.button.update.label" /> </button>

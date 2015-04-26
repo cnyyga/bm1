@@ -75,8 +75,7 @@ class PreppyController {
     }
 
     def create() {
-        [preppyInstance: new Preppy(params),plans:planService.getPgPlans(),zhongPlans:planService.getZzPlans(),
-                waiPlans:planService.getWsPlans(),provinces:provinceService.getProvinces(),
+        [preppyInstance: new Preppy(params),provinces:provinceService.getProvinces(),
                 preppyPlans:planService.getPreppyPlans()]
     }
 
@@ -124,8 +123,7 @@ class PreppyController {
         preppyInstance.academicScore = academicScores
         preppyInstance.protocolCode = preppyService.buildProtocolCode()
         if (!preppyInstance.save(flush: true)) {
-            render(view: "create", model: [preppyInstance: preppyInstance,plans:planService.getPgPlans(),zhongPlans:planService.getZzPlans(),
-                    waiPlans:planService.getWsPlans(),provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()])
+            render(view: "create", model: [preppyInstance: preppyInstance,provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()])
             return
         }
 
@@ -153,8 +151,7 @@ class PreppyController {
             return
         }
 
-        [preppyInstance: preppyInstance,plans:planService.getPgPlans(),zhongPlans:planService.getZzPlans(),
-                waiPlans:planService.getWsPlans(),provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()]
+        [preppyInstance: preppyInstance,provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()]
     }
 
     def update(Long id, Long version) {
@@ -170,8 +167,7 @@ class PreppyController {
                 preppyInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                         [message(code: 'preppy.label', default: 'Preppy')] as Object[],
                         "Another user has updated this Preppy while you were editing")
-                render(view: "edit", model: [preppyInstance: preppyInstance,plans:planService.getPgPlans(),zhongPlans:planService.getZzPlans(),
-                        waiPlans:planService.getWsPlans(),provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()])
+                render(view: "edit", model: [preppyInstance: preppyInstance,provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()])
                 return
             }
         }
@@ -218,8 +214,7 @@ class PreppyController {
         preppyInstance.academicScore = academicScores
 
         if (!preppyInstance.save(flush: true)) {
-            render(view: "edit", model: [preppyInstance: preppyInstance,plans:planService.getPgPlans(),zhongPlans:planService.getZzPlans(),
-                    waiPlans:planService.getWsPlans(),provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()])
+            render(view: "edit", model: [preppyInstance: preppyInstance,provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()])
             return
         }
 
@@ -267,6 +262,20 @@ class PreppyController {
     }
 
     def xy(Long id) {
+        def preppyInstance = Preppy.get(id)
+        if (!preppyInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'preppy.label', default: 'Preppy'), id])
+            redirect(action: "list")
+            return
+        }
+        def cal = Calendar.instance
+        def year = cal.get(Calendar.YEAR)
+        def birthday = preppyInstance.birthday
+        cal.time = birthday
+        [preppyInstance: preppyInstance,year:year,age:(year - cal.get(Calendar.YEAR))]
+    }
+
+    def xyPrint(Long id) {
         def preppyInstance = Preppy.get(id)
         if (!preppyInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'preppy.label', default: 'Preppy'), id])

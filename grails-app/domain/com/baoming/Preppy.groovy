@@ -75,6 +75,7 @@ class Preppy {
         status nullable: true
         collegeType nullable: true
         protocolCode nullable: true
+        preppyPlan nullable: true
     }
 
     enum CollegeType {

@@ -43,3 +43,12 @@ label.error {
     float: left;
     padding-top: 5px;
 }
+
+.checkbox-inline, .radio-inline {
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 400;
+    margin-bottom: 0;
+    padding-left: 20px;
+    vertical-align: middle;
+}

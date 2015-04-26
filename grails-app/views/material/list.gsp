@@ -1,10 +1,10 @@
 
-<%@ page import="com.baoming.Plan" %>
+<%@ page import="com.baoming.Material" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'plan.label', default: 'Plan')}" />
+		<g:set var="entityName" value="${message(code: 'material.label', default: 'Material')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
 	<body>
@@ -33,49 +33,52 @@
                 <table class="table table-bordered table-striped table-condensed">
                     <thead>
                     <tr>
-                        <th><g:message code="default.orderValue.label" default="Order" /></th>
-
-                        <th><g:message code="plan.name.label" default="Name" /></th>
-
-                        <th><g:message code="plan.code.label" default="Code" /></th>
-
-                        <th><g:message code="plan.status.label" default="Status" /></th>
-                        <th><g:message code="plan.score.label" default="score" /></th>
+                        
+                        <th><g:message code="material.content.label" default="Content" /></th>
+                        
+                        <th><g:message code="material.reviewStatus.label" default="Review Status" /></th>
                         
                         <th><g:message code="default.operator.label" default="Actions" /></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <g:each in="${planInstanceList}" status="i" var="planInstance">
+                    <g:each in="${materialInstanceList}" status="i" var="materialInstance">
                         <tr>
-                            <td class="center">${planInstance.orderValue}</td>
-
-                            <td class="center">${fieldValue(bean: planInstance, field: "name")}</td>
-
-                            <td class="center">${fieldValue(bean: planInstance, field: "code")}</td>
-
-                            <td class="center">${planInstance.status.label}</td>
-                            <td class="center">${planInstance.score}</td>
+                            
+                            <td class="center">${fieldValue(bean: materialInstance, field: "content")}</td>
                             
                             <td class="center">
-                                    <g:link class="btn btn-success" action="show" id="${planInstance.id}">
+                                <g:each in="${materialInstance.reviewStatus?.tokenize(",")}" var="rs">
+                                    <g:each in="${Material.ReviewStatus.values()}" var="rev">
+                                        <g:if test="${rev.id == rs as int}">
+                                            ${rev.label}
+                                        </g:if>
+                                    </g:each>
+                                </g:each>
+                            </td>
+                            
+                            <td class="center">
+                                    <g:link class="btn btn-success" action="show" id="${materialInstance.id}">
                                         <i class="icon-zoom-in icon-white"></i>
                                         <g:message code="default.button.view.label" default="View" />
                                     </g:link>
 
-                                    <g:link class="btn btn-info" action="edit" id="${planInstance.id}">
+                                    <g:link class="btn btn-info" action="edit" id="${materialInstance.id}">
                                         <i class="icon-edit icon-white"></i>
                                         <g:message code="default.button.edit.label" default="Edit" />
                                     </g:link>
 
-
+                                    <g:link class="btn btn-danger" action="delete" id="${materialInstance.id}">
+                                        <i class="icon-trash icon-white"></i>
+                                        <g:message code="default.button.delete.label" default="Delete" />
+                                    </g:link>
                             </td>
                         </tr>
                     </g:each>
                     </tbody>
                 </table>
                 <div class="pagination pagination-centered">
-                    <g:paginate total="${planInstanceTotal}" />
+                    <g:paginate total="${materialInstanceTotal}" />
                 </div>
             </div>
         </div><!--/span-->

@@ -74,7 +74,7 @@ class MediumController {
     }
 
     def create() {
-        [mediumInstance: new Medium(params),plans:planService.getMedPlans(),provinces:provinceService.getProvinces(),mediumPlans:planService.getMediumPlans()]
+        [mediumInstance: new Medium(params),provinces:provinceService.getProvinces(),mediumPlans:planService.getMediumPlans()]
     }
 
     def save() {
@@ -121,7 +121,7 @@ class MediumController {
         }
 
         if (!mediumInstance.save(flush: true)) {
-            render(view: "create", model: [mediumInstance: mediumInstance,plans:planService.getMedPlans(),provinces:provinceService.getProvinces()])
+            render(view: "create", model: [mediumInstance: mediumInstance,provinces:provinceService.getProvinces()])
             return
         }
 
@@ -148,7 +148,7 @@ class MediumController {
             return
         }
 
-        [mediumInstance: mediumInstance,plans:planService.getMedPlans(),provinces:provinceService.getProvinces(),mediumPlans:planService.getMediumPlans()]
+        [mediumInstance: mediumInstance,provinces:provinceService.getProvinces(),mediumPlans:planService.getMediumPlans()]
     }
 
     def update(Long id, Long version) {
@@ -164,7 +164,7 @@ class MediumController {
                 mediumInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                         [message(code: 'medium.label', default: 'Medium')] as Object[],
                         "Another user has updated this Medium while you were editing")
-                render(view: "edit", model: [mediumInstance: mediumInstance,plans:planService.getMedPlans(),provinces:provinceService.getProvinces()])
+                render(view: "edit", model: [mediumInstance: mediumInstance,provinces:provinceService.getProvinces()])
                 return
             }
         }

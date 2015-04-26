@@ -185,6 +185,7 @@
 
 <g:hiddenField name="cityUrl" value="${createLink(action: 'cityOpts',controller: 'api')}" title="${mediumInstance?.city?.code?:params.cityId}"  />
 <g:hiddenField name="districtUrl" value="${createLink(action: 'districtOpts',controller: 'api')}"  title="${mediumInstance?.district?.code?:params.districtId}" />
+<g:hiddenField name="mediumPlanUrl" value="${createLink(action: 'getPlans',controller: 'mediumPlan')}"  title="${mediumInstance?.plan?.id?:params['plan.id']}" />
 
 
 

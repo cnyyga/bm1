@@ -102,7 +102,16 @@
                         </div>
                     </div>
                     </g:if>
-                    
+                    <div class="control-group">
+                        <label class="control-label">
+                            <g:message code="plan.label" default="Status" />
+                        </label>
+                        <div class="controls">
+
+                            <span class="property-value" aria-labelledby="status-label">${mediumPlanInstance.plans?mediumPlanInstance.plans*.name.join(','):''}</span>
+
+                        </div>
+                    </div>
                     <div class="form-actions">
                         <g:form>
                                 <g:hiddenField name="id" value="${mediumPlanInstance?.id}" />

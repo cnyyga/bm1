@@ -4,6 +4,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>钟山职业技术学院</title>
+    <script type="text/javascript">
+        window.print();
+    </script>
 </head>
 <link rel="stylesheet" href="${resource(dir: 'css', file: 'xiyi.css')}" type="text/css">
 <body>
@@ -199,8 +202,6 @@
         </table></td>
     </tr>
 </table>
-<p style="margin:0 auto;text-align: center;padding:20px 0">
-    <button class="btn btn-primary" onclick="location.href='${createLink(action: 'xyPrint',id: params.id)}'"  <g:if test="${preppyInstance.reviewStatus.name() == com.baoming.Preppy.ReviewStatus.NO_AUDIT}">disabled="disabled"</g:if> style="padding:10px 20px;border-radius: 4px;border:1px solid #ddd"><g:message code="default.button.print.label"/></button>
-</p>
+
 </body>
 </html>

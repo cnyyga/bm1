@@ -51,6 +51,32 @@ $(function(){
         $("#studentDistrict").load(districtUrl+"?id="+cityId+"&selected="+selectedId);
     }
 
+    $("#mediumPlan").change(function(){
+        _setPlan($(this).val());
+    })
+
+    _setPlan($("#mediumPlan").val());
+    function _setPlan(mediumPlanId) {
+        var _url = $("#mediumPlanUrl").val();
+        var _selected =   $("#mediumPlanUrl").attr("title");
+        _url += "/"+mediumPlanId;
+        var _plan = $("#plan");
+        _plan.html("")        ;
+        $.getJSON(_url,function(data){
+            var str = "";
+            $.each(data,function(index,val){
+                var id = val['id'];
+                var name = val['name'];
+                var sel = "";
+                if(id == _selected) {
+                    sel = "selected='selected'";
+                }
+                 str += "<option "+sel+" value=\""+id+"\">"+val.name+"</option>";
+            })
+            $("#plan").html(str);
+        })
+    }
+
 
     $('#editForm').validate({
         rules: {

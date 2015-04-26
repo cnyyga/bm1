@@ -182,16 +182,17 @@
     </label>
 
     <div class="controls">
-        <g:select id="preppyPlan" name="preppyPlan.id" from="${preppyPlans}" optionKey="id" optionValue="name" value="${preppyInstance?.preppyPlan?.id}" class="many-to-one" />
+        <g:select id="preppyPlan" name="preppyPlan.id" from="${preppyPlans}" optionKey="id" optionValue="name" value="${preppyInstance.preppyPlan?.id}" class="many-to-one" />
     </div>
 </div>
 
 <div class="control-group ">
-    <label class="control-label" for="plan">
+    <label class="control-label" for="planId">
         <g:message code="preppy.plan.label" default="Plan" />
     </label>
 
     <div class="controls plan-area">
+        <select id="planId" name="plan.id"></select>
     </div>
 </div>
 
@@ -272,17 +273,21 @@
             </select>
         </div>
     </div>
+    <div class="control-group material-content">
+        <label class="control-label" for="combobox">
+            <g:message code="material.label" default="material" />
+        </label>
+        <div class="controls">
+            <ul>
+                <g:each in="${com.baoming.Material.list()}" var="material">
+                    <li class="${material.reviewStatus}">${material.content}</li>
+                </g:each>
+            </ul>
+        </div>
+    </div>
 </div>
 </sec:ifAllGranted>
 
 <g:hiddenField name="cityUrl" value="${createLink(action: 'cityOpts',controller: 'api')}" title="${preppyInstance?.city?.code?:params.cityId}"  />
 <g:hiddenField name="districtUrl" value="${createLink(action: 'districtOpts',controller: 'api')}"  title="${preppyInstance?.district?.code?:params.districtId}" />
-<g:textArea name="pugaoArea" rows="1" cols="1" style="display: none">
-    <g:select id="plan" name="plan.id" from="${plans}" optionKey="id" optionValue="name" value="${preppyInstance?.plan?.id}" class="many-to-one" />
-</g:textArea>
-<g:textArea name="zhongzhiArea" rows="1" cols="1" style="display: none">
-    <g:select id="plan" name="plan.id" from="${zhongPlans}" optionKey="id" optionValue="name" value="${preppyInstance?.plan?.id}" class="many-to-one" />
-</g:textArea>
-<g:textArea name="waiArea" rows="1" cols="1" style="display: none">
-    <g:select id="plan" name="plan.id" from="${waiPlans}" optionKey="id" optionValue="name" value="${preppyInstance?.plan?.id}" class="many-to-one" />
-</g:textArea>
+<g:hiddenField name="preppyPlanUrl" value="${createLink(action: 'getPlans',controller: 'preppyPlan')}"  title="${preppyInstance?.plan?.id}" />

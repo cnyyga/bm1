@@ -16,6 +16,18 @@ class MediumPlan {
         orderValue index: 'orderValue_idx'
         sort orderValue:'desc'
     }
+
+    Set<Plan> getPlans() {
+        if(!this || !this.id) {
+            return
+        }
+        def mpd = MediumPlanDetail.findAllByMediumPlan(this)
+        if(!mpd) {
+            return
+        }
+        mpd.collect { it.plan } as Set
+    }
+
     enum Status {
         WAITING(0,'未启用'),
         RUNNING(1,'进行中'),
