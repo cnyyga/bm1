@@ -170,8 +170,17 @@
         <td colspan="3" align="left" valign="top" style="padding-left:30px;"><table width="720" border="0" align="center" cellpadding="0" cellspacing="0" style="margin-top:10px;">
             <tr>
                 <td width="134" valign="top" >★ <strong>需要提交的材料</strong>：</td>
-                <td width="606" height="100" valign="top" >&nbsp;</td>
+                <td width="606" height="100" valign="top" >
+                    <g:if test="${preppyInstance.reviewStatus.name() != com.baoming.Preppy.ReviewStatus.NO_AUDIT}">
+                        <g:set var="rsid" value="%${preppyInstance.reviewStatus.id}%"/>
+                        <g:each in="${com.baoming.Material.findAllByReviewStatusLike(rsid)}" var="material">
+                            <div>${material.content}</div>
+                        </g:each>
+                    </g:if>
+                </td>
             </tr>
+
+
         </table></td>
     </tr>
     <tr>
@@ -189,7 +198,7 @@
             <tr>
                 <td width="281" height="45" valign="middle" ><span >学生手机：${preppyInstance.phone}</td>
                 <td width="265" valign="middle" >家长手机：${preppyInstance.parentPhone}</td>
-                <g:if test="${preppyInstance.reviewStatus.name() != com.baoming.Preppy.ReviewStatus.NO_AUDIT}">
+                <g:if test="${preppyInstance.reviewStatus.name() != com.baoming.Preppy.ReviewStatus.NO_AUDIT.name()}">
                     <td width="194" valign="middle" >签订日期：<g:formatDate date="${preppyInstance.lastUpdated}" format="yyyy年MM月dd日"/> </td>
                 </g:if>
                 <g:else>
@@ -200,7 +209,7 @@
     </tr>
 </table>
 <p style="margin:0 auto;text-align: center;padding:20px 0">
-    <button class="btn btn-primary" onclick="location.href='${createLink(action: 'xyPrint',id: params.id)}'"  <g:if test="${preppyInstance.reviewStatus.name() == com.baoming.Preppy.ReviewStatus.NO_AUDIT}">disabled="disabled"</g:if> style="padding:10px 20px;border-radius: 4px;border:1px solid #ddd"><g:message code="default.button.print.label"/></button>
+    <button class="btn btn-primary" onclick="location.href='${createLink(action: 'xyPrint',id: params.id)}'"  <g:if test="${preppyInstance.reviewStatus.name() == com.baoming.Preppy.ReviewStatus.NO_AUDIT.name()}">disabled="disabled"</g:if> style="padding:10px 20px;border-radius: 4px;border:1px solid #ddd"><g:message code="default.button.print.label"/></button>
 </p>
 </body>
 </html>

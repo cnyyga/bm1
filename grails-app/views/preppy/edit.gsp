@@ -1,4 +1,4 @@
-<%@ page import="com.baoming.Preppy" %>
+<%@ page import="com.baoming.account.Role; com.baoming.Preppy" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -110,6 +110,26 @@
 
                     <button type="submit" class="btn btn-primary"><g:message code="default.button.update.label" /> </button>
                     <button type="reset" class="btn"><g:message code="default.button.reset.label" /> </button>
+                            <sec:ifNotGranted roles="${Role.AUTHORITY_TEACHER}">
+                                <g:link class="btn btn-success" action="xyPrint" id="${preppyInstance.id}">
+                                    <i class="icon-zoom-in  icon-white"></i>
+                                    <g:message code="default.button.print.label" default="Xy" />
+                                </g:link>
+                            </sec:ifNotGranted>
+                            <sec:ifAllGranted roles="${Role.AUTHORITY_TEACHER}">
+                                <g:if test="${preppyInstance.reviewStatus.name() == com.baoming.Preppy.ReviewStatus.NO_AUDIT.name()}">
+                                    <g:link class="btn btn-success" action="xy" id="${preppyInstance.id}">
+                                        <i class="icon-zoom-in  icon-white"></i>
+                                        <g:message code="default.button.preview.label" default="Xy" />
+                                    </g:link>
+                                </g:if>
+                                <g:else>
+                                    <g:link class="btn btn-success" action="xyPrint" id="${preppyInstance.id}">
+                                        <i class="icon-zoom-in  icon-white"></i>
+                                        <g:message code="default.button.print.label" default="Xy" />
+                                    </g:link>
+                                </g:else>
+                            </sec:ifAllGranted>
                         </div>
                     </fieldset>
                     </g:form>

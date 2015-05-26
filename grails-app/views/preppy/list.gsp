@@ -64,7 +64,6 @@
                         <div class="span2">
                             <g:submitButton name="sub" value="${message(code:'default.button.search.label')}" class="btn btn-small btn-primary" />
                             <input type="button" name='exportBtn' id="exportBtn" value="${message(code:'default.button.export.label')}" class="btn btn-small btn-inverse"   />
-                            <input type="button" name='printBtn' id="printBtn" value="${message(code:'default.button.print.label')}" class="btn btn-small btn-info"   />
 
                         </div>
                     </g:form>
@@ -133,10 +132,31 @@
                                         <i class="icon-zoom-in icon-white"></i>
                                         <g:message code="default.button.view.label" default="View" />
                                     </g:link>
-                                <g:link class="btn btn-success" action="xy" id="${preppyInstance.id}">
-                                    <i class="icon-zoom-in  icon-white"></i>
-                                    <g:message code="preppy.xy.label" default="Xy" />
-                                </g:link>
+                                    <g:link class="btn btn-primary" action="xy" id="${preppyInstance.id}">
+                                        <i class="icon-zoom-in  icon-white"></i>
+                                        <g:message code="preppy.xy.label" default="Xy" />
+                                    </g:link>
+                                <sec:ifNotGranted roles="${Role.AUTHORITY_TEACHER}">
+                                    <g:link class="btn btn-success" action="xyPrint" id="${preppyInstance.id}">
+                                        <i class="icon-zoom-in  icon-white"></i>
+                                        <g:message code="default.button.print.label" default="Xy" />
+                                    </g:link>
+                                </sec:ifNotGranted>
+                                <sec:ifAllGranted roles="${Role.AUTHORITY_TEACHER}">
+                                    <g:if test="${preppyInstance.reviewStatus?.name() == com.baoming.Preppy.ReviewStatus.NO_AUDIT.name()}">
+                                        <g:link class="btn btn-success" action="xy" id="${preppyInstance.id}">
+                                            <i class="icon-zoom-in  icon-white"></i>
+                                            <g:message code="default.button.preview.label" default="Xy" />
+                                        </g:link>
+                                    </g:if>
+                                    <g:else>
+                                        <g:link class="btn btn-success" action="xyPrint" id="${preppyInstance.id}">
+                                            <i class="icon-zoom-in  icon-white"></i>
+                                            <g:message code="default.button.print.label" default="Xy" />
+                                        </g:link>
+                                    </g:else>
+                                </sec:ifAllGranted>
+
                                 <sec:ifNotGranted roles="${Role.AUTHORITY_FINANCE}">
                                     <g:link class="btn btn-info" action="edit" id="${preppyInstance.id}">
                                         <i class="icon-edit icon-white"></i>

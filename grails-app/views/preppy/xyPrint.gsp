@@ -173,7 +173,14 @@
         <td colspan="3" align="left" valign="top" style="padding-left:30px;"><table width="720" border="0" align="center" cellpadding="0" cellspacing="0" style="margin-top:10px;">
             <tr>
                 <td width="134" valign="top" >★ <strong>需要提交的材料</strong>：</td>
-                <td width="606" height="100" valign="top" >&nbsp;</td>
+                <td width="606" height="100" valign="top" >
+                    <g:if test="${preppyInstance.reviewStatus.name() != com.baoming.Preppy.ReviewStatus.NO_AUDIT.name()}">
+                        <g:set var="rsid" value="%${preppyInstance.reviewStatus.id}%"/>
+                        <g:each in="${com.baoming.Material.findAllByReviewStatusLike(rsid)}" var="material">
+                            <div>${material.content}</div>
+                        </g:each>
+                    </g:if>
+                </td>
             </tr>
         </table></td>
     </tr>

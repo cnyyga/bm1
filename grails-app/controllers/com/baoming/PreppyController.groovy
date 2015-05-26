@@ -31,6 +31,10 @@ class PreppyController {
         def cal = Calendar.instance
         def startDate
         def endDate
+        params.max = Math.min(max ?: 10, 100)
+        params.sort = "id";
+        params.order = "desc"
+
         if (!year) {
             cal.set(Calendar.DAY_OF_YEAR, 1)
             cal.set(Calendar.MONTH, 0)
@@ -70,7 +74,6 @@ class PreppyController {
             lt('dateCreated', endDate)
         }
 
-        params.max = Math.min(max ?: 10, 100)
         [preppyInstanceList: list, preppyInstanceTotal: total]
     }
 
@@ -227,7 +230,6 @@ class PreppyController {
         if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)) {
             def userId = springSecurityService.authentication.principal?.id
             def teacher = Teacher.get(userId)
-            preppyInstance.teacher = teacher
             preppyInstance = Preppy.findByIdAndTeacher(id, teacher)
         } else {
             preppyInstance = Preppy.get(id)
