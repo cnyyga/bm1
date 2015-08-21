@@ -136,6 +136,37 @@ class ApiController {
 
     }
 
+    def img1(){
+        def filename = params.path
+        if(!filename){
+            return
+        }
+        println(filename)
+        filename = filename.decodeURL()
+        println(filename)
+
+        def storeFile = grailsApplication.config.baoming.image.storage.path + '/' + filename
+        def f = new File(storeFile)
+        if(!f.exists()){
+            return
+        }
+        def inputStream = new FileInputStream(f)
+        if(!inputStream) {
+            return
+        }
+        def out = response.outputStream
+
+        try {
+            IOUtils.copy(inputStream,out)
+        } catch (IOException e) {
+
+        }finally{
+            IOUtils.closeQuietly(inputStream)
+            IOUtils.closeQuietly(out)
+        }
+
+    }
+
     def excel(){
         def path = new File("d:/abc1.xls")
         try {

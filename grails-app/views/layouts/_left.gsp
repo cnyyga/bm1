@@ -19,7 +19,6 @@
             <sec:access controller="student">
                 <sec:ifAllGranted roles="${Role.AUTHORITY_ADMIN}">
                     <li class="${(params.controller == 'student'&& params.action != 'createNew'&& params.action != 'imp' && params.regType!= '0')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'student' ,params: [regType:1])}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'default.manager.label',args: ["${message(code: 'student.label')}"])}</span></a></li>
-                    <li class="${(params.controller == 'student'&& params.action != 'createNew'&& params.action != 'imp' && params.regType== '0')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'student' ,params: [regType:0])}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'default.manager.label',args: ["${message(code: 'student.reg.label')}"])}</span></a></li>
                 </sec:ifAllGranted>
                 <sec:ifAllGranted roles="${Role.AUTHORITY_TEACHER}">
                     <li class="${(params.controller == 'student'&& params.action != 'createNew'&& params.action != 'imp')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'student')}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'default.manager.label',args: ["${message(code: 'student.label')}"])}</span></a></li>
@@ -27,14 +26,16 @@
                 <sec:ifAllGranted roles="${Role.AUTHORITY_FINANCE}">
                     <li class="${(params.controller == 'student'&& params.action != 'createNew'&& params.action != 'imp' && params.regType!= '0')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'student')}"><i class="icon-user"></i><span class="hidden-tablet">
                         <g:message code='student.label' /><g:message code='student.review.label' /></span></a></li>
-                    <li class="${(params.controller == 'student'&& params.action != 'createNew'&& params.action != 'imp' && params.regType== '0')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'student' ,params: [regType:0])}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'default.manager.label',args: ["${message(code: 'student.reg.label')}"])}</span></a></li>
                 </sec:ifAllGranted>
             </sec:access>
             <sec:access controller="preppy">
-                <li class="${(params.controller == 'preppy' && params.action != 'create')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'preppy')}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'preppy.label')}${message(code: 'student.review.label')}</span></a></li>
+                <li class="${(params.controller == 'preppy' && params.action != 'create')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'preppy')}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'default.manager.label',args: ["${message(code: 'preppy.label')}"])}</span></a></li>
             </sec:access>
             <sec:access controller="medium">
                 <li class="${(params.controller == 'medium' && params.action != 'create')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'medium')}"><i class="icon-user"></i><span class="hidden-tablet">  ${message(code: 'default.manager.label',args: ["${message(code: 'medium.label')}"])}</span></a></li>
+            </sec:access>
+            <sec:access controller="student">
+            <li class="${(params.controller == 'student'&& params.action != 'createNew'&& params.action != 'imp' && params.regType== '0')?'active':''}"><a class="ajax-link" href="${createLink(controller: 'student' ,params: [regType:0])}"><i class="icon-user"></i><span class="hidden-tablet"> ${message(code: 'default.manager.label',args: ["${message(code: 'student.reg.label')}"])}</span></a></li>
             </sec:access>
 
             <sec:access url="/student/imp" >
@@ -53,6 +54,7 @@
             <sec:access controller="statistics">
                 <li class="${params.action == 'departmentStat'?'active':''}"><a class="ajax-link" href="${createLink(controller: 'statistics',action: 'departmentStat')}"><i class="icon-tag"></i><span class="hidden-tablet"> ${message(code: 'statistics.department.label')}</span></a></li>
             </sec:access>
+            <li class="${params.controller == 'workPlan'?'active':''}"><a class="ajax-link" href="${createLink(controller: 'workPlan')}"><i class="icon-flag"></i><span class="hidden-tablet">  ${message(code: 'workPlan.label')}</span></a></li>
 
             <sec:ifAllGranted roles="${Role.AUTHORITY_ADMIN}">
             <li class="nav-header hidden-tablet">
@@ -71,6 +73,7 @@
                 <sec:access controller="department">
                     <li class="${params.controller == 'department'?'active':''}"><a class="ajax-link" href="${createLink(controller: 'department')}"><i class="icon-user"></i><span class="hidden-tablet">  ${message(code: 'default.manager.label',args: ["${message(code: 'department.label')}"])}</span></a></li>
                 </sec:access>
+
 
             <li class="nav-header hidden-tablet">
                 ${message(code: 'default.manager.label',args: ["${message(code: 'default.menu.sys.label')}"])}

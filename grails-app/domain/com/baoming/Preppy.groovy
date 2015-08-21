@@ -48,6 +48,14 @@ class Preppy {
     String qq
     String tel
     Teacher teacher  //推荐老师
+    ///////
+    String hkbPath //户口本首页
+    String hkbksyPath//户口本考生页
+    String cardPhotoPath//身份证照片
+    String byzsPath//高中（中职）毕业证书
+    String xjzmPath//学籍证明（本省在校中职生）
+
+    String remark
 
     Date dateCreated
     Date lastUpdated
@@ -76,8 +84,17 @@ class Preppy {
         collegeType nullable: true
         protocolCode nullable: true
         preppyPlan nullable: true
+        hkbPath nullable: true
+        hkbksyPath nullable: true
+        cardPhotoPath nullable: true
+        byzsPath nullable: true
+        xjzmPath nullable: true
+        remark nullable: true
     }
 
+    static mapping = {
+        remark sqlType: 'text'
+    }
     enum CollegeType {
         HIGH(1,'普高'),
         VOCATION (2,'中职')
@@ -163,7 +180,8 @@ class Preppy {
         NO_AUDIT(1,'未审核'),
         JSPG(2,'参加江苏省普高注册入学'),
         JSZZ(3,'参加江苏省中职注册入学') ,
-        GJSZZ(4,'挂江苏中职学籍')
+        GJSZZ(4,'挂江苏中职学籍'),
+        NO_PASS(5,'审核未通过')
 
         Integer id
         String label

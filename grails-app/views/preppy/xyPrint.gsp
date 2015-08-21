@@ -174,8 +174,8 @@
             <tr>
                 <td width="134" valign="top" >★ <strong>需要提交的材料</strong>：</td>
                 <td width="606" height="100" valign="top" >
-                    <g:if test="${preppyInstance.reviewStatus.name() != com.baoming.Preppy.ReviewStatus.NO_AUDIT.name()}">
-                        <g:set var="rsid" value="%${preppyInstance.reviewStatus.id}%"/>
+                    <g:if test="${preppyInstance.reviewStatus?.name() != com.baoming.Preppy.ReviewStatus.NO_AUDIT.name()}">
+                        <g:set var="rsid" value="%${preppyInstance.reviewStatus?.id}%"/>
                         <g:each in="${com.baoming.Material.findAllByReviewStatusLike(rsid)}" var="material">
                             <div>${material.content}</div>
                         </g:each>
@@ -187,7 +187,13 @@
     <tr>
         <td colspan="3" align="left" style="padding:0 0 30px 30px;"><table width="720" border="0" align="center" cellpadding="0" cellspacing="0" style="margin-top:10px;">
             <tr>
-                <td width="350" valign="top" >甲方（盖章）：<br />              推&nbsp;&nbsp;&nbsp;&nbsp;荐&nbsp;&nbsp;&nbsp;&nbsp; 人：${preppyInstance.teacher?.name}</td>
+                <td width="350" valign="top" >甲方（盖章）：<br />              推&nbsp;&nbsp;&nbsp;&nbsp;荐&nbsp;&nbsp;&nbsp;&nbsp; 人：<%
+                    try{
+                        preppyInstance.teacher?.name
+                    }catch (Exception e){
+
+                    }
+                %></td>
                 <td valign="top" >乙 方&nbsp;&nbsp;&nbsp;学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;生： &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 家&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;长：<br />
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;家庭住址：${preppyInstance.address}</td>
             </tr>
@@ -199,7 +205,7 @@
             <tr>
                 <td width="281" height="45" valign="middle" ><span >学生手机：${preppyInstance.phone}</td>
                 <td width="265" valign="middle" >家长手机：${preppyInstance.parentPhone}</td>
-                <g:if test="${preppyInstance.reviewStatus.name() != com.baoming.Preppy.ReviewStatus.NO_AUDIT}">
+                <g:if test="${preppyInstance.reviewStatus?.name() != com.baoming.Preppy.ReviewStatus.NO_AUDIT}">
                     <td width="194" valign="middle" >签订日期：<g:formatDate date="${preppyInstance.lastUpdated}" format="yyyy年MM月dd日"/> </td>
                 </g:if>
                 <g:else>

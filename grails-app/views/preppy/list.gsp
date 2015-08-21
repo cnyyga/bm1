@@ -6,6 +6,9 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'preppy.label', default: 'Preppy')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
+        <g:javascript src="tj.js"/>
+        <g:javascript src="student-review.js"/>
+
         <script>
             $(function(){
                 $("#exportBtn").click(function(){
@@ -60,6 +63,36 @@
                             <label class="search-lb"><g:message code="student.name.label"/> ：</label>
                             <g:textField name="name"  value="${params.name}"/>
                         </div>
+                        <div class="bm-search">
+                            <label class="search-lb"><g:message code="preppy.plan.label"/> ：</label>
+                            <g:select name="planId" from="${com.baoming.PreppyPlanDetail.findAll()*.plan.unique()}" optionKey="id" optionValue="name" value="${params.planId}" noSelection="['':'']"/>
+                        </div>
+                        <div class="bm-search">
+                            <label class="search-lb"><g:message code="preppy.teacher.label"/> ：</label>
+
+
+                            <%
+                                def userService = grailsApplication.mainContext.getBean("userService");
+                            %>
+                            <select id="combobox" name="teacherId">
+                                <option value="">请选择</option>
+
+                                <g:set var="studTeacherId" value="${params.teacherId}"/>
+                                <g:each in="${userService.getTeachers()}" var="teah">
+                                    <g:if test="${studTeacherId == teah.id}">
+                                        <option value="${teah.id}" title="${teah.name}${com.bm.utils.PinyinUtils.getPinyin(teah.name)}" selected="true" >${teah.name}</option>
+                                    </g:if>
+                                    <g:else>
+                                        <option value="${teah.id}" title="${teah.name}${com.bm.utils.PinyinUtils.getPinyin(teah.name)}" >${teah.name}</option>
+                                    </g:else>
+                                </g:each>
+                            </select>
+                        </div>
+                        <div class="bm-search">
+                            <label class="search-lb"><g:message code="preppy.reviewStatus.label"/> ：</label>
+                            <g:select name="reviewStatus" from="${com.baoming.Preppy$ReviewStatus?.values()}"  optionValue="label" noSelection="['':'']" value="${params.reviewStatus}"/>
+
+                        </div>
 
                         <div class="span2">
                             <g:submitButton name="sub" value="${message(code:'default.button.search.label')}" class="btn btn-small btn-primary" />
@@ -81,6 +114,9 @@
                         <th><g:message code="preppy.birthday.label" default="number" /></th>
 
                         <th><g:message code="preppy.studentCateories.label" default="collegeType" /></th>
+                        <th><g:message code="preppy.teacher.label" default="teacher" /></th>
+
+                        <th><g:message code="preppy.reviewStatus.label" default="reviewStatus" /></th>
 
                         <th>报警</th>
                         
@@ -100,6 +136,19 @@
                             <td class="center"><g:formatDate date="${preppyInstance.birthday}" format="yyyy-MM-dd"/> </td>
                             
                             <td class="center">${preppyInstance.studentCateories?.label}</td>
+                            <td class="center">
+                                <%
+                                    try{
+                                        println(preppyInstance.teacher?.name)
+                                    }catch (e){}
+                                    %>
+                            </td>
+
+                            <td class="center" id="studentTd${preppyInstance.id}">
+                                <span class="label  ${preppyInstance.reviewStatus == Preppy.ReviewStatus.NO_AUDIT ?'label-important':(preppyInstance.reviewStatus == Preppy.ReviewStatus.GJSZZ?'label-success':'label-warning')}">
+                                    ${preppyInstance.reviewStatus?.label?:message(code: 'home.student.auditing.message')}
+                                </span>
+                               </td>
 
                             <td class="center red">
                               <g:if test="${preppyInstance.studentCateories.name() == com.baoming.Preppy.StudentCateories.SG.name()}">
@@ -168,7 +217,12 @@
                                         <g:message code="default.button.delete.label" default="Delete" />
                                     </g:link>
                                 </sec:ifNotGranted>
-
+                                <sec:ifNotGranted roles="${Role.AUTHORITY_TEACHER}">
+                                    <g:link class="btn btn-info btn-stu-review" action="ajaxAudit" rel="${preppyInstance.id}" id="${preppyInstance.id}" params="${[t:'au']}">
+                                        <i class="icon-edit icon-white"></i>
+                                        <g:message code="student.review.label" default="Review" />
+                                    </g:link>
+                                </sec:ifNotGranted>
                             </td>
                         </tr>
                     </g:each>
@@ -183,6 +237,29 @@
     </div><!--/row-->
 
 
-		</div>
+    <div id="reviewModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel"><g:message code="student.review.label"/> </h3>
+        </div>
+        <div class="modal-body">
+            <div id="reviewFormContent">
+                <sec:ifAnyGranted roles="${com.baoming.account.Role.AUTHORITY_ADMIN},${com.baoming.account.Role.AUTHORITY_FINANCE}">
+                    <div class="control-group">
+                        <label class="control-label" for="reviewStatus">
+                            <g:message code="student.review.status.label" default="account" />
+                        </label>
+                        <div class="controls">
+                            <g:select name="reviewStatus" from="${Preppy.ReviewStatus.values()}"   optionValue="label"></g:select>
+                        </div>
+                    </div>
+                </sec:ifAnyGranted>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true"><g:message code="default.button.close.label"/></button>
+            <button class="btn btn-primary save-student-review" data-loading-text="Loading..."><g:message code="default.button.update.label"/></button>
+        </div>
+    </div>
 	</body>
 </html>

@@ -35,6 +35,7 @@ class PreppyPlanController {
                 PreppyPlanDetail.create(preppyPlanInstance,plan)
             }
         }
+        planService.clearPreppyPlans();
         flash.message = message(code: 'default.created.message', args: [message(code: 'preppyPlan.label', default: 'PreppyPlan'), preppyPlanInstance.id])
         redirect(action: "show", id: preppyPlanInstance.id)
     }
@@ -93,6 +94,7 @@ class PreppyPlanController {
                 PreppyPlanDetail.create(preppyPlanInstance,plan)
             }
         }
+        planService.clearPreppyPlans();
         flash.message = message(code: 'default.updated.message', args: [message(code: 'preppyPlan.label', default: 'PreppyPlan'), preppyPlanInstance.id])
         redirect(action: "show", id: preppyPlanInstance.id)
     }

@@ -21,7 +21,7 @@ class MaterialController {
 
     def save() {
         def materialInstance = new Material(params)
-        def reviewStatus1 = params.reviewStatus1;
+        def reviewStatus1 = params.list('reviewStatus1');
         materialInstance.reviewStatus =  reviewStatus1.join(",");
         materialInstance.validate()
         if (!materialInstance.save(flush: true)) {

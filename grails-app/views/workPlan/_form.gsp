@@ -1,7 +1,11 @@
 <%@ page import="com.baoming.WorkPlan" %>
-
-
-
+<style>
+    textarea{
+        width: 80%;
+    }
+</style>
+<h2 style="text-align: center;margin: 15px auto;padding: 0;">招生老师定期工作汇报及工作计划</h2>
+<h4>一、基本信息</h4>
 <div class="control-group">
 	<label class="control-label" for="name">
 		<g:message code="workPlan.name.label" default="Name" />
@@ -39,12 +43,12 @@
 
     <div class="controls">
 	<g:datePicker name="startDate" precision="day" relativeYears="[0..1]"  value="${workPlanInstance?.startDate}"  />
-        至	<g:datePicker name="endDate" precision="day" relativeYears="[0..1]" value="${workPlanInstance?.endDate}"  />
+        <br/>至<br/>	<g:datePicker name="endDate" precision="day" relativeYears="[-1..1]" value="${workPlanInstance?.endDate}"  />
 
     </div>
 </div>
 
-
+<h4>二、【联系中学情况】 </h4>
 <div class="control-group">
 	<label class="control-label" for="middleSchools">
 		<g:message code="workPlan.middleSchools.label" default="Middle Schools" />
@@ -71,7 +75,7 @@
 	</label>
 
     <div class="controls">
-	<g:textField name="result" value="${workPlanInstance?.result}"/>
+        <g:textArea name="result" rows="3" cols="" >${workPlanInstance?.result}</g:textArea>
     </div>
 </div>
 
@@ -81,9 +85,12 @@
 	</label>
 
     <div class="controls">
-	<g:textField name="opinion" value="${workPlanInstance?.opinion}"/>
+    <g:textArea name="opinion" rows="3" cols="">${workPlanInstance?.opinion}</g:textArea>
+
     </div>
 </div>
+
+<h4>三、【材料发放情况】  </h4>
 
 <div class="control-group">
 	<label class="control-label" for="materialObject">
@@ -119,7 +126,7 @@
 	</label>
 
     <div class="controls">
-	<g:textField name="questions" value="${workPlanInstance?.questions}"/>
+    <g:textArea name="questions" rows="3" cols="">${workPlanInstance?.questions}</g:textArea>
     </div>
 </div>
 
@@ -129,7 +136,9 @@
 	</label>
 
     <div class="controls">
-	<g:field name="hasOpinion" type="number" value="${workPlanInstance.hasOpinion}"/>
+
+        <g:select name="hasOpinion" from="[[id:0,label:'无'],[id:1,label:'有']]" optionKey="id" optionValue="label" value="${workPlanInstance.hasOpinion}"/>
+
     </div>
 </div>
 
@@ -139,9 +148,15 @@
 	</label>
 
     <div class="controls">
-	<g:textField name="pic" value="${workPlanInstance?.pic}"/>
+	<g:hiddenField name="pic" value="${workPlanInstance?.pic}"/>
+        <input type="file" name="fileInp" />
+        <g:if test="${workPlanInstance?.pic}">
+            <img src="${createLink(controller: 'api',action: 'img',id: workPlanInstance?.pic)}" style="max-height:80px"/>
+        </g:if>
     </div>
 </div>
+
+<h4>四、【本周期工作开支】   </h4>
 
 <div class="control-group">
 	<label class="control-label" for="carFare">
@@ -193,13 +208,16 @@
     </div>
 </div>
 
+<h4>五、【其他工作】    </h4>
+
 <div class="control-group">
 	<label class="control-label" for="attendSeminar">
 		<g:message code="workPlan.attendSeminar.label" default="Attend Seminar" />
 	</label>
 
     <div class="controls">
-	<g:field name="attendSeminar" type="number" value="${workPlanInstance.attendSeminar}"/>
+        <g:select name="attendSeminar" from="[[id:0,label:'无'],[id:1,label:'有']]" optionKey="id" optionValue="label" value="${workPlanInstance.attendSeminar}"/>
+
     </div>
 </div>
 
@@ -209,7 +227,7 @@
 	</label>
 
     <div class="controls">
-	<g:textField name="workPlan" value="${workPlanInstance?.workPlan}"/>
+    <g:textArea name="workPlan" rows="3" cols="">${workPlanInstance?.workPlan}</g:textArea>
     </div>
 </div>
 

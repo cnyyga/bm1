@@ -113,8 +113,21 @@
                         <div class="controls">
 
                             <span class="property-value" aria-labelledby="studentDistrict-label">
-                                ${preppyInstance?.studentProvince?.name}${preppyInstance?.studentCity?.name} ${preppyInstance?.studentDistrict?.name}</span>
 
+                            <%
+                                try {
+                                    out.print(preppyInstance?.studentProvince?.name)
+                                } catch (Exception e) {
+                                }
+                                try {
+                                    out.print(preppyInstance?.studentCity?.name)
+                                } catch (Exception e) {
+                                }
+                                try {
+                                    out.print(preppyInstance?.studentDistrict?.name)
+                                } catch (Exception e) {
+                                }
+                            %></span>
                         </div>
                     </div>
                 </g:if>
@@ -297,6 +310,84 @@
                         </div>
                     </div>
                 </g:if>
+
+                    <div class="control-group">
+                        <label class="control-label">
+                            <g:message code="preppy.hkbPath.label"/>
+                        </label>
+                        <div class="controls">
+
+                            <span class="property-value" aria-labelledby="qq-label">
+                                <g:if test="${preppyInstance?.hkbPath}">
+                                <g:link action="img1"  controller="api" params="[path:preppyInstance?.hkbPath]" target="_blank">
+                                    <img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance?.hkbPath])}" style="height: 100px;"/>
+                                </g:link>
+                                </g:if>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            <g:message code="preppy.hkbksyPath.label"/>
+                        </label>
+                        <div class="controls">
+
+                            <span class="property-value" aria-labelledby="qq-label">
+                                <g:if test="${preppyInstance?.hkbksyPath}">
+                                    <g:link action="img1"  controller="api"  params="[path:preppyInstance?.hkbksyPath]"  target="_blank">
+                                        <img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance?.hkbksyPath])}" style="height: 100px;"/>
+                                    </g:link>
+                                </g:if>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            <g:message code="preppy.cardPhotoPath.label"/>
+                        </label>
+                        <div class="controls">
+
+                            <span class="property-value" aria-labelledby="qq-label">
+                                <g:if test="${preppyInstance?.cardPhotoPath}">
+                                    <g:link action="img1"  controller="api" params="[path:preppyInstance?.cardPhotoPath]" target="_blank">
+                                        <img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance?.cardPhotoPath])}" style="height: 100px;"/>
+                                    </g:link>
+                                </g:if>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            <g:message code="preppy.byzsPath.label"/>
+                        </label>
+                        <div class="controls">
+
+                            <span class="property-value" aria-labelledby="qq-label">
+                                <g:if test="${preppyInstance?.byzsPath}">
+                                    <g:link action="img1"  controller="api"  params="[path:preppyInstance?.byzsPath]"  target="_blank">
+                                        <img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance?.byzsPath])}" style="height: 100px;"/>
+                                    </g:link>
+                                </g:if>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            <g:message code="preppy.xjzmPath.label"/>
+                        </label>
+                        <div class="controls">
+
+                            <span class="property-value" aria-labelledby="qq-label">
+                                <g:if test="${preppyInstance?.xjzmPath}">
+                                    <g:link action="img1"  controller="api"  params="[path:preppyInstance?.xjzmPath]"  target="_blank">
+                                        <img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance?.xjzmPath])}" style="height: 100px;"/>
+                                    </g:link>
+                                </g:if>
+                            </span>
+                        </div>
+                    </div>
+
+
                     <sec:ifAllGranted roles="ROLE_ADMIN">
                         <g:if test="${preppyInstance?.reviewStatus}">
                             <div class="control-group">
@@ -305,7 +396,9 @@
                                 </label>
                                 <div class="controls">
 
-                                    <span class="property-value" aria-labelledby="reviewStatus-label">${preppyInstance.reviewStatus?.label}</span>
+                                    <span class="property-value" aria-labelledby="reviewStatus-label">
+                                        ${preppyInstance.reviewStatus?.label?:message(code: 'home.student.auditing.message')}
+                                    </span>
 
                                 </div>
                             </div>
@@ -357,6 +450,16 @@
                         </div>
                     </g:if>
                         </sec:ifAllGranted>
+                    <div class="control-group">
+                        <label class="control-label">
+                            <g:message code="preppy.remark.label" default="remark" />
+                        </label>
+                        <div class="controls">
+                            <span class="property-value" aria-labelledby="teacher-label">
+                                ${preppyInstance.remark}
+                            </span>
+                        </div>
+                    </div>
                     <div class="control-group">
                         <label class="control-label">
                             <g:message code="default.dateCreated.label" default="dateCreated" />

@@ -202,9 +202,20 @@
                             </td>
 
                             <td class="center">
-                                ${studentInstance.province?.name}
-                                ${studentInstance.city?.name}
-                                ${studentInstance.district?.name}
+                                <%
+                                    try {
+                                        out.print(studentInstance?.province?.name)
+                                    } catch (Exception e) {
+                                    }
+                                    try {
+                                        out.print(studentInstance?.city?.name)
+                                    } catch (Exception e) {
+                                    }
+                                    try {
+                                        out.print(studentInstance?.district?.name)
+                                    } catch (Exception e) {
+                                    }
+                                %>
                             </td>
 
                             <td class="center">${studentInstance.admission?.label?: com.baoming.account.Student.Admission.NO.label}</td>
@@ -235,7 +246,7 @@
 
                             </sec:ifAllGranted>
                             <sec:ifAllGranted roles="${Role.AUTHORITY_FINANCE}">
-                                <g:if test="${params.regType == 1}">
+                                <g:if test="${params.regType == 1 || params.regType == '1'}">
                                 <g:link class="btn btn-info btn-stu-review" action="ajaxAudit" rel="${studentInstance.id}" id="${studentInstance.id}" params="${[t:'au']}">
                                     <i class="icon-edit icon-white"></i>
                                     <g:message code="student.review.label" default="Review" />

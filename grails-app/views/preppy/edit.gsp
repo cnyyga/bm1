@@ -68,7 +68,7 @@
                     <h2><i class="icon-edit"></i> <g:message code="default.edit.label" args="[entityName]" /></h2>
                 </div>
                 <div class="box-content">
-                    <g:form class="form-horizontal" action="update" >
+                    <g:uploadForm class="form-horizontal" action="update" >
                     <g:hiddenField name="id" value="${preppyInstance?.id}" />
                     <g:hiddenField name="version" value="${preppyInstance?.version}" />
                     <fieldset>
@@ -132,7 +132,7 @@
                             </sec:ifAllGranted>
                         </div>
                     </fieldset>
-                    </g:form>
+                    </g:uploadForm>
 
                 </div>
             </div><!--/span-->

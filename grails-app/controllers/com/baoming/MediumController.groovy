@@ -4,7 +4,10 @@ import com.baoming.account.Role
 import com.baoming.account.Student
 import com.baoming.account.Teacher
 import com.baoming.account.User
+import grails.converters.JSON
+import grails.plugin.jxl.builder.ExcelBuilder
 import org.apache.commons.io.FileUtils
+import org.apache.commons.io.IOUtils
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 import org.springframework.dao.DataIntegrityViolationException
 
@@ -31,6 +34,9 @@ class MediumController {
         def cal = Calendar.instance
         def startDate
         def endDate
+        params.sort = params.sort?:'id'
+        params.order = params.order?:'desc'
+
         if (!year) {
             cal.set(Calendar.DAY_OF_YEAR, 1)
             cal.set(Calendar.MONTH, 0)
@@ -237,5 +243,123 @@ class MediumController {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'medium.label', default: 'Medium'), id])
             redirect(action: "show", id: id)
         }
+    }
+
+    def exp() {
+        def userId = springSecurityService.authentication.principal?.id
+        def year = params.date('year', 'yyyy')
+        def cal = Calendar.instance
+        def startDate
+        def endDate
+        if (!year) {
+            cal.set(Calendar.DAY_OF_YEAR, 1)
+            cal.set(Calendar.MONTH, 0)
+            startDate = cal.time
+            cal.add(Calendar.YEAR, 1)
+            endDate = cal.time
+        } else {
+            cal.time = year
+            cal.add(Calendar.YEAR, 1)
+            startDate = year
+            endDate = cal.time
+        }
+        println(startDate?.format('yyyy-MM-dd HH:mm:ss'))
+        println(endDate?.format('yyyy-MM-dd HH:mm:ss'))
+
+        def teacher
+        if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)) {
+            teacher = Teacher.get(userId)
+        } else {
+            teacher = Teacher.get(params.long('teacherId'))
+        }
+        def list = Medium.createCriteria().list {
+            if (teacher){
+                eq('teacher', teacher)
+            }
+            ge('dateCreated', startDate)
+            lt('dateCreated', endDate)
+        }
+
+        def titles = [message(code: 'medium.name.label'),message(code: 'medium.code.label'),message(code: 'medium.number.label'),
+                      message(code: 'medium.gender.label'),message(code: 'mediumPlan.label'),message(code: 'medium.plan.label'),
+                      message(code: 'medium.district.label'),message(code: 'medium.studentDistrict.label'),message(code: 'medium.teacher.label'),
+                      message(code: 'default.dateCreated.label')];
+        def outputStream
+        try {
+            outputStream = response.outputStream;
+            response.setContentType("APPLICATION/OCTET-STREAM");
+            response.setHeader("Content-Disposition", "attachment; filename=\""+new String("${message(code: 'medium.label')}.xls".getBytes('gbk'),"ISO8859_1")+"\"");
+            new ExcelBuilder().workbook(outputStream) {
+                sheet {
+                    titles.eachWithIndex {e,i->
+                        cell(i,0,e).bold()
+                    }
+                    list.eachWithIndex { de, k ->
+                        def kk = k+1
+                        def district = de.province?.name?:''
+                        district += de.city?.name?:''
+                        district += de.district?.name?:''
+
+                        def studentDistrict = de.studentProvince?.name?:''
+                        studentDistrict += de.studentCity?.name?:''
+                        studentDistrict += de.studentDistrict?.name?:''
+
+
+                        cell(0,kk,de.name?:'')
+                        cell(1,kk,de.code?:'')
+                        cell(2,kk,de.number?:'')
+                        cell(3,kk,de.gender?.label?:'')
+                        cell(4,kk,de.mediumPlan?.name?:'')
+                        try {
+                            cell(5,kk,de.plan?.name?:'')
+                        } catch (e) {
+                            cell(5,kk,'')
+                        }
+                        cell(6,kk,district?:'')
+                        cell(7,kk,studentDistrict?:'')
+                        def teacherNmae=""
+                        try {
+                            teacherNmae = de.teacher?.name
+                        } catch (e) {
+                        }
+                        cell(8,kk,teacherNmae)
+                        cell(9,kk,de.lastUpdated.format('yyyy-MM-dd HH:mm:ss'))
+                    }
+                }
+            }
+            //
+        } catch (Exception e) {
+            flash.message = message(code: 'download.null.message')
+            log.error("medium exprot errors:${e.message}",e)
+        } finally {
+            IOUtils.closeQuietly(outputStream)
+        }
+        return
+    }
+
+    def ajaxAudit(Long id) {
+        if(!id) {
+            render(([status:'0'] as JSON) as String)
+            return
+        }
+        def mediumInstance = Medium.get(id)
+        if (!mediumInstance) {
+            render(([status:'0'] as JSON) as String)
+            return
+        }
+        if (params.reviewStatus == Student.ReviewStatus.NO_AUDIT.name()) {
+            render(([status: '1'] as JSON) as String)
+            return
+        }
+        def userId = springSecurityService.authentication.principal?.id
+        mediumInstance.reviewDate = new Date()
+        mediumInstance.reviewPerson = User.get(userId as Long)
+        mediumInstance.reviewStatus = Student.ReviewStatus."${params.reviewStatus}"
+
+        if (!mediumInstance.save()) {
+            render(([status: '0'] as JSON) as String)
+            return
+        }
+        render(([status: '1', reviewStatusId:mediumInstance.reviewStatus?.id,reviewStatusLab:mediumInstance.reviewStatus?.label] as JSON) as String)
     }
 }

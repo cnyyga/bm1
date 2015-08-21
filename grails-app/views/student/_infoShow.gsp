@@ -139,9 +139,20 @@
     <div class="controls">
 
         <span class="property-value" aria-labelledby="district-label">
-            ${studentInstance?.province?.name}
-            ${studentInstance?.city?.name}
-            ${studentInstance?.district?.name}</span>
+            <%
+                try {
+                    out.print(studentInstance?.province?.name)
+                } catch (Exception e) {
+                }
+                try {
+                    out.print(studentInstance?.city?.name)
+                } catch (Exception e) {
+                }
+                try {
+                    out.print(studentInstance?.district?.name)
+                } catch (Exception e) {
+                }
+            %></span>
 
     </div>
 </div>

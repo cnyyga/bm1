@@ -236,7 +236,105 @@
     </div>
 </div>
 
-<sec:ifAllGranted roles="ROLE_ADMIN">
+<div class="control-group">
+    <label class="control-label" for="hkbPathInp">
+        <g:message code="preppy.hkbPath.label" default="Voucher Path" />
+    </label>
+
+    <div class="controls">
+        <g:if test="${preppyInstance?.hkbPath}">
+            <div style="position: relative;height: 100px;">
+                <g:link action="img1"  controller="api" params="[path:preppyInstance?.hkbPath]" target="_blank">
+                    <img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance?.hkbPath])}" style="height: 100px;"/>
+                </g:link>
+            </div>
+        </g:if>
+        <g:hiddenField name="hkbPath" value="${preppyInstance?.hkbPath}"/>
+        <input type="file" name="hkbPathInp" id="hkbPathInp" />
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label" for="hkbksyPathInp">
+        <g:message code="preppy.hkbksyPath.label" default="Voucher Path" />
+    </label>
+
+    <div class="controls">
+        <g:if test="${preppyInstance?.hkbksyPath}">
+            <div style="position: relative;height: 100px;">
+                <g:link action="img1"  controller="api"  params="[path:preppyInstance?.hkbksyPath]"  target="_blank">
+                    <img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance?.hkbksyPath])}" style="height: 100px;"/>
+                </g:link>
+            </div>
+        </g:if>
+        <g:hiddenField name="hkbksyPath" value="${preppyInstance?.hkbksyPath}"/>
+        <input type="file" name="hkbksyPathInp" id="hkbksyPathInp" />
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label" for="cardPhotoPathInp">
+        <g:message code="preppy.cardPhotoPath.label" default="Voucher Path" />
+    </label>
+
+    <div class="controls">
+        <g:if test="${preppyInstance?.cardPhotoPath}">
+            <div style="position: relative;height: 100px;">
+                <g:link action="img1"  controller="api" params="[path:preppyInstance?.cardPhotoPath]" target="_blank">
+                    <img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance?.cardPhotoPath])}" style="height: 100px;"/>
+                </g:link>
+            </div>
+        </g:if>
+        <g:hiddenField name="cardPhotoPath" value="${preppyInstance?.cardPhotoPath}"/>
+        <input type="file" name="cardPhotoPathInp" id="cardPhotoPathInp" />
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label" for="cardPhotoPathInp">
+        <g:message code="preppy.byzsPath.label" default="Voucher Path" />
+    </label>
+
+    <div class="controls">
+        <g:if test="${preppyInstance?.byzsPath}">
+            <div style="position: relative;height: 100px;">
+                <g:link action="img1"  controller="api"  params="[path:preppyInstance?.byzsPath]"  target="_blank">
+                    <img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance?.byzsPath])}" style="height: 100px;"/>
+                </g:link>
+            </div>
+        </g:if>
+        <g:hiddenField name="byzsPath" value="${preppyInstance?.byzsPath}"/>
+        <input type="file" name="byzsPathInp" id="byzsPathInp" />
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label" for="cardPhotoPathInp">
+        <g:message code="preppy.xjzmPath.label" default="Voucher Path" />
+    </label>
+
+    <div class="controls">
+        <g:if test="${preppyInstance?.xjzmPath}">
+            <div style="position: relative;height: 100px;">
+                <g:link action="img1"  controller="api"  params="[path:preppyInstance?.xjzmPath]"  target="_blank">
+                    <img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance?.xjzmPath])}" style="height: 100px;"/>
+                </g:link>
+            </div>
+        </g:if>
+        <g:hiddenField name="xjzmPath" value="${preppyInstance?.xjzmPath}"/>
+        <input type="file" name="xjzmPathInp" id="xjzmPathInp" />
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label" for="remark">
+        <g:message code="preppy.remark.label" default="remark" />
+    </label>
+    <div class="controls">
+            <g:textArea name="remark" rows="3" cols="15" style="width: 300px;">${preppyInstance?.remark}</g:textArea>
+    </div>
+</div>
+<sec:ifNotGranted roles="ROLE_TEACHER">
+
 <div class="control-group">
     <label class="control-label" for="reviewStatus">
         <g:message code="preppy.reviewStatus.label" default="ReviewStatus" />
@@ -286,7 +384,10 @@
         </div>
     </div>
 </div>
-</sec:ifAllGranted>
+</sec:ifNotGranted>
+
+
+
 
 <g:hiddenField name="cityUrl" value="${createLink(action: 'cityOpts',controller: 'api')}" title="${preppyInstance?.city?.code?:params.cityId}"  />
 <g:hiddenField name="districtUrl" value="${createLink(action: 'districtOpts',controller: 'api')}"  title="${preppyInstance?.district?.code?:params.districtId}" />

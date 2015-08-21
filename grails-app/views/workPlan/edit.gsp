@@ -5,6 +5,15 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'workPlan.label', default: 'WorkPlan')}" />
 		<title><g:message code="default.edit.label" args="[entityName]" /></title>
+        <style>
+        .form-horizontal h4{
+            background: #77c2ee;
+            color: #fff;
+            margin: 5px auto;
+            text-align: center;
+            padding:5px 0;
+        }
+        </style>
 	</head>
 	<body>
         <div>
@@ -34,7 +43,7 @@
                     <h2><i class="icon-edit"></i> <g:message code="default.edit.label" args="[entityName]" /></h2>
                 </div>
                 <div class="box-content">
-                    <g:form class="form-horizontal" action="update" >
+                    <g:uploadForm class="form-horizontal" action="update" >
                     <g:hiddenField name="id" value="${workPlanInstance?.id}" />
                     <g:hiddenField name="version" value="${workPlanInstance?.version}" />
                     <fieldset>
@@ -45,7 +54,7 @@
                     <button type="reset" class="btn"><g:message code="default.button.reset.label" /> </button>
                         </div>
                     </fieldset>
-                    </g:form>
+                    </g:uploadForm>
 
                 </div>
             </div><!--/span-->

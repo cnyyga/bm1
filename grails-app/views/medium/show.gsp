@@ -124,7 +124,13 @@
                         <div class="controls">
                             
                             <span class="property-value" aria-labelledby="teacher-label">
-                                ${mediumInstance?.teacher?.name}</span>
+                                <%
+                                    try {
+                                        out.print(mediumInstance.teacher?.name)
+                                    }catch (Exception e){}
+
+                                %>
+                            </span>
                             
                         </div>
                     </div>
@@ -151,7 +157,21 @@
                         <div class="controls">
 
                             <span class="property-value" aria-labelledby="studentDistrict-label">
-                                ${mediumInstance?.studentProvince?.name}${mediumInstance?.studentCity?.name} ${mediumInstance?.studentDistrict?.name}</span>
+                                <%
+                                    try {
+                                        out.print(mediumInstance?.studentProvince?.name)
+                                    } catch (Exception e) {
+                                    }
+                                    try {
+                                        out.print(mediumInstance?.studentCity?.name)
+                                    } catch (Exception e) {
+                                    }
+                                    try {
+                                        out.print(mediumInstance?.studentDistrict?.name)
+                                    } catch (Exception e) {
+                                    }
+                                %>
+                            </span>
 
                         </div>
                     </div>
@@ -164,13 +184,15 @@
                         <div class="controls">
                             
                             <span class="property-value" aria-labelledby="voucherPath-label">
+                        <g:link action="img"  controller="api" id="${mediumInstance?.voucherPath}"  target="_blank">
                                 <img src="${createLink(controller: 'api',action: 'img',id: mediumInstance?.voucherPath)}" style="height: 100px;"/>
+                        </g:link>
                             </span>
                             
                         </div>
                     </div>
                     </g:if>
-                    
+                %{--
                     <g:if test="${mediumInstance?.admission}">
                     <div class="control-group">
                         <label class="control-label">
@@ -195,7 +217,7 @@
                             
                         </div>
                     </div>
-                    </g:if>
+                    </g:if>--}%
                     
                     <g:if test="${mediumInstance?.reviewStatus}">
                     <div class="control-group">

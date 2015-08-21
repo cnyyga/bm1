@@ -44,7 +44,26 @@
                         </label>
                         <div class="controls">
                             
-                            <span class="property-value" aria-labelledby="city-label">${middleSchoolInstance?.district?.city?.province?.name} ${middleSchoolInstance?.district?.city?.name} ${middleSchoolInstance?.district?.name}</span>
+                            <span class="property-value" aria-labelledby="city-label">
+
+                                <%
+                                    try{
+                                        out.println(middleSchoolInstance?.district?.city?.province?.name)
+                                    }catch (e){
+
+                                    }
+                                    try{
+                                        out.println(middleSchoolInstance?.district?.city?.name)
+                                    }catch (e){
+
+                                    }
+                                    try{
+                                        out.println(middleSchoolInstance?.district?.name)
+                                    }catch (e){
+
+                                    }
+                                %>
+                            </span>
                             
                         </div>
                     </div>

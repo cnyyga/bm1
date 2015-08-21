@@ -64,7 +64,19 @@
                             <td class="center">
                                 <g:set var="tds" value="${teacherInstance?.teacherDistricts}"/>
                                 <g:each in="${tds}" var="td">
-                                    ${td.district?.city?.name}${td.district?.name}
+
+                                    <%
+                                        try{
+                                            out.println(td.district?.city?.name)
+                                        }catch (e){
+
+                                        }
+                                        try{
+                                            out.println(td.district?.name)
+                                        }catch (e){
+
+                                        }
+                                    %>
                                 </g:each>
                             </td>
                             <td class="center">${teacherInstance.taskNumber}</td>

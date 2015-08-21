@@ -38,7 +38,6 @@
                 <div class="form-horizontal">
                 <fieldset>
                     
-                    <g:if test="${workPlanInstance?.name}">
                     <div class="control-group">
                         <label class="control-label">
                             <g:message code="workPlan.name.label" default="Name" />
@@ -49,9 +48,6 @@
                             
                         </div>
                     </div>
-                    </g:if>
-                    
-                    <g:if test="${workPlanInstance?.area}">
                     <div class="control-group">
                         <label class="control-label">
                             <g:message code="workPlan.area.label" default="Area" />
@@ -62,9 +58,7 @@
                             
                         </div>
                     </div>
-                    </g:if>
-                    
-                    <g:if test="${workPlanInstance?.num}">
+
                     <div class="control-group">
                         <label class="control-label">
                             <g:message code="workPlan.num.label" default="Num" />
@@ -75,21 +69,20 @@
                             
                         </div>
                     </div>
-                    </g:if>
-                    
+
                     <div class="control-group">
                         <label class="control-label">
                             <g:message code="workPlan.date.label" default="Start Date" />
                         </label>
                         <div class="controls">
                             
-                            <span class="property-value" aria-labelledby="startDate-label"><g:formatDate date="${workPlanInstance?.startDate}" format="yyyy-MM-dd" />-
+                            <span class="property-value" aria-labelledby="startDate-label"><g:formatDate date="${workPlanInstance?.startDate}" format="yyyy-MM-dd" />
+                                至
                             <g:formatDate date="${workPlanInstance?.endDate}" format="yyyy-MM-dd" /></span>
                         </div>
                     </div>
 
                     
-                    <g:if test="${workPlanInstance?.middleSchools}">
                     <div class="control-group">
                         <label class="control-label">
                             <g:message code="workPlan.middleSchools.label" default="Middle Schools" />
@@ -100,9 +93,6 @@
                             
                         </div>
                     </div>
-                    </g:if>
-                    
-                    <g:if test="${workPlanInstance?.tel}">
                     <div class="control-group">
                         <label class="control-label">
                             <g:message code="workPlan.tel.label" default="Tel" />
@@ -113,9 +103,6 @@
                             
                         </div>
                     </div>
-                    </g:if>
-                    
-                    <g:if test="${workPlanInstance?.result}">
                     <div class="control-group">
                         <label class="control-label">
                             <g:message code="workPlan.result.label" default="Result" />
@@ -126,9 +113,6 @@
                             
                         </div>
                     </div>
-                    </g:if>
-                    
-                    <g:if test="${workPlanInstance?.opinion}">
                     <div class="control-group">
                         <label class="control-label">
                             <g:message code="workPlan.opinion.label" default="Opinion" />
@@ -139,9 +123,6 @@
                             
                         </div>
                     </div>
-                    </g:if>
-                    
-                    <g:if test="${workPlanInstance?.materialObject}">
                     <div class="control-group">
                         <label class="control-label">
                             <g:message code="workPlan.materialObject.label" default="Material Object" />
@@ -152,9 +133,6 @@
                             
                         </div>
                     </div>
-                    </g:if>
-
-                    <g:if test="${workPlanInstance?.materialNum}">
                         <div class="control-group">
                             <label class="control-label">
                                 <g:message code="workPlan.materialNum.label" default="Material Num" />
@@ -165,8 +143,6 @@
 
                             </div>
                         </div>
-                    </g:if>
-                    <g:if test="${workPlanInstance?.materialTel}">
                     <div class="control-group">
                         <label class="control-label">
                             <g:message code="workPlan.materialTel.label" default="Material Tel" />
@@ -177,9 +153,6 @@
                             
                         </div>
                     </div>
-                    </g:if>
-                    
-                    <g:if test="${workPlanInstance?.questions}">
                     <div class="control-group">
                         <label class="control-label">
                             <g:message code="workPlan.questions.label" default="Questions" />
@@ -190,35 +163,36 @@
                             
                         </div>
                     </div>
-                    </g:if>
-                    
-                    <g:if test="${workPlanInstance?.hasOpinion}">
                     <div class="control-group">
                         <label class="control-label">
                             <g:message code="workPlan.hasOpinion.label" default="Has Opinion" />
                         </label>
                         <div class="controls">
                             
-                            <span class="property-value" aria-labelledby="hasOpinion-label"><g:fieldValue bean="${workPlanInstance}" field="hasOpinion"/></span>
+                            <span class="property-value" aria-labelledby="hasOpinion-label">
+                                <g:if test="${workPlanInstance.hasOpinion == 1}">
+                                    <g:message code="default.yes.label"/>
+                                </g:if>
+                                <g:else>
+                                    <g:message code="default.no.label"/>
+                                </g:else>
+
+                            </span>
                             
                         </div>
                     </div>
-                    </g:if>
-                    
-                    <g:if test="${workPlanInstance?.pic}">
                     <div class="control-group">
                         <label class="control-label">
                             <g:message code="workPlan.pic.label" default="Pic" />
                         </label>
                         <div class="controls">
                             
-                            <span class="property-value" aria-labelledby="pic-label"><g:fieldValue bean="${workPlanInstance}" field="pic"/></span>
+                            <span class="property-value" aria-labelledby="pic-label">
+                                <img src="${createLink(controller: 'api',action: 'img',id: workPlanInstance?.pic)}" style="max-height:80px"/>
+                                </span>
                             
                         </div>
                     </div>
-                    </g:if>
-                    
-                    <g:if test="${workPlanInstance?.carFare}">
                     <div class="control-group">
                         <label class="control-label">
                             <g:message code="workPlan.carFare.label" default="Car Fare" />
@@ -229,9 +203,6 @@
                             
                         </div>
                     </div>
-                    </g:if>
-                    
-                    <g:if test="${workPlanInstance?.cityCarFare}">
                     <div class="control-group">
                         <label class="control-label">
                             <g:message code="workPlan.cityCarFare.label" default="City Car Fare" />
@@ -242,9 +213,6 @@
                             
                         </div>
                     </div>
-                    </g:if>
-                    
-                    <g:if test="${workPlanInstance?.accommodation}">
                     <div class="control-group">
                         <label class="control-label">
                             <g:message code="workPlan.accommodation.label" default="Accommodation" />
@@ -255,9 +223,7 @@
                             
                         </div>
                     </div>
-                    </g:if>
-                    
-                    <g:if test="${workPlanInstance?.entertainment}">
+
                     <div class="control-group">
                         <label class="control-label">
                             <g:message code="workPlan.entertainment.label" default="Entertainment" />
@@ -268,9 +234,7 @@
                             
                         </div>
                     </div>
-                    </g:if>
-                    
-                    <g:if test="${workPlanInstance?.amount}">
+
                     <div class="control-group">
                         <label class="control-label">
                             <g:message code="workPlan.amount.label" default="Amount" />
@@ -281,22 +245,25 @@
                             
                         </div>
                     </div>
-                    </g:if>
-                    
-                    <g:if test="${workPlanInstance?.attendSeminar}">
+
                     <div class="control-group">
                         <label class="control-label">
                             <g:message code="workPlan.attendSeminar.label" default="Attend Seminar" />
                         </label>
                         <div class="controls">
                             
-                            <span class="property-value" aria-labelledby="attendSeminar-label"><g:fieldValue bean="${workPlanInstance}" field="attendSeminar"/></span>
+                            <span class="property-value" aria-labelledby="attendSeminar-label">
+                                <g:if test="${workPlanInstance.attendSeminar == 1}">
+                                    <g:message code="default.yes.label"/>
+                                </g:if>
+                                <g:else>
+                                    <g:message code="default.no.label"/>
+                                </g:else>
+                            </span>
                             
                         </div>
                     </div>
-                    </g:if>
-                    
-                    <g:if test="${workPlanInstance?.workPlan}">
+
                     <div class="control-group">
                         <label class="control-label">
                             <g:message code="workPlan.workPlan.label" default="Work Plan" />
@@ -307,7 +274,6 @@
                             
                         </div>
                     </div>
-                    </g:if>
 
 
 

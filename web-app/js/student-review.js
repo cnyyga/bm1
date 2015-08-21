@@ -20,8 +20,6 @@ $(function(){
     $("#reviewModal .save-student-review").click(function() {
         var studentId =  $( "#reviewModal").data("studentId");
         var studentUrl =  $( "#reviewModal").data("studentUrl");
-        console.log(studentId);
-        console.log(studentUrl);
         if(!studentId){
             $("#reviewModal").modal('hide');
             return

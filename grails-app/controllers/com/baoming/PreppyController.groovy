@@ -16,6 +16,7 @@ class PreppyController {
     def planService
     def provinceService
     def preppyService
+    def fileService
 
     def index() {
 
@@ -55,11 +56,22 @@ class PreppyController {
             teacher = Teacher.get(params.long('teacherId'))
         }
 
+        def plan
+        if(params.planId) {
+            plan = Plan.get(params.planId as long)
+        }
+
         list = Preppy.createCriteria().list(params) {
             if (teacher)
                 eq('teacher', teacher)
             if (name) {
                 like('name', "%${name}%")
+            }
+            if(plan){
+                eq('plan',plan)
+            }
+            if(params.reviewStatus) {
+                eq('reviewStatus',Preppy.ReviewStatus."${params.reviewStatus}")
             }
             ge('dateCreated', startDate)
             lt('dateCreated', endDate)
@@ -69,6 +81,12 @@ class PreppyController {
                 eq('teacher', teacher)
             if (name) {
                 like('name', "%${name}%")
+            }
+            if(plan){
+                eq('plan',plan)
+            }
+            if(params.reviewStatus) {
+                eq('reviewStatus',Preppy.ReviewStatus."${params.reviewStatus}")
             }
             ge('dateCreated', startDate)
             lt('dateCreated', endDate)
@@ -125,6 +143,34 @@ class PreppyController {
         academicScores = academicScores.join(",")
         preppyInstance.academicScore = academicScores
         preppyInstance.protocolCode = preppyService.buildProtocolCode()
+
+        def hkbPathFile = request.getFile("hkbPathInp")
+        def hkbksyPathFile = request.getFile("hkbksyPathInp")
+        def cardPhotoPathFile = request.getFile("cardPhotoPathInp")
+        def byzsPathFile = request.getFile("byzsPathInp")
+        def xjzmPathFile = request.getFile("xjzmPathInp")
+
+        def hkbPath =fileService.upload(hkbPathFile,"preppy")
+        def hkbksyPath =fileService.upload(hkbksyPathFile,"preppy")
+        def cardPhotoPath =fileService.upload(cardPhotoPathFile,"preppy")
+        def byzsPath =fileService.upload(byzsPathFile,"preppy")
+        def xjzmPath =fileService.upload(xjzmPathFile,"preppy")
+        if(hkbPath){
+            preppyInstance.hkbPath=hkbPath
+        }
+        if(hkbksyPath){
+            preppyInstance.hkbksyPath=hkbksyPath
+        }
+        if(cardPhotoPath){
+            preppyInstance.cardPhotoPath=cardPhotoPath
+        }
+        if(byzsPath){
+            preppyInstance.byzsPath=byzsPath
+        }
+        if(xjzmPath){
+            preppyInstance.xjzmPath=xjzmPath
+        }
+
         if (!preppyInstance.save(flush: true)) {
             render(view: "create", model: [preppyInstance: preppyInstance,provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()])
             return
@@ -215,6 +261,33 @@ class PreppyController {
         def academicScores = params.list('academicScore')
         academicScores = academicScores.join(",")
         preppyInstance.academicScore = academicScores
+
+        def hkbPathFile = request.getFile("hkbPathInp")
+        def hkbksyPathFile = request.getFile("hkbksyPathInp")
+        def cardPhotoPathFile = request.getFile("cardPhotoPathInp")
+        def byzsPathFile = request.getFile("byzsPathInp")
+        def xjzmPathFile = request.getFile("xjzmPathInp")
+
+        def hkbPath =fileService.upload(hkbPathFile,"preppy")
+        def hkbksyPath =fileService.upload(hkbksyPathFile,"preppy")
+        def cardPhotoPath =fileService.upload(cardPhotoPathFile,"preppy")
+        def byzsPath =fileService.upload(byzsPathFile,"preppy")
+        def xjzmPath =fileService.upload(xjzmPathFile,"preppy")
+        if(hkbPath){
+            preppyInstance.hkbPath=hkbPath
+        }
+        if(hkbksyPath){
+            preppyInstance.hkbksyPath=hkbksyPath
+        }
+        if(cardPhotoPath){
+            preppyInstance.cardPhotoPath=cardPhotoPath
+        }
+        if(byzsPath){
+            preppyInstance.byzsPath=byzsPath
+        }
+        if(xjzmPath){
+            preppyInstance.xjzmPath=xjzmPath
+        }
 
         if (!preppyInstance.save(flush: true)) {
             render(view: "edit", model: [preppyInstance: preppyInstance,provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()])
@@ -335,8 +408,8 @@ class PreppyController {
                       message(code: 'preppy.academicYear.label'),message(code: 'preppy.academicScore.label'),message(code: 'preppy.skill.label'),
                       message(code: 'preppy.middlePlan.label'),message(code: 'preppyPlan.label'),message(code: 'preppy.plan.label'),
                 message(code: 'preppy.deposit.label'),message(code: 'preppy.phone.label'),message(code: 'preppy.parentPhone.label'),
-                message(code: 'preppy.address.label'),message(code: 'preppy.studentCateories.label'),
-                message(code: 'preppy.teacher.label'),message(code: 'default.lastUpdated.label')]
+                message(code: 'preppy.address.label'),message(code: 'preppy.studentCateories.label'),message(code: 'preppy.reviewStatus.label'),
+                      message(code: 'preppy.teacher.label'),message(code: 'preppy.remark.label'),message(code: 'default.lastUpdated.label')]
         def outputStream
         try {
 
@@ -401,12 +474,14 @@ class PreppyController {
                         cell(17,kk,de.parentPhone?:'')
                         cell(18,kk,de.address?:'')
                         cell(19,kk,de.studentCateories?.label?:'')
+                        cell(20,kk,de.reviewStatus?.label?:'')
                         try {
-                            cell(20,kk,de.teacher?.name?:'')
+                            cell(21,kk,de.teacher?.name?:'')
                         } catch (Exception e) {
-                            cell(20,kk,'')
+                            cell(21,kk,'')
                         }
-                        cell(21,kk,de.lastUpdated.format('yyyy-MM-dd HH:mm:ss'))
+                        cell(22,kk,de.remark?:'')
+                        cell(23,kk,de.lastUpdated.format('yyyy-MM-dd HH:mm:ss'))
                     }
                 }
             }
@@ -418,5 +493,32 @@ class PreppyController {
             IOUtils.closeQuietly(outputStream)
         }
         return
+    }
+
+    def ajaxAudit(Long id) {
+        if(!id) {
+            render(([status:'0'] as JSON) as String)
+            return
+        }
+        def preppyInstance = Preppy.get(id)
+        if (!preppyInstance) {
+            render(([status:'0'] as JSON) as String)
+            return
+        }
+        if (params.reviewStatus == Preppy.ReviewStatus.NO_AUDIT.name()) {
+            render(([status: '1'] as JSON) as String)
+            return
+        }
+        def userId = springSecurityService.authentication.principal?.id
+        preppyInstance.reviewDate = new Date()
+        preppyInstance.reviewPerson = User.get(userId as Long)
+        preppyInstance.reviewStatus = Preppy.ReviewStatus."${params.reviewStatus}"
+
+        if (!preppyInstance.save()) {
+            log.error(preppyInstance.errors)
+            render(([status: '0'] as JSON) as String)
+            return
+        }
+        render(([status: '1', reviewStatusId:preppyInstance.reviewStatus?.id,reviewStatusLab:preppyInstance.reviewStatus?.label] as JSON) as String)
     }
 }

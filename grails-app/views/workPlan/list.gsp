@@ -23,6 +23,7 @@
     </g:if>
     <div>
          <g:link action="create"  class="btn btn-small btn-primary"><i class="icon-chevron-left icon-white"></i><g:message code="default.add.label" args="[entityName]" /></g:link>
+         <g:link action="exp"  class="btn btn-small btn-primary"><i class="icon-chevron-left icon-white"></i><g:message code="default.button.export.label" /></g:link>
     </div>
     <div class="row-fluid sortable">
         <div class="box span12">
@@ -49,13 +50,13 @@
                     <g:each in="${workPlanInstanceList}" status="i" var="workPlanInstance">
                         <tr>
                             
-                            <td class="center">${fieldValue(bean: workPlanInstance, field: "name")}</td>
+                            <td class="center"><g:link action="show" id="${workPlanInstance.id}">${fieldValue(bean: workPlanInstance, field: "name")}</g:link> </td>
                             
                             <td class="center">${fieldValue(bean: workPlanInstance, field: "area")}</td>
                             
                             <td class="center">${fieldValue(bean: workPlanInstance, field: "num")}</td>
                             
-                            <td class="center"><g:formatDate date="${workPlanInstance.startDate}" format="yyyy-MM-dd"  />-<g:formatDate date="${workPlanInstance.endDate}"  format="yyyy-MM-dd"  /></td>
+                            <td class="center"><g:formatDate date="${workPlanInstance.startDate}" format="yyyy-MM-dd"  />至<g:formatDate date="${workPlanInstance.endDate}"  format="yyyy-MM-dd"  /></td>
 
                             <td class="center">
                                     <g:link class="btn btn-success" action="show" id="${workPlanInstance.id}">

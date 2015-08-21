@@ -68,7 +68,7 @@
                     <h2><i class="icon-edit"></i> <g:message code="default.add.label" args="[entityName]" /></h2>
                 </div>
                 <div class="box-content">
-                    <g:form class="form-horizontal" action="save" name="editForm">
+                    <g:uploadForm class="form-horizontal" action="save" name="editForm">
 
                     <fieldset>
                          <g:render template="form"/>
@@ -77,7 +77,7 @@
                     <button type="reset" class="btn"><g:message code="default.button.reset.label" /> </button>
                             </div>
                         </fieldset>
-                    </g:form>
+                    </g:uploadForm>
 
                 </div>
             </div><!--/span-->

@@ -142,7 +142,7 @@
     </div>
 </div>
 
-<div class="control-group">
+%{--<div class="control-group">
 	<label class="control-label" for="admission">
 		<g:message code="medium.admission.label" default="Admission" />
 	</label>
@@ -160,8 +160,8 @@
     <div class="controls">
 	<g:select name="registration" from="${com.baoming.account.Student$Registration?.values()}" optionValue="label"  required="" value="${mediumInstance?.registration}"/>
     </div>
-</div>
-<sec:ifAllGranted roles="ROLE_ADMIN">
+</div>--}%
+<sec:ifNotGranted roles="ROLE_TEACHER">
 <div class="control-group">
 	<label class="control-label" for="reviewStatus">
 		<g:message code="medium.reviewStatus.label" default="Review Status" />
@@ -171,7 +171,7 @@
 	<g:select name="reviewStatus" from="${com.baoming.account.Student$ReviewStatus?.values()}" optionValue="label"  required="" value="${mediumInstance?.reviewStatus}"/>
     </div>
 </div>
-      </sec:ifAllGranted>
+</sec:ifNotGranted>
 <div class="control-group">
 	<label class="control-label" for="description">
 		<g:message code="medium.description.label" default="Description" />
