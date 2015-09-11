@@ -646,7 +646,11 @@ class StudentController {
                 if(i ==0 ){
                     title << message(code: 'student.district.label')
                 }
-                data << "${stu.city?.name}${stu.district?.name}"
+                try {
+                    data << "${stu.city?.name}${stu.district?.name}"
+                } catch (e) {
+                    data << ""
+                }
             }
             if(fs.count('middleSchool') > 0 ){
                 if(i ==0 ){

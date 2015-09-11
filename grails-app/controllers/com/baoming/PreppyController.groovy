@@ -423,13 +423,22 @@ class PreppyController {
                     }
                     list.eachWithIndex {de,k->
                         def kk = k+1
-                        def district = de.province?.name?:''
-                        district += de.city?.name?:''
-                        district += de.district?.name?:''
-
-                        def studentDistrict = de.studentProvince?.name?:''
-                        studentDistrict += de.studentCity?.name?:''
-                        studentDistrict += de.studentDistrict?.name?:''
+                        def district = ''
+                        def studentDistrict = ''
+                        try {
+                            district = de.province?.name?:''
+                            district += de.city?.name?:''
+                            district += de.district?.name?:''
+                        } catch (e) {
+                            log.error(e.message)
+                        }
+                        try {
+                            studentDistrict = de.studentProvince?.name?:''
+                            studentDistrict += de.studentCity?.name?:''
+                            studentDistrict += de.studentDistrict?.name?:''
+                        } catch (e) {
+                            log.error(e.message)
+                        }
 
                         def academicScore = de.academicScore
                         if(academicScore) {
@@ -505,7 +514,7 @@ class PreppyController {
             render(([status:'0'] as JSON) as String)
             return
         }
-        if (params.reviewStatus == Preppy.ReviewStatus.NO_AUDIT.name()) {
+        if (!params.reviewStatus || params.reviewStatus == Preppy.ReviewStatus.NO_AUDIT.name()) {
             render(([status: '1'] as JSON) as String)
             return
         }
