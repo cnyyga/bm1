@@ -9,14 +9,9 @@ hibernate {
 environments {
     development {
         dataSource {
-            //dbCreate = "create-drop"
-            dbCreate = "update"
-            pooled = true
-            driverClassName = "com.mysql.jdbc.Driver"
-            url = "jdbc:mysql://localhost:3306/bm?useUnicode=true&characterEncoding=UTF-8"
-            username = "root"
-            password = "1"
-            logSql = 'true'
+
+            dbCreate = "create-drop"
+                url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
         }
     }
     test {
