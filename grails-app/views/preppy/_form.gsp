@@ -8,15 +8,6 @@
     }
 </style>
 
-<div class="control-group">
-    <label class="control-label" for="studentCateories"><g:message code="preppy.studentCateories.label"/> <span class="required-indicator">*</span>
-    </label>
-
-    <div class="controls">
-        <g:select name="studentCateories" from="${Preppy.StudentCateories.values()}" optionValue="label" value="${preppyInstance?.studentCateories}"/>
-
-    </div>
-</div>
 
 <div class="control-group">
     <label class="control-label" for="name">
@@ -40,12 +31,53 @@
 
 
 <div class="control-group">
+    <label class="control-label" for="password">
+        <g:message code="springSecurity.login.password.label" default="Password" />
+        <span class="required-indicator">*</span>
+    </label>
+
+    <div class="controls">
+        <g:passwordField name="password"  value=""/>
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label" for="family"><g:message code="preppy.family.label"/> <span class="required-indicator">*</span>
+    </label>
+
+    <div class="controls">
+        <g:select name="family" from="${Preppy.Family.values()}" optionValue="label" value="${preppyInstance?.family}"/>
+
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label" for="studentCateories"><g:message code="preppy.studentCateories.label"/> <span class="required-indicator">*</span>
+    </label>
+
+    <div class="controls">
+        <g:select name="studentCateories" from="${Preppy.StudentCateories.values()}" optionValue="label" value="${preppyInstance?.studentCateories}"/>
+
+    </div>
+</div>
+
+<div class="control-group">
     <label class="control-label" for="gender">
         <g:message code="preppy.gender.label" default="Gender" />
     </label>
 
     <div class="controls">
         <g:select name="gender" from="${com.baoming.account.User$Gender?.values()}" keys="${com.baoming.account.User$Gender.values()*.name()}" optionValue="label" required="" value="${preppyInstance?.gender?.name()}"/>
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label" for="gender">
+        <g:message code="nation.label" default="nation" />
+    </label>
+
+    <div class="controls">
+        <g:select name="nation" from="${com.baoming.Nation.findAll()}"  optionValue="name" required="" value="${preppyInstance?.gender?.name()}"/>
     </div>
 </div>
 
@@ -63,8 +95,6 @@
         <g:set var="startYear" value="${year-25}"/>
         <g:datePicker name="birthday" value="${preppyInstance?.birthday ?: cal.time}" precision="day"
                       years="${startYear..(year-10)}"/>
-        <g:message code="preppy.age.label" default="birthday" />
-        <g:textField name="age" this-year-attr="${year}"  readonly=""/>
     </div>
 </div>
 
@@ -80,112 +110,15 @@
     </div>
 </div>
 
-
 <div class="control-group">
-    <label class="control-label" for="studentDistrict">
-        <g:message code="medium.studentDistrict.label" default="Student District" />
+    <label class="control-label" for="address">
+        <g:message code="preppy.address.label" default="Tel" />
     </label>
 
     <div class="controls">
-        <g:select id="studentProvince" name="studentProvinceId" from="${provinces}" optionKey="code" optionValue="name" required="" value="${preppyInstance?.studentProvince?.code}" class="many-to-one"/>
-        <g:select id="studentCity" name="studentCityId" from="" optionKey="id" required=""/>
-            <g:hiddenField name="studentCityVal" value="${preppyInstance?.studentCity?.code}"  />
-        <g:select id="studentDistrict" name="studentDistrictId" from="" optionKey="id" required=""/>
-            <g:hiddenField name="studentDistrictVal" value="${preppyInstance?.studentDistrict?.code}"  />
+        <g:textField name="address" value="${preppyInstance?.address}"/>
     </div>
 </div>
-
-<div class="control-group">
-    <label class="control-label" for="school">
-        <g:message code="preppy.school.label" default="school" />
-    </label>
-
-    <div class="controls">
-
-        <g:textField name="school" value="${preppyInstance?.school}"/>
-
-    </div>
-</div>
-
-<div class="control-group ">
-    <label class="control-label" for="type">
-        <g:message code="preppy.type.label" default="type" />
-    </label>
-
-    <div class="controls">
-        <g:select name="type" from="${com.baoming.Preppy$Type?.values()}"  optionValue="label" required="" value="${preppyInstance?.type?.name()}"/>
-    </div>
-</div>
-
-<div class="control-group zhongzhi  waisheng">
-	<label class="control-label" for="schoolType">
-		<g:message code="preppy.schoolType.label" default="schoolType" />
-	</label>
-
-    <div class="controls">
-	<g:select name="schoolType" from="${com.baoming.Preppy$SchoolType?.values()}" optionValue="label" required="" value="${preppyInstance?.schoolType?.name()}"/>
-    </div>
-</div>
-
-
-<div class="control-group pugao">
-    <label class="control-label" for="academicYear">
-        <g:message code="preppy.academicYear.label" default="academicYear" />
-    </label>
-
-    <div class="controls">
-        <g:select name="academicYear" from="${startYear..(year-1)}" noSelection="['':'未参加']" value="${preppyInstance?.academicYear}"/>
-
-    </div>
-</div>
-
-<div class="control-group pugao">
-    <label class="control-label" for="academicScore1">
-        <g:message code="preppy.academicScore.label" default="academicScore" />
-    </label>
-
-    <div class="controls">
-        <g:set var="academicScore" value="${preppyInstance.academicScore}"  />
-        <g:set var="academicScoreList" value="${academicScore?academicScore.tokenize(','):['A','A','A','A','A','A']}"  />
-        物理<g:select name="academicScore" id="academicScore1" value="${academicScoreList[0]}" class="select-min" from="${['A','B','C','D']}"/>
-        化学<g:select name="academicScore" id="academicScore2" value="${academicScoreList[1]}" class="select-min" from="${['A','B','C','D']}"/>
-        生物<g:select name="academicScore" id="academicScore3" value="${academicScoreList[2]}" class="select-min" from="${['A','B','C','D']}"/>
-        地理<g:select name="academicScore" id="academicScore4" value="${academicScoreList[3]}" class="select-min" from="${['A','B','C','D']}"/>
-        历史<g:select name="academicScore" id="academicScore5" value="${academicScoreList[4]}" class="select-min" from="${['A','B','C','D']}"/>
-        政治<g:select name="academicScore" id="academicScore6" value="${academicScoreList[5]}" class="select-min" from="${['A','B','C','D']}"/>
-    </div>
-</div>
-
-<div class="control-group pugao">
-    <label class="control-label" for="skill">
-        <g:message code="preppy.skill.label" default="skill" />
-    </label>
-
-    <div class="controls">
-        <g:select name="skill" from="${com.baoming.Preppy$Skill?.values()}" optionValue="label" required="" value="${preppyInstance?.skill?.name()}"/>
-    </div>
-</div>
-
-<div class="control-group zhongzhi">
-    <label class="control-label" for="middlePlan">
-        <g:message code="preppy.middlePlan.label" default="Middle Plan" />
-    </label>
-
-    <div class="controls">
-        <g:textField name="middlePlan" value="${preppyInstance?.middlePlan}"/>
-    </div>
-</div>
-
-<div class="control-group zhongzhi">
-    <label class="control-label" for="preppyPlan">
-        <g:message code="preppyPlan.label" default="preppyPlan" />
-    </label>
-
-    <div class="controls">
-        <g:select id="preppyPlan" name="preppyPlan.id" from="${preppyPlans}" optionKey="id" optionValue="name" value="${preppyInstance.preppyPlan?.id}" class="many-to-one" />
-    </div>
-</div>
-
 <div class="control-group ">
     <label class="control-label" for="planId">
         <g:message code="preppy.plan.label" default="Plan" />
@@ -196,23 +129,14 @@
     </div>
 </div>
 
+
 <div class="control-group">
-    <label class="control-label" for="deposit">
-        <g:message code="preppy.deposit.label" default="deposit" />
+    <label class="control-label" for="phone">
+        <g:message code="preppy.phone.label" default="Phone" />
     </label>
 
     <div class="controls">
-        <g:textField name="deposit" value="${preppyInstance?.deposit}"/>  元
-    </div>
-</div>
-
-<div class="control-group">
-	<label class="control-label" for="phone">
-		<g:message code="preppy.phone.label" default="Phone" />
-	</label>
-
-    <div class="controls">
-	<g:textField name="phone" value="${preppyInstance?.phone}"/>
+        <g:textField name="phone" value="${preppyInstance?.phone}"/>
     </div>
 </div>
 
@@ -227,112 +151,27 @@
 </div>
 
 <div class="control-group">
-    <label class="control-label" for="address">
-        <g:message code="preppy.address.label" default="Tel" />
+    <label class="control-label" for="parentPhone">
+        <g:message code="preppy.qq.label" default="qq" />
     </label>
 
     <div class="controls">
-        <g:textField name="address" value="${preppyInstance?.address}"/>
+        <g:textField name="qq" value="${preppyInstance?.qq}"/>
     </div>
 </div>
+
 
 <div class="control-group">
-    <label class="control-label" for="hkbPathInp">
-        <g:message code="preppy.hkbPath.label" default="Voucher Path" />
+    <label class="control-label" for="deposit">
+        <g:message code="preppy.deposit.label" default="deposit" />
     </label>
 
     <div class="controls">
-        <g:if test="${preppyInstance?.hkbPath}">
-            <div style="position: relative;height: 100px;">
-                <g:link action="img1"  controller="api" params="[path:preppyInstance?.hkbPath]" target="_blank">
-                    <img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance?.hkbPath])}" style="height: 100px;"/>
-                </g:link>
-            </div>
-        </g:if>
-        <g:hiddenField name="hkbPath" value="${preppyInstance?.hkbPath}"/>
-        <input type="file" name="hkbPathInp" id="hkbPathInp" />
+        <g:textField name="deposit" value="${preppyInstance?.deposit}"/>  元
     </div>
 </div>
 
-<div class="control-group">
-    <label class="control-label" for="hkbksyPathInp">
-        <g:message code="preppy.hkbksyPath.label" default="Voucher Path" />
-    </label>
 
-    <div class="controls">
-        <g:if test="${preppyInstance?.hkbksyPath}">
-            <div style="position: relative;height: 100px;">
-                <g:link action="img1"  controller="api"  params="[path:preppyInstance?.hkbksyPath]"  target="_blank">
-                    <img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance?.hkbksyPath])}" style="height: 100px;"/>
-                </g:link>
-            </div>
-        </g:if>
-        <g:hiddenField name="hkbksyPath" value="${preppyInstance?.hkbksyPath}"/>
-        <input type="file" name="hkbksyPathInp" id="hkbksyPathInp" />
-    </div>
-</div>
-
-<div class="control-group">
-    <label class="control-label" for="cardPhotoPathInp">
-        <g:message code="preppy.cardPhotoPath.label" default="Voucher Path" />
-    </label>
-
-    <div class="controls">
-        <g:if test="${preppyInstance?.cardPhotoPath}">
-            <div style="position: relative;height: 100px;">
-                <g:link action="img1"  controller="api" params="[path:preppyInstance?.cardPhotoPath]" target="_blank">
-                    <img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance?.cardPhotoPath])}" style="height: 100px;"/>
-                </g:link>
-            </div>
-        </g:if>
-        <g:hiddenField name="cardPhotoPath" value="${preppyInstance?.cardPhotoPath}"/>
-        <input type="file" name="cardPhotoPathInp" id="cardPhotoPathInp" />
-    </div>
-</div>
-
-<div class="control-group">
-    <label class="control-label" for="cardPhotoPathInp">
-        <g:message code="preppy.byzsPath.label" default="Voucher Path" />
-    </label>
-
-    <div class="controls">
-        <g:if test="${preppyInstance?.byzsPath}">
-            <div style="position: relative;height: 100px;">
-                <g:link action="img1"  controller="api"  params="[path:preppyInstance?.byzsPath]"  target="_blank">
-                    <img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance?.byzsPath])}" style="height: 100px;"/>
-                </g:link>
-            </div>
-        </g:if>
-        <g:hiddenField name="byzsPath" value="${preppyInstance?.byzsPath}"/>
-        <input type="file" name="byzsPathInp" id="byzsPathInp" />
-    </div>
-</div>
-
-<div class="control-group">
-    <label class="control-label" for="cardPhotoPathInp">
-        <g:message code="preppy.xjzmPath.label" default="Voucher Path" />
-    </label>
-
-    <div class="controls">
-        <g:if test="${preppyInstance?.xjzmPath}">
-            <div style="position: relative;height: 100px;">
-                <g:link action="img1"  controller="api"  params="[path:preppyInstance?.xjzmPath]"  target="_blank">
-                    <img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance?.xjzmPath])}" style="height: 100px;"/>
-                </g:link>
-            </div>
-        </g:if>
-        <g:hiddenField name="xjzmPath" value="${preppyInstance?.xjzmPath}"/>
-        <input type="file" name="xjzmPathInp" id="xjzmPathInp" />
-    </div>
-</div>
-<div class="control-group">
-    <label class="control-label" for="remark">
-        <g:message code="preppy.remark.label" default="remark" />
-    </label>
-    <div class="controls">
-            <g:textArea name="remark" rows="3" cols="15" style="width: 300px;">${preppyInstance?.remark}</g:textArea>
-    </div>
-</div>
 <sec:ifNotGranted roles="ROLE_TEACHER">
 
 <div class="control-group">
@@ -345,6 +184,43 @@
     </div>
 </div>
 
+    <div class="control-group zhongzhi">
+        <label class="control-label" for="preppyPlan">
+            <g:message code="preppyPlan.label" default="preppyPlan" />
+        </label>
+
+        <div class="controls">
+            <g:select id="preppyPlan" name="preppyPlan.id" from="${preppyPlans}" optionKey="id" optionValue="name" value="${preppyInstance.preppyPlan?.id}" class="many-to-one" />
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="remark">
+            <g:message code="preppy.remark.label" default="remark" />1
+        </label>
+        <div class="controls">
+            <g:textArea name="remark" rows="3" cols="15" style="width: 300px;">${preppyInstance?.remark}</g:textArea>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="remark">
+            <g:message code="preppy.remark.label" default="remark" />2
+        </label>
+        <div class="controls">
+            <g:textArea name="remark1" rows="3" cols="15" style="width: 300px;">${preppyInstance?.remark1}</g:textArea>
+        </div>
+    </div>
+
+
+    <div class="control-group">
+        <label class="control-label" for="remark">
+            <g:message code="preppy.remark.label" default="remark" />3
+        </label>
+        <div class="controls">
+            <g:textArea name="remark2" rows="3" cols="15" style="width: 300px;">${preppyInstance?.remark2}</g:textArea>
+        </div>
+    </div>
 
 <div class="control-group">
 	<label class="control-label" for="combobox">
@@ -391,4 +267,4 @@
 
 <g:hiddenField name="cityUrl" value="${createLink(action: 'cityOpts',controller: 'api')}" title="${preppyInstance?.city?.code?:params.cityId}"  />
 <g:hiddenField name="districtUrl" value="${createLink(action: 'districtOpts',controller: 'api')}"  title="${preppyInstance?.district?.code?:params.districtId}" />
-<g:hiddenField name="preppyPlanUrl" value="${createLink(action: 'getPlans',controller: 'preppyPlan')}"  title="${preppyInstance?.plan?.id}" />
+<g:hiddenField name="preppyPlanUrl" value="${createLink(action: 'getPlans1',controller: 'preppyPlan')}"  title="${preppyInstance?.plan?.id}" />

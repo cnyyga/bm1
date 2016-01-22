@@ -115,41 +115,32 @@ $(function(){
         }
     })
 
-    $("#studentCateories").change(function(){
-        category($(this).val());
+    $("#family").change(function(){
+        family($(this).val());
+        setPlans($("#studentCateories").val());
     });
 
-    category($("#studentCateories").val());
-    function category(cate) {
-        if(cate == 'SG')  {
-             $(".pugao").show();
-            $(".waisheng").hide();
-            $(".zhongzhi").hide();
-            $(".zhongzhi").hide();
-           // $(".plan-area").html($("#pugaoArea").val())
-        }else  if(cate == 'WG'){
-            $(".pugao").hide();
-            $(".waisheng").hide();
-            $(".zhongzhi").show();
-            //$(".plan-area").html($("#zhongzhiArea").val())
-        }else  if(cate == 'SZ'){
-            $(".pugao").hide();
-            $(".zhongzhi").hide();
-            $(".waisheng").show();
-            //$(".plan-area").html($("#waiArea").val())
+    var opts = $("#studentCateories option");
+    $("#studentCateories").append(opts);
+    family($("#family").val());
+    function family(cate) {
+        $("#studentCateories").empty()
+        if(cate == 'JIANGSU'){
+            var opts1 = opts.slice(3,9);
+            $("#studentCateories").append(opts1);
+        }else{
+            var opts2 = opts.slice(9,11);
+            $("#studentCateories").append(opts2);
         }
-
-        setPlans(cate,$("#preppyPlan").val())
     }
 
-    $("#preppyPlan").change(function(){
-        setPlans($("#studentCateories").val(),$(this).val())
+    $("#studentCateories").change(function(){
+        setPlans($(this).val())
     });
-
-    function setPlans(type,preppyPlanId) {
+    setPlans($("#studentCateories").val());
+    function setPlans(type) {
         var _url = $("#preppyPlanUrl").val();
         var _selected =   $("#preppyPlanUrl").attr("title");
-        _url += "/"+preppyPlanId;
         $("#planId").html('');
         $.getJSON(_url,{type:type},function(data){
             var str = "";

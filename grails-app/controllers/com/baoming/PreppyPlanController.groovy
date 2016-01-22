@@ -145,6 +145,23 @@ class PreppyPlanController {
             [id:it.id,name:it.name]
         }
         render((plans as JSON) as String)
+    }
 
+    def getPlans1(Long id) {
+        def type = params.type
+        if(!type) {
+            render(([] as JSON) as String)
+            return
+        }
+        def plans = planService.getPlansByFlg(type);
+
+        if(!plans) {
+            render(([] as JSON) as String)
+            return
+        }
+        plans = plans.collect {
+            [id:it.id,name:it.name]
+        }
+        render((plans as JSON) as String)
     }
 }

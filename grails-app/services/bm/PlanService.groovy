@@ -4,6 +4,7 @@ import com.baoming.MediumPlan
 import com.baoming.MediumPlanDetail
 import com.baoming.Plan
 import com.baoming.PlanUse
+import com.baoming.Preppy
 import com.baoming.PreppyPlan
 import com.baoming.PreppyPlanDetail
 import grails.plugin.cache.CacheEvict
@@ -60,6 +61,16 @@ class PlanService {
             eq("status",(Plan.Status.RUNNING))
             planUses {
                 eq("flg",PlanUse.USE_FLG_PREPPY)
+            }
+        }
+    }
+
+    def getPlansByFlg(flg){
+        def sc = Preppy.StudentCateories.valueOf(flg)
+        Plan.createCriteria().list {
+            eq("status",(Plan.Status.RUNNING))
+            planUses {
+                eq("flg",sc.id as short)
             }
         }
     }
