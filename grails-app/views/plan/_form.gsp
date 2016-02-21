@@ -70,10 +70,14 @@
     <g:set var="planUses" value="${planUses?planUses*.flg:[]}"/>
 
     <div class="controls">
-        <g:each in="${(4..11)}" var="st">
+    <label  class="checkbox-inline">学生<input type="checkbox" name="flg" value="1" <g:if test="${planUses.count(1)>0}">checked="checked"</g:if> /> </label>
+    <label  class="checkbox-inline">中职<input type="checkbox" name="flg" value="2" <g:if test="${planUses.count(2)>0}">checked="checked"</g:if> /></label>
+    <div>
+        <p class="red">旁听生</p>
+    <g:each in="${(4..11)}" var="st">
             <label  class="checkbox-inline"><g:message code="studentType.${st}.label"/><input type="checkbox" name="flg" value="${st}" <g:if test="${planUses.count(st)>0}">checked="checked"</g:if> /> </label>
         </g:each>
-
+    </div>
     </div>
 </div>
 

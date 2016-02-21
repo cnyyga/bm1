@@ -160,6 +160,15 @@
     </div>
 </div>
 
+<div class="control-group">
+    <label class="control-label" for="parentPhone">
+        <g:message code="preppy.resume.label" default="qq" />
+    </label>
+
+    <div class="controls">
+        <g:textArea cols="200" rows="3" name="resume" >${preppyInstance?.resume}</g:textArea>
+    </div>
+</div>
 
 <div class="control-group">
     <label class="control-label" for="deposit">
@@ -183,6 +192,16 @@
         <g:select name="reviewStatus" from="${com.baoming.Preppy$ReviewStatus?.values()}"  optionValue="label" required="" value="${preppyInstance?.reviewStatus?.name()}"/>
     </div>
 </div>
+
+    <div class="control-group zhongzhi">
+        <label class="control-label" for="collegeSignUp">
+            高考报名地
+        </label>
+
+        <div class="controls">
+            <g:select name="collegeSignUp" from="${com.baoming.Preppy$CollegeSignUp?.values()}"  optionValue="label" required="" value="${preppyInstance?.collegeSignUp?.name()}"/>
+        </div>
+    </div>
 
     <div class="control-group zhongzhi">
         <label class="control-label" for="preppyPlan">

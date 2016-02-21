@@ -57,6 +57,7 @@ class Preppy {
     String byzsPath//高中（中职）毕业证书
     String xjzmPath//学籍证明（本省在校中职生）
 
+    String resume
     String remark //备注1
     String remark1//备注2
     String remark2//备注3
@@ -98,6 +99,7 @@ class Preppy {
         remark2 nullable: true
         nation nullable: true
         collegeSignUp nullable: true
+        resume nullable: true,maxSize: 1024
     }
 
     static mapping = {
@@ -186,9 +188,9 @@ class Preppy {
 
     enum ReviewStatus{
         NO_AUDIT(1,'未审核'),
-        JSPG(2,'参加江苏省普高注册入学'),
-        JSZZ(3,'参加江苏省中职注册入学') ,
-        GJSZZ(4,'挂江苏中职学籍'),
+        JSPG(2,'江苏普高'),
+        JSZZ(3,'江苏中职') ,
+        GJSZZ(4,'挂学籍'),
         NO_PASS(5,'审核未通过')
 
         Integer id
