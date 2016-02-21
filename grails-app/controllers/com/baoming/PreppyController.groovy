@@ -8,6 +8,7 @@ import grails.plugin.jxl.builder.ExcelBuilder
 import org.apache.commons.io.IOUtils
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 import org.springframework.dao.DataIntegrityViolationException
+import org.springframework.transaction.annotation.Transactional
 
 class PreppyController {
 
@@ -17,6 +18,7 @@ class PreppyController {
     def provinceService
     def preppyService
     def fileService
+    def userService
 
     def index() {
 
@@ -100,6 +102,7 @@ class PreppyController {
                 preppyPlans:planService.getPreppyPlans()]
     }
 
+    @Transactional
     def save() {
         def preppyInstance = new Preppy(params)
         def userId = springSecurityService.authentication.principal?.id
@@ -175,6 +178,12 @@ class PreppyController {
             render(view: "create", model: [preppyInstance: preppyInstance,provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()])
             return
         }
+
+        def user = new User();
+        user.username = preppyInstance.number
+        user.password = params.password
+        user.enabled=true
+        userService.saveUser(user,Role.AUTHORITY_STUDENT)
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'preppy.label', default: 'Preppy'), preppyInstance.id])
         redirect(action: "show", id: preppyInstance.id)

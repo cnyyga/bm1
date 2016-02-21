@@ -33,7 +33,7 @@
 
 <body>
     <div class="" style="width:220px;height:350px;margin: 0 auto;border: 0;">
-        <h2 style="text-align: center;padding: 5px;color: #43A1DA">报名后台管理登录</h2>
+        <h2 style="text-align: center;padding: 5px;color: #43A1DA">登录</h2>
         <form action="${postUrl}" class="login-form" id="loginForm" method="post" style="padding-top: 15px;">
             <g:if test='${flash.message}'>
             <dl class="top clearfix">

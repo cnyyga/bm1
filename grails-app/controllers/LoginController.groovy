@@ -135,7 +135,7 @@ class LoginController {
 
     def dispatch = {
         if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_STUDENT)) {
-            redirect controller: 'profile',action: 'edit'
+            redirect controller: 'profile',action: 'preppy'
         } else {
             redirect controller: 'home'
         }

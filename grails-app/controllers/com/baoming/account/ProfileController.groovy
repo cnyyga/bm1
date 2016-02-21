@@ -194,4 +194,14 @@ class ProfileController {
         flash.message = message(code: 'default.updated1.message', args: [msg])
         redirect(action: "edit", params:[v:v])
     }
+
+
+    def preppy() {
+        def userId = springSecurityService.authentication.principal?.id
+
+    }
+
+    def savePreppy() {
+
+    }
 }
