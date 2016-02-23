@@ -1,13 +1,12 @@
 <%@ page import="com.baoming.Plan; com.baoming.PreppyPlan; com.baoming.Preppy" %>
 <style>
-    .select-min,#age{
-        width: 50px;
-    }
-    #birthday_year,#birthday_month,#birthday_day,#deposit{
-        width: 80px;
-    }
+.select-min,#age{
+    width: 50px;
+}
+#birthday_year,#birthday_month,#birthday_day,#deposit{
+    width: 80px;
+}
 </style>
-
 
 <div class="control-group">
     <label class="control-label" for="name">
@@ -15,7 +14,7 @@
     </label>
 
     <div class="controls">
-        <g:textField name="name" value="${preppyInstance?.name}"/>
+        <g:textField name="name" readonly="readonly" value="${preppyInstance?.name}"/>
     </div>
 </div>
 
@@ -25,34 +24,10 @@
     </label>
 
     <div class="controls">
-        <g:textField name="number" value="${preppyInstance?.number}"/>
+        <g:textField name="number" readonly="readonly" value="${preppyInstance?.number}"/>
     </div>
 </div>
 
-
-<div class="control-group">
-    <label class="control-label" for="password">
-        <g:message code="springSecurity.login.password.label" default="Password" />
-        <span class="required-indicator">*</span>
-    </label>
-
-    <div class="controls">
-        <g:passwordField name="password"  value=""/>
-    </div>
-</div>
-
-
-<div class="control-group">
-    <label class="control-label" for="deposit">
-        <g:message code="preppy.deposit.label" default="deposit" />
-    </label>
-
-    <div class="controls">
-        <g:textField name="deposit" value="${preppyInstance?.deposit}"/>  元
-    </div>
-</div>
-
-<sec:ifNotGranted roles="ROLE_TEACHER">
 <div class="control-group">
     <label class="control-label" for="family"><g:message code="preppy.family.label"/> <span class="required-indicator">*</span>
     </label>
@@ -181,107 +156,6 @@
         <g:textArea cols="200" rows="3" name="resume" >${preppyInstance?.resume}</g:textArea>
     </div>
 </div>
-
-<div class="control-group">
-    <label class="control-label" for="reviewStatus">
-        <g:message code="preppy.reviewStatus.label" default="ReviewStatus" />
-    </label>
-
-    <div class="controls">
-        <g:select name="reviewStatus" from="${com.baoming.Preppy$ReviewStatus?.values()}"  optionValue="label" required="" value="${preppyInstance?.reviewStatus?.name()}"/>
-    </div>
-</div>
-
-    <div class="control-group zhongzhi">
-        <label class="control-label" for="collegeSignUp">
-            高考报名地
-        </label>
-
-        <div class="controls">
-            <g:select name="collegeSignUp" from="${com.baoming.Preppy$CollegeSignUp?.values()}"  optionValue="label" required="" value="${preppyInstance?.collegeSignUp?.name()}"/>
-        </div>
-    </div>
-
-    <div class="control-group zhongzhi">
-        <label class="control-label" for="preppyPlan">
-            <g:message code="preppyPlan.label" default="preppyPlan" />
-        </label>
-
-        <div class="controls">
-            <g:select id="preppyPlan" name="preppyPlan.id" from="${preppyPlans}" optionKey="id" optionValue="name" value="${preppyInstance.preppyPlan?.id}" class="many-to-one" />
-        </div>
-    </div>
-
-    <div class="control-group">
-        <label class="control-label" for="remark">
-            <g:message code="preppy.remark.label" default="remark" />1
-        </label>
-        <div class="controls">
-            <g:textArea name="remark" rows="3" cols="15" style="width: 300px;">${preppyInstance?.remark}</g:textArea>
-        </div>
-    </div>
-
-    <div class="control-group">
-        <label class="control-label" for="remark">
-            <g:message code="preppy.remark.label" default="remark" />2
-        </label>
-        <div class="controls">
-            <g:textArea name="remark1" rows="3" cols="15" style="width: 300px;">${preppyInstance?.remark1}</g:textArea>
-        </div>
-    </div>
-
-
-    <div class="control-group">
-        <label class="control-label" for="remark">
-            <g:message code="preppy.remark.label" default="remark" />3
-        </label>
-        <div class="controls">
-            <g:textArea name="remark2" rows="3" cols="15" style="width: 300px;">${preppyInstance?.remark2}</g:textArea>
-        </div>
-    </div>
-
-<div class="control-group">
-	<label class="control-label" for="combobox">
-		<g:message code="preppy.teacher.label" default="Teacher" />
-	</label>
-
-    <div class="controls">
-
-    <%
-        def userService = grailsApplication.mainContext.getBean("userService");
-    %>
-            <select id="combobox" name="teacherId">
-                <option value="">请选择</option>
-
-        <g:set var="studTeacherId" value="${preppyInstance.teacher?.id}"/>
-                <g:each in="${userService.getTeachers()}" var="teah">
-                    <g:if test="${studTeacherId == teah.id}">
-                        <option value="${teah.id}" title="${teah.name}${com.bm.utils.PinyinUtils.getPinyin(teah.name)}" selected="true" >${teah.name}</option>
-                    </g:if>
-                    <g:else>
-                        <option value="${teah.id}" title="${teah.name}${com.bm.utils.PinyinUtils.getPinyin(teah.name)}" >${teah.name}</option>
-                    </g:else>
-                </g:each>
-            </select>
-        </div>
-    </div>
-    <div class="control-group material-content">
-        <label class="control-label" for="combobox">
-            <g:message code="material.label" default="material" />
-        </label>
-        <div class="controls">
-            <ul>
-                <g:each in="${com.baoming.Material.list()}" var="material">
-                    <li class="${material.reviewStatus}">${material.content}</li>
-                </g:each>
-            </ul>
-        </div>
-    </div>
-</div>
-</sec:ifNotGranted>
-
-
-
 
 <g:hiddenField name="cityUrl" value="${createLink(action: 'cityOpts',controller: 'api')}" title="${preppyInstance?.city?.code?:params.cityId}"  />
 <g:hiddenField name="districtUrl" value="${createLink(action: 'districtOpts',controller: 'api')}"  title="${preppyInstance?.district?.code?:params.districtId}" />

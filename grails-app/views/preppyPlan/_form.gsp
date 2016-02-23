@@ -18,7 +18,7 @@
 	</label>
 
     <div class="controls">
-	<g:select name="status" from="${com.baoming.PreppyPlan$Status?.values()}" optionValue="label" required="" value="${preppyPlanInstance?.status?.name()}"/>
+	<g:select name="status" from="${com.baoming.PreppyPlan$Status?.values()}" optionValue="label" value="${preppyPlanInstance?.status?.name()}"/>
     </div>
 </div>
 <div class="control-group">

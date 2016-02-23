@@ -69,7 +69,7 @@ class Preppy {
         name()
         number()
         birthday nullable: true
-        gender()
+        gender(nullable: true)
         district nullable: true
         city nullable: true
         province nullable: true
@@ -100,6 +100,21 @@ class Preppy {
         nation nullable: true
         collegeSignUp nullable: true
         resume nullable: true,maxSize: 1024
+        studentCity nullable: true
+        academicYear nullable: true
+        academicScore nullable: true
+        address nullable: true
+        middlePlan nullable: true
+        parentPhone nullable: true
+        phone nullable: true
+        school nullable: true
+        schoolType nullable: true
+        skill nullable: true
+        studentProvince nullable: true
+        studentDistrict nullable: true
+        province nullable: true
+        studentCity nullable: true
+        type nullable: true
     }
 
     static mapping = {

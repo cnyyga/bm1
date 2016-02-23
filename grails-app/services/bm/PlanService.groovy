@@ -60,7 +60,7 @@ class PlanService {
         Plan.createCriteria().list {
             eq("status",(Plan.Status.RUNNING))
             planUses {
-                eq("flg",PlanUse.USE_FLG_PREPPY)
+                gt("flg",PlanUse.USE_FLG_PREPPY)
             }
         }
     }

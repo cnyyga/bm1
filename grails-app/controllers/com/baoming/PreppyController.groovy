@@ -122,29 +122,43 @@ class PreppyController {
 
         preppyInstance.teacher = teacher
 
-        def province = Province.findByCode(params.provinceId)
+        def province = params.provinceId?Province.findByCode(params.provinceId):null
         if(province && province.name.count('江苏') > 0) {
             preppyInstance.family = Preppy.Family.JIANGSU
         }else{
             preppyInstance.family = Preppy.Family.OTHER
         }
-        preppyInstance.province = province
-        preppyInstance.city = City.findByCode(params.cityId)
-        preppyInstance.district = District.findByCode(params.districtId)
+        if(province){
+            preppyInstance.province = province
+        }
+        if(params.cityId){
+            preppyInstance.city = City.findByCode(params.cityId)
+        }
+        if(params.districtId){
+            preppyInstance.district = District.findByCode(params.districtId)
+        }
 
-        def studentProvince = Province.findByCode(params.studentProvinceId)
+        def studentProvince = params.studentProvinceId?Province.findByCode(params.studentProvinceId):null
         if(studentProvince && studentProvince.name.count('江苏') > 0) {
             preppyInstance.studentFamily = Preppy.Family.JIANGSU
         } else{
             preppyInstance.studentFamily = Preppy.Family.OTHER
         }
-        preppyInstance.studentProvince = studentProvince
-        preppyInstance.studentCity = City.findByCode(params.studentCityId)
-        preppyInstance.studentDistrict = District.findByCode(params.studentDistrictId)
+        if(studentProvince){
+            preppyInstance.studentProvince = studentProvince
+        }
+        if(params.studentCityId){
+            preppyInstance.studentCity = City.findByCode(params.studentCityId)
+        }
+        if(params.studentDistrictId){
+            preppyInstance.studentDistrict = District.findByCode(params.studentDistrictId)
+        }
 
         def academicScores = params.list('academicScore')
-        academicScores = academicScores.join(",")
-        preppyInstance.academicScore = academicScores
+        if(academicScores){
+            academicScores = academicScores.join(",")
+            preppyInstance.academicScore = academicScores
+        }
         preppyInstance.protocolCode = preppyService.buildProtocolCode()
 
         def hkbPathFile = request.getFile("hkbPathInp")
@@ -153,11 +167,11 @@ class PreppyController {
         def byzsPathFile = request.getFile("byzsPathInp")
         def xjzmPathFile = request.getFile("xjzmPathInp")
 
-        def hkbPath =fileService.upload(hkbPathFile,"preppy")
-        def hkbksyPath =fileService.upload(hkbksyPathFile,"preppy")
-        def cardPhotoPath =fileService.upload(cardPhotoPathFile,"preppy")
-        def byzsPath =fileService.upload(byzsPathFile,"preppy")
-        def xjzmPath =fileService.upload(xjzmPathFile,"preppy")
+        def hkbPath =hkbPathFile?fileService.upload(hkbPathFile,"preppy"):null
+        def hkbksyPath =hkbksyPathFile?fileService.upload(hkbksyPathFile,"preppy"):null
+        def cardPhotoPath =cardPhotoPathFile?fileService.upload(cardPhotoPathFile,"preppy"):null
+        def byzsPath =byzsPathFile?fileService.upload(byzsPathFile,"preppy"):null
+        def xjzmPath =xjzmPathFile?fileService.upload(xjzmPathFile,"preppy"):null
         if(hkbPath){
             preppyInstance.hkbPath=hkbPath
         }
@@ -247,25 +261,37 @@ class PreppyController {
         }
         preppyInstance.teacher = teacher
 
-        def province = Province.findByCode(params.provinceId)
+        def province = params.provinceId?Province.findByCode(params.provinceId):null
         if(province && province.name.count('江苏') > 0) {
             preppyInstance.family = Preppy.Family.JIANGSU
         }    else{
             preppyInstance.family = Preppy.Family.OTHER
         }
-        preppyInstance.province = province
-        preppyInstance.city = City.findByCode(params.cityId)
-        preppyInstance.district = District.findByCode(params.districtId)
+        if(params.cityId){
+            preppyInstance.city = City.findByCode(params.cityId)
+        }
+        if(province){
+            preppyInstance.province = province
+        }
+        if(params.districtId){
+            preppyInstance.district = District.findByCode(params.districtId)
+        }
 
-        def studentProvince = Province.findByCode(params.studentProvinceId)
+        def studentProvince = params.studentProvinceId?Province.findByCode(params.studentProvinceId):null
         if(studentProvince && studentProvince.name.count('江苏') > 0) {
             preppyInstance.studentFamily = Preppy.Family.JIANGSU
         }else{
             preppyInstance.studentFamily = Preppy.Family.OTHER
         }
-        preppyInstance.studentProvince = studentProvince
-        preppyInstance.studentCity = City.findByCode(params.studentCityId)
-        preppyInstance.studentDistrict = District.findByCode(params.studentDistrictId)
+        if(studentProvince){
+            preppyInstance.studentProvince = studentProvince
+        }
+        if(params.studentCityId){
+            preppyInstance.studentCity = City.findByCode(params.studentCityId)
+        }
+        if(params.studentDistrictId){
+            preppyInstance.studentDistrict = District.findByCode(params.studentDistrictId)
+        }
 
         def academicScores = params.list('academicScore')
         academicScores = academicScores.join(",")
@@ -277,11 +303,11 @@ class PreppyController {
         def byzsPathFile = request.getFile("byzsPathInp")
         def xjzmPathFile = request.getFile("xjzmPathInp")
 
-        def hkbPath =fileService.upload(hkbPathFile,"preppy")
-        def hkbksyPath =fileService.upload(hkbksyPathFile,"preppy")
-        def cardPhotoPath =fileService.upload(cardPhotoPathFile,"preppy")
-        def byzsPath =fileService.upload(byzsPathFile,"preppy")
-        def xjzmPath =fileService.upload(xjzmPathFile,"preppy")
+        def hkbPath =hkbPathFile?fileService.upload(hkbPathFile,"preppy"):null
+        def hkbksyPath =hkbksyPathFile?fileService.upload(hkbksyPathFile,"preppy"):null
+        def cardPhotoPath =cardPhotoPathFile?fileService.upload(cardPhotoPathFile,"preppy"):null
+        def byzsPath =byzsPathFile?fileService.upload(byzsPathFile,"preppy"):null
+        def xjzmPath =xjzmPathFile?fileService.upload(xjzmPathFile,"preppy"):null
         if(hkbPath){
             preppyInstance.hkbPath=hkbPath
         }

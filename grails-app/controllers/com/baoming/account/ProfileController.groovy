@@ -1,6 +1,7 @@
 package com.baoming.account
 
 import com.baoming.Plan
+import com.baoming.Preppy
 import com.baoming.Province
 import com.baoming.City
 import com.baoming.District
@@ -10,6 +11,8 @@ import org.apache.commons.io.FileUtils
 class ProfileController {
     def springSecurityService
     def userService
+    def provinceService
+    def planService
 
     def index() {
         redirect(action: "edit")
@@ -198,10 +201,57 @@ class ProfileController {
 
     def preppy() {
         def userId = springSecurityService.authentication.principal?.id
-
+        def user = User.get(userId)
+        if(!user){
+            flash.message = message(code: 'default.save.failure.label')
+            render(view: "preppy", model: [preppy: null])
+            return
+        }
+        def username = user.username
+        def preppy = Preppy.findByNumber(username)
+        if(!preppy){
+            flash.message = message(code: 'default.save.failure.label')
+            render(view: "preppy", model: [preppy: null])
+            return
+        }
+        [preppy:preppy,provinces:provinceService.getProvinces(),
+         preppyPlans:planService.getPreppyPlans()]
     }
 
     def savePreppy() {
-
+        def userId = springSecurityService.authentication.principal?.id
+        def user = User.get(userId)
+        if(!user){
+            flash.message = message(code: 'default.save.failure.label')
+            redirect(action: 'preppy')
+            return
+        }
+        def username = user.username
+        def preppy = Preppy.findByNumber(username)
+        if(!preppy){
+            flash.message = message(code: 'default.save.failure.label')
+            redirect(action: 'preppy')
+            return
+        }
+        preppy.family = params.family
+        preppy.studentCateories = params.studentCateories
+        preppy.gender = params.gender
+        preppy.nation = params.nation
+        preppy.birthday = params.birthday
+        preppy.district = params.district
+        preppy.address = params.address
+        preppy.plan = params.plan
+        preppy.phone = params.phone
+        preppy.parentPhone = params.parentPhone
+        preppy.qq = params.qq
+        preppy.resume = params.resume
+        if(!preppy.save()){
+            log.error(preppy.errors)
+            flash.message = message(code: 'default.save.failure.label')
+            render(view: "preppy", model: [preppy: preppy])
+            return
+        }
+        flash.message = message(code: 'default.save.success.label')
+        redirect(action: 'preppy')
     }
 }

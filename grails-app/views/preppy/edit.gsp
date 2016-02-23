@@ -73,7 +73,7 @@
                     <g:hiddenField name="version" value="${preppyInstance?.version}" />
                     <fieldset>
                         <g:render template="form"/>
-                        <div class="control-group">
+                        %{--<div class="control-group">
                         <label class="control-label red" style="padding-left:140px;" >
                             <%
                                 def cal = Calendar.instance
@@ -105,7 +105,7 @@
                             </g:else>
                         </label>
 
-                        </div>
+                        </div>--}%
                         <div class="form-actions">
 
                     <button type="submit" class="btn btn-primary"><g:message code="default.button.update.label" /> </button>
@@ -117,7 +117,7 @@
                                 </g:link>
                             </sec:ifNotGranted>
                             <sec:ifAllGranted roles="${Role.AUTHORITY_TEACHER}">
-                                <g:if test="${preppyInstance.reviewStatus.name() == com.baoming.Preppy.ReviewStatus.NO_AUDIT.name()}">
+                                <g:if test="${preppyInstance.reviewStatus?.name() == com.baoming.Preppy.ReviewStatus.NO_AUDIT.name()}">
                                     <g:link class="btn btn-success" action="xy" id="${preppyInstance.id}">
                                         <i class="icon-zoom-in  icon-white"></i>
                                         <g:message code="default.button.preview.label" default="Xy" />

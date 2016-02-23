@@ -48,7 +48,7 @@
                 <h2> <g:message code="default.list.label" args="[entityName]" /></h2>
             </div>
             <div class="box-content">
-                <div class="span12 well">
+                <se class="span12 well">
                     <g:form action="list" >
                         <div class="bm-search">
                             <label class="search-lb"><g:message code="student.year.label"/>：</label>
@@ -67,6 +67,7 @@
                             <label class="search-lb"><g:message code="preppy.plan.label"/> ：</label>
                             <g:select name="planId" from="${com.baoming.PreppyPlanDetail.findAll()*.plan.unique()}" optionKey="id" optionValue="name" value="${params.planId}" noSelection="['':'']"/>
                         </div>
+                        <sec:ifNotGranted roles="${Role.AUTHORITY_TEACHER}">
                         <div class="bm-search">
                             <label class="search-lb"><g:message code="preppy.teacher.label"/> ：</label>
 
@@ -87,7 +88,7 @@
                                     </g:else>
                                 </g:each>
                             </select>
-                        </div>
+                        </div></sec:ifNotGranted>
                         <div class="bm-search">
                             <label class="search-lb"><g:message code="preppy.reviewStatus.label"/> ：</label>
                             <g:select name="reviewStatus" from="${com.baoming.Preppy$ReviewStatus?.values()}"  optionValue="label" noSelection="['':'']" value="${params.reviewStatus}"/>
@@ -118,7 +119,7 @@
 
                         <th><g:message code="preppy.reviewStatus.label" default="reviewStatus" /></th>
 
-                        <th>报警</th>
+                       %{-- <th>报警</th>--}%
                         
                         <th><g:message code="default.operator.label" default="Actions" /></th>
                     </tr>
@@ -129,11 +130,11 @@
                             
                             <td class="center">${preppyInstance.name}</td>
                             
-                            <td class="center">${preppyInstance.gender.label}</td>
+                            <td class="center">${preppyInstance.gender?.label}</td>
                             
                             <td class="center">${preppyInstance.number}</td>
                             
-                            <td class="center"><g:formatDate date="${preppyInstance.birthday}" format="yyyy-MM-dd"/> </td>
+                            <td class="center"><g:if test="${preppyInstance.birthday}"><g:formatDate date="${preppyInstance.birthday}" format="yyyy-MM-dd"/></g:if> </td>
                             
                             <td class="center">${preppyInstance.studentCateories?.label}</td>
                             <td class="center">
@@ -150,7 +151,7 @@
                                 </span>
                                </td>
 
-                            <td class="center red">
+                            %{--<td class="center red">
                               <g:if test="${preppyInstance.studentCateories.name() == com.baoming.Preppy.StudentCateories.SG.name()}">
                                       <g:set var="joinYear" value="${preppyInstance.academicYear}"/>
 
@@ -175,7 +176,7 @@
                                     </g:if>
                                 </g:else>
                             </td>
-                            
+                            --}%
                             <td class="center">
                                     <g:link class="btn btn-success" action="show" id="${preppyInstance.id}">
                                         <i class="icon-zoom-in icon-white"></i>

@@ -57,9 +57,50 @@ $(function(){
             },
             number:{
                 required: true
-            },
-            password:{
+            }
+            ,
+            plan:{
                 required: true
+            }  ,
+            phone:{
+                required: true
+            }  ,
+            parentPhone:{
+                required: true
+            }  ,
+            school:{
+                required: true
+            }  ,
+            address:{
+                required: true
+            }  ,
+            deposit:{
+                required: true,
+                number:true
+            }  ,
+            middlePlan:{
+                required:function(){
+                    var studentCateories = $("#studentCateories").val()
+                    return  studentCateories== 'WG'
+                }
+            } ,
+            hkbPathInp:{
+                required: function(){
+                    var vv = $("#hkbPath").val()
+                    return  !vv || vv == ''
+                }
+            } ,
+            hkbksyPathInp:{
+                required: function(){
+                    var vv = $("#hkbksyPath").val()
+                    return  !vv || vv == ''
+                }
+            } ,
+            cardPhotoPathInp:{
+                required: function(){
+                    var vv = $("#cardPhotoPath").val()
+                    return  !vv || vv == ''
+                }
             }
 
         },

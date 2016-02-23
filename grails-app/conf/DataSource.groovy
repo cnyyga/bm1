@@ -10,8 +10,16 @@ environments {
     development {
         dataSource {
 
-            dbCreate = "create-drop"
-                url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+//            dbCreate = "create-drop"
+//            dbCreate = "update"
+//            url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+            dbCreate = "update"
+            pooled = true
+            driverClassName = "com.mysql.jdbc.Driver"
+            url = "jdbc:mysql://localhost:3306/bm?useUnicode=true&amp;characterEncoding=utf-8"
+            username = "root"
+            password = "1"
+            logSql = 'true'
         }
     }
     test {

@@ -14,7 +14,8 @@ class PreppyPlan {
         if(!this || !this.id) {
             return
         }
-        PreppyPlanDetail.findAllByPreppyPlan(this).collect { it.plan } as Set
+        def list  = PreppyPlanDetail.findAllByPreppyPlan(this).collect { it.plan }
+        return list as Set
     }
 
     enum Status {
