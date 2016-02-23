@@ -2,13 +2,16 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="layout" content="mainStudent">
+		<meta name="layout" content="mainReg">
 		<g:set var="entityName" value="${message(code: 'reg.student.info.label', default: 'Student')}" />
 		<title><g:message code="default.edit.label" args="[entityName]" /></title>
+		<link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap-cerulean.css')}" type="text/css">
+
+		<link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap-responsive.css')}" type="text/css">
         <g:javascript src="jquery.validate.min.js"/>
 		<g:javascript src="messages_zh.js"/>
 		<g:javascript src="tj.js"/>
-		<g:javascript src="app-preppy.js"/>
+		<g:javascript src="app-preppy_stu.js"/>
 	</head>
 	<body>
     <div class="reg-content">

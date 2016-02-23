@@ -52,13 +52,6 @@ $(function(){
 
     $('#editForm').validate({
         rules: {
-            name: {
-                required: true
-            },
-            number:{
-                required: true
-            }
-            ,
             plan:{
                 required: true
             }  ,
@@ -82,24 +75,6 @@ $(function(){
                 required:function(){
                     var studentCateories = $("#studentCateories").val()
                     return  studentCateories== 'WG'
-                }
-            } ,
-            hkbPathInp:{
-                required: function(){
-                    var vv = $("#hkbPath").val()
-                    return  !vv || vv == ''
-                }
-            } ,
-            hkbksyPathInp:{
-                required: function(){
-                    var vv = $("#hkbksyPath").val()
-                    return  !vv || vv == ''
-                }
-            } ,
-            cardPhotoPathInp:{
-                required: function(){
-                    var vv = $("#cardPhotoPath").val()
-                    return  !vv || vv == ''
                 }
             }
 

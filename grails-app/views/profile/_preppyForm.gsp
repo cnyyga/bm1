@@ -64,7 +64,7 @@
     </label>
 
     <div class="controls">
-        <g:select name="nation" from="${com.baoming.Nation.findAll()}"  optionValue="name" required="" value="${preppyInstance?.gender?.name()}"/>
+        <g:select name="nation" from="${com.baoming.Nation.findAll()}"  optionValue="name" optionKey="id" required="" value="${preppyInstance?.gender?.name()}"/>
     </div>
 </div>
 

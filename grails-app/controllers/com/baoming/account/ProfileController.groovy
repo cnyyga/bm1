@@ -1,5 +1,6 @@
 package com.baoming.account
 
+import com.baoming.Nation
 import com.baoming.Plan
 import com.baoming.Preppy
 import com.baoming.Province
@@ -214,7 +215,7 @@ class ProfileController {
             render(view: "preppy", model: [preppy: null])
             return
         }
-        [preppy:preppy,provinces:provinceService.getProvinces(),
+        [preppyInstance:preppy,provinces:provinceService.getProvinces(),
          preppyPlans:planService.getPreppyPlans()]
     }
 
@@ -233,14 +234,14 @@ class ProfileController {
             redirect(action: 'preppy')
             return
         }
-        preppy.family = params.family
+        preppy.family =Preppy.Family."${params.family}"
         preppy.studentCateories = params.studentCateories
-        preppy.gender = params.gender
-        preppy.nation = params.nation
+        preppy.gender = User.Gender."${params.gender}"
+        preppy.nation = Nation.get(params.long("nation"))
         preppy.birthday = params.birthday
-        preppy.district = params.district
+        preppy.district = District.findByCode(params.districtId)
         preppy.address = params.address
-        preppy.plan = params.plan
+        preppy.plan = Plan.get(params.long("plan.id"))
         preppy.phone = params.phone
         preppy.parentPhone = params.parentPhone
         preppy.qq = params.qq
