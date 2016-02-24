@@ -72,6 +72,10 @@ class LoginController {
             // have cookie but the page is guarded with IS_AUTHENTICATED_FULLY
             redirect action: 'full', params: params
         }
+        if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_STUDENT)) {
+            redirect(controller: 'profile',action: 'preppy')
+            return
+        }
     }
 
     /**

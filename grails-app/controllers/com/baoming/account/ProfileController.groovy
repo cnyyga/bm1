@@ -240,6 +240,8 @@ class ProfileController {
         preppy.nation = Nation.get(params.long("nation"))
         preppy.birthday = params.birthday
         preppy.district = District.findByCode(params.districtId)
+        preppy.city = City.findByCode(params.cityId)
+        preppy.province = Province.findByCode(params.provinceId)
         preppy.address = params.address
         preppy.plan = Plan.get(params.long("plan.id"))
         preppy.phone = params.phone

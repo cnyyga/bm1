@@ -61,21 +61,20 @@ $(function(){
             parentPhone:{
                 required: true
             }  ,
-            school:{
+            nation:{
                 required: true
             }  ,
-            address:{
+            province:{
                 required: true
             }  ,
-            deposit:{
-                required: true,
-                number:true
+            city:{
+                required: true
             }  ,
-            middlePlan:{
-                required:function(){
-                    var studentCateories = $("#studentCateories").val()
-                    return  studentCateories== 'WG'
-                }
+            district:{
+                required: true
+            }  ,
+            resume:{
+                required: true
             }
 
         },

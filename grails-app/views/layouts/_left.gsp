@@ -54,8 +54,9 @@
             <sec:access controller="statistics">
                 <li class="${params.action == 'departmentStat'?'active':''}"><a class="ajax-link" href="${createLink(controller: 'statistics',action: 'departmentStat')}"><i class="icon-tag"></i><span class="hidden-tablet"> ${message(code: 'statistics.department.label')}</span></a></li>
             </sec:access>
+            <sec:access controller="workPlan">
             <li class="${params.controller == 'workPlan'?'active':''}"><a class="ajax-link" href="${createLink(controller: 'workPlan')}"><i class="icon-flag"></i><span class="hidden-tablet">  ${message(code: 'workPlan.label')}</span></a></li>
-
+            </sec:access>
             <sec:ifAllGranted roles="${Role.AUTHORITY_ADMIN}">
             <li class="nav-header hidden-tablet">
                 ${message(code: 'default.manager.label',args: ["${message(code: 'user.label')}"])}
