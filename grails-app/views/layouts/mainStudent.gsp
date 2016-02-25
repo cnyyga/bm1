@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html>
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
 <!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
 <!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
@@ -17,10 +18,7 @@
         <link rel="stylesheet" href="${resource(dir: 'css', file: 'jquery-ui.min.css')}" type="text/css">
         <g:javascript src="jquery-1.8.3.js"/>
         <r:layoutResources />
-        <g:javascript src="jquery-ui-1.9.2.custom.min.js"/>
-        <g:javascript src="jquery.ui.datepicker-zh-CN.js"/>
         <g:layoutHead/>
-
 	</head>
 	<body>
         <div id="header">

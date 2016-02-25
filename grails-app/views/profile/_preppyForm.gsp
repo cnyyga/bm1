@@ -149,11 +149,12 @@
 
 <div class="control-group">
     <label class="control-label" for="parentPhone">
-        <g:message code="preppy.resume.label" default="qq" />
+        <g:message code="preppy.resume.label" default="resume" />
     </label>
 
     <div class="controls">
-        <g:textArea cols="200" rows="3" name="resume" >${preppyInstance?.resume}</g:textArea>
+        <g:textArea cols="200" rows="3" name="resume" >${preppyInstance?.resume?:'【初中】：xxxx年xx月起——xxxx年xx月止，学校名称，证明人\n' +
+                '【高中（中职）】：xxxx年xx月起——xxxx年xx月止，学校名称（中职须注明专业），证明人'}</g:textArea>
     </div>
 </div>
 

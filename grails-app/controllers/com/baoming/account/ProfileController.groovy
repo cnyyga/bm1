@@ -52,6 +52,13 @@ class ProfileController {
             render(view: 're_password')
             return
         }
+
+        if (passwordnew.length>16 || passwordnew.length<6) {
+            flash.message = message(code: 'operator.password.len.error.message')
+            render(view: view)
+            return
+        }
+
         if (passwordnew != passwordnew2) {
             flash.message = message(code: 'operator.passwordnotequal.message',default: 'Passwords are not equal')
             render(view: view)

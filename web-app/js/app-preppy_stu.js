@@ -50,16 +50,20 @@ $(function(){
         $("#studentDistrict").load(districtUrl+"?id="+cityId+"&selected="+selectedId);
     }
 
-    $('#editForm').validate({
+    $("#preppyForm").validate({
         rules: {
             plan:{
                 required: true
             }  ,
             phone:{
-                required: true
+                required: true,
+                phoneCN:true,
+                maxlength:11
             }  ,
             parentPhone:{
-                required: true
+                required: true,
+                phoneCN:true,
+                maxlength:11
             }  ,
             nation:{
                 required: true
@@ -74,7 +78,19 @@ $(function(){
                 required: true
             }  ,
             resume:{
-                required: true
+                required: true,
+                maxlength:500
+            }
+            ,
+            address:{
+                required: true,
+                maxlength:80
+            }
+            ,
+            qq:{
+                required: true,
+                digits:true,
+                maxlength:10
             }
 
         },
@@ -87,7 +103,7 @@ $(function(){
                 .text('OK!').addClass('valid')
                 .closest('.control-group').addClass('success');
         }
-    })
+    });
 
     $("#family").change(function(){
         family($(this).val());
@@ -141,29 +157,5 @@ $(function(){
         $("#age").val(thisyear-year);
     }
 
-
-    _show_material($("#reviewStatus").val());
-    $("#reviewStatus").change(function(){
-        _show_material($(this).val());
-    });
-    function _show_material(rsval) {
-        var id=-1;
-        if(rsval == 'JSPG'){
-            id=2;
-        }else if(rsval == 'JSZZ'){
-            id=3;
-        }else if(rsval == 'GJSZZ'){
-            id=4;
-        }
-        $(".material-content").hide();
-        $(".material-content li").hide();
-        $(".material-content li").each(function(){
-            var _class = $(this).attr("class");
-            if(_class.indexOf(id) != -1){
-                $(this).show();
-                $(".material-content").show();
-            }
-        })
-    }
 
 })

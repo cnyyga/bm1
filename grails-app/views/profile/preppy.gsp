@@ -4,11 +4,12 @@
 	<head>
 		<meta name="layout" content="mainStudent">
 		<g:set var="entityName" value="${message(code: 'reg.student.info.label', default: 'Student')}" />
-		<title><g:message code="default.edit.label" args="[entityName]" /></title>
+		<title>旁听生信息采集</title>
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap-cerulean.css')}" type="text/css">
 
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap-responsive.css')}" type="text/css">
         <g:javascript src="jquery.validate.min.js"/>
+		<g:javascript src="additional-methods.js"/>
 		<g:javascript src="messages_zh.js"/>
 		<g:javascript src="app-preppy_stu.js"/>
 		<style>
@@ -27,7 +28,7 @@
 	<body>
     <div class="reg-content">
         <div class="reg-header">
-			基本信息
+			旁听生信息采集
 		</div>
         <g:if test="${flash.message}">
         <div class="info-result">
@@ -42,9 +43,8 @@
 			</ul>
 			</g:hasErrors>
 			<g:form method="post"  action="savePreppy" name="preppyForm">
-
 		        <g:render template="preppyForm"/>
-					<g:submitButton name="subbtn" class="input-submit"  value="${message(code: 'default.button.update.label', default: 'Update')}" />
+				<g:submitButton name="subbtn" class="input-submit"  value="${message(code: 'default.button.update.label', default: 'Update')}" />
 			</g:form>
 		</div>
 	</body>

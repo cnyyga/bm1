@@ -1,7 +1,7 @@
 <ul>
     <li>
         <g:link controller="profile" action="preppy" params="${[v:'info']}">
-            <g:message code="reg.student.info.label"/>
+            旁听生信息采集
         </g:link>
     </li>
     %{--<li>

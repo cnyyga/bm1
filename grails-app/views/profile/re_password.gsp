@@ -4,7 +4,6 @@
     <meta name="layout" content="mainStudent">
     <g:set var="entityName" value="${message(code: 'student.label', default: 'Student')}" />
     <title><g:message code="default.create.label" args="[entityName]" /></title>
-    <g:javascript src="baoming.js"/>
 </head>
 <body>
 <div class="reg-content">
