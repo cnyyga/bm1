@@ -6,6 +6,7 @@
 		<g:set var="entityName" value="${message(code: 'preppy.label', default: 'Preppy')}" />
 		<title><g:message code="default.edit.label" args="[entityName]" /></title>
         <g:javascript src="jquery.validate.min.js"/>
+        <g:javascript src="additional-methods.js"/>
         <g:javascript src="messages_zh.js"/>
         <g:javascript src="tj.js"/>
         <g:javascript src="app-preppy.js"/>

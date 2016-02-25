@@ -53,13 +53,16 @@ $(function(){
     $('#editForm').validate({
         rules: {
             name: {
-                required: true
+                required: true,
+                maxlength:10
             },
             number:{
-                required: true
+                required: true,
+                isIdCardNo:true
             },
             password:{
-                required: true
+                required: true,
+                maxlength:16
             }
 
         },
@@ -91,6 +94,7 @@ $(function(){
             var opts2 = opts.slice(9,11);
             $("#studentCateories").append(opts2);
         }
+        $("#studentCateories").val($("#studentCateories").attr("attr-sel"));
     }
 
     $("#studentCateories").change(function(){
