@@ -43,7 +43,7 @@
     </label>
 
     <div class="controls">
-        <g:select name="studentCateories" from="${Preppy.StudentCateories.values()}" optionValue="label" value="${preppyInstance?.studentCateories}"/>
+        <g:select name="studentCateories" from="${Preppy.StudentCateories.values()}" optionValue="label" value="${preppyInstance?.studentCateories}" attr-sel="${preppyInstance?.studentCateories}"/>
 
     </div>
 </div>
@@ -64,7 +64,7 @@
     </label>
 
     <div class="controls">
-        <g:select name="nation" from="${com.baoming.Nation.findAll()}"  optionValue="name" optionKey="id" required="" value="${preppyInstance?.gender?.name()}"/>
+        <g:select name="nation" from="${com.baoming.Nation.findAll()}"  optionValue="name" optionKey="id" required="" value="${preppyInstance?.nation?.id}"/>
     </div>
 </div>
 

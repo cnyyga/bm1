@@ -242,7 +242,7 @@ class ProfileController {
             return
         }
         preppy.family =Preppy.Family."${params.family}"
-        preppy.studentCateories = params.studentCateories
+        preppy.studentCateories = Preppy.StudentCateories."${params.studentCateories}"
         preppy.gender = User.Gender."${params.gender}"
         preppy.nation = Nation.get(params.long("nation"))
         preppy.birthday = params.birthday
