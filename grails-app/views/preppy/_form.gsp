@@ -265,19 +265,6 @@
             </select>
         </div>
     </div>
-    <div class="control-group material-content">
-        <label class="control-label" for="combobox">
-            <g:message code="material.label" default="material" />
-        </label>
-        <div class="controls">
-            <ul>
-                <g:each in="${com.baoming.Material.list()}" var="material">
-                    <li class="${material.reviewStatus}">${material.content}</li>
-                </g:each>
-            </ul>
-        </div>
-    </div>
-</div>
 </sec:ifNotGranted>
 
 

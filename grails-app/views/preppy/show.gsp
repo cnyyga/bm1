@@ -11,6 +11,9 @@
             display: block;
             padding-top: 5px;
         }
+            .controls{
+                padding-top: 5px;
+            }
         </style>
 	</head>
 	<body>
@@ -38,435 +41,219 @@
                 <div class="form-horizontal">
                 <fieldset>
 
-
-                    <g:if test="${preppyInstance?.name}">
-                        <div class="control-group">
-                            <label class="control-label">
-                                <g:message code="preppy.name.label" default="Name" />
-                            </label>
-                            <div class="controls">
-
-                                <span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${preppyInstance}" field="name"/></span>
-
-                            </div>
-                        </div>
-                    </g:if>
-
-                    <g:if test="${preppyInstance?.number}">
-                        <div class="control-group">
-                            <label class="control-label">
-                                <g:message code="preppy.number.label" default="Number" />
-                            </label>
-                            <div class="controls">
-
-                                <span class="property-value" aria-labelledby="number-label"><g:fieldValue bean="${preppyInstance}" field="number"/></span>
-
-                            </div>
-                        </div>
-                    </g:if>
-
-                    <g:if test="${preppyInstance?.gender}">
-                        <div class="control-group">
-                            <label class="control-label">
-                                <g:message code="preppy.gender.label" default="Gender" />
-                            </label>
-                            <div class="controls">
-
-                                <span class="property-value" aria-labelledby="gender-label">${preppyInstance?.gender?.label}</span>
-
-                            </div>
-                        </div>
-                    </g:if>
-
                 <div class="control-group">
-                    <label class="control-label">
-                        <g:message code="preppy.birthday.label" default="Plan" />
+                    <label class="control-label" for="name">
+                        <g:message code="preppy.name.label" default="Name" />
                     </label>
+
                     <div class="controls">
-
-                        <span class="property-value" aria-labelledby="plan-label">
-                            <g:formatDate format="yyyy-MM-dd" date="${preppyInstance.birthday}"/>
-                        </span>
-
+                        ${preppyInstance?.name}
                     </div>
                 </div>
 
-                <g:if test="${preppyInstance?.district}">
+                <div class="control-group">
+                    <label class="control-label" for="number">
+                        <g:message code="preppy.number.label" default="Number" />
+                    </label>
+
+                    <div class="controls">
+                        ${preppyInstance?.number}
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="deposit">
+                        <g:message code="preppy.deposit.label" default="deposit" />
+                    </label>
+
+                    <div class="controls">
+                        ${preppyInstance?.deposit}  元
+                    </div>
+                </div>
+
                     <div class="control-group">
-                        <label class="control-label">
+                        <label class="control-label" for="family"><g:message code="preppy.family.label"/> 
+                        </label>
+
+                        <div class="controls">
+                            ${preppyInstance?.family?.label}
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="studentCateories"><g:message code="preppy.studentCateories.label"/> 
+                        </label>
+
+                        <div class="controls">
+                            ${preppyInstance?.studentCateories?.label}
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="gender">
+                            <g:message code="preppy.gender.label" default="Gender" />
+                        </label>
+
+                        <div class="controls">
+                            ${preppyInstance?.gender?.label}
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="gender">
+                            <g:message code="nation.label" default="nation" />
+                        </label>
+
+                        <div class="controls">
+                            ${preppyInstance?.nation?.name}
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="birthday">
+                            <g:message code="preppy.birthday.label" default="birthday" />
+                        </label>
+
+                        <div class="controls">
+                            <g:formatDate date="${preppyInstance?.birthday}" format="yyyy-MM-dd"/>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="district">
                             <g:message code="medium.district.label" default="District" />
                         </label>
+
                         <div class="controls">
-
-                            <span class="property-value" aria-labelledby="district-label">${preppyInstance?.province?.name}${preppyInstance?.city?.name}${preppyInstance?.district?.name}</span>
-                        </span>
-
+                            ${preppyInstance?.province?.name}${preppyInstance?.city?.name}${preppyInstance?.district?.name}
                         </div>
                     </div>
-                </g:if>
 
-                <g:if test="${preppyInstance?.studentDistrict}">
                     <div class="control-group">
-                        <label class="control-label">
-                            <g:message code="medium.studentDistrict.label" default="Student District" />
+                        <label class="control-label" for="address">
+                            <g:message code="preppy.address.label" default="Tel" />
                         </label>
+
                         <div class="controls">
-
-                            <span class="property-value" aria-labelledby="studentDistrict-label">
-
-                            <%
-                                try {
-                                    out.print(preppyInstance?.studentProvince?.name)
-                                } catch (Exception e) {
-                                }
-                                try {
-                                    out.print(preppyInstance?.studentCity?.name)
-                                } catch (Exception e) {
-                                }
-                                try {
-                                    out.print(preppyInstance?.studentDistrict?.name)
-                                } catch (Exception e) {
-                                }
-                            %></span>
+                            ${preppyInstance?.address}
                         </div>
                     </div>
-                </g:if>
-
-                <div class="control-group">
-                    <label class="control-label">
-                        <g:message code="preppy.type.label" default="type" />
-                    </label>
-                    <div class="controls">
-
-                        <span class="property-value" aria-labelledby="gender-label">${preppyInstance?.type?.label}</span>
-
-                    </div>
-                </div>
-
-
-
-                <g:if test="${preppyInstance?.studentCateories?.name() == Preppy.StudentCateories.SG.name()}">
-                    <div class="control-group">
-                        <label class="control-label">
-                            <g:message code="preppy.academicYear.label" default="Plan" />
-                        </label>
-                        <div class="controls">
-
-                            <span class="property-value" aria-labelledby="plan-label">
-                                   ${preppyInstance.academicYear?:'未参加'}
-                            </span>
-
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">
-                            <g:message code="preppy.academicScore.label" default="Plan" />
-                        </label>
-                        <div class="controls">
-
-                            <span class="property-value" aria-labelledby="plan-label">
-                                <g:set var="academicScore" value="${preppyInstance.academicScore}"  />
-                                <g:set var="academicScoreList" value="${academicScore?academicScore.tokenize(','):['A','A','A','A','A','A']}"  />
-                                物理${academicScoreList[0]}
-                                化学${academicScoreList[1]}
-                                生物${academicScoreList[2]}
-                                地理${academicScoreList[3]}
-                                历史${academicScoreList[4]}
-                                政治${academicScoreList[5]}
-                            </span>
-
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">
-                            <g:message code="preppy.skill.label" default="Plan" />
-                        </label>
-                        <div class="controls">
-                            <span class="property-value" aria-labelledby="plan-label">
-                                ${preppyInstance.skill?.label}
-                            </span>
-
-                        </div>
-                    </div>
-                </g:if>
-                <g:else>
-                    <div class="control-group">
-                        <label class="control-label">
-                            <g:message code="preppy.schoolType.label" default="schoolType" />
-                        </label>
-                        <div class="controls">
-
-                            <span class="property-value" aria-labelledby="gender-label">${preppyInstance?.schoolType?.label}</span>
-
-                        </div>
-                    </div>
-                </g:else>
-
-                <g:if test="${preppyInstance?.studentCateories?.name() == Preppy.StudentCateories.WG.name()}">
-                    <div class="control-group">
-                        <label class="control-label">
-                            <g:message code="preppy.middlePlan.label" default="type" />
-                        </label>
-                        <div class="controls">
-
-                            <span class="property-value" aria-labelledby="gender-label">${preppyInstance?.middlePlan}</span>
-
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">
-                            <g:message code="preppyPlan.label" default="type" />
-                        </label>
-                        <div class="controls">
-
-                            <span class="property-value" aria-labelledby="gender-label">
-
-                                <%
-                                       try{
-                                          println preppyInstance.preppyPlan.name
-                                       }catch(Exception e){dd}
-                                    %>
-                            </span>
-
-                        </div>
-                    </div>
-                </g:if>
-                    
-                    <g:if test="${preppyInstance?.plan}">
-                    <div class="control-group">
-                        <label class="control-label">
+                    <div class="control-group ">
+                        <label class="control-label" for="planId">
                             <g:message code="preppy.plan.label" default="Plan" />
                         </label>
-                        <div class="controls">
-                            
-                            <span class="property-value" aria-labelledby="plan-label"><g:link controller="plan" action="show" id="${preppyInstance?.plan?.id}">${preppyInstance?.plan?.name}</g:link></span>
-                            
+
+                        <div class="controls plan-area">
+                            ${preppyInstance?.plan?.name}
                         </div>
                     </div>
-                    </g:if>
 
-                <div class="control-group">
-                    <label class="control-label">
-                        <g:message code="preppy.deposit.label" default="Plan" />
-                    </label>
-                    <div class="controls">
 
-                        <span class="property-value" aria-labelledby="plan-label">
-                            ${preppyInstance?.deposit}
-                        </span>
+                    <div class="control-group">
+                        <label class="control-label" for="phone">
+                            <g:message code="preppy.phone.label" default="Phone" />
+                        </label>
 
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <label class="control-label">
-                        <g:message code="preppy.phone.label" default="Plan" />
-                    </label>
-                    <div class="controls">
-
-                        <span class="property-value" aria-labelledby="plan-label">
+                        <div class="controls">
                             ${preppyInstance?.phone}
-                        </span>
-
+                        </div>
                     </div>
-                </div>
 
-                <div class="control-group">
-                    <label class="control-label">
-                        <g:message code="preppy.parentPhone.label" default="Plan" />
-                    </label>
-                    <div class="controls">
+                    <div class="control-group">
+                        <label class="control-label" for="parentPhone">
+                            <g:message code="preppy.parentPhone.label" default="parentPhone" />
+                        </label>
 
-                        <span class="property-value" aria-labelledby="plan-label">
+                        <div class="controls">
                             ${preppyInstance?.parentPhone}
-                        </span>
-
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <label class="control-label">
-                        <g:message code="preppy.address.label" default="Plan" />
-                    </label>
-                    <div class="controls">
-
-                        <span class="property-value" aria-labelledby="plan-label">
-                            ${preppyInstance?.address}
-                        </span>
-
-                    </div>
-                </div>
-                    
-
-                <g:if test="${preppyInstance?.studentCateories}">
-                    <div class="control-group">
-                        <label class="control-label">
-                            <g:message code="studentType.label"/>
-                        </label>
-                        <div class="controls">
-
-                            <span class="property-value" aria-labelledby="qq-label">${preppyInstance?.studentCateories?.label}</span>
-
                         </div>
                     </div>
-                </g:if>
 
                     <div class="control-group">
-                        <label class="control-label">
-                            <g:message code="preppy.hkbPath.label"/>
+                        <label class="control-label" for="parentPhone">
+                            <g:message code="preppy.qq.label" default="qq" />
                         </label>
-                        <div class="controls">
 
-                            <span class="property-value" aria-labelledby="qq-label">
-                                <g:if test="${preppyInstance?.hkbPath}">
-                                <g:link action="img1"  controller="api" params="[path:preppyInstance?.hkbPath]" target="_blank">
-                                    <img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance?.hkbPath])}" style="height: 100px;"/>
-                                </g:link>
-                                </g:if>
-                            </span>
+                        <div class="controls">
+                            ${preppyInstance?.qq}
                         </div>
                     </div>
-                    <div class="control-group">
-                        <label class="control-label">
-                            <g:message code="preppy.hkbksyPath.label"/>
-                        </label>
-                        <div class="controls">
 
-                            <span class="property-value" aria-labelledby="qq-label">
-                                <g:if test="${preppyInstance?.hkbksyPath}">
-                                    <g:link action="img1"  controller="api"  params="[path:preppyInstance?.hkbksyPath]"  target="_blank">
-                                        <img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance?.hkbksyPath])}" style="height: 100px;"/>
-                                    </g:link>
-                                </g:if>
-                            </span>
+                    <div class="control-group">
+                        <label class="control-label" for="parentPhone">
+                            <g:message code="preppy.resume.label" default="qq" />
+                        </label>
+
+                        <div class="controls">
+                            ${preppyInstance?.resume}
                         </div>
                     </div>
-                    <div class="control-group">
-                        <label class="control-label">
-                            <g:message code="preppy.cardPhotoPath.label"/>
-                        </label>
-                        <div class="controls">
 
-                            <span class="property-value" aria-labelledby="qq-label">
-                                <g:if test="${preppyInstance?.cardPhotoPath}">
-                                    <g:link action="img1"  controller="api" params="[path:preppyInstance?.cardPhotoPath]" target="_blank">
-                                        <img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance?.cardPhotoPath])}" style="height: 100px;"/>
-                                    </g:link>
-                                </g:if>
-                            </span>
+                    <div class="control-group">
+                        <label class="control-label" for="reviewStatus">
+                            <g:message code="preppy.reviewStatus.label" default="ReviewStatus" />
+                        </label>
+
+                        <div class="controls">
+                            ${preppyInstance?.reviewStatus?.label}
                         </div>
                     </div>
-                    <div class="control-group">
-                        <label class="control-label">
-                            <g:message code="preppy.byzsPath.label"/>
-                        </label>
-                        <div class="controls">
 
-                            <span class="property-value" aria-labelledby="qq-label">
-                                <g:if test="${preppyInstance?.byzsPath}">
-                                    <g:link action="img1"  controller="api"  params="[path:preppyInstance?.byzsPath]"  target="_blank">
-                                        <img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance?.byzsPath])}" style="height: 100px;"/>
-                                    </g:link>
-                                </g:if>
-                            </span>
+                    <div class="control-group zhongzhi">
+                        <label class="control-label" for="collegeSignUp">
+                            高考报名地
+                        </label>
+
+                        <div class="controls">
+                            ${preppyInstance?.collegeSignUp?.label}
                         </div>
                     </div>
+
+                    <div class="control-group zhongzhi">
+                        <label class="control-label" for="preppyPlan">
+                            <g:message code="preppyPlan.label" default="preppyPlan" />
+                        </label>
+
+                        <div class="controls">
+                            ${preppyInstance.preppyPlan?.name}
+                        </div>
+                    </div>
+
                     <div class="control-group">
-                        <label class="control-label">
-                            <g:message code="preppy.xjzmPath.label"/>
+                        <label class="control-label" for="remark">
+                            <g:message code="preppy.remark.label" default="remark" />1
                         </label>
                         <div class="controls">
+                            ${preppyInstance?.remark}
+                        </div>
+                    </div>
 
-                            <span class="property-value" aria-labelledby="qq-label">
-                                <g:if test="${preppyInstance?.xjzmPath}">
-                                    <g:link action="img1"  controller="api"  params="[path:preppyInstance?.xjzmPath]"  target="_blank">
-                                        <img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance?.xjzmPath])}" style="height: 100px;"/>
-                                    </g:link>
-                                </g:if>
-                            </span>
+                    <div class="control-group">
+                        <label class="control-label" for="remark">
+                            <g:message code="preppy.remark.label" default="remark" />2
+                        </label>
+                        <div class="controls">
+                            ${preppyInstance?.remark1}
                         </div>
                     </div>
 
 
-                    <sec:ifAllGranted roles="ROLE_ADMIN">
-                        <g:if test="${preppyInstance?.reviewStatus}">
-                            <div class="control-group">
-                                <label class="control-label">
-                                    <g:message code="medium.reviewStatus.label" default="Review Status" />
-                                </label>
-                                <div class="controls">
-
-                                    <span class="property-value" aria-labelledby="reviewStatus-label">
-                                        ${preppyInstance.reviewStatus?.label?:message(code: 'home.student.auditing.message')}
-                                    </span>
-
-                                </div>
-                            </div>
-                        </g:if>
-
-
-
-                        <g:if test="${preppyInstance?.reviewPerson}">
-                            <div class="control-group">
-                                <label class="control-label">
-                                    <g:message code="medium.reviewPerson.label" default="Review Person" />
-                                </label>
-                                <div class="controls">
-
-                                    <span class="property-value" aria-labelledby="reviewPerson-label">
-                                        ${preppyInstance?.reviewPerson?.name}</span>
-
-                                </div>
-                            </div>
-                        </g:if>
-                        <g:if test="${preppyInstance?.reviewDate}">
-                            <div class="control-group">
-                                <label class="control-label">
-                                    <g:message code="medium.reviewDate.label" default="Review Date" />
-                                </label>
-                                <div class="controls">
-
-                                    <span class="property-value" aria-labelledby="reviewDate-label"><g:formatDate date="${preppyInstance?.reviewDate}" format="yyyy-MM-dd HH:mm:ss" /></span>
-
-                                </div>
-                            </div>
-                        </g:if>
-                        <%
-                            def ttt
-                            try {
-                                ttt = preppyInstance?.teacher
-                            } catch (Exception e) {
-
-                            }
-                            %>
-                    <g:if test="${ttt}">
-                        <div class="control-group">
-                            <label class="control-label">
-                                <g:message code="preppy.teacher.label" default="Teacher" />
-                            </label>
-                            <div class="controls">
-                                <span class="property-value" aria-labelledby="teacher-label"><g:link controller="teacher" action="show" id="${ttt?.id}">${ttt?.name}</g:link></span>
-                            </div>
-                        </div>
-                    </g:if>
-                        </sec:ifAllGranted>
                     <div class="control-group">
-                        <label class="control-label">
-                            <g:message code="preppy.remark.label" default="remark" />
+                        <label class="control-label" for="remark">
+                            <g:message code="preppy.remark.label" default="remark" />3
                         </label>
                         <div class="controls">
-                            <span class="property-value" aria-labelledby="teacher-label">
-                                ${preppyInstance.remark}
-                            </span>
+                            ${preppyInstance?.remark2}
                         </div>
                     </div>
+
                     <div class="control-group">
-                        <label class="control-label">
-                            <g:message code="default.dateCreated.label" default="dateCreated" />
+                        <label class="control-label" for="combobox">
+                            <g:message code="preppy.teacher.label" default="Teacher" />
                         </label>
+
                         <div class="controls">
-                            <span class="property-value" aria-labelledby="teacher-label"><g:formatDate
-                                    date="${preppyInstance?.dateCreated}" format="yyyy-MM-dd HH:mm"/></span>
+                            ${preppyInstance?.teacher?.name}
                         </div>
                     </div>
 
