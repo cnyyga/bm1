@@ -48,7 +48,13 @@
     </label>
 
     <div class="controls">
-        <g:textField name="deposit" value="${preppyInstance?.deposit}"/>  元
+        <g:if test="${preppyInstance.reviewStatus == com.baoming.Preppy.ReviewStatus.NO_AUDIT }">
+            <g:textField name="deposit" value="${preppyInstance?.deposit}"/>
+        </g:if>
+        <g:else>
+            <g:textField name="deposit" value="${preppyInstance?.deposit} "  readonly="readonly"/>
+        </g:else>
+        元
     </div>
 </div>
 

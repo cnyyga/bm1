@@ -241,6 +241,11 @@ class ProfileController {
             redirect(action: 'preppy')
             return
         }
+        if(preppy.reviewStatus != Preppy.ReviewStatus.NO_AUDIT){
+            flash.message = '已经审核无法修改资料'
+            redirect(action: 'preppy')
+            return
+        }
         preppy.family =Preppy.Family."${params.family}"
         preppy.studentCateories = Preppy.StudentCateories."${params.studentCateories}"
         preppy.gender = User.Gender."${params.gender}"

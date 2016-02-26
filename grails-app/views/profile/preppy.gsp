@@ -44,7 +44,9 @@
 			</g:hasErrors>
 			<g:form method="post"  action="savePreppy" name="preppyForm">
 		        <g:render template="preppyForm"/>
+				<g:if test="${preppyInstance.reviewStatus == com.baoming.Preppy.ReviewStatus.NO_AUDIT }">
 				<g:submitButton name="subbtn" class="input-submit"  value="${message(code: 'default.button.update.label', default: 'Update')}" />
+				</g:if>
 			</g:form>
 		</div>
 	</body>

@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aec92546-be35-4fea-a03b-5db458d17829" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/com/baoming/PreppyController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/com/baoming/PreppyController.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/com/baoming/account/ProfileController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/com/baoming/account/ProfileController.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/preppy/_form.gsp" afterPath="$PROJECT_DIR$/grails-app/views/preppy/_form.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/profile/_preppyForm.gsp" afterPath="$PROJECT_DIR$/grails-app/views/profile/_preppyForm.gsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bm.iws" afterPath="$PROJECT_DIR$/bm.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/preppy/list.gsp" afterPath="$PROJECT_DIR$/grails-app/views/preppy/list.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/js/student-review.js" afterPath="$PROJECT_DIR$/web-app/js/student-review.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/profile/preppy.gsp" afterPath="$PROJECT_DIR$/grails-app/views/profile/preppy.gsp" />
     </list>
     <ignored path="bm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -78,8 +79,18 @@
       <file leaf-file-name="PreppyController.groovy" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/controllers/com/baoming/PreppyController.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-31.148148">
-              <caret line="101" column="57" selection-start-line="101" selection-start-column="57" selection-end-line="101" selection-end-column="57" />
+            <state vertical-scroll-proportion="-2.2962964">
+              <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="preppy.gsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/profile/preppy.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.0125">
+              <caret line="44" column="73" selection-start-line="44" selection-start-column="73" selection-end-line="44" selection-end-column="73" />
               <folding />
             </state>
           </provider>
@@ -89,7 +100,17 @@
         <entry file="file://$PROJECT_DIR$/grails-app/services/bm/PlanService.groovy">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="110" column="8" selection-start-line="110" selection-start-column="8" selection-end-line="110" selection-end-column="8" />
+              <caret line="39" column="20" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_preppyForm.gsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/profile/_preppyForm.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="31.903847">
+              <caret line="56" column="31" selection-start-line="56" selection-start-column="31" selection-end-line="56" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -98,8 +119,8 @@
       <file leaf-file-name="Preppy.groovy" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/domain/com/baoming/Preppy.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.4074073">
-              <caret line="49" column="21" selection-start-line="49" selection-start-column="21" selection-end-line="49" selection-end-column="21" />
+            <state vertical-scroll-proportion="-3.0">
+              <caret line="204" column="8" selection-start-line="204" selection-start-column="8" selection-end-line="204" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -108,21 +129,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="show.gsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/preppy/show.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.981982">
-              <caret line="210" column="0" selection-start-line="210" selection-start-column="0" selection-end-line="210" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="list.gsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/preppy/list.gsp">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-2.7804878">
               <caret line="260" column="76" selection-start-line="260" selection-start-column="62" selection-end-line="260" selection-end-column="76" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProfileController.groovy" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/grails-app/controllers/com/baoming/account/ProfileController.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.7751938">
+              <caret line="245" column="38" selection-start-line="245" selection-start-column="38" selection-end-line="245" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -138,41 +159,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_preppyForm.gsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/profile/_preppyForm.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.615385">
-              <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="_form.gsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/preppy/_form.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-18.51923">
-              <caret line="240" column="10" selection-start-line="194" selection-start-column="4" selection-end-line="240" selection-end-column="10" />
+            <state vertical-scroll-proportion="-5.1153846">
+              <caret line="50" column="97" selection-start-line="50" selection-start-column="7" selection-end-line="50" selection-end-column="97" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="edit.gsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/preppy/edit.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="32.884617">
-              <caret line="12" column="15" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="student-review.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="student-review.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web-app/js/student-review.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.22592592">
-              <caret line="28" column="26" selection-start-line="28" selection-start-column="26" selection-end-line="28" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="17" column="37" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -218,21 +219,21 @@
         <option value="$PROJECT_DIR$/grails-app/controllers/LoginController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/layouts/_studentLeft.gsp" />
         <option value="$PROJECT_DIR$/web-app/js/additional-methods.js" />
-        <option value="$PROJECT_DIR$/grails-app/views/profile/preppy.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/layouts/mainStudent.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/profile/re_password.gsp" />
         <option value="$PROJECT_DIR$/grails-app/i18n/messages.properties" />
-        <option value="$PROJECT_DIR$/grails-app/controllers/com/baoming/account/ProfileController.groovy" />
         <option value="$PROJECT_DIR$/web-app/js/app-preppy_stu.js" />
-        <option value="$PROJECT_DIR$/grails-app/views/profile/_preppyForm.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/preppy/edit.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/preppy/create.gsp" />
         <option value="$PROJECT_DIR$/web-app/js/app-preppy.js" />
-        <option value="$PROJECT_DIR$/grails-app/views/preppy/_form.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/preppy/show.gsp" />
         <option value="$PROJECT_DIR$/grails-app/controllers/com/baoming/PreppyController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/preppy/list.gsp" />
         <option value="$PROJECT_DIR$/web-app/js/student-review.js" />
+        <option value="$PROJECT_DIR$/grails-app/views/preppy/_form.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/profile/_preppyForm.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/profile/preppy.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/controllers/com/baoming/account/ProfileController.groovy" />
       </list>
     </option>
   </component>
@@ -798,7 +799,7 @@
       <workItem from="1456221239738" duration="4505000" />
       <workItem from="1456312801623" duration="7508000" />
       <workItem from="1456385615725" duration="4714000" />
-      <workItem from="1456457149216" duration="7844000" />
+      <workItem from="1456457149216" duration="8615000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1451145414113</created>
@@ -884,11 +885,17 @@
       <option name="project" value="LOCAL" />
       <updated>1456465531987</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="旁听生资料修改">
+      <created>1456479670111</created>
+      <option name="number" value="00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1456479670111</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45685000" />
+    <option name="totallyTimeSpent" value="46456000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -1247,6 +1254,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.4074074">
           <caret line="122" column="9" selection-start-line="122" selection-start-column="9" selection-end-line="122" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1330,24 +1338,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/com/baoming/account/ProfileController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="234" column="18" selection-start-line="234" selection-start-column="18" selection-end-line="234" selection-end-column="18" />
-          <folding>
-            <element signature="e#29#54#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/profile/preppy.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="33" selection-start-line="11" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web-app/js/additional-methods.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1372,14 +1362,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/profile/_preppyForm.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.615385">
-          <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/preppy/edit.gsp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="32.884617">
@@ -1392,41 +1374,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.981982">
           <caret line="210" column="0" selection-start-line="210" selection-start-column="0" selection-end-line="210" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/services/bm/PlanService.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="110" column="8" selection-start-line="110" selection-start-column="8" selection-end-line="110" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/preppy/_form.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-18.51923">
-          <caret line="240" column="10" selection-start-line="194" selection-start-column="4" selection-end-line="240" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/com/baoming/Preppy.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.4074073">
-          <caret line="49" column="21" selection-start-line="49" selection-start-column="21" selection-end-line="49" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/com/baoming/PreppyController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-31.148148">
-          <caret line="101" column="57" selection-start-line="101" selection-start-column="57" selection-end-line="101" selection-end-column="57" />
           <folding />
         </state>
       </provider>
@@ -1449,8 +1396,67 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web-app/js/student-review.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22592592">
-          <caret line="28" column="26" selection-start-line="28" selection-start-column="26" selection-end-line="28" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="37" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/services/bm/PlanService.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="39" column="20" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/com/baoming/PreppyController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.2962964">
+          <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/preppy/_form.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.1153846">
+          <caret line="50" column="97" selection-start-line="50" selection-start-column="7" selection-end-line="50" selection-end-column="97" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/profile/_preppyForm.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="31.903847">
+          <caret line="56" column="31" selection-start-line="56" selection-start-column="31" selection-end-line="56" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/profile/preppy.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.0125">
+          <caret line="44" column="73" selection-start-line="44" selection-start-column="73" selection-end-line="44" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/com/baoming/Preppy.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.0">
+          <caret line="204" column="8" selection-start-line="204" selection-start-column="8" selection-end-line="204" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/com/baoming/account/ProfileController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7751938">
+          <caret line="245" column="38" selection-start-line="245" selection-start-column="38" selection-end-line="245" selection-end-column="38" />
           <folding />
         </state>
       </provider>

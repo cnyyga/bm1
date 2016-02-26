@@ -33,7 +33,7 @@
     </label>
 
     <div class="controls">
-        <g:select name="family" from="${Preppy.Family.values()}" optionValue="label" value="${preppyInstance?.family}"/>
+        <g:select name="family" from="${Preppy.Family.values()}" readonly="" optionValue="label" value="${preppyInstance?.family}"/>
 
     </div>
 </div>
