@@ -219,6 +219,13 @@
                                     </g:link>
                                 </sec:ifNotGranted>
                                 <sec:ifNotGranted roles="${Role.AUTHORITY_TEACHER}">
+                                    <g:hiddenField name="preppy_reviewStatus" value="${preppyInstance.reviewStatus}"/>
+                                    <g:hiddenField name="preppy_family" value="${preppyInstance.family}"/>
+                                    <g:hiddenField name="preppy_collegeSignUp" value="${preppyInstance.collegeSignUp}"/>
+                                    <g:hiddenField name="preppy_preppyPlan" value="${preppyInstance.preppyPlan?.id}"/>
+                                    <g:hiddenField name="preppy_remark" value="${preppyInstance.remark}"/>
+                                    <g:hiddenField name="preppy_remark1" value="${preppyInstance.remark1}"/>
+                                    <g:hiddenField name="preppy_remark2" value="${preppyInstance.remark2}"/>
                                     <g:link class="btn btn-info btn-stu-review" action="ajaxAudit" rel="${preppyInstance.id}" id="${preppyInstance.id}" params="${[t:'au']}">
                                         <i class="icon-edit icon-white"></i>
                                         <g:message code="student.review.label" default="Review" />
@@ -251,7 +258,54 @@
                             <g:message code="student.review.status.label" default="account" />
                         </label>
                         <div class="controls">
-                            <g:select name="reviewStatus" from="${Preppy.ReviewStatus.values()}"   optionValue="label"></g:select>
+                            <g:select name="reviewStatus" id="reviewStatus11" from="${Preppy.ReviewStatus.values()}"   optionValue="label"></g:select>
+                        </div>
+                    </div>
+                    <div class="control-group zhongzhi">
+                        <label class="control-label" for="collegeSignUp">
+                            高考报名地
+                        </label>
+
+                        <div class="controls">
+                            <g:select name="collegeSignUp" from="${com.baoming.Preppy$CollegeSignUp?.values()}"  optionValue="label" required="" value="${preppyInstance?.collegeSignUp?.name()}"/>
+                        </div>
+                    </div>
+
+                    <div class="control-group zhongzhi">
+                        <label class="control-label" for="preppyPlan">
+                            <g:message code="preppyPlan.label" default="preppyPlan" />
+                        </label>
+
+                        <div class="controls">
+                            <g:select id="preppyPlan" name="preppyPlan" from="${preppyPlans}" optionKey="id" optionValue="name" value="${preppyInstance?.preppyPlan?.id}" class="many-to-one" />
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="remark">
+                            <g:message code="preppy.remark.label" default="remark" />1
+                        </label>
+                        <div class="controls">
+                            <g:textArea name="remark" rows="3" cols="15" style="width: 300px;">${preppyInstance?.remark}</g:textArea>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="remark">
+                            <g:message code="preppy.remark.label" default="remark" />2
+                        </label>
+                        <div class="controls">
+                            <g:textArea name="remark1" rows="3" cols="15" style="width: 300px;">${preppyInstance?.remark1}</g:textArea>
+                        </div>
+                    </div>
+
+
+                    <div class="control-group">
+                        <label class="control-label" for="remark">
+                            <g:message code="preppy.remark.label" default="remark" />3
+                        </label>
+                        <div class="controls">
+                            <g:textArea name="remark2" rows="3" cols="15" style="width: 300px;">${preppyInstance?.remark2}</g:textArea>
                         </div>
                     </div>
                 </sec:ifAnyGranted>

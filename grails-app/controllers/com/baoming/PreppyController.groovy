@@ -94,7 +94,7 @@ class PreppyController {
             lt('dateCreated', endDate)
         }
 
-        [preppyInstanceList: list, preppyInstanceTotal: total]
+        [preppyInstanceList: list, preppyInstanceTotal: total,preppyPlans:planService.getPreppyPlans()]
     }
 
     def create() {
@@ -557,6 +557,11 @@ class PreppyController {
         preppyInstance.reviewDate = new Date()
         preppyInstance.reviewPerson = User.get(userId as Long)
         preppyInstance.reviewStatus = Preppy.ReviewStatus."${params.reviewStatus}"
+        preppyInstance.collegeSignUp = Preppy.CollegeSignUp."${params.collegeSignUp}"
+        preppyInstance.preppyPlan = PreppyPlan.get(params.long("preppyPlan"))
+        preppyInstance.remark = params.remark
+        preppyInstance.remark1 = params.remark1
+        preppyInstance.remark2 = params.remark2
 
         if (!preppyInstance.save()) {
             log.error(preppyInstance.errors)
