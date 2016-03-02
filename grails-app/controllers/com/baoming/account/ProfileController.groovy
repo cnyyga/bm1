@@ -6,6 +6,7 @@ import com.baoming.Preppy
 import com.baoming.Province
 import com.baoming.City
 import com.baoming.District
+import com.baoming.Resume
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 import org.apache.commons.io.FileUtils
 
@@ -261,6 +262,49 @@ class ProfileController {
         preppy.qq = params.qq
         preppy.resume = params.resume
         preppy.town = params.town
+
+        def juniorStart_year = params.get("juniorStart_year")
+        def juniorStart_month = params.get("juniorStart_month")
+        def juniorEnd_year = params.get("juniorEnd_year")
+        def juniorEnd_month = params.get("juniorEnd_month")
+        def juniorSchool = params.get("juniorSchool")
+        def juniorAuthenticator = params.get("juniorAuthenticator")
+        def highStart_year = params.get("highStart_year")
+        def highStart_month = params.get("highStart_month")
+        def highEnd_year = params.get("highEnd_year")
+        def highEnd_month = params.get("highEnd_month")
+        def highSchool = params.get("highSchool")
+        def highAuthenticator = params.get("highAuthenticator")
+        def cal = Calendar.instance
+        cal.clearTime()
+        def resume = new Resume()
+        if(juniorStart_year&&juniorStart_month){
+            cal.set(Calendar.YEAR,juniorStart_year as int)
+            cal.set(Calendar.MONTH,(juniorStart_month as int)-1)
+            resume.juniorStart = cal.time
+        }
+        if(juniorEnd_year&&juniorEnd_month){
+            cal.set(Calendar.YEAR,juniorEnd_year as int)
+            cal.set(Calendar.MONTH,(juniorEnd_month as int)-1)
+            resume.juniorEnd=cal.time
+        }
+        resume.juniorSchool=juniorSchool
+        resume.juniorAuthenticator=juniorAuthenticator
+        if(highStart_year&&highStart_month){
+            cal.set(Calendar.YEAR,highStart_year as int)
+            cal.set(Calendar.MONTH,(highStart_month as int)-1)
+            resume.highStart = cal.time
+        }
+        if(highEnd_year&&highEnd_month){
+            cal.set(Calendar.YEAR,highEnd_year as int)
+            cal.set(Calendar.MONTH,(highEnd_month as int)-1)
+            resume.highEnd=cal.time
+        }
+        resume.highSchool=highSchool
+        resume.highAuthenticator=highAuthenticator
+        preppy.resume=resume
+
+
         if(!preppy.save()){
             log.error(preppy.errors)
             flash.message = message(code: 'default.save.failure.label')

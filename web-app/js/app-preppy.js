@@ -61,7 +61,10 @@ $(function(){
                 isIdCardNo:true
             },
             password:{
-                required: true,
+                required: function(){
+                    var _id= $("#id").val();
+                    return (!_id ||_id == '')
+                },
                 maxlength:16
             }
 

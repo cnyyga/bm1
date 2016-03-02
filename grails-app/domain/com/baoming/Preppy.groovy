@@ -60,7 +60,7 @@ class Preppy {
     String byzsPath//高中（中职）毕业证书
     String xjzmPath//学籍证明（本省在校中职生）
 
-    String resume //简历
+    Resume resume //简历
     String remark //备注1
     String remark1//备注2
     String remark2//备注3
@@ -104,7 +104,7 @@ class Preppy {
         remark2 nullable: true
         nation nullable: true
         collegeSignUp nullable: true
-        resume nullable: true,maxSize: 1024
+        resume nullable: true
         studentCity nullable: true
         academicYear nullable: true
         academicScore nullable: true
@@ -122,6 +122,8 @@ class Preppy {
         type nullable: true
         town nullable: true
     }
+
+    static embedded = ['resume']
 
     static mapping = {
         remark sqlType: 'text'
@@ -261,4 +263,28 @@ class Preppy {
             this.label = label
         }
     }
+}
+
+class Resume{
+    Date juniorStart//初中入学日期
+    Date juniorEnd//初中毕业日期
+    String juniorSchool//初中学校
+    String juniorAuthenticator//初中证明人
+
+    Date highStart//高中入学日期
+    Date highEnd//高中毕业日期
+    String highSchool//高中学校
+    String highAuthenticator//高中证明人
+
+    static constraints = {
+        juniorStart nullable: true
+        juniorEnd nullable: true
+        juniorSchool nullable: true
+        juniorAuthenticator nullable: true
+        highStart nullable: true
+        highEnd nullable: true
+        highSchool nullable: true
+        highAuthenticator nullable: true
+    }
+
 }

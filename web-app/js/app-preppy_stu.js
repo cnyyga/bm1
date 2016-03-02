@@ -81,9 +81,21 @@ $(function(){
                 required: true,
                 maxlength:50
             }  ,
-            resume:{
+            juniorSchool:{
                 required: true,
-                maxlength:500
+                maxlength:80
+            },
+            juniorAuthenticator:{
+                required: true,
+                maxlength:80
+            } ,
+            highSchool:{
+                required: true,
+                maxlength:80
+            },
+            highAuthenticator:{
+                required: true,
+                maxlength:80
             }
             ,
             address:{

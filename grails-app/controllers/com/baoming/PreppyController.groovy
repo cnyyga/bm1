@@ -226,22 +226,13 @@ class PreppyController {
         [preppyInstance: preppyInstance,provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()]
     }
 
-    def update(Long id, Long version) {
+    def update(Long id) {
+
         def preppyInstance = Preppy.get(id)
         if (!preppyInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'preppy.label', default: 'Preppy'), id])
             redirect(action: "list")
             return
-        }
-
-        if (version != null) {
-            if (preppyInstance.version > version) {
-                preppyInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                        [message(code: 'preppy.label', default: 'Preppy')] as Object[],
-                        "Another user has updated this Preppy while you were editing")
-                render(view: "edit", model: [preppyInstance: preppyInstance,provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()])
-                return
-            }
         }
 
         preppyInstance.properties = params
@@ -260,6 +251,14 @@ class PreppyController {
             }
         }
         preppyInstance.teacher = teacher
+
+        if(params.password){
+            def user = User.findByUsername(preppyInstance.number)
+            if(user){
+                user.password = params.password
+                user.save()
+            }
+        }
 
         def province = params.provinceId?Province.findByCode(params.provinceId):null
         if(province && province.name.count('江苏') > 0) {
@@ -323,6 +322,55 @@ class PreppyController {
         if(xjzmPath){
             preppyInstance.xjzmPath=xjzmPath
         }
+
+        def juniorStart_year = params.get("juniorStart_year")
+        def juniorStart_month = params.get("juniorStart_month")
+        def juniorEnd_year = params.get("juniorEnd_year")
+        def juniorEnd_month = params.get("juniorEnd_month")
+        def juniorSchool = params.get("juniorSchool")
+        def juniorAuthenticator = params.get("juniorAuthenticator")
+        def highStart_year = params.get("highStart_year")
+        def highStart_month = params.get("highStart_month")
+        def highEnd_year = params.get("highEnd_year")
+        def highEnd_month = params.get("highEnd_month")
+        def highSchool = params.get("highSchool")
+        def highAuthenticator = params.get("highAuthenticator")
+        def cal = Calendar.instance
+        cal.clearTime()
+        def resume = preppyInstance.resume?:new Resume()
+        if(juniorStart_year&&juniorStart_month){
+            cal.set(Calendar.YEAR,juniorStart_year as int)
+            cal.set(Calendar.MONTH,(juniorStart_month as int)-1)
+            resume.juniorStart = cal.time
+        }
+        if(juniorEnd_year&&juniorEnd_month){
+            cal.set(Calendar.YEAR,juniorEnd_year as int)
+            cal.set(Calendar.MONTH,(juniorEnd_month as int)-1)
+            resume.juniorEnd=cal.time
+        }
+        if(juniorSchool){
+            resume.juniorSchool=juniorSchool
+        }
+        if(juniorAuthenticator){
+            resume.juniorAuthenticator=juniorAuthenticator
+        }
+        if(highStart_year&&highStart_month){
+            cal.set(Calendar.YEAR,highStart_year as int)
+            cal.set(Calendar.MONTH,(highStart_month as int)-1)
+            resume.highStart = cal.time
+        }
+        if(highEnd_year&&highEnd_month){
+            cal.set(Calendar.YEAR,highEnd_year as int)
+            cal.set(Calendar.MONTH,(highEnd_month as int)-1)
+            resume.highEnd=cal.time
+        }
+        if(highSchool){
+            resume.highSchool=highSchool
+        }
+        if(highAuthenticator){
+            resume.highAuthenticator=highAuthenticator
+        }
+        preppyInstance.resume=resume
 
         if (!preppyInstance.save(flush: true)) {
             render(view: "edit", model: [preppyInstance: preppyInstance,provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()])

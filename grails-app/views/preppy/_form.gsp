@@ -6,6 +6,9 @@
     #birthday_year,#birthday_month,#birthday_day,#deposit{
         width: 80px;
     }
+    .p-resume select{
+        width: 60px;
+    }
 </style>
 
 
@@ -33,7 +36,6 @@
 <div class="control-group">
     <label class="control-label" for="password">
         <g:message code="springSecurity.login.password.label" default="Password" />
-        <span class="required-indicator">*</span>
     </label>
 
     <div class="controls">
@@ -95,7 +97,7 @@
     </label>
 
     <div class="controls">
-        <g:select name="nation" from="${com.baoming.Nation.findAll()}"  optionValue="name" required="" value="${preppyInstance?.nation?.id}"/>
+        <g:select name="nation.id" from="${com.baoming.Nation.findAll()}"  optionValue="name" optionKey="id" required="" value="${preppyInstance?.nation?.id}"/>
     </div>
 </div>
 
@@ -125,7 +127,7 @@
         <g:select id="province" name="provinceId" from="${provinces}" optionKey="code" optionValue="name" required="" value="${preppyInstance?.province?.code}" class="many-to-one"/>
         <g:select id="city" name="cityId" from="" optionKey="id" required="" class="many-to-one"/>
         <g:select id="district" name="districtId" from="" optionKey="id" required="" class="many-to-one"/>
-        <g:message code="preppy.town.label"/>: <g:textField name="town" value="${preppyInstance?.town}"/>
+        <g:textField name="town" value="${preppyInstance?.town}" placeholder="${message(code: 'preppy.town.label')}"/>
     </div>
 </div>
 
@@ -184,8 +186,43 @@
         <g:message code="preppy.resume.label" default="qq" />
     </label>
 
-    <div class="controls">
-        <g:textArea cols="200" rows="3" name="resume" >${preppyInstance?.resume}</g:textArea>
+    <div class="controls p-resume">
+
+            <div>
+                <%
+                    cal.add(Calendar.YEAR,4);
+                    cal.set(Calendar.MONTH,8)
+                %>
+                <g:message code="preppy.resume.junior.label" default="junior" />
+                <g:datePicker name="juniorStart" value="${preppyInstance?.resume?.juniorStart ?: cal.time}" precision="month"
+                              years="${startYear..year}"/>起--
+                <%
+                    cal.add(Calendar.YEAR,3);
+                    cal.set(Calendar.MONTH,6)
+                %>
+                <g:datePicker name="juniorEnd" value="${preppyInstance?.resume?.juniorEnd ?: cal.time}" precision="month"
+                              years="${startYear..year}"/>止
+                <g:textField name="juniorSchool" value="${preppyInstance?.resume?.juniorSchool}"  placeholder="学校名称（中职须注明专业）"/>
+                <g:textField name="juniorAuthenticator" value="${preppyInstance?.resume?.juniorAuthenticator}"  placeholder="证明人"/>
+            </div>
+
+            <div>
+                <%
+
+                    cal.set(Calendar.MONTH,8)
+                %>
+                <g:message code="preppy.resume.high.label" default="high" />
+                <g:datePicker name="highStart" value="${preppyInstance?.resume?.highStart ?: cal.time}" precision="month"
+                              years="${startYear..year}"/>起--
+                <%
+                    cal.add(Calendar.YEAR,3);
+                    cal.set(Calendar.MONTH,6)
+                %>
+                <g:datePicker name="highEnd" value="${preppyInstance?.resume?.highEnd ?: cal.time}" precision="month"
+                              years="${startYear..year}"/>止
+                <g:textField name="highSchool" value="${preppyInstance?.resume?.highSchool}"  placeholder="学校名称（中职须注明专业）"/>
+                <g:textField name="highAuthenticator" value="${preppyInstance?.resume?.highAuthenticator}"  placeholder="证明人"/>
+            </div>
     </div>
 </div>
 

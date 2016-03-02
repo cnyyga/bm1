@@ -23,6 +23,12 @@
 		textarea{
 			width: 400px;
 		}
+		.p-resume select{
+			width: 80px;
+		}
+		.p-resume input{
+			width: 150px;
+		}
 	</style>
 	</head>
 	<body>
