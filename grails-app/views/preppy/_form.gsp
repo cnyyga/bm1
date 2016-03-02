@@ -28,7 +28,13 @@
     </label>
 
     <div class="controls">
-        <g:textField name="number" value="${preppyInstance?.number}"/>
+        <g:if test="${!preppyInstance.reviewStatus || preppyInstance.reviewStatus == com.baoming.Preppy.ReviewStatus.NO_AUDIT }">
+            <g:textField name="number" value="${preppyInstance?.number}"/>
+        </g:if>
+        <g:else>
+            <g:textField name="number" value="${preppyInstance?.number} "  readonly="readonly"/>
+        </g:else>
+
     </div>
 </div>
 
@@ -50,7 +56,7 @@
     </label>
 
     <div class="controls">
-        <g:if test="${preppyInstance.reviewStatus == com.baoming.Preppy.ReviewStatus.NO_AUDIT }">
+        <g:if test="${!preppyInstance.reviewStatus || preppyInstance.reviewStatus == com.baoming.Preppy.ReviewStatus.NO_AUDIT }">
             <g:textField name="deposit" value="${preppyInstance?.deposit}"/>
         </g:if>
         <g:else>

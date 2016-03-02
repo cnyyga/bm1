@@ -242,7 +242,7 @@ class ProfileController {
             redirect(action: 'preppy')
             return
         }
-        if(preppy.reviewStatus != Preppy.ReviewStatus.NO_AUDIT){
+        if(preppy.reviewStatus && preppy.reviewStatus != Preppy.ReviewStatus.NO_AUDIT){
             flash.message = '已经审核无法修改资料'
             redirect(action: 'preppy')
             return

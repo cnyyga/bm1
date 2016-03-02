@@ -3,6 +3,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>钟山职业技术学院</title>
+    <script type="text/javascript">
+        window.print();
+    </script>
 </head>
 
 <body>
@@ -25,11 +28,11 @@
         <td width="245" align="left" bgcolor="#FFFFFF" style="padding-left:5px;"><table width="180" border="0" cellpadding="0" cellspacing="0">
 
             <tr>
-                <td><input name="textfield7" type="text"  id="textfield7" value="${preppyInstance?.birthday.toCalendar().get(Calendar.YEAR)}"   size="5" /></td>
+                <td><input name="textfield7" type="text"  id="textfield7" value="${preppyInstance?.birthday?.format("yyyy")}"   size="5" /></td>
                 <td>年</td>
-                <td><input name="textfield8" type="text"  id="textfield8" value="${preppyInstance?.birthday.toCalendar().get(Calendar.MONTH)}"   size="4" /></td>
+                <td><input name="textfield8" type="text"  id="textfield8" value="${preppyInstance?.birthday?.format("MM")}"   size="4" /></td>
                 <td>月</td>
-                <td><input name="textfield9" type="text"  id="textfield9" value="${preppyInstance?.birthday.toCalendar().get(Calendar.DATE)}"   size="4" /></td>
+                <td><input name="textfield9" type="text"  id="textfield9" value="${preppyInstance?.birthday?.format("dd")}"   size="4" /></td>
                 <td>日</td>
             </tr>
         </table></td>
@@ -83,7 +86,7 @@
     <tr>
         <td height="45" align="center" bgcolor="#FFFFFF" style="padding-left:5px;">毕业中学<br />
             （中职）名称</td>
-        <td colspan="7" align="left" bgcolor="#FFFFFF" style="padding-left:5px;"><input name="textfield2" type="text"   id="textfield2" value="如皋中学" size="70" /></td>
+        <td colspan="7" align="left" bgcolor="#FFFFFF" style="padding-left:5px;"><input name="textfield2" type="text"   id="textfield2" value="${preppyInstance?.resume?.highSchool}" size="70" /></td>
     </tr>
     <tr>
         <td height="45" align="center" bgcolor="#FFFFFF" style="padding-left:5px;">本人简历</td>
@@ -97,42 +100,44 @@
             <tr>
                 <td height="45" align="left" valign="middle" bgcolor="#FFFFFF" style="padding-left:5px;"><table width="120" border="0" cellpadding="0" cellspacing="0">
                     <tr>
-                        <td><input name="textfield10" type="text"  id="textfield10" style="width:40px; height:20px;" value="2009"   size="4" /></td>
+                        <td><input name="textfield10" type="text"  id="textfield10" style="width:40px; height:20px;" value="${preppyInstance?.resume?.juniorStart?.format("yyyy")}"   size="4" /></td>
                         <td>年</td>
-                        <td><input name="textfield10" type="text"  id="textfield11" style="width:40px; height:20px;" value="09"   size="2" /></td>
+                        <td><input name="textfield10" type="text"  id="textfield11" style="width:40px; height:20px;" value="${preppyInstance?.resume?.juniorStart?.format("MM")}"   size="2" /></td>
                         <td>月</td>
                     </tr>
                 </table></td>
                 <td align="left" bgcolor="#FFFFFF" style="padding-left:5px;"><table width="120" border="0" cellpadding="0" cellspacing="0">
                     <tr>
-                        <td><input name="textfield11" type="text"  id="textfield14" style="width:40px; height:20px;" value="2012"   size="4" /></td>
+                        <td><input name="textfield11" type="text"  id="textfield14" style="width:40px; height:20px;" value="${preppyInstance?.resume?.juniorEnd?.format("yyyy")}"   size="4" /></td>
                         <td>年</td>
-                        <td><input name="textfield11" type="text"  id="textfield21" style="width:40px; height:20px;" value="06"   size="2" /></td>
+                        <td><input name="textfield11" type="text"  id="textfield21" style="width:40px; height:20px;" value="${preppyInstance?.resume?.juniorEnd?.format("MM")}"   size="2" /></td>
                         <td>月</td>
                     </tr>
                 </table></td>
-                <td colspan="4" align="center" bgcolor="#FFFFFF" style="padding-left:5px;"><input name="textfield21" type="text" id="textfield44" value="南通如皋中学" size="28"   /></td>
-                <td align="center" bgcolor="#FFFFFF" style="padding-left:5px;"><input name="textfield21" type="text" id="textfield45" value="张兰" size="10"   /></td>
+                <td colspan="4" align="center" bgcolor="#FFFFFF" style="padding-left:5px;"><input name="textfield21" type="text" id="textfield44" value="${preppyInstance?.resume?.juniorSchool}" size="28"   /></td>
+                <td align="center" bgcolor="#FFFFFF" style="padding-left:5px;"><input name="textfield21" type="text" id="textfield45" value="${preppyInstance?.resume?.juniorAuthenticator}" size="10"   /></td>
             </tr>
             <tr>
                 <td height="45" align="left" bgcolor="#FFFFFF" style="padding-left:5px;"><table width="120" border="0" cellpadding="0" cellspacing="0">
                     <tr>
-                        <td><input name="textfield13" type="text"  id="textfield46" style="width:40px; height:20px;" value="2012"   size="4" /></td>
+                        <td><input name="textfield13" type="text"  id="textfield46" style="width:40px; height:20px;" value="${preppyInstance?.resume?.highStart?.format("yyyy")}"   size="4" /></td>
                         <td>年</td>
-                        <td><input name="textfield13" type="text"  id="textfield47" style="width:40px; height:20px;" value="09"   size="2" /></td>
+                        <td><input name="textfield13" type="text"  id="textfield47" style="width:40px; height:20px;" value="${preppyInstance?.resume?.highStart?.format("MM")}"   size="2" /></td>
                         <td>月</td>
                     </tr>
                 </table></td>
                 <td align="left" bgcolor="#FFFFFF" style="padding-left:5px;"><table width="120" border="0" cellpadding="0" cellspacing="0">
                     <tr>
-                        <td><input name="textfield14" type="text"  id="textfield51" style="width:40px; height:20px;" value="2015"   size="4" /></td>
+                        <td><input name="textfield14" type="text"  id="textfield51" style="width:40px; height:20px;"
+                                   value="${preppyInstance?.resume?.highEnd?.format("yyyy")}"   size="4" /></td>
                         <td>年</td>
-                        <td><input name="textfield14" type="text"  id="textfield52" style="width:40px; height:20px;" value="06"   size="2" /></td>
+                        <td><input name="textfield14" type="text"  id="textfield52" style="width:40px; height:20px;"
+                                   value="${preppyInstance?.resume?.highEnd?.format("MM")}"   size="2" /></td>
                         <td>月</td>
                     </tr>
                 </table></td>
-                <td colspan="4" align="center" bgcolor="#FFFFFF" style="padding-left:5px;"><input name="textfield21" type="text" id="textfield48" value="南通如皋中学" size="28"   /></td>
-                <td align="center" bgcolor="#FFFFFF" style="padding-left:5px;"><input name="textfield21" type="text" id="textfield49" value="王兰" size="10"   /></td>
+                <td colspan="4" align="center" bgcolor="#FFFFFF" style="padding-left:5px;"><input name="textfield21" type="text" id="textfield48" value="${preppyInstance?.resume?.highSchool}" size="28"   /></td>
+                <td align="center" bgcolor="#FFFFFF" style="padding-left:5px;"><input name="textfield21" type="text" id="textfield49" value="${preppyInstance?.resume?.highAuthenticator}" size="10"   /></td>
             </tr>
         </table></td>
     </tr>

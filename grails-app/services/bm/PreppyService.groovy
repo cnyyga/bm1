@@ -58,7 +58,7 @@ class PreppyService {
         def code = "001"
         if(p){
             if(p.code){
-                code = code as int
+                code = p.code as int
                 code = code + 1
                 code = makeCode(code)
             }
