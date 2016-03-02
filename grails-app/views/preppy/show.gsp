@@ -256,7 +256,25 @@
                             ${preppyInstance?.teacher?.name}
                         </div>
                     </div>
-
+                    <g:if test="${preppyInstance?.code}">
+                    <div class="control-group">
+                        <label class="control-label">
+                            <g:message code="preppy.code.label" default="code" />
+                        </label>
+                        <div class="controls">
+                            ${preppyInstance?.code}
+                        </div>
+                    </div>
+                    </g:if>
+<g:if test="${preppyInstance?.csCode}">
+                    <div class="control-group">
+                        <label class="control-label">
+                            <g:message code="preppy.csCode.label" default="code" />
+                        </label>
+                        <div class="controls">
+                            ${preppyInstance?.csCode}
+                        </div>
+                    </div>  </g:if>
                     <div class="form-actions">
                         <sec:ifNotGranted roles="${Role.AUTHORITY_FINANCE}">
                                 <g:hiddenField name="id" value="${preppyInstance?.id}" />
@@ -266,27 +284,25 @@
                                 </g:link>
                             <g:hiddenField name="act" value="1" />
                                 <g:actionSubmit class="btn btn-primary" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-                            <sec:ifNotGranted roles="${Role.AUTHORITY_TEACHER}">
-                                <g:link class="btn btn-success" action="xyPrint" id="${preppyInstance.id}">
+                                <g:link class="btn btn-success" action="xyPrint1" id="${preppyInstance.id}">
                                     <i class="icon-zoom-in  icon-white"></i>
                                     <g:message code="default.button.print.label" default="Xy" />
                                 </g:link>
-                            </sec:ifNotGranted>
-                            <sec:ifAllGranted roles="${Role.AUTHORITY_TEACHER}">
-                                <g:if test="${preppyInstance.reviewStatus?.name() == com.baoming.Preppy.ReviewStatus.NO_AUDIT.name()}">
-                                    <g:link class="btn btn-success" action="xy" id="${preppyInstance.id}">
-                                        <i class="icon-zoom-in  icon-white"></i>
-                                        <g:message code="default.button.preview.label" default="Xy" />
-                                    </g:link>
-                                </g:if>
-                                <g:else>
-                                    <g:link class="btn btn-success" action="xyPrint" id="${preppyInstance.id}">
-                                        <i class="icon-zoom-in  icon-white"></i>
-                                        <g:message code="default.button.print.label" default="Xy" />
-                                    </g:link>
-                                </g:else>
-                            </sec:ifAllGranted>
                          </sec:ifNotGranted>
+                        <sec:ifAllGranted roles="${Role.AUTHORITY_TEACHER}">
+                            <g:if test="${preppyInstance.reviewStatus?.name() == com.baoming.Preppy.ReviewStatus.NO_AUDIT.name()}">
+                                <g:link class="btn btn-success" action="xy1" id="${preppyInstance.id}">
+                                    <i class="icon-zoom-in  icon-white"></i>
+                                    <g:message code="default.button.preview.label" default="Xy" />
+                                </g:link>
+                            </g:if>
+                            <g:else>
+                                <g:link class="btn btn-success" action="xyPrint1" id="${preppyInstance.id}">
+                                    <i class="icon-zoom-in  icon-white"></i>
+                                    <g:message code="default.button.print.label" default="Xy" />
+                                </g:link>
+                            </g:else>
+                        </sec:ifAllGranted>
                     </div>
                 </fieldset>
                     </div>

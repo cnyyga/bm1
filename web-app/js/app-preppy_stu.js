@@ -77,6 +77,10 @@ $(function(){
             district:{
                 required: true
             }  ,
+            town:{
+                required: true,
+                maxlength:50
+            }  ,
             resume:{
                 required: true,
                 maxlength:500

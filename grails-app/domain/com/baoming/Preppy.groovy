@@ -8,10 +8,13 @@ import com.baoming.account.User
  */
 class Preppy {
 
+    String code //审核通过后的总的编号 -2016
+    String csCode //审核通过后的编号 -2016
     String name    //姓名 -2016
     String number //身份证号 -2016
     Date birthday //出生日期 -2016
     User.Gender gender //性别 -2016
+    String town//镇
     District district//考生户口所在地区 -2016
     Nation nation//民族 -2016
     City city //市 -2016
@@ -57,7 +60,7 @@ class Preppy {
     String byzsPath//高中（中职）毕业证书
     String xjzmPath//学籍证明（本省在校中职生）
 
-    String resume
+    String resume //简历
     String remark //备注1
     String remark1//备注2
     String remark2//备注3
@@ -66,6 +69,8 @@ class Preppy {
     Date lastUpdated //-2016
 
     static constraints = {
+        code(nullable: true)
+        csCode(nullable: true)
         name()
         number()
         birthday nullable: true
@@ -115,6 +120,7 @@ class Preppy {
         province nullable: true
         studentCity nullable: true
         type nullable: true
+        town nullable: true
     }
 
     static mapping = {

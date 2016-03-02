@@ -94,6 +94,7 @@
         <g:select id="province" name="provinceId" from="${provinces}" optionKey="code" optionValue="name" required="" value="${preppyInstance?.province?.code}" class="many-to-one"/>
         <g:select id="city" name="cityId" from="" optionKey="id" required="" class="many-to-one"/>
         <g:select id="district" name="districtId" from="" optionKey="id" required="" class="many-to-one"/>
+        <g:message code="preppy.town.label"/>: <g:textField name="town" value="${preppyInstance?.town}"/>
     </div>
 </div>
 

@@ -260,6 +260,7 @@ class ProfileController {
         preppy.parentPhone = params.parentPhone
         preppy.qq = params.qq
         preppy.resume = params.resume
+        preppy.town = params.town
         if(!preppy.save()){
             log.error(preppy.errors)
             flash.message = message(code: 'default.save.failure.label')

@@ -399,6 +399,31 @@ class PreppyController {
         [preppyInstance: preppyInstance,year:year,age:(year - cal.get(Calendar.YEAR))]
     }
 
+    def xy1(Long id) {
+        def preppyInstance = Preppy.get(id)
+        if (!preppyInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'preppy.label', default: 'Preppy'), id])
+            redirect(action: "list")
+            return
+        }
+        def cal = Calendar.instance
+        def year = cal.get(Calendar.YEAR)
+        [preppyInstance: preppyInstance,year:year]
+    }
+
+    def xyPrint1(Long id) {
+        def preppyInstance = Preppy.get(id)
+        if (!preppyInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'preppy.label', default: 'Preppy'), id])
+            redirect(action: "list")
+            return
+        }
+        def cal = Calendar.instance
+        def year = cal.get(Calendar.YEAR)
+
+        [preppyInstance: preppyInstance,year:year]
+    }
+
     def exp(Integer max) {
         def userId = springSecurityService.authentication.principal?.id
         def name = params.name
@@ -562,12 +587,19 @@ class PreppyController {
         preppyInstance.remark = params.remark
         preppyInstance.remark1 = params.remark1
         preppyInstance.remark2 = params.remark2
-
+        def codes = preppyService.generateCode(preppyInstance)
+        if(codes && !preppyInstance.code){
+            preppyInstance.code=codes[0]
+        }
+        if(codes && !preppyInstance.csCode){
+            preppyInstance.csCode=codes[1]
+        }
         if (!preppyInstance.save()) {
             log.error(preppyInstance.errors)
             render(([status: '0'] as JSON) as String)
             return
         }
+
         render(([status: '1', reviewStatusId:preppyInstance.reviewStatus?.id,reviewStatusLab:preppyInstance.reviewStatus?.label] as JSON) as String)
     }
 }
