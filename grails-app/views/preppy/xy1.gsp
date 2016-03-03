@@ -9,7 +9,7 @@
 <style>
 .main_table input{ font-family:'微软雅黑'; font-weight:bold; font-size:16px;}
 </style>
-<div style="text-align:center;"><span style="font-size:30px; font-family:'微软雅黑'; font-weight:bold;">2016年注册入学关键信息采集表</span></div>
+<div style="text-align:center;"><span style="font-size:30px; font-family:'微软雅黑'; font-weight:bold;">${new Date().format('yyyy')}年注册入学关键信息采集表</span></div>
 <br />
 <table width="750" border="0" align="center" cellpadding="0" cellspacing="1" style="background:#666666; font-family:'微软雅黑'; font-size:15px;" class="main_table"  >
     <tr>
