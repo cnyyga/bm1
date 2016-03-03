@@ -124,7 +124,7 @@
     </label>
 
     <div class="controls">
-        <g:textField name="phone" value="${preppyInstance?.phone}"/>
+        <g:textField name="phone" value="${preppyInstance?.phone}" maxlength="11"/>
     </div>
 </div>
 
@@ -134,17 +134,17 @@
     </label>
 
     <div class="controls">
-        <g:textField name="parentPhone" value="${preppyInstance?.parentPhone}"/>
+        <g:textField name="parentPhone" value="${preppyInstance?.parentPhone}"  maxlength="11"/>
     </div>
 </div>
 
 <div class="control-group">
     <label class="control-label" for="parentPhone">
-        <g:message code="preppy.qq.label" default="qq" />
+        <g:message code="preppy.qq.label" default="qq"  />
     </label>
 
     <div class="controls">
-        <g:textField name="qq" value="${preppyInstance?.qq}"/>
+        <g:textField name="qq" value="${preppyInstance?.qq}" maxlength="16"/>
     </div>
 </div>
 
