@@ -74,8 +74,7 @@
                     <fieldset>
                          <g:render template="form"/>
                             <div class="form-actions">
-                    <button type="submit" class="btn btn-primary"><g:message code="default.button.update.label" /> </button>
-                    <button type="reset" class="btn"><g:message code="default.button.reset.label" /> </button>
+                    <button type="submit" class="btn btn-primary"><g:message code="default.button.create.label" /><g:message code="preppy.label" /> </button>
                             </div>
                         </fieldset>
                     </g:uploadForm>

@@ -294,10 +294,6 @@
                                 </g:link>
                             <g:hiddenField name="act" value="1" />
                                 <g:actionSubmit class="btn btn-primary" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-                                <g:link class="btn btn-success" action="xyPrint1" id="${preppyInstance.id}">
-                                    <i class="icon-zoom-in  icon-white"></i>
-                                    <g:message code="default.button.print.label" default="Xy" />
-                                </g:link>
                          </sec:ifAllGranted>
                         <sec:ifAllGranted roles="${Role.AUTHORITY_TEACHER}">
                             <g:if test="${!preppyInstance.reviewStatus || preppyInstance.reviewStatus?.name() == com.baoming.Preppy.ReviewStatus.NO_AUDIT.name()}">
@@ -306,12 +302,12 @@
                                     <g:message code="default.button.edit.label" default="Edit" />
                                 </g:link>
                             </g:if>
-                            <g:link class="btn btn-success" action="xy1" id="${preppyInstance.id}">
-                                <i class="icon-zoom-in  icon-white"></i>
-                                <g:message code="default.button.preview.label" default="Xy" />
-                            </g:link>
 
                         </sec:ifAllGranted>
+                        <g:link class="btn btn-success" action="xyPrint1" id="${preppyInstance.id}">
+                            <i class="icon-zoom-in  icon-white"></i>
+                            <g:message code="default.button.print.label" default="Xy" />
+                        </g:link>
                     </div>
                 </fieldset>
                     </div>
