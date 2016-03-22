@@ -77,7 +77,6 @@ public class PinyinUtils {
 
         Set<String> pinyinSet = pinyins.get(index);
         if (curSet == null) {
-            curSet = new HashSet<String>();
             for (String string : pinyinSet) {
                 tempSet.add(string.charAt(0)+"");
             }

@@ -340,6 +340,7 @@ class PreppyController {
         def highEnd_month = params.get("highEnd_month")
         def highSchool = params.get("highSchool")
         def highAuthenticator = params.get("highAuthenticator")
+        def zzzy = params.get("zzzy")
         def cal = Calendar.instance
         cal.clearTime()
         def resume = preppyInstance.resume?:new Resume()
@@ -371,6 +372,9 @@ class PreppyController {
         }
         if(highSchool){
             resume.highSchool=highSchool
+        }
+        if(zzzy){
+            resume.zzzy=zzzy
         }
         if(highAuthenticator){
             resume.highAuthenticator=highAuthenticator

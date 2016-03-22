@@ -194,7 +194,7 @@
                                 <g:message code="preppy.resume.high.label"/>
                                 <g:formatDate format="yyyy年MM月" date="${preppyInstance?.resume?.highStart}"/>起--
                                 <g:formatDate format="yyyy年MM月" date="${preppyInstance?.resume?.highEnd}"/>
-                                ${preppyInstance?.resume?.highSchool}&nbsp;${preppyInstance?.resume?.highAuthenticator}
+                                ${preppyInstance?.resume?.highSchool}&nbsp;${preppyInstance?.resume?.zzzy}&nbsp;${preppyInstance?.resume?.highAuthenticator}
                             </div>
                         </div>
                     </div>

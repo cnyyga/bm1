@@ -1,16 +1,25 @@
-<%@ page import="com.baoming.Preppy" %>
+<%@ page import="com.baoming.account.Role; com.baoming.Preppy" %>
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'preppy.label', default: 'Preppy')}" />
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
+        <g:javascript src="jquery-1.8.3.js"/>
+        <g:javascript src="jquery-ui-1.9.2.custom.min.js"  />
+        <g:javascript src="jquery.chosen.min.js"  />
         <g:javascript src="jquery.validate.min.js"/>
+        <g:javascript src="card.js"/>
         <g:javascript src="additional-methods.js"/>
         <g:javascript src="messages_zh.js"/>
         <g:javascript src="tj.js"/>
         <g:javascript src="app-preppy.js"/>
-        <style>
+        <style type="text/css">
+        .sel_gray1 {font-size:14px; font-family:"微软雅黑";}
+        .sel_gray1 {font-size:14px; font-family:"微软雅黑";}
+        .tianxie{ font-family:"微软雅黑"; font-size:18px;  }
+        .tianxie td{ border-bottom:1px dashed #cccccc; padding:3px 0;}
+        .inp_gray{ font-size:14px; color:#000000; border:#d1d1d1 1px solid; height:24px;  font-family:"微软雅黑";  }
+        .sel_gray{ font-size:14px; font-family:"微软雅黑";}
         .ui-combobox {
             position: relative;
             display: inline-block;
@@ -39,19 +48,53 @@
         .tab-content {
             overflow: visible;
         }
+
+        label.error {
+            color: red;
+            font-weight: bold;
+            margin-top: 2px;
+            padding: 2px 8px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .alert {
+            padding: 8px 35px 8px 14px;
+            margin-bottom: 18px;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+            background-color: #8bc5e8;
+            border: 1px solid #7ed0e5;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            color: #1c628b;
+        }
+        .alert-error {
+            background-color: #eddbe3;
+            border-color: #e8d1df;
+            color: #bd4247;
+        }
         </style>
+        <script>
+            $(function(){
+                <sec:ifAllGranted roles="${Role.AUTHORITY_TEACHER}">
+                $(".xstx input").attr("disabled",true);
+                $(".xstx select").attr("disabled",true);
+                $(".zbsh input").attr("disabled",true);
+                $(".zbsh select").attr("disabled",true);
+                </sec:ifAllGranted>
+                <sec:ifAllGranted roles="${Role.AUTHORITY_FINANCE}">
+                $(".xstx input").attr("disabled",true);
+                $(".xstx select").attr("disabled",true);
+                $(".lstx input").attr("disabled",true);
+                $(".lstx select").attr("disabled",true);
+                </sec:ifAllGranted>
+            })
+
+        </script>
 	</head>
 	<body>
-        <div>
-            <ul class="breadcrumb">
-                <li>
-                    <a href="${createLink(uri: '/')}">Home</a> <span class="divider">/</span>
-                </li>
-                <li>
-                    <g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link>
-                </li>
-            </ul>
-        </div>
     <g:if test="${flash.message}">
         <div class="alert alert-error">${flash.message}</div>
     </g:if>
@@ -62,27 +105,13 @@
             </g:eachError>
         </ul>
     </g:hasErrors>
-
-        <div class="row-fluid sortable">
-            <div class="box span12">
-                <div class="box-header well" data-original-title>
-                    <h2><i class="icon-edit"></i> <g:message code="default.add.label" args="[entityName]" /></h2>
-                </div>
-                <div class="box-content">
-                    <g:uploadForm class="form-horizontal" action="save" name="editForm">
-
-                    <fieldset>
-                         <g:render template="form"/>
-                            <div class="form-actions">
-                    <button type="submit" class="btn btn-primary"><g:message code="default.button.create.label" /><g:message code="preppy.label" /> </button>
-                            </div>
-                        </fieldset>
-                    </g:uploadForm>
-
-                </div>
-            </div><!--/span-->
-
-        </div><!--/row-->
-
+    <g:uploadForm action="save" name="editForm">
+        <g:render template="form"/>
+        <div class="form-actions" style="margin: 10px auto;text-align: center;">
+            <input type="submit" name="button" id="button" value="提交" />
+            &nbsp;&nbsp;
+            <input type="submit" name="button2" id="button2" value="重置" />
+        </div>
+    </g:uploadForm>
 	</body>
 </html>

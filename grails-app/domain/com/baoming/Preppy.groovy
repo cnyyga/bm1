@@ -274,12 +274,14 @@ class Resume{
     Date highStart//高中入学日期
     Date highEnd//高中毕业日期
     String highSchool//高中学校
+    String zzzy//中职专业
     String highAuthenticator//高中证明人
 
     static constraints = {
         juniorStart nullable: true
         juniorEnd nullable: true
         juniorSchool nullable: true
+        zzzy nullable: true
         juniorAuthenticator nullable: true
         highStart nullable: true
         highEnd nullable: true
