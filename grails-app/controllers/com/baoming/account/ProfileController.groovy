@@ -275,6 +275,7 @@ class ProfileController {
         def highEnd_month = params.get("highEnd_month")
         def highSchool = params.get("highSchool")
         def highAuthenticator = params.get("highAuthenticator")
+        def zzzy = params.get("zzzy")
         def cal = Calendar.instance
         cal.clearTime()
         def resume = new Resume()
@@ -301,6 +302,7 @@ class ProfileController {
             resume.highEnd=cal.time
         }
         resume.highSchool=highSchool
+        resume.zzzy=zzzy
         resume.highAuthenticator=highAuthenticator
         preppy.resume=resume
 

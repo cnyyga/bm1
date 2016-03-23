@@ -478,7 +478,7 @@ class PreppyController {
         def cal = Calendar.instance
         def year = cal.get(Calendar.YEAR)
 
-        [preppyInstance: preppyInstance,year:year]
+        render(view: 'xyPrint2',model: [preppyInstance: preppyInstance,year:year])
     }
 
     def exp(Integer max) {
