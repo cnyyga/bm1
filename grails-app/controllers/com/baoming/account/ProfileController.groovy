@@ -250,7 +250,7 @@ class ProfileController {
         preppy.family =Preppy.Family."${params.family}"
         preppy.studentCateories = Preppy.StudentCateories."${params.studentCateories}"
         preppy.gender = User.Gender."${params.gender}"
-        preppy.nation = Nation.get(params.long("nation"))
+        preppy.nation = Nation.get(params.long("nation.id"))
         preppy.birthday = params.birthday
         preppy.district = District.findByCode(params.districtId)
         preppy.city = City.findByCode(params.cityId)

@@ -106,7 +106,7 @@ $(function(){
             qq:{
                 required: true,
                 digits:true,
-                maxlength:10
+                maxlength:20
             }
 
         },

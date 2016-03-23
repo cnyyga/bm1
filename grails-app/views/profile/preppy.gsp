@@ -20,8 +20,6 @@
 	.sel_gray{ font-size:14px; font-family:"微软雅黑";}
 
 	label.error {
-		display: block;
-		margin-bottom: 5px;
 		color: red;
 		font-weight: bold;
 		margin-top: 2px;
@@ -55,6 +53,12 @@
 		</script>
 	</head>
 	<body>
+		<sec:ifAllGranted roles='ROLE_STUDENT'>
+			<div style="text-align: right;padding-left: 5px;font-size: 12px;">
+				<g:link action="rePassword" controller="profile">修改密码</g:link>
+				<g:link controller="logout">退出</g:link>
+			</div>
+		</sec:ifAllGranted>
 
 	<g:if test="${flash.message}">
 		<div class="alert alert-error">${flash.message}</div>
