@@ -55,10 +55,6 @@
             margin-top: 2px;
             padding: 2px 8px;
         }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
         .alert {
             padding: 8px 35px 8px 14px;
             margin-bottom: 18px;

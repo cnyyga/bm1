@@ -188,6 +188,13 @@ class PreppyController {
             preppyInstance.xjzmPath=xjzmPath
         }
 
+        def c  = Preppy.countByNumber(preppyInstance.number)
+        if(c > 0){
+            flash.message = '身份证号已经存在'
+            render(view: "create", model: [preppyInstance: preppyInstance,provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()])
+            return
+        }
+
         if (!preppyInstance.save(flush: true)) {
             render(view: "create", model: [preppyInstance: preppyInstance,provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()])
             return
@@ -239,7 +246,7 @@ class PreppyController {
         def userId = springSecurityService.authentication.principal?.id
         def teacher
         if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)) {
-            if(preppyInstance.reviewStatus != Preppy.ReviewStatus.NO_AUDIT){
+            if(preppyInstance.reviewStatus && preppyInstance.reviewStatus != Preppy.ReviewStatus.NO_AUDIT){
                 flash.message = '已经审核无法修改资料'
                 redirect(action: 'list')
                 return
