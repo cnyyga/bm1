@@ -148,7 +148,7 @@
     </tr>
     <tr>
         <td colspan="5" align="left" bgcolor="#FFFFFF"><p>填表人：<span class="f_20">
-            <input class="inp_red" name="textfield31" type="text" id="textfield33"   value="${preppyInstance.teacher?.name}" size="29" />
+            <input class="inp_red" name="textfield31" type="text" id="textfield33"   value="" size="29" />
         </span> 填表日期：<span class="f_20">
             <input class="inp_red" name="textfield32" type="text" id="textfield34"   value="${preppyInstance.reviewDate?.format("yyyy年MM月dd日")}" size="30" />
         </span></p></td>

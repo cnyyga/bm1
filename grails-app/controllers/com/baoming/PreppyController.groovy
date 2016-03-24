@@ -472,7 +472,7 @@ class PreppyController {
         }
         def cal = Calendar.instance
         def year = cal.get(Calendar.YEAR)
-        [preppyInstance: preppyInstance,year:year]
+        render(view: 'xyPrint2',model: [preppyInstance: preppyInstance,year:year])
     }
 
     def xyPrint1(Long id) {
@@ -526,14 +526,32 @@ class PreppyController {
             lt('dateCreated', endDate)
 
         }
-        def titles = [message(code: 'preppy.name.label'),message(code: 'preppy.gender.label'),message(code: 'preppy.number.label'),
-                      message(code: 'preppy.birthday.label'),message(code: 'medium.district.label'),message(code: 'preppy.studentDistrict.label'),
-                      message(code: 'preppy.school.label'),message(code: 'preppy.type.label'),message(code: 'preppy.schoolType.label'),
-                      message(code: 'preppy.academicYear.label'),message(code: 'preppy.academicScore.label'),message(code: 'preppy.skill.label'),
-                      message(code: 'preppy.middlePlan.label'),message(code: 'preppyPlan.label'),message(code: 'preppy.plan.label'),
-                message(code: 'preppy.deposit.label'),message(code: 'preppy.phone.label'),message(code: 'preppy.parentPhone.label'),
-                message(code: 'preppy.address.label'),message(code: 'preppy.studentCateories.label'),message(code: 'preppy.reviewStatus.label'),
-                      message(code: 'preppy.teacher.label'),message(code: 'preppy.remark.label'),message(code: 'default.lastUpdated.label')]
+        def titles = [message(code: 'preppy.name.label'),
+                      message(code: 'preppy.number.label'),
+                      message(code: 'preppy.deposit.label'),
+
+                      message(code: 'preppy.family.label'),
+                      message(code: 'preppy.studentCateories.label'),
+                      message(code: 'preppy.gender.label'),
+                      message(code: 'nation.label'),
+                      message(code: 'preppy.birthday.label'),
+                      message(code: 'medium.district.label'),
+                      message(code: 'preppy.address.label'),
+                      message(code: 'preppy.plan.label'),
+                      message(code: 'preppy.phone.label'),
+                      message(code: 'preppy.parentPhone.label'),
+                      message(code: 'preppy.qq.label'),
+                      message(code: 'preppy.resume.label'),
+
+                      message(code: 'preppy.reviewStatus.label'),
+                      message(code: 'preppy.collegeSignUp.label'),
+                      message(code: 'preppyPlan.label'),
+                      message(code: 'preppy.remark.label')+"1",
+                      message(code: 'preppy.remark.label')+"2",
+                      message(code: 'preppy.remark.label')+"3",
+
+                      message(code: 'preppy.teacher.label'),
+                      message(code: 'default.dateCreated.label')]
         def outputStream
         try {
 
@@ -548,73 +566,65 @@ class PreppyController {
                     list.eachWithIndex {de,k->
                         def kk = k+1
                         def district = ''
-                        def studentDistrict = ''
                         try {
                             district = de.province?.name?:''
                             district += de.city?.name?:''
                             district += de.district?.name?:''
+                            district += de.town?:''
                         } catch (e) {
                             log.error(e.message)
                         }
-                        try {
-                            studentDistrict = de.studentProvince?.name?:''
-                            studentDistrict += de.studentCity?.name?:''
-                            studentDistrict += de.studentDistrict?.name?:''
-                        } catch (e) {
-                            log.error(e.message)
-                        }
+                        def resume = ''
 
-                        def academicScore = de.academicScore
-                        if(academicScore) {
-                            def acss = academicScore.tokenize(",")
-                            academicScore = "物理${acss[0]} 化学${acss[1]} 生物${acss[2]} 地理${acss[3]} 历史${acss[4]} 政治${acss[5]}"
+                        resume += '初中'+de?.resume?.juniorStart?.format("yyyy年MM月")
+                        resume += '-'
+                        resume += de?.resume?.juniorEnd?.format("yyyy年MM月")
+                        resume += ' '
+                        resume += de?.resume?.juniorSchool
+                        resume += ' '
+                        resume += de?.resume?.juniorAuthenticator
+                        resume += '\r\n'
+                        resume += '高中'+de?.resume?.highStart?.format("yyyy年MM月")
+                        resume += '-'
+                        resume += de?.resume?.highEnd?.format("yyyy年MM月")
+                        resume += ' '
+                        resume += de?.resume?.highSchool
+                        if(de?.resume?.zzzy){
+                            resume += "("+de?.resume?.zzzy+")"
                         }
+                        resume += ' '
+                        resume += de?.resume?.highAuthenticator
 
                         cell(0,kk,de.name?:'')
-                        cell(1,kk,de.gender?.label?:'')
-                        cell(2,kk,de.number?:'')
-                        cell(3,kk,de.birthday?de.birthday.format('yyyy-MM-dd'):'')
-                        cell(4,kk,district?:'')
-                        cell(5,kk,studentDistrict?:'')
-                        cell(6,kk,de.school?:'')
-                        cell(7,kk,de.type?.label?:'')
-                        if(de.studentCateories?.name() == Preppy.StudentCateories.SG.name()){
-                            cell(8,kk,'')
-                            cell(9,kk,de.academicYear?:'未参加')
-                            cell(10,kk,academicScore?:'')
-                            cell(11,kk,de.skill?.label?:'')
-                        }else{
-                            cell(8,kk,de.schoolType?.label?:'')
-                            cell(9,kk,'')
-                            cell(10,kk,'')
-                            cell(11,kk,'')
-                        }
+                        cell(1,kk,de.number?:'')
+                        cell(2,kk,de.deposit?:'')
 
-                        if(de.studentCateories?.name() == Preppy.StudentCateories.WG.name()){
-                            cell(12,kk,de.middlePlan?:'')
-                        }else{
-                            cell(12,kk,'')
-                        }
+                        cell(3,kk,de.family?.label?:'')
+                        cell(4,kk,de.studentCateories?.label?:'')
+                        cell(5,kk,de.gender?.label?:'')
+                        cell(6,kk,de.nation?.name?:'')
+                        cell(7,kk,de.birthday?de.birthday.format('yyyy-MM-dd'):'')
+                        cell(8,kk,district?:'')
+                        cell(9,kk,de.address?:'')
+                        cell(10,kk,de.plan?.name?:'')
+                        cell(11,kk,de.phone?:'')
+                        cell(12,kk,de.parentPhone?:'')
+                        cell(13,kk,de.qq?:'')
+                        cell(14,kk,resume?:'')
 
-                        try {
-                            cell(13,kk,de.preppyPlan?.name?:'')
-                        } catch (ee) {
-                            cell(13,kk,'')
-                        }
-                        cell(14,kk,de.plan?.name?:'')
-                        cell(15,kk,de.deposit?:'')
-                        cell(16,kk,de.phone?:'')
-                        cell(17,kk,de.parentPhone?:'')
-                        cell(18,kk,de.address?:'')
-                        cell(19,kk,de.studentCateories?.label?:'')
-                        cell(20,kk,de.reviewStatus?.label?:'')
+                        cell(15,kk,de.reviewStatus?.label?:'')
+                        cell(16,kk,de.collegeSignUp?.label?:'')
+                        cell(17,kk,de.preppyPlan?.name?:'')
+                        cell(18,kk,de.remark?:'')
+                        cell(19,kk,de.remark1?:'')
+                        cell(20,kk,de.remark2?:'')
+
                         try {
                             cell(21,kk,de.teacher?.name?:'')
                         } catch (Exception e) {
                             cell(21,kk,'')
                         }
-                        cell(22,kk,de.remark?:'')
-                        cell(23,kk,de.lastUpdated.format('yyyy-MM-dd HH:mm:ss'))
+                        cell(22,kk,de.dateCreated.format('yyyy-MM-dd HH:mm:ss'))
                     }
                 }
             }

@@ -109,7 +109,7 @@ $(function(){
         var _selected =   $("#preppyPlanUrl").attr("title");
         $("#planId").html('');
         $.getJSON(_url,{type:type},function(data){
-            var str = "";
+            var str = "<option value=\"\">«Î—°‘Ò</option>";
             $.each(data,function(index,val){
                 var id = val['id'];
                 var name = val['name'];
