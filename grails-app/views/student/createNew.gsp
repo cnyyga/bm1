@@ -1,9 +1,12 @@
-<%@ page import="com.baoming.account.Student" %>
+<%@ page import="com.baoming.account.Role; com.baoming.account.Student" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'student.create.new.label', default: 'Student')}" />
+        <g:set var="entityName" value="${message(code: 'student.create.new.label', default: 'Student')}" />
+        <sec:ifAllGranted roles="${Role.AUTHORITY_FINANCE}">
+            <g:set var="entityName" value="${message(code: 'student.review.label', default: 'Student')}" />
+        </sec:ifAllGranted>
 		<title>${entityName}</title>
         <g:javascript src="jquery.validate.min.js"/>
         <g:javascript src="card.js"/>
@@ -47,6 +50,16 @@
             overflow: visible;
         }
         </style>
+        <sec:ifAllGranted roles="${Role.AUTHORITY_FINANCE}">
+            <script>
+                $(function(){
+                    $("#editForm input,#editForm select,#editForm textarea").attr("disabled",true);
+                    $("#editForm select[name='reviewStatus']").attr("disabled",false);
+                    $("#editForm textArea[name='reviewDescription']").attr("disabled",false);
+                    $("#editForm input[name='id']").attr("disabled",false);
+                })
+            </script>
+        </sec:ifAllGranted>
 	</head>
 	<body>
         <div>

@@ -173,7 +173,7 @@
                 <g:textArea name="description" cols="40" rows="5" maxlength="1024" value="${studentInstance?.description}"/>
             </div>
         </div>
-    <sec:ifAllGranted roles="ROLE_ADMIN">
+<sec:ifAnyGranted roles="${com.baoming.account.Role.AUTHORITY_ADMIN},${com.baoming.account.Role.AUTHORITY_FINANCE}">
         <div class="control-group">
             <label class="control-label" for="studentType.id">
                 <g:message code="student.admission.label" default="admission" />
@@ -193,7 +193,7 @@
                 <g:select name="registration" from="${com.baoming.account.Student.Registration.values()}"   optionValue="label"   value="${studentInstance?.registration}" />
             </div>
         </div>
-    </sec:ifAllGranted>
+    </sec:ifAnyGranted>
     <g:render template="reviewForm"/>
 <g:hiddenField name="cityUrl" value="${createLink(action: 'cityOpts',controller: 'api')}" title="${studentInstance?.city?.code?:params.cityId}"  />
 <g:hiddenField name="districtUrl" value="${createLink(action: 'districtOpts',controller: 'api')}"  title="${studentInstance?.district?.code?:params.districtId}" />

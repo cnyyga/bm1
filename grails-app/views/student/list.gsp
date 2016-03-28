@@ -247,10 +247,11 @@
                             </sec:ifAllGranted>
                             <sec:ifAllGranted roles="${Role.AUTHORITY_FINANCE}">
                                 <g:if test="${params.regType == 1 || params.regType == '1'}">
-                                <g:link class="btn btn-info btn-stu-review" action="ajaxAudit" rel="${studentInstance.id}" id="${studentInstance.id}" params="${[t:'au']}">
-                                    <i class="icon-edit icon-white"></i>
-                                    <g:message code="student.review.label" default="Review" />
-                                </g:link></g:if>
+                                    <g:link class="btn btn-info" action="createNew" id="${studentInstance.id}">
+                                        <i class="icon-edit icon-white"></i>
+                                        <g:message code="student.review.label" default="Edit" />
+                                    </g:link></g:if>
+
                             </sec:ifAllGranted>
                             </td>
                         </tr>

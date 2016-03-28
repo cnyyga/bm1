@@ -61,7 +61,31 @@ class StudentController {
     }
 
     def saveNew(Long id) {
+
         def planIds = params.list('planId')
+        def userId = springSecurityService.authentication.principal?.id
+        def studentInstance
+        if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_FINANCE)) {
+            studentInstance = Student.get(id)
+            if(!studentInstance){
+                flash.message = '学生不存在'
+                render(view: 'createNew', model: [studentInstance: studentInstance,planIds:planIds])
+                return
+            }
+            studentInstance.reviewStatus = Student.ReviewStatus."${params.reviewStatus}"
+            studentInstance.reviewDescription = params.reviewDescription
+            studentInstance.reviewDate = new Date()
+            studentInstance.reviewPerson = User.get(userId as Long)
+            if(!studentInstance.save()) {
+                log.error(studentInstance.errors)
+                flash.message = message(code: 'student.updated.audit.failure.message', args: [message(code: 'student.label', default: 'Student'), studentInstance.name])
+                render(view: 'createNew', model: [studentInstance: studentInstance,planIds:planIds])
+                return
+            }
+            flash.message = message(code: 'student.updated.audit.message', args: [message(code: 'student.label', default: 'Student'), studentInstance.name])
+            redirect(action: "show", id: studentInstance.id)
+            return
+        }
 
         def msg = ""
         if(!params.name) {
@@ -88,9 +112,9 @@ class StudentController {
         }
 
 
-        def studentInstance
+
         def teacher
-        def userId = springSecurityService.authentication.principal?.id
+
         if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)) {
             teacher = Teacher.get(userId as Long)
         }
