@@ -120,7 +120,7 @@ log4j = {
            'net.sf.ehcache.hibernate'
 }
 
-grails.plugins.springsecurity.logout.afterLogoutUrl = '/login'
+grails.plugins.springsecurity.logout.afterLogoutUrl = '/logout/dispatch'
 grails.plugins.springsecurity.dao.reflectionSaltSourceProperty = 'username'
 // Added by the Spring Security Core plugin:
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.baoming.account.User'
@@ -170,6 +170,7 @@ grails.plugins.springsecurity.interceptUrlMap = [
         '/reg/**': ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/login/**': ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/logout/**': ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/stu/**': ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/workPlan/**': ['ROLE_ADMIN','ROLE_FINANCE','ROLE_TEACHER'],
 ]
 

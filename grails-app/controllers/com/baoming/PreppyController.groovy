@@ -219,7 +219,7 @@ class PreppyController {
         }
 
 
-        [preppyInstance: preppyInstance]
+        [preppyInstance: preppyInstance,provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()]
     }
 
     def edit(Long id) {
@@ -388,6 +388,16 @@ class PreppyController {
         }
         preppyInstance.resume=resume
 
+        if (params.reviewStatus && params.reviewStatus != Preppy.ReviewStatus.NO_AUDIT.name()) {
+            def codes = preppyService.generateCode(preppyInstance)
+            if(codes && !preppyInstance.code){
+                preppyInstance.code=codes[0]
+            }
+            if(codes && !preppyInstance.csCode){
+                preppyInstance.csCode=codes[1]
+            }
+        }
+
         if (!preppyInstance.save(flush: true)) {
             render(view: "edit", model: [preppyInstance: preppyInstance,provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()])
             return
@@ -526,7 +536,9 @@ class PreppyController {
             lt('dateCreated', endDate)
 
         }
-        def titles = [message(code: 'preppy.name.label'),
+        def titles = [message(code: 'preppy.code.label'),
+                      message(code: 'preppy.csCode.label'),
+                      message(code: 'preppy.name.label'),
                       message(code: 'preppy.number.label'),
                       message(code: 'preppy.deposit.label'),
 
@@ -595,36 +607,38 @@ class PreppyController {
                         resume += ' '
                         resume += de?.resume?.highAuthenticator
 
-                        cell(0,kk,de.name?:'')
-                        cell(1,kk,de.number?:'')
-                        cell(2,kk,de.deposit?:'')
+                        cell(0,kk,de.code?:'')
+                        cell(1,kk,de.csCode?:'')
+                        cell(2,kk,de.name?:'')
+                        cell(3,kk,de.number?:'')
+                        cell(4,kk,de.deposit?:'')
 
-                        cell(3,kk,de.family?.label?:'')
-                        cell(4,kk,de.studentCateories?.label?:'')
-                        cell(5,kk,de.gender?.label?:'')
-                        cell(6,kk,de.nation?.name?:'')
-                        cell(7,kk,de.birthday?de.birthday.format('yyyy-MM-dd'):'')
-                        cell(8,kk,district?:'')
-                        cell(9,kk,de.address?:'')
-                        cell(10,kk,de.plan?.name?:'')
-                        cell(11,kk,de.phone?:'')
-                        cell(12,kk,de.parentPhone?:'')
-                        cell(13,kk,de.qq?:'')
-                        cell(14,kk,resume?:'')
+                        cell(5,kk,de.family?.label?:'')
+                        cell(6,kk,de.studentCateories?.label?:'')
+                        cell(7,kk,de.gender?.label?:'')
+                        cell(8,kk,de.nation?.name?:'')
+                        cell(9,kk,de.birthday?de.birthday.format('yyyy-MM-dd'):'')
+                        cell(10,kk,district?:'')
+                        cell(11,kk,de.address?:'')
+                        cell(12,kk,de.plan?.name?:'')
+                        cell(13,kk,de.phone?:'')
+                        cell(14,kk,de.parentPhone?:'')
+                        cell(15,kk,de.qq?:'')
+                        cell(16,kk,resume?:'')
 
-                        cell(15,kk,de.reviewStatus?.label?:'')
-                        cell(16,kk,de.collegeSignUp?.label?:'')
-                        cell(17,kk,de.preppyPlan?.name?:'')
-                        cell(18,kk,de.remark?:'')
-                        cell(19,kk,de.remark1?:'')
-                        cell(20,kk,de.remark2?:'')
+                        cell(17,kk,de.reviewStatus?.label?:'')
+                        cell(18,kk,de.collegeSignUp?.label?:'')
+                        cell(19,kk,de.preppyPlan?.name?:'')
+                        cell(20,kk,de.remark?:'')
+                        cell(21,kk,de.remark1?:'')
+                        cell(22,kk,de.remark2?:'')
 
                         try {
-                            cell(21,kk,de.teacher?.name?:'')
+                            cell(23,kk,de.teacher?.name?:'')
                         } catch (Exception e) {
-                            cell(21,kk,'')
+                            cell(23,kk,'')
                         }
-                        cell(22,kk,de.dateCreated.format('yyyy-MM-dd HH:mm:ss'))
+                        cell(24,kk,de.dateCreated.format('yyyy-MM-dd HH:mm:ss'))
                     }
                 }
             }
@@ -675,5 +689,47 @@ class PreppyController {
         }
 
         render(([status: '1', reviewStatusId:preppyInstance.reviewStatus?.id,reviewStatusLab:preppyInstance.reviewStatus?.label] as JSON) as String)
+    }
+
+    def audit(Long id) {
+        if(!id) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'preppy.label', default: 'Preppy'), id])
+            redirect(action: "list")
+            return
+        }
+        def preppyInstance = Preppy.get(id)
+        if (!preppyInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'preppy.label', default: 'Preppy'), id])
+            redirect(action: "list")
+            return
+        }
+        if (!params.reviewStatus || params.reviewStatus == Preppy.ReviewStatus.NO_AUDIT.name()) {
+            redirect(action: "edit",id: id)
+            return
+        }
+        def userId = springSecurityService.authentication.principal?.id
+        preppyInstance.reviewDate = new Date()
+        preppyInstance.reviewPerson = User.get(userId as Long)
+        preppyInstance.reviewStatus = Preppy.ReviewStatus."${params.reviewStatus}"
+        preppyInstance.collegeSignUp = Preppy.CollegeSignUp."${params.collegeSignUp}"
+        preppyInstance.preppyPlan = PreppyPlan.get(params.long("preppyPlan.id"))
+        preppyInstance.remark = params.remark
+        preppyInstance.remark1 = params.remark1
+        preppyInstance.remark2 = params.remark2
+        def codes = preppyService.generateCode(preppyInstance)
+        if(codes && !preppyInstance.code){
+            preppyInstance.code=codes[0]
+        }
+        if(codes && !preppyInstance.csCode){
+            preppyInstance.csCode=codes[1]
+        }
+        if (!preppyInstance.save()) {
+            log.error(preppyInstance.errors)
+            flash.message = message(code: 'default.save.failure.label')
+            redirect(action: "edit",id: id)
+            return
+        }
+        flash.message = message(code: 'default.save.success.label')
+        redirect(action: "edit",id: id)
     }
 }

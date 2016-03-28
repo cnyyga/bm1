@@ -82,8 +82,8 @@
                     $(".zbsh select").attr("disabled",true);
                 </sec:ifAllGranted>
                 <sec:ifAllGranted roles="${Role.AUTHORITY_FINANCE}">
-                    $(".xstx input").attr("disabled",true);
-                    $(".xstx select").attr("disabled",true);
+                   // $(".xstx input").attr("disabled",true);
+                   // $(".xstx select").attr("disabled",true);
                     $(".lstx input").attr("disabled",true);
                     $(".lstx select").attr("disabled",true);
                 </sec:ifAllGranted>
@@ -111,7 +111,7 @@
                 <input type="submit" name="button" id="button" value="提交" />
                 &nbsp;&nbsp;
                 <input type="submit" name="button2" id="button2" value="重置" />
-                <button onclick="javascript:history.back()"type="button" >返回</button>
+                <button onclick="location.href='list'"type="button" >返回</button>
             </div>
         </g:uploadForm>
 	</body>

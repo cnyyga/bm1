@@ -126,6 +126,11 @@
                 </span></td>
             </tr>
             <tr>
+                <td colspan="2">辅导员，辅导员电话：<span class="f_20">
+                    <input class="inp_red" name="textfield211" type="text" id="textfield231" size="60" value="${preppyInstance.counselor}${preppyInstance.counselorPhone}" />
+                </span></td>
+            </tr>
+            <tr>
                 <td>科目组：<span class="f_20">
                     <input class="inp_red" name="textfield16" type="text" id="textfield18"   value="${preppyInstance.preppyPlan?.name}" size="40" />
                 </span></td>
@@ -153,10 +158,13 @@
             <input class="inp_red" name="textfield32" type="text" id="textfield34"   value="${preppyInstance.reviewDate?.format("yyyy年MM月dd日")}" size="30" />
         </span></p></td>
     </tr>
-    <tr>
-        <td colspan="5" align="center" bgcolor="#FFFFFF"><input type="submit" name="button" id="button" value="打印" onclick="javascript:window.print();"/>
-            &nbsp;&nbsp;<br /></td>
-    </tr>
+
+    <g:if test="${preppyInstance.reviewStatus && preppyInstance.reviewStatus?.name() != com.baoming.Preppy.ReviewStatus.NO_AUDIT.name()}">
+        <tr>
+            <td colspan="5" align="center" bgcolor="#FFFFFF"><input type="submit" name="button" id="button" value="打印" onclick="javascript:window.print();"/>
+                &nbsp;&nbsp;<br /></td>
+        </tr>
+    </g:if>
 </table>
 <p>&nbsp;</p>
 </body>

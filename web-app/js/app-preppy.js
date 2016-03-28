@@ -66,8 +66,103 @@ $(function(){
                     return (!_id ||_id == '')
                 },
                 maxlength:16
+            },
+            'plan.id':{
+                required: true
+            }  ,
+            phone:{
+                required: true,
+                phoneCN:true,
+                maxlength:11
+            }  ,
+            parentPhone:{
+                required: true,
+                phoneCN:true,
+                maxlength:11
+            }  ,
+            'nation.id':{
+                required: true
+            }  ,
+            province:{
+                required: true
+            }  ,
+            city:{
+                required: true
+            }  ,
+            district:{
+                required: true
+            }  ,
+            town:{
+                required: true,
+                maxlength:50
+            }  ,
+            juniorSchool:{
+                required: true,
+                maxlength:80
+            },
+            juniorAuthenticator:{
+                required: true,
+                maxlength:80
+            } ,
+            highSchool:{
+                required: true,
+                maxlength:80
+            },
+            highAuthenticator:{
+                required: true,
+                maxlength:80
             }
-
+            ,
+            address:{
+                required: true,
+                maxlength:80
+            }
+            ,
+            qq:{
+                required: true,
+                digits:true,
+                maxlength:20
+            }
+            ,
+            'preppyPlan.id':{
+                required: true
+            }
+            ,
+            combobox:{
+                required: true
+            }
+            ,
+            juniorStart_year:{
+                required: true
+            }
+            ,
+            juniorStart_month:{
+                required: true
+            }
+            ,
+            juniorEnd_year:{
+                required: true
+            }
+            ,
+            juniorEnd_month:{
+                required: true
+            }
+            ,
+            highStart_year:{
+                required: true
+            }
+            ,
+            highStart_month:{
+                required: true
+            }
+            ,
+            highEnd_year:{
+                required: true
+            }
+            ,
+            highEnd_month:{
+                required: true
+            }
         },
         highlight: function(label) {
             $(label).closest('.control-group').addClass('error');
@@ -107,9 +202,9 @@ $(function(){
     function setPlans(type) {
         var _url = $("#preppyPlanUrl").val();
         var _selected =   $("#preppyPlanUrl").attr("title");
-        $("#planId").html('');
+        $("select[name='plan.id']").html('');
         $.getJSON(_url,{type:type},function(data){
-            var str = "<option value=\"\">«Î—°‘Ò</option>";
+            var str = "<option value=\"\">Please select</option>";
             $.each(data,function(index,val){
                 var id = val['id'];
                 var name = val['name'];
@@ -119,7 +214,7 @@ $(function(){
                 }
                 str += "<option "+sel+" value=\""+id+"\">"+val.name+"</option>";
             })
-            $("#planId").html(str);
+            $("select[name='plan.id']").html(str);
         })
     }
 

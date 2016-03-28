@@ -46,12 +46,14 @@ class Preppy {
     String protocolCode //协议号
     CollegeSignUp collegeSignUp//高考报名地  -2016
     //////old/////////////
-    Family family = Family.OTHER //户籍类型 -2016
+    Family family//户籍类型 -2016
     Family studentFamily = Family.OTHER //学籍类型
     CollegeType collegeType =  CollegeType.HIGH //高考类型
     Status status = Status.DROP //上学状态
     String qq //-2016
     String tel
+    String counselor//辅导员
+    String counselorPhone//辅导员电话
     Teacher teacher  //推荐老师 -2016
     ///////
     String hkbPath //户口本首页
@@ -121,6 +123,8 @@ class Preppy {
         studentCity nullable: true
         type nullable: true
         town nullable: true
+        counselor nullable: true
+        counselorPhone nullable: true
     }
 
     static embedded = ['resume']

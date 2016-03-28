@@ -52,7 +52,7 @@ $(function(){
 
     $("#preppyForm").validate({
         rules: {
-            plan:{
+            'plan.id':{
                 required: true
             }  ,
             phone:{
@@ -107,6 +107,37 @@ $(function(){
                 required: true,
                 digits:true,
                 maxlength:20
+            },
+            juniorStart_year:{
+                required: true
+            }
+            ,
+            juniorStart_month:{
+                required: true
+            }
+            ,
+            juniorEnd_year:{
+                required: true
+            }
+            ,
+            juniorEnd_month:{
+                required: true
+            }
+            ,
+            highStart_year:{
+                required: true
+            }
+            ,
+            highStart_month:{
+                required: true
+            }
+            ,
+            highEnd_year:{
+                required: true
+            }
+            ,
+            highEnd_month:{
+                required: true
             }
 
         },
@@ -148,7 +179,7 @@ $(function(){
     function setPlans(type) {
         var _url = $("#preppyPlanUrl").val();
         var _selected =   $("#preppyPlanUrl").attr("title");
-        $("#planId").html('');
+        $("select[name='plan.id']").html('');
         $.getJSON(_url,{type:type},function(data){
             var str = "";
             $.each(data,function(index,val){
@@ -160,7 +191,7 @@ $(function(){
                 }
                 str += "<option "+sel+" value=\""+id+"\">"+val.name+"</option>";
             })
-            $("#planId").html(str);
+            $("select[name='plan.id']").html(str);
         })
     }
 

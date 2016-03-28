@@ -3,318 +3,369 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'preppy.label', default: 'Preppy')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
+        <g:javascript src="jquery-1.8.3.js"/>
+        <g:javascript src="jquery-ui-1.9.2.custom.min.js"  />
+        <g:javascript src="jquery.chosen.min.js"  />
+        <g:javascript src="jquery.validate.min.js"/>
+        <g:javascript src="card.js"/>
+        <g:javascript src="additional-methods.js"/>
+        <g:javascript src="messages_zh.js"/>
+        <g:javascript src="tj.js"/>
+        <g:javascript src="app-preppy.js"/>
         <style type="text/css">
-        span.property-value{
-            display: block;
-            padding-top: 5px;
+        .sel_gray1 {font-size:14px; font-family:"微软雅黑";}
+        .sel_gray1 {font-size:14px; font-family:"微软雅黑";}
+        .tianxie{ font-family:"微软雅黑"; font-size:18px;  }
+        .tianxie td{ border-bottom:1px dashed #cccccc; padding:3px 0;}
+        .inp_gray{ font-size:14px; color:#000000; border:#d1d1d1 1px solid; height:24px;  font-family:"微软雅黑";  }
+        .sel_gray{ font-size:14px; font-family:"微软雅黑";}
+        .ui-combobox {
+            position: relative;
+            display: inline-block;
         }
-            .controls{
-                padding-top: 5px;
-            }
+        .ui-combobox-toggle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin-left: -1px;
+            padding: 0;
+            /* adjust styles for IE 6/7 */
+            *height: 1.7em;
+            *top: 0.1em;
+        }
+        .ui-combobox-input {
+            margin: 0;
+            padding: 0.3em;
+        }
+        .ui-widget-content {
+            text-align: left;
+        }
+        ul.ui-widget-content {
+            height: 200px;
+            overflow: auto;
+        }
+        .tab-content {
+            overflow: visible;
+        }
+        label.error {
+            color: red;
+            font-weight: bold;
+            margin-top: 2px;
+            padding: 2px 8px;
+        }
+        .alert {
+            padding: 8px 35px 8px 14px;
+            margin-bottom: 18px;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+            background-color: #8bc5e8;
+            border: 1px solid #7ed0e5;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            color: #1c628b;
+        }
+        .alert-error {
+            background-color: #eddbe3;
+            border-color: #e8d1df;
+            color: #bd4247;
+        }label.error {
+             color: red;
+             font-weight: bold;
+             margin-top: 2px;
+             padding: 2px 8px;
+         }
+        .alert {
+            padding: 8px 35px 8px 14px;
+            margin-bottom: 18px;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+            background-color: #8bc5e8;
+            border: 1px solid #7ed0e5;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            color: #1c628b;
+        }
+        .alert-error {
+            background-color: #eddbe3;
+            border-color: #e8d1df;
+            color: #bd4247;
+        }
         </style>
+        <script>
+            $(function(){
+                $(".xstx input").attr("disabled",true);
+                $(".xstx select").attr("disabled",true);
+                $(".zbsh input").attr("disabled",true);
+                $(".zbsh select").attr("disabled",true);
+                $(".lstx input").attr("disabled",true);
+                $(".lstx select").attr("disabled",true);
+            })
+
+        </script>
 	</head>
 	<body>
-    <div>
-        <ul class="breadcrumb">
-            <li>
-                <a href="${createLink(uri: '/')}">Home</a> <span class="divider">/</span>
-            </li>
-            <li>
-                <g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link>
-            </li>
-        </ul>
-    </div>
-
     <g:if test="${flash.message}">
         <div class="alert alert-error">${flash.message}</div>
     </g:if>
+    <table width="750" border="0" align="center" cellpadding="0" cellspacing="0" class="tianxie lstx" >
+        <tr>
+            <td height="42" align="center" style="background:#5fb9f2;"><strong style="font-size:22px; color:#ffffff;">☆☆☆ 招生老师填写 ☆☆☆</strong></td>
+        </tr>
+        <tr>
+            <td height="50" >姓&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：
+                <input name="name" type="text" id="name" size="12"  class="inp_gray" value="${preppyInstance?.name}" /></td>
+        </tr>
+        <tr>
+            <td height="50">身份证号：&nbsp;
+            <g:if test="${!preppyInstance.reviewStatus || preppyInstance.reviewStatus == com.baoming.Preppy.ReviewStatus.NO_AUDIT }">
+                <g:textField name="number" value="${preppyInstance?.number}"  class="inp_gray" size="40" />
+            </g:if>
+            <g:else>
+                <g:textField name="number" value="${preppyInstance?.number} " class="inp_gray" size="40"  readonly="readonly"/>
+            </g:else>
+            &nbsp;</td>
+        </tr>
+        <tr>
+            <td height="50">登陆密码：&nbsp;
+                <input name="password" type="text"  class="inp_gray" id="password" size="40" />
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td height="50">缴纳保证金：&nbsp;
+            <g:if test="${!preppyInstance.reviewStatus || preppyInstance.reviewStatus == com.baoming.Preppy.ReviewStatus.NO_AUDIT }">
+                <g:textField name="deposit" value="${preppyInstance?.deposit}" size="10" class="sel_gray"/>
+            </g:if>
+            <g:else>
+                <g:textField name="deposit" value="${preppyInstance?.deposit} "  size="10" class="sel_gray" readonly="readonly"/>
+            </g:else>
+            元 </td>
+        </tr>
+    </table>
+    <table width="750" border="0" align="center" cellpadding="0" cellspacing="0" class="tianxie xstx">
+        <tr>
+            <td height="42" align="center" style="background:#5fb9f2;"><strong style="font-size:22px; color:#ffffff;">☆☆☆ 学生填写 ☆☆☆</strong></td>
+        </tr>
 
-    <div class="row-fluid sortable">
-        <div class="box span12">
-            <div class="box-header well" data-original-title>
-                <h2><i class="icon-zoom-in"></i> <g:message code="default.show.label" args="[entityName]" /></h2>
-            </div>
-            <div class="box-content">
-                <div class="form-horizontal">
-                <fieldset>
+        <tr>
+            <td height="50" align="center"><strong >（请选择你的身份，只能选一个，必须真实有效。 如选错，将无法取得我院学籍。 )</strong></td>
+        </tr>
+        <tr>
+            <td height="50">户籍地：
+            <g:select name="family" from="${com.baoming.Preppy.Family.values()}" class="sel_gray" optionValue="label" value="${preppyInstance?.family}" noSelection="['':'请选择']"/>
+            </td>
+        </tr>
+        <tr>
+            <td height="50">考生类型：
+            <g:select name="studentCateories" from="${Preppy.StudentCateories.values()}" optionValue="label" value="${preppyInstance?.studentCateories}" attr-sel="${preppyInstance?.studentCateories}" noSelection="['':'请选择']"/>
+            </td>
+        </tr>
+        <tr>
+            <td height="50">性<span class="f_20">&nbsp; &nbsp;&nbsp;&nbsp;</span><span class="f_20">&nbsp;&nbsp;</span>别：
 
-                <div class="control-group">
-                    <label class="control-label" for="name">
-                        <g:message code="preppy.name.label" default="Name" />
-                    </label>
+                <label>
+                    <input name="gender" type="radio" id="radio" value="${com.baoming.account.User.Gender.MALE.name()}" <g:if test="${!preppyInstance?.gender?.name() || preppyInstance?.gender?.name() == com.baoming.account.User.Gender.MALE.name()}">checked="checked"</g:if> />
+                    ${com.baoming.account.User.Gender.MALE.label}&nbsp; &nbsp;&nbsp;
+                    <input type="radio" name="gender" id="radio2" value="${com.baoming.account.User.Gender.FEMALE.name()}" <g:if test="${preppyInstance?.gender?.name() == com.baoming.account.User.Gender.FEMALE.name()}">checked="checked"</g:if>/>
+                    ${com.baoming.account.User.Gender.FEMALE.label} </label></td>
+        </tr>
+        <tr>
+            <td height="50">民<span class="f_20">&nbsp; &nbsp;&nbsp;&nbsp;</span><span class="f_20">&nbsp;&nbsp;</span>族：
+            <g:select name="nation.id" from="${com.baoming.Nation.findAll()}" class="sel_gray" optionValue="name" optionKey="id" required="" value="${preppyInstance?.nation?.id}" noSelection="['':'请选择']"/>
+            </td>
+        </tr>
+        <tr>
+            <td height="50">出生日期：
+            <%
+                def cal = Calendar.instance
+                def year = cal.get(Calendar.YEAR)
+                cal.add(Calendar.YEAR,-10);
+            %>
+            <g:set var="startYear" value="${year-25}"/>
+            <g:datePicker name="birthday" value="${preppyInstance?.birthday ?: cal.time}" precision="day"
+                          years="${startYear..(year-10)}"/>
+        </tr>
+        <tr>
+            <td height="50">户籍地区：
+            <g:select id="province" name="provinceId" from="${provinces}" optionKey="code" optionValue="name" required="" value="${preppyInstance?.province?.code}" noSelection="['':'请选择']"/>
+            省&nbsp;
+            <g:select id="city" name="cityId" from="" optionKey="id" required="" class="many-to-one"/>
+            &nbsp;市&nbsp;
+            <g:select id="district" name="districtId" from="" optionKey="id" required="" class="many-to-one"/>
+            县（区）
+            <g:textField name="town" value="${preppyInstance?.town}" placeholder="${message(code: 'preppy.town.label')}"/>
+            乡镇</td>
+        </tr>
+        <tr>
+            <td height="50">详细地址：
+            <g:textField name="address" value="${preppyInstance?.address}" size="80" class="sel_gray" />
+            </td>
+        </tr>
+        <tr>
+            <td height="50"><p >申请就读专业：
+                <select id="planId" name="plan.id" class="sel_gray"></select>
+            </td>
+        </tr>
+        <tr>
+            <td height="50">学生手机：
+                <g:textField name="phone" value="${preppyInstance?.phone}"  size="20" class="sel_gray1" />
+                家长手机：
+                <g:textField name="parentPhone" value="${preppyInstance?.parentPhone}" size="20" class="sel_gray1" />
+                学生QQ：
+                <g:textField name="qq" value="${preppyInstance?.qq}" size="15" class="sel_gray1"/></td>
+        </tr>
+        <tr>
+            <td height="55"  style="border-bottom:none;"><table width="750" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td width="98">学生简历：</td>
+                    <%
+                        cal.add(Calendar.YEAR,4);
+                        cal.set(Calendar.MONTH,8)
+                    %>
+                    <td>初中
+                        <g:datePicker name="juniorStart" value="${preppyInstance?.resume?.juniorStart ?: cal.time}" precision="month"
+                                      years="${startYear..year}" class="sel_gray1"/>
+                        <%
+                            cal.add(Calendar.YEAR,3);
+                            cal.set(Calendar.MONTH,6)
+                        %>
+                        起至<g:datePicker name="juniorEnd" value="${preppyInstance?.resume?.juniorEnd ?: cal.time}" precision="month"
+                                        years="${startYear..year}"  class="sel_gray1"/></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>初中校名：
+                    <g:textField name="juniorSchool" value="${preppyInstance?.resume?.juniorSchool}"  size="40" class="sel_gray" />
+                    证明人：
+                    <g:textField name="juniorAuthenticator" value="${preppyInstance?.resume?.juniorAuthenticator}"   size="20" class="sel_gray1" />
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <%
 
-                    <div class="controls">
-                        ${preppyInstance?.name}
-                    </div>
-                </div>
+                        cal.set(Calendar.MONTH,8)
+                    %>
+                    <td>高中(中职)<span class="f_20">&nbsp;</span>
+                        <g:datePicker name="highStart" value="${preppyInstance?.resume?.highStart ?: cal.time}" precision="month"
+                                      years="${startYear..year}"  class="sel_gray1"/>
+                        <%
+                            cal.add(Calendar.YEAR,3);
+                            cal.set(Calendar.MONTH,6)
+                        %>
+                        起至
+                        <g:datePicker name="highEnd" value="${preppyInstance?.resume?.highEnd ?: cal.time}" precision="month"
+                                      years="${startYear..year}"  class="sel_gray1"/></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>高中(中职)校名：
+                        <g:textField name="highSchool" value="${preppyInstance?.resume?.highSchool}"  size="33" class="sel_gray"/>
+                        证明人：
+                        <g:textField name="highAuthenticator" value="${preppyInstance?.resume?.highAuthenticator}" size="20" class="sel_gray1" /></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>中职专业：
+                        <input name="zzzy" type="text" id="textfield19"   size="40" class="sel_gray" value="${preppyInstance?.resume?.zzzy}" />
+                        <font style="font-size:14px;">（注：中职学生填写此项）</font></td>
+                </tr>
+            </table></td>
+        </tr>
+    </table>
+    <table width="750" border="0" align="center" cellpadding="0" cellspacing="0" class="tianxie zbsh">
+        <tr>
+            <td height="42" align="center" style="background:#5fb9f2;"><strong style="font-size:22px; color:#ffffff;">☆☆☆ 招办审核 ☆☆☆</strong></td>
+        </tr>
+        <tr>
+            <td height="50" align="left" >1、审核：
+            <g:select name="reviewStatus" from="${com.baoming.Preppy$ReviewStatus?.values()}"  optionValue="label" required="" value="${preppyInstance?.reviewStatus?.name()}"  class="sel_gray1" noSelection="['':'请选择']"/>
 
-                <div class="control-group">
-                    <label class="control-label" for="number">
-                        <g:message code="preppy.number.label" default="Number" />
-                    </label>
+            </td>
+        </tr>
+        <tr class="zhongzhi">
+            <td height="50" align="left" ><p >2、2017年高考报名
+            <g:select name="collegeSignUp" from="${com.baoming.Preppy$CollegeSignUp?.values()}"  optionValue="label" required="" value="${preppyInstance?.collegeSignUp?.name()}" class="sel_gray1" noSelection="['':'请选择']"/>
+                <font style="font-size:14px;"> （注：非江苏户籍学生全部选“钟山学院”，江苏户籍任选）</font> </p></td>
+        </tr>
+        <tr class="zhongzhi">
+            <td height="50" align="left" >3、科目组
+            <g:select id="preppyPlan" name="preppyPlan.id" from="${preppyPlans}" optionKey="id" optionValue="name" value="${preppyInstance.preppyPlan?.id}" class="sel_gray1" noSelection="['':'请选择']"/>
+            </td>
+        </tr>
+        <tr>
+            <td height="50" align="left" >4、备注1：
+                <g:textField name="remark" value="${preppyInstance?.remark}" size="80" class="sel_gray1"/></td>
+        </tr>
+        <tr>
+            <td height="50" align="left" ><span class="f_20">&nbsp; &nbsp;&nbsp;&nbsp;</span><span class="f_20">&nbsp;</span>备注2：
+                <g:textField name="remark1" value="${preppyInstance?.remark1}" size="80" class="sel_gray1"/></td>
+        </tr>
+        <tr>
+            <td height="50" align="left" ><span class="f_20">&nbsp; &nbsp;&nbsp;&nbsp;</span><span class="f_20">&nbsp;</span>备注3：
+                <g:textField name="remark2" value="${preppyInstance?.remark2}" size="80" class="sel_gray1"/></td>
+        </tr>
+        <tr>
+            <td height="50" align="left" >5、推荐人：
+            <%
+                def userService = grailsApplication.mainContext.getBean("userService");
+            %>
+                <select name="teacherId">
+                    <option value="">请选择</option>
+                    <g:set var="studTeacherId" value="${preppyInstance.teacher?.id}"/>
+                    <g:each in="${userService.getTeachers()}" var="teah">
+                        <g:if test="${studTeacherId == teah.id}">
+                            <option value="${teah.id}" title="${teah.name}${com.bm.utils.PinyinUtils.getPinyin(teah.name)}" selected="true" >${teah.name}</option>
+                        </g:if>
+                        <g:else>
+                            <option value="${teah.id}" title="${teah.name}${com.bm.utils.PinyinUtils.getPinyin(teah.name)}" >${teah.name}</option>
+                        </g:else>
+                    </g:each>
+                </select>
+                <span class="f_20">&nbsp;</span></td>
+        </tr>
+        <tr>
+            <td height="50" align="left" ><span class="f_20">&nbsp; &nbsp;&nbsp;&nbsp;</span><span class="f_20">&nbsp;</span> <g:message code="preppy.code.label" default="code" />：
+                <g:textField name="remark2" value="${preppyInstance?.code}" size="80" class="sel_gray1"/></td>
+        </tr>
+        <tr>
+            <td height="50" align="left" ><span class="f_20">&nbsp; &nbsp;&nbsp;&nbsp;</span><span class="f_20">&nbsp;</span> <g:message code="preppy.csCode.label" default="code" />
+                <g:textField name="remark2" value="${preppyInstance?.csCode}" size="80" class="sel_gray1"/></td>
+        </tr>
+    </table>
 
-                    <div class="controls">
-                        ${preppyInstance?.number}
-                    </div>
-                </div>
+    <div style="text-align: center">
+        <sec:ifAllGranted roles="${Role.AUTHORITY_ADMIN}">
+            <g:hiddenField name="id" value="${preppyInstance?.id}" />
+            <g:link class="btn btn-info" action="edit" id="${preppyInstance?.id}">
+                <i class="icon-edit icon-white"></i>
+                <g:message code="default.button.edit.label" default="Edit" />
+            </g:link>
+            <g:hiddenField name="act" value="1" />
+            <g:actionSubmit class="btn btn-primary" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+        </sec:ifAllGranted>
+        <sec:ifAllGranted roles="${Role.AUTHORITY_TEACHER}">
+            <g:if test="${!preppyInstance.reviewStatus || preppyInstance.reviewStatus?.name() == com.baoming.Preppy.ReviewStatus.NO_AUDIT.name()}">
+                <g:link class="btn btn-info" action="edit" id="${preppyInstance?.id}">
+                    <i class="icon-edit icon-white"></i>
+                    <g:message code="default.button.edit.label" default="Edit" />
+                </g:link>
+            </g:if>
 
-                <div class="control-group">
-                    <label class="control-label" for="deposit">
-                        <g:message code="preppy.deposit.label" default="deposit" />
-                    </label>
-
-                    <div class="controls">
-                        ${preppyInstance?.deposit}  元
-                    </div>
-                </div>
-
-                    <div class="control-group">
-                        <label class="control-label" for="family"><g:message code="preppy.family.label"/> 
-                        </label>
-
-                        <div class="controls">
-                            ${preppyInstance?.family?.label}
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label" for="studentCateories"><g:message code="preppy.studentCateories.label"/> 
-                        </label>
-
-                        <div class="controls">
-                            ${preppyInstance?.studentCateories?.label}
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label" for="gender">
-                            <g:message code="preppy.gender.label" default="Gender" />
-                        </label>
-
-                        <div class="controls">
-                            ${preppyInstance?.gender?.label}
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label" for="gender">
-                            <g:message code="nation.label" default="nation" />
-                        </label>
-
-                        <div class="controls">
-                            ${preppyInstance?.nation?.name}
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label" for="birthday">
-                            <g:message code="preppy.birthday.label" default="birthday" />
-                        </label>
-
-                        <div class="controls">
-                            <g:formatDate date="${preppyInstance?.birthday}" format="yyyy-MM-dd"/>
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label" for="district">
-                            <g:message code="medium.district.label" default="District" />
-                        </label>
-
-                        <div class="controls">
-                            ${preppyInstance?.province?.name}${preppyInstance?.city?.name}${preppyInstance?.district?.name}
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label" for="address">
-                            <g:message code="preppy.address.label" default="Tel" />
-                        </label>
-
-                        <div class="controls">
-                            ${preppyInstance?.address}
-                        </div>
-                    </div>
-                    <div class="control-group ">
-                        <label class="control-label" for="planId">
-                            <g:message code="preppy.plan.label" default="Plan" />
-                        </label>
-
-                        <div class="controls plan-area">
-                            ${preppyInstance?.plan?.name}
-                        </div>
-                    </div>
-
-
-                    <div class="control-group">
-                        <label class="control-label" for="phone">
-                            <g:message code="preppy.phone.label" default="Phone" />
-                        </label>
-
-                        <div class="controls">
-                            ${preppyInstance?.phone}
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label" for="parentPhone">
-                            <g:message code="preppy.parentPhone.label" default="parentPhone" />
-                        </label>
-
-                        <div class="controls">
-                            ${preppyInstance?.parentPhone}
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label" for="parentPhone">
-                            <g:message code="preppy.qq.label" default="qq" />
-                        </label>
-
-                        <div class="controls">
-                            ${preppyInstance?.qq}
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">
-                            <g:message code="preppy.resume.label" default="qq" />
-                        </label>
-                        <div class="controls">
-                            <div>
-                                <g:message code="preppy.resume.junior.label"/>
-                                <g:formatDate format="yyyy年MM月" date="${preppyInstance?.resume?.juniorStart}"/>起--
-                                <g:formatDate format="yyyy年MM月" date="${preppyInstance?.resume?.juniorEnd}"/>
-                                ${preppyInstance?.resume?.juniorSchool}&nbsp;${preppyInstance?.resume?.juniorAuthenticator}
-                            </div>
-                            <div>
-                                <g:message code="preppy.resume.high.label"/>
-                                <g:formatDate format="yyyy年MM月" date="${preppyInstance?.resume?.highStart}"/>起--
-                                <g:formatDate format="yyyy年MM月" date="${preppyInstance?.resume?.highEnd}"/>
-                                ${preppyInstance?.resume?.highSchool}&nbsp;${preppyInstance?.resume?.zzzy}&nbsp;${preppyInstance?.resume?.highAuthenticator}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label" for="reviewStatus">
-                            <g:message code="preppy.reviewStatus.label" default="ReviewStatus" />
-                        </label>
-
-                        <div class="controls">
-                            ${preppyInstance?.reviewStatus?.label}
-                        </div>
-                    </div>
-
-                    <div class="control-group zhongzhi">
-                        <label class="control-label" for="collegeSignUp">
-                            高考报名地
-                        </label>
-
-                        <div class="controls">
-                            ${preppyInstance?.collegeSignUp?.label}
-                        </div>
-                    </div>
-
-                    <div class="control-group zhongzhi">
-                        <label class="control-label" for="preppyPlan">
-                            <g:message code="preppyPlan.label" default="preppyPlan" />
-                        </label>
-
-                        <div class="controls">
-                            ${preppyInstance.preppyPlan?.name}
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label" for="remark">
-                            <g:message code="preppy.remark.label" default="remark" />1
-                        </label>
-                        <div class="controls">
-                            ${preppyInstance?.remark}
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label" for="remark">
-                            <g:message code="preppy.remark.label" default="remark" />2
-                        </label>
-                        <div class="controls">
-                            ${preppyInstance?.remark1}
-                        </div>
-                    </div>
+        </sec:ifAllGranted>
+        <g:link class="btn btn-success" action="xyPrint1" id="${preppyInstance.id}">
+            <i class="icon-zoom-in  icon-white"></i>
+            <g:message code="default.button.print.label" default="Xy" />
+        </g:link>
+<g:link class="btn btn-success" action="list">
+        <g:message code="default.button.back.label" default="back" />
+    </g:link>
+    </div>
 
 
-                    <div class="control-group">
-                        <label class="control-label" for="remark">
-                            <g:message code="preppy.remark.label" default="remark" />3
-                        </label>
-                        <div class="controls">
-                            ${preppyInstance?.remark2}
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label" for="combobox">
-                            <g:message code="preppy.teacher.label" default="Teacher" />
-                        </label>
-
-                        <div class="controls">
-                            ${preppyInstance?.teacher?.name}
-                        </div>
-                    </div>
-                    <g:if test="${preppyInstance?.code}">
-                    <div class="control-group">
-                        <label class="control-label">
-                            <g:message code="preppy.code.label" default="code" />
-                        </label>
-                        <div class="controls">
-                            ${preppyInstance?.code}
-                        </div>
-                    </div>
-                    </g:if>
-<g:if test="${preppyInstance?.csCode}">
-                    <div class="control-group">
-                        <label class="control-label">
-                            <g:message code="preppy.csCode.label" default="code" />
-                        </label>
-                        <div class="controls">
-                            ${preppyInstance?.csCode}
-                        </div>
-                    </div>  </g:if>
-                    <div class="form-actions">
-                        <sec:ifAllGranted roles="${Role.AUTHORITY_ADMIN}">
-                                <g:hiddenField name="id" value="${preppyInstance?.id}" />
-                                <g:link class="btn btn-info" action="edit" id="${preppyInstance?.id}">
-                                    <i class="icon-edit icon-white"></i>
-                                    <g:message code="default.button.edit.label" default="Edit" />
-                                </g:link>
-                            <g:hiddenField name="act" value="1" />
-                                <g:actionSubmit class="btn btn-primary" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-                         </sec:ifAllGranted>
-                        <sec:ifAllGranted roles="${Role.AUTHORITY_TEACHER}">
-                            <g:if test="${!preppyInstance.reviewStatus || preppyInstance.reviewStatus?.name() == com.baoming.Preppy.ReviewStatus.NO_AUDIT.name()}">
-                                <g:link class="btn btn-info" action="edit" id="${preppyInstance?.id}">
-                                    <i class="icon-edit icon-white"></i>
-                                    <g:message code="default.button.edit.label" default="Edit" />
-                                </g:link>
-                            </g:if>
-
-                        </sec:ifAllGranted>
-                        <g:link class="btn btn-success" action="xyPrint1" id="${preppyInstance.id}">
-                            <i class="icon-zoom-in  icon-white"></i>
-                            <g:message code="default.button.print.label" default="Xy" />
-                        </g:link>
-                    </div>
-                </fieldset>
-                    </div>
-            </div>
-        </div><!--/span-->
-
-    </div><!--/row-->
+    <g:hiddenField name="cityUrl" value="${createLink(action: 'cityOpts',controller: 'api')}" title="${preppyInstance?.city?.code?:params.cityId}"  />
+    <g:hiddenField name="districtUrl" value="${createLink(action: 'districtOpts',controller: 'api')}"  title="${preppyInstance?.district?.code?:params.districtId}" />
+    <g:hiddenField name="preppyPlanUrl" value="${createLink(action: 'getPlans1',controller: 'preppyPlan')}"  title="${preppyInstance?.plan?.id}" />
 
 	</body>
 </html>

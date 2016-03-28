@@ -86,13 +86,13 @@
     line-height: 20px;
     position: relative;
 }
-.login-form dl.pwd {
+.login-form dl.pwd,.login-form dl.top {
     margin: 15px 0 0;
 }
 .login-form dl.savepassword {
     margin: 5px 0;
 }
-.login-form dl.top label, .login-form dl.pwd label {
+.login-form dl.top label, .login-form dl.pwd label,.login-form dl.fullanme label {
     background: url("../images/ico.png") no-repeat scroll 8px -84px transparent;
     height: 25px;
     left: 4px;
@@ -105,6 +105,11 @@
 .login-form dl.pwd label {
     background-position: 8px -112px;
 }
+
+.login-form dl.fullanme label {
+    background-position: 8px -283px;
+}
+
 .login-form dl.pwd .pwdtip, .login-form dl.code .codetip {
     background: none repeat scroll 0 0 transparent;
     color: #888888;

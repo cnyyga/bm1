@@ -10,4 +10,20 @@ class LogoutController {
        // SpringSecurityUtils.securityConfig.logout.afterLogoutUrl = createLink(action: 'index',controller: 'login')
         redirect uri: SpringSecurityUtils.securityConfig.logout.filterProcessesUrl // '/j_spring_security_logout'
     }
+
+    def dispatch = {
+        def cookies = request.getCookies();
+        def stu = false
+        cookies.each {c->
+            def a = c.getName();
+            if(a == 'studentLogin'){
+                stu = true
+            }
+        }
+        if(stu){
+            redirect(controller: 'stu',action: 'index')
+        }else{
+            redirect(controller: 'login',action: 'auth')
+        }
+    }
 }

@@ -1,5 +1,6 @@
 import grails.converters.JSON
 
+import javax.servlet.http.Cookie
 import javax.servlet.http.HttpServletResponse
 
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
@@ -41,6 +42,10 @@ class LoginController {
      * Show the login page.
      */
     def auth = {
+        def cookie = new Cookie("studentLogin","yes")
+        cookie.setPath("/")
+        cookie.setMaxAge(0)
+        response.addCookie(cookie)
 
         def config = SpringSecurityUtils.securityConfig
 
@@ -119,6 +124,10 @@ class LoginController {
         }
         else {
             flash.message = msg
+            if(session.studentLogin){
+                redirect action: 'index',controller: 'stu', params: params
+                return
+            }
             redirect action: 'auth', params: params
         }
     }

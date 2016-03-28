@@ -43,12 +43,12 @@
     </tr>
     <tr>
         <td height="50">户籍地：
-        <g:select name="family" from="${com.baoming.Preppy.Family.values()}" class="sel_gray" optionValue="label" value="${preppyInstance?.family}" noSelection="['请选择':'']"/>
+        <g:select name="family" from="${com.baoming.Preppy.Family.values()}" class="sel_gray" optionValue="label" value="${preppyInstance?.family}" noSelection="['':'请选择']"/>
         </td>
     </tr>
     <tr>
         <td height="50">考生类型：
-        <g:select name="studentCateories" from="${Preppy.StudentCateories.values()}" optionValue="label" value="${preppyInstance?.studentCateories}" attr-sel="${preppyInstance?.studentCateories}" noSelection="['请选择':'']"/>
+        <g:select name="studentCateories" from="${Preppy.StudentCateories.values()}" optionValue="label" value="${preppyInstance?.studentCateories}" attr-sel="${preppyInstance?.studentCateories}" noSelection="['':'请选择']"/>
 </td>
     </tr>
     <tr>
@@ -62,7 +62,7 @@
     </tr>
     <tr>
         <td height="50">民<span class="f_20">&nbsp; &nbsp;&nbsp;&nbsp;</span><span class="f_20">&nbsp;&nbsp;</span>族：
-        <g:select name="nation.id" from="${com.baoming.Nation.findAll()}" class="sel_gray" optionValue="name" optionKey="id" required="" value="${preppyInstance?.nation?.id}" noSelection="['请选择':'']"/>
+        <g:select name="nation.id" from="${com.baoming.Nation.findAll()}" class="sel_gray" optionValue="name" optionKey="id" required="" value="${preppyInstance?.nation?.id}" noSelection="['':'请选择']"/>
 </td>
     </tr>
     <tr>
@@ -73,12 +73,12 @@
             cal.add(Calendar.YEAR,-10);
         %>
         <g:set var="startYear" value="${year-25}"/>
-        <g:datePicker name="birthday" value="${preppyInstance?.birthday ?: cal.time}" precision="day"
-                      years="${startYear..(year-10)}"/>
+        <g:datePicker name="birthday" value="${preppyInstance?.birthday}" precision="day"
+                      years="${startYear..(year-10)}" default="none" noSelection="['':'请选择']"/>
     </tr>
     <tr>
         <td height="50">户籍地区：
-        <g:select id="province" name="provinceId" from="${provinces}" optionKey="code" optionValue="name" required="" value="${preppyInstance?.province?.code}" noSelection="['请选择':'']"/>
+        <g:select id="province" name="provinceId" from="${provinces}" optionKey="code" optionValue="name" required="" value="${preppyInstance?.province?.code}" noSelection="['':'请选择']"/>
         省&nbsp;
         <g:select id="city" name="cityId" from="" optionKey="id" required="" class="many-to-one"/>
             &nbsp;市&nbsp;
@@ -94,7 +94,7 @@
     </tr>
     <tr>
         <td height="50"><p >申请就读专业：
-            <select id="planId" name="plan.id" class="sel_gray"></select>
+            <select id="plan.id" name="plan.id" class="sel_gray"></select>
             </td>
     </tr>
     <tr>
@@ -114,14 +114,14 @@
                     cal.set(Calendar.MONTH,8)
                 %>
                 <td>初中
-            <g:datePicker name="juniorStart" value="${preppyInstance?.resume?.juniorStart ?: cal.time}" precision="month"
-                          years="${startYear..year}" class="sel_gray1"/>
+            <g:datePicker name="juniorStart" value="${preppyInstance?.resume?.juniorStart}" precision="month"
+                          years="${startYear..year}" class="sel_gray1" noSelection="['':'请选择']" default="none"/>
             <%
                 cal.add(Calendar.YEAR,3);
                 cal.set(Calendar.MONTH,6)
             %>
-            起至<g:datePicker name="juniorEnd" value="${preppyInstance?.resume?.juniorEnd ?: cal.time}" precision="month"
-                            years="${startYear..year}"  class="sel_gray1"/></td>
+            起至<g:datePicker name="juniorEnd" value="${preppyInstance?.resume?.juniorEnd}" precision="month"
+                            years="${startYear..year}"  class="sel_gray1" noSelection="['':'请选择']" default="none"/></td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
@@ -137,15 +137,15 @@
                     cal.set(Calendar.MONTH,8)
                 %>
                 <td>高中(中职)<span class="f_20">&nbsp;</span>
-                <g:datePicker name="highStart" value="${preppyInstance?.resume?.highStart ?: cal.time}" precision="month"
-                              years="${startYear..year}"  class="sel_gray1"/>
+                <g:datePicker name="highStart" value="${preppyInstance?.resume?.highStart}" precision="month"
+                              years="${startYear..year}"  class="sel_gray1" noSelection="['':'请选择']" default="none"/>
                 <%
                     cal.add(Calendar.YEAR,3);
                     cal.set(Calendar.MONTH,6)
                 %>
                 起至
-                <g:datePicker name="highEnd" value="${preppyInstance?.resume?.highEnd ?: cal.time}" precision="month"
-                              years="${startYear..year}"  class="sel_gray1"/></td>
+                <g:datePicker name="highEnd" value="${preppyInstance?.resume?.highEnd}" precision="month"
+                              years="${startYear..year}"  class="sel_gray1" noSelection="['':'请选择']" default="none"/></td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
@@ -169,18 +169,18 @@
     </tr>
     <tr>
         <td height="50" align="left" >1、审核：
-        <g:select name="reviewStatus" from="${com.baoming.Preppy$ReviewStatus?.values()}"  optionValue="label" required="" value="${preppyInstance?.reviewStatus?.name()}"  class="sel_gray1" noSelection="['请选择':'']"/>
+        <g:select name="reviewStatus" from="${com.baoming.Preppy$ReviewStatus?.values()}"  optionValue="label" required="" value="${preppyInstance?.reviewStatus?.name()}"  class="sel_gray1" noSelection="['':'请选择']"/>
 
         </td>
     </tr>
     <tr class="zhongzhi">
         <td height="50" align="left" ><p >2、2017年高考报名
-            <g:select name="collegeSignUp" from="${com.baoming.Preppy$CollegeSignUp?.values()}"  optionValue="label" required="" value="${preppyInstance?.collegeSignUp?.name()}" class="sel_gray1" noSelection="['请选择':'']"/>
+            <g:select name="collegeSignUp" from="${com.baoming.Preppy$CollegeSignUp?.values()}"  optionValue="label" required="" value="${preppyInstance?.collegeSignUp?.name()}" class="sel_gray1" noSelection="['':'请选择']"/>
             <font style="font-size:14px;"> （注：非江苏户籍学生全部选“钟山学院”，江苏户籍任选）</font> </p></td>
     </tr>
     <tr class="zhongzhi">
         <td height="50" align="left" >3、科目组
-        <g:select id="preppyPlan" name="preppyPlan.id" from="${preppyPlans}" optionKey="id" optionValue="name" value="${preppyInstance.preppyPlan?.id}" class="sel_gray1" noSelection="['请选择':'']"/>
+        <g:select id="preppyPlan" name="preppyPlan.id" from="${preppyPlans}" optionKey="id" optionValue="name" value="${preppyInstance.preppyPlan?.id}" class="sel_gray1" noSelection="['':'请选择']"/>
         </td>
     </tr>
     <tr>
@@ -213,6 +213,12 @@
                 </g:each>
             </select>
             <span class="f_20">&nbsp;</span></td>
+    </tr>
+    <tr>
+        <td height="50" align="left" >6、辅导员，辅导员电话：
+        <g:textField name="counselor" value="${preppyInstance?.counselor}" size="20" class="sel_gray1"/>
+        <g:textField name="counselorPhone" value="${preppyInstance?.counselorPhone}" size="20" class="sel_gray1"/>
+        </td>
     </tr>
 
 </table>
