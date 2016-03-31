@@ -16,7 +16,7 @@ environments {
             dbCreate = "update"
             pooled = true
             driverClassName = "com.mysql.jdbc.Driver"
-            url = "jdbc:mysql://localhost:3306/bm?useUnicode=true&amp;characterEncoding=utf-8"
+            url = "jdbc:mysql://localhost:3306/bm1?useUnicode=true&amp;characterEncoding=utf-8"
             username = "root"
             password = "1"
             logSql = 'true'

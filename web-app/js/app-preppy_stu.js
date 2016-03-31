@@ -179,9 +179,10 @@ $(function(){
     function setPlans(type) {
         var _url = $("#preppyPlanUrl").val();
         var _selected =   $("#preppyPlanUrl").attr("title");
+        var _txt =   $("#preppyPlanUrl").attr("select-txt");
         $("select[name='plan.id']").html('');
         $.getJSON(_url,{type:type},function(data){
-            var str = "";
+            var str = "<option value=\"\">"+_txt+"</option>";
             $.each(data,function(index,val){
                 var id = val['id'];
                 var name = val['name'];

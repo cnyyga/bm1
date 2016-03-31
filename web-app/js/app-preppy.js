@@ -186,10 +186,10 @@ $(function(){
     function family(cate) {
         $("#studentCateories").empty()
         if(cate == 'JIANGSU'){
-            var opts1 = opts.slice(3,9);
+            var opts1 = opts.slice(4,9);
             $("#studentCateories").append(opts1);
         }else{
-            var opts2 = opts.slice(9,11);
+            var opts2 = opts.slice(10,12);
             $("#studentCateories").append(opts2);
         }
         $("#studentCateories").val($("#studentCateories").attr("attr-sel"));
@@ -202,9 +202,10 @@ $(function(){
     function setPlans(type) {
         var _url = $("#preppyPlanUrl").val();
         var _selected =   $("#preppyPlanUrl").attr("title");
+        var _txt =   $("#preppyPlanUrl").attr("select-txt");
         $("select[name='plan.id']").html('');
         $.getJSON(_url,{type:type},function(data){
-            var str = "<option value=\"\">Please select</option>";
+            var str = "<option value=\"\">"+_txt+"</option>";
             $.each(data,function(index,val){
                 var id = val['id'];
                 var name = val['name'];

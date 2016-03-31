@@ -5,6 +5,12 @@
     <title>钟山职业技术学院</title>
     <script type="text/javascript">
        // window.print();
+        function print1(){
+            var printTr = document.getElementById("printTr");
+            printTr.style.display='none';
+            window.print();
+
+        }
     </script>
 </head>
 <style>
@@ -16,9 +22,17 @@
 
 </style>
 <body>
+
 <table width="750" border="0" align="center" cellpadding="0" cellspacing="1" class="tianxie" style="background:#cccccc;" >
     <tr>
         <td height="50" colspan="5" align="center" bgcolor="#FFFFFF"><strong style="font-size:26px;">${new Date().format('yyyy')}注册入学关键信息采集表</strong></td>
+    </tr>
+    <tr>
+        <td colspan="5" bgcolor="#FFFFFF">编号：<span class="f_20">
+            <input class="inp_red" name="textfield13" type="text" id="textfield161"   value="${preppyInstance.code}"  />
+        </span>审核编号：<span class="f_20">
+            <input class="inp_red" name="textfield13" type="text" id="textfield162"   value="${preppyInstance.csCode}" />
+        </span></td>
     </tr>
     <tr>
         <td colspan="5" bgcolor="#FFFFFF">姓名： <span class="f_20">
@@ -38,7 +52,7 @@
     </tr>
     <tr>
         <td colspan="5" bgcolor="#FFFFFF">户&nbsp;&nbsp;籍&nbsp;地：<span class="f_20">
-            <input class="inp_red" name="textfield23" type="text" id="textfield25"   value="${preppyInstance.province?.name}省${preppyInstance.city?.name}市${preppyInstance.district?.name}县(区.市)${preppyInstance.town}" size="70" />
+            <input class="inp_red" name="textfield23" type="text" id="textfield25"   value="${preppyInstance.province?.name}${preppyInstance.city?.name}${preppyInstance.district?.name}${preppyInstance.town}" size="70" />
         </span></td>
     </tr>
     <tr>
@@ -112,7 +126,7 @@
             </tr>
             <tr>
                 <td colspan="2">备注1：<span class="f_20">
-                    <input class="inp_red" name="textfield18" type="text" id="textfield21"   value="2017年高考报名" size="72" value="${preppyInstance.remark}" />
+                    <input class="inp_red" name="textfield18" type="text" id="textfield21" size="72" value="${preppyInstance.remark}" />
                 </span></td>
             </tr>
             <tr>
@@ -160,8 +174,8 @@
     </tr>
 
     <g:if test="${preppyInstance.reviewStatus && preppyInstance.reviewStatus?.name() != com.baoming.Preppy.ReviewStatus.NO_AUDIT.name()}">
-        <tr>
-            <td colspan="5" align="center" bgcolor="#FFFFFF"><input type="submit" name="button" id="button" value="打印" onclick="javascript:window.print();"/>
+        <tr id="printTr">
+            <td colspan="5" align="center" bgcolor="#FFFFFF"><input type="submit" name="button" id="button" value="打印" onclick="print1();"/>
                 &nbsp;&nbsp;<br /></td>
         </tr>
     </g:if>
