@@ -153,6 +153,7 @@ class ProvinceController {
             province.name = params.name
             province.number = params.number
             province.orderValue = orderValue
+            province.status = Province.Status."${params.status}"
             if(!province.save()){
                 flash.message = message(code: 'default.save.failure.label', args: [message(code: 'district.label', default: 'Student'), id])
                 redirect(action: 'edit',params: [t:t,id:id,pid:pid])

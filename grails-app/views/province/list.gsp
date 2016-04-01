@@ -61,6 +61,9 @@
 
                         <th><g:message code="province.code.label" default="Code" /></th>
 
+                        <g:if test="${!params.t || params.t == 'province'}">
+                            <th><g:message code="mediumPlan.status.label" default="status" /></th>
+                        </g:if>
                         <th><g:message code="default.operator.label" default="Actions" /></th>
                     </tr>
                     </thead>
@@ -72,8 +75,9 @@
                             <td class="center">${fieldValue(bean: instance, field: "name")}</td>
 
                             <td class="center">${instance?.number?:instance?.code}</td>
-
-
+                            <g:if test="${!params.t || params.t == 'province'}">
+                                <td class="center">${instance?.status?.label}</td>
+                            </g:if>
                             <td class="center">
 
                                     <g:if test="${params.t != 'district'}">

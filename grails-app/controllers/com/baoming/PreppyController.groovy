@@ -124,9 +124,9 @@ class PreppyController {
 
         def province = params.provinceId?Province.findByCode(params.provinceId):null
         if(province && province.name.count('江苏') > 0) {
-            preppyInstance.family = Preppy.Family.JIANGSU
-        }else{
-            preppyInstance.family = Preppy.Family.OTHER
+        //    preppyInstance.family = Preppy.Family.JIANGSU
+        }else  if(province && !province.name.count('江苏') > 0){
+        //    preppyInstance.family = Preppy.Family.OTHER
         }
         if(province){
             preppyInstance.province = province

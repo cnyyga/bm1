@@ -57,12 +57,13 @@ class PlanService {
     }
 
     def getPreppyPlanPlans(){
-        Plan.createCriteria().list {
+        def plans = Plan.createCriteria().list {
             eq("status",(Plan.Status.RUNNING))
             planUses {
                 gt("flg",PlanUse.USE_FLG_PREPPY)
             }
         }
+        return plans.unique()
     }
 
     def getPlansByFlg(flg){

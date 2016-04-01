@@ -27,4 +27,14 @@
         <g:textField name="orderValue" value="${instance?.orderValue?:0}" />
     </div>
 </div>
+<g:if test="${!params.t || params.t == 'province'}">
 
+<div class="control-group">
+    <label class="control-label" for="status">
+        <g:message code="mediumPlan.status.label" default="Status" />
+    </label>
+    <div class="controls">
+        <g:select name="status" from="${com.baoming.Province.Status?.values()}" optionValue="label" required="" value="${instance?.status?.name()}"/>
+    </div>
+</div>
+</g:if>

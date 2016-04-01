@@ -9,7 +9,7 @@
     </tr>
     <tr>
         <td height="50">身份证号：&nbsp;
-            <g:if test="${!preppyInstance.reviewStatus || preppyInstance.reviewStatus == com.baoming.Preppy.ReviewStatus.NO_AUDIT }">
+            <g:if test="${!preppyInstance.reviewStatus || preppyInstance?.reviewStatus == com.baoming.Preppy.ReviewStatus.NO_AUDIT }">
                 <g:textField name="number" value="${preppyInstance?.number}"  class="inp_gray" size="40" />
             </g:if>
             <g:else>
@@ -24,7 +24,7 @@
     </tr>
     <tr>
         <td height="50">缴纳保证金：&nbsp;
-            <g:if test="${!preppyInstance.reviewStatus || preppyInstance.reviewStatus == com.baoming.Preppy.ReviewStatus.NO_AUDIT }">
+            <g:if test="${!preppyInstance.reviewStatus || preppyInstance?.reviewStatus == com.baoming.Preppy.ReviewStatus.NO_AUDIT }">
                 <g:textField name="deposit" value="${preppyInstance?.deposit}" size="10" class="sel_gray"/>
             </g:if>
             <g:else>

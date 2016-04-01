@@ -10,7 +10,7 @@ class ProvinceService {
 
     @Cacheable('provinces')
     def getProvinces() {
-        Province.listOrderByOrderValue(order: 'desc')
+        Province.findAllByStatus(Province.Status.ENABLED)
     }
 
     @CacheEvict(value='provinces', allEntries = true)

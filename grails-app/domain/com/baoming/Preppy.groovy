@@ -47,7 +47,7 @@ class Preppy {
     CollegeSignUp collegeSignUp//高考报名地  -2016
     //////old/////////////
     Family family//户籍类型 -2016
-    Family studentFamily = Family.OTHER //学籍类型
+    Family studentFamily//学籍类型
     CollegeType collegeType =  CollegeType.HIGH //高考类型
     Status status = Status.DROP //上学状态
     String qq //-2016

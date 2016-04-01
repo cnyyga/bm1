@@ -157,16 +157,20 @@ $(function(){
         setPlans($("#studentCateories").val());
     });
 
+    var _txt =   $("#preppyPlanUrl").attr("select-txt");
+    var _str = "<option value=\"\">"+_txt+"</option>";
+
     var opts = $("#studentCateories option");
     $("#studentCateories").append(opts);
     family($("#family").val());
     function family(cate) {
-        $("#studentCateories").empty()
+        $("#studentCateories").empty();
+        $("#studentCateories").append(_str);
         if(cate == 'JIANGSU'){
-            var opts1 = opts.slice(3,9);
+            var opts1 = opts.slice(4,10);
             $("#studentCateories").append(opts1);
-        }else{
-            var opts2 = opts.slice(9,11);
+        }else if(cate == 'OTHER'){
+            var opts2 = opts.slice(10,12);
             $("#studentCateories").append(opts2);
         }
         $("#studentCateories").val($("#studentCateories").attr("attr-sel"));

@@ -55,7 +55,7 @@
                 <dt><label for="username">帐号:</label></dt>
                 <dd style="border-color: rgb(173, 182, 201);">
                     <input type="text" id="username" class="input-text" name="j_username" style="color: rgb(136, 136, 136);">
-                    <label for="username" id="pwdUsername" class="codetip" style="visibility: visible;">请输入身体证号</label>
+                    <label for="username" id="pwdUsername" class="codetip" style="visibility: visible;">请输入身份证号</label>
                 </dd>
             </dl>
             <dl class="pwd clearfix">

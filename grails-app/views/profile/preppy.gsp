@@ -73,7 +73,7 @@
 			<g:form method="post"  action="savePreppy" name="preppyForm">
 		        <g:render template="/preppy/form"/>
 				<div style="text-align: center;margin: 10px auto;">
-				<g:if test="${!preppyInstance.reviewStatus || preppyInstance.reviewStatus == com.baoming.Preppy.ReviewStatus.NO_AUDIT }">
+				<g:if test="${!preppyInstance.reviewStatus || preppyInstance?.reviewStatus == com.baoming.Preppy.ReviewStatus.NO_AUDIT }">
 				<g:submitButton name="subbtn" class="input-submit"  value="${message(code: 'default.button.update.label', default: 'Update')}" />
 				</g:if>
 				<button onclick="javascript:history.back()"type="button" >返回</button>
