@@ -29,9 +29,11 @@
     </tr>
     <tr>
         <td colspan="5" bgcolor="#FFFFFF">编号：<span class="f_20">
-            <input class="inp_red" name="textfield13" type="text" id="textfield161"   value="${preppyInstance.code}"  />
+            <input class="inp_red" name="textfield13" type="text" id="textfield161"   value="${preppyInstance.code}"  size="17"/>
         </span>审核编号：<span class="f_20">
-            <input class="inp_red" name="textfield13" type="text" id="textfield162"   value="${preppyInstance.csCode}" />
+            <input class="inp_red" name="textfield13" type="text" id="textfield162"   value="${preppyInstance.csCode}"size="17" />
+        </span>审核：<span class="f_20">
+            <input class="inp_red" name="textfield13" type="text" id="textfield163"   value="${preppyInstance.reviewStatus?.label}" size="17"/>
         </span></td>
     </tr>
     <tr>

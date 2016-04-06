@@ -241,6 +241,7 @@ class PreppyController {
             redirect(action: "list")
             return
         }
+        def oldReviewStatus = preppyInstance.reviewStatus
 
         preppyInstance.properties = params
         def userId = springSecurityService.authentication.principal?.id
@@ -388,12 +389,12 @@ class PreppyController {
         }
         preppyInstance.resume=resume
 
-        if (params.reviewStatus && params.reviewStatus != Preppy.ReviewStatus.NO_AUDIT.name()) {
+        if (params.reviewStatus && params.reviewStatus != Preppy.ReviewStatus.NO_AUDIT.name() && params.reviewStatus != Preppy.ReviewStatus.NO_PASS.name()) {
             def codes = preppyService.generateCode(preppyInstance)
             if(codes && !preppyInstance.code){
                 preppyInstance.code=codes[0]
             }
-            if(codes && !preppyInstance.csCode){
+            if(codes && oldReviewStatus.name()!=params.reviewStatus){
                 preppyInstance.csCode=codes[1]
             }
         }
