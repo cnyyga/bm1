@@ -162,6 +162,13 @@
             </tr>
         </table></td>
     </tr>
+    <sec:ifAllGranted roles="${com.baoming.account.Role.AUTHORITY_STUDENT}">
+    <tr>
+        <td>
+            <div style="text-align: center;color:red">【所有信息填写完毕，请点击最下方“保存修改”】</div>
+        </td>
+    </tr>
+    </sec:ifAllGranted>
 </table>
 <table width="750" border="0" align="center" cellpadding="0" cellspacing="0" class="tianxie zbsh">
     <tr>
@@ -185,15 +192,15 @@
     </tr>
     <tr>
         <td height="50" align="left" >4、备注1：
-            <g:textField name="remark" value="${preppyInstance?.remark}" size="80" class="sel_gray1"/></td>
+            <g:textField name="remark" value="${preppyInstance?.remark}" size="80" class="sel_gray1"/><label class="error" style="font-size: 12px;">（科目组）</label></td>
     </tr>
     <tr>
         <td height="50" align="left" ><span class="f_20">&nbsp; &nbsp;&nbsp;&nbsp;</span><span class="f_20">&nbsp;</span>备注2：
-            <g:textField name="remark1" value="${preppyInstance?.remark1}" size="80" class="sel_gray1"/></td>
+            <g:textField name="remark1" value="${preppyInstance?.remark1}" size="80" class="sel_gray1"/><label class="error" style="font-size: 12px;">（学籍异动、学费、挂靠费收退补）</label></td>
     </tr>
     <tr>
         <td height="50" align="left" ><span class="f_20">&nbsp; &nbsp;&nbsp;&nbsp;</span><span class="f_20">&nbsp;</span>备注3：
-            <g:textField name="remark2" value="${preppyInstance?.remark2}" size="80" class="sel_gray1"/></td>
+            <g:textField name="remark2" value="${preppyInstance?.remark2}" size="80" class="sel_gray1"/><label class="error" style="font-size: 12px;">（取得学籍的年份等其他内容）</label></td>
     </tr>
     <tr>
         <td height="50" align="left" >5、推荐人：

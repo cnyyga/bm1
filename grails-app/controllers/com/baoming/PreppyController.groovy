@@ -123,11 +123,11 @@ class PreppyController {
         preppyInstance.teacher = teacher
 
         def province = params.provinceId?Province.findByCode(params.provinceId):null
-        if(province && province.name.count('江苏') > 0) {
+      //  if(province && province.name.count('江苏') > 0) {
         //    preppyInstance.family = Preppy.Family.JIANGSU
-        }else  if(province && !province.name.count('江苏') > 0){
+       // }else  if(province && !province.name.count('江苏') > 0){
         //    preppyInstance.family = Preppy.Family.OTHER
-        }
+      //  }
         if(province){
             preppyInstance.province = province
         }
@@ -394,7 +394,7 @@ class PreppyController {
             if(codes && !preppyInstance.code){
                 preppyInstance.code=codes[0]
             }
-            if(codes && oldReviewStatus.name()!=params.reviewStatus){
+            if(codes && (!oldReviewStatus || oldReviewStatus.name()!=params.reviewStatus)){
                 preppyInstance.csCode=codes[1]
             }
         }

@@ -332,6 +332,12 @@
             <td height="50" align="left" ><span class="f_20">&nbsp; &nbsp;&nbsp;&nbsp;</span><span class="f_20">&nbsp;</span> <g:message code="preppy.csCode.label" default="code" />
                 <g:textField name="remark2" value="${preppyInstance?.csCode}" size="80" class="sel_gray1"/></td>
         </tr>
+        <tr>
+            <td height="50" align="left" >6、辅导员，辅导员电话：
+            <g:textField name="counselor" value="${preppyInstance?.counselor}" size="20" class="sel_gray1"/>
+            <g:textField name="counselorPhone" value="${preppyInstance?.counselorPhone}" size="20" class="sel_gray1"/>
+            </td>
+        </tr>
     </table>
 
     <div style="text-align: center">

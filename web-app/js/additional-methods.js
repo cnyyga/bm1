@@ -438,7 +438,7 @@ jQuery.validator.addMethod("extension", function(value, element, param) {
 
 
 jQuery.validator.addMethod("phoneCN", function(value, element) {
-    var tel = /^(130|131|132|133|134|135|136|137|138|139|150|151|152|153|154|155|156|157|158|159|170|171|172|173|174|175|176|177|178|179|180|181|182|183|184|185|186|187|188|189)\d{8}$/;
+    var tel = /^(130|131|132|133|134|135|136|137|138|139|140|141|142|143|144|145|146|147|148|149|150|151|152|153|154|155|156|157|158|159|170|171|172|173|174|175|176|177|178|179|180|181|182|183|184|185|186|187|188|189)\d{8}$/;
     return tel.test(value) || this.optional(element);
 }, "请输入11位正确的手机号码");
 jQuery.validator.addMethod("stringCheck", function(value, element) {
