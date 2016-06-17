@@ -36,7 +36,11 @@
 
      <g:each in="${teacherInstance?.teacherDistricts}" var="teacherDistrict">
          <%
-             c  << teacherDistrict.district.code as String%>
+             try {
+                 c  << teacherDistrict.district.code as String
+             } catch (e) {
+             }
+         %>
      </g:each>
 </g:if>
 <div class="control-group">

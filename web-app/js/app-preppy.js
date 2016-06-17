@@ -162,6 +162,21 @@ $(function(){
             ,
             highEnd_month:{
                 required: true
+            },
+            family:{
+                required: true
+            },
+            studentCateories:{
+                required: true
+            },
+            birthday_year:{
+                required: true
+            },
+            birthday_month:{
+                required: true
+            },
+            birthday_day:{
+                required: true
             }
         },
         highlight: function(label) {

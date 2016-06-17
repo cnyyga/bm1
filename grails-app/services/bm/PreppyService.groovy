@@ -52,6 +52,9 @@ class PreppyService {
         }else if(preppy.reviewStatus == Preppy.ReviewStatus.JSPG){
             c = "P"
         }
+        if(!c){
+            return
+        }
         def d = new Date().clearTime()
         d = DateUtils.truncate(d,Calendar.YEAR)
         def p = Preppy.findByDateCreatedGreaterThanEqualsAndCodeIsNotNull(d,[sort:'code',order:'desc'])
