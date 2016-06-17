@@ -194,8 +194,8 @@ class PreppyController {
             render(view: "create", model: [preppyInstance: preppyInstance,provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()])
             return
         }
-/*
-        def juniorStart_year = params.get("juniorStart_year")
+        if (SpringSecurityUtils.ifNotGranted(Role.AUTHORITY_TEACHER)) {
+            def juniorStart_year = params.get("juniorStart_year")
         def juniorStart_month = params.get("juniorStart_month")
         def juniorEnd_year = params.get("juniorEnd_year")
         def juniorEnd_month = params.get("juniorEnd_month")
@@ -246,16 +246,16 @@ class PreppyController {
         if(highAuthenticator){
             resume.highAuthenticator=highAuthenticator
         }
-        preppyInstance.resume=resume*/
-
-        if (params.reviewStatus && params.reviewStatus != Preppy.ReviewStatus.NO_AUDIT.name() && params.reviewStatus != Preppy.ReviewStatus.NO_PASS.name()) {
-            def oldReviewStatus = preppyInstance.reviewStatus
-            def codes = preppyService.generateCode(preppyInstance)
-            if(codes && !preppyInstance.code){
-                preppyInstance.code=codes[0]
-            }
-            if(codes){
-                preppyInstance.csCode=codes[1]
+        preppyInstance.resume=resume
+            if (params.reviewStatus && params.reviewStatus != Preppy.ReviewStatus.NO_AUDIT.name() && params.reviewStatus != Preppy.ReviewStatus.NO_PASS.name()) {
+                def oldReviewStatus = preppyInstance.reviewStatus
+                def codes = preppyService.generateCode(preppyInstance)
+                if (codes && !preppyInstance.code) {
+                    preppyInstance.code = codes[0]
+                }
+                if (codes) {
+                    preppyInstance.csCode = codes[1]
+                }
             }
         }
         preppyInstance.validate()
