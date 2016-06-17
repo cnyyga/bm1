@@ -248,7 +248,6 @@ class PreppyController {
         }
         preppyInstance.resume=resume
             if (params.reviewStatus && params.reviewStatus != Preppy.ReviewStatus.NO_AUDIT.name() && params.reviewStatus != Preppy.ReviewStatus.NO_PASS.name()) {
-                def oldReviewStatus = preppyInstance.reviewStatus
                 def codes = preppyService.generateCode(preppyInstance)
                 if (codes && !preppyInstance.code) {
                     preppyInstance.code = codes[0]
@@ -458,8 +457,12 @@ class PreppyController {
             if(codes && !preppyInstance.code){
                 preppyInstance.code=codes[0]
             }
-            if(codes && (!oldReviewStatus || oldReviewStatus.name()!=params.reviewStatus)){
-                preppyInstance.csCode=codes[1]
+            if(codes){
+                if(!preppyInstance.csCode){
+                    preppyInstance.csCode=codes[1]
+                }else if(!oldReviewStatus || oldReviewStatus.name()!=params.reviewStatus){
+                    preppyInstance.csCode=codes[1]
+                }
             }
         }
 
