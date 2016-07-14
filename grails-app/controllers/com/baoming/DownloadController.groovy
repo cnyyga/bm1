@@ -75,8 +75,23 @@ class DownloadController {
         if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)) {
             def userId = springSecurityService.authentication.principal?.id
             def teacher = Teacher.get(userId)
-            def districts = teacher?.teacherDistricts*.district
+            if(!teacher){
+                log.error("teacher is null,userId:${userId}")
+                flash.message = message(code: 'download.city.null.message')
+                redirect(action: 'index')
+                return;
+            }
+            def districts
+            try {
+                districts = teacher?.teacherDistricts*.district
+            } catch (e) {
+                log.error("districts is null,userId:${userId},error:${e.message}")
+                flash.message = message(code: 'download.city.null.message')
+                redirect(action: 'index')
+                return
+            }
             if(!districts || districts.empty) {
+                log.error("districts is null,userId:${userId}")
                 flash.message = message(code: 'download.city.null.message')
                 redirect(action: 'index')
                 return

@@ -70,7 +70,7 @@
 			</g:eachError>
 		</ul>
 	</g:hasErrors>
-			<g:form method="post"  action="savePreppy" name="preppyForm">
+			<g:uploadForm method="post"  action="savePreppy" name="preppyForm">
 		        <g:render template="/preppy/form"/>
 				<div style="text-align: center;margin: 10px auto;">
 				<g:if test="${!preppyInstance.reviewStatus || preppyInstance?.reviewStatus == com.baoming.Preppy.ReviewStatus.NO_AUDIT }">
@@ -78,6 +78,6 @@
 				</g:if>
 				<button onclick="javascript:history.back()"type="button" >返回</button>
 				</div>
-			</g:form>
+			</g:uploadForm>
 	</body>
 </html>

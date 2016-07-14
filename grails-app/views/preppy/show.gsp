@@ -273,6 +273,61 @@
             </table></td>
         </tr>
     </table>
+    <table width="750" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+            <td height="42" align="center" style="background:#5fb9f2;"><strong style="font-size:22px; color:#ffffff;">☆☆☆ 上传材料 ☆☆☆</strong></td>
+        </tr>
+        <tr>
+            <td height="50" align="left" >身份证正面照片
+                <g:if test="${preppyInstance.cardPhotoPath}">
+                    <g:link action="img1"  controller="api" params="[path:preppyInstance?.cardPhotoPath]" target="_blank"><img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance.cardPhotoPath])}" title="点击打开原图" alt="点击打开原图" style="max-height: 50px;"></g:link>
+                </g:if>
+            </td>
+        </tr>
+        <tr>
+            <td height="50" align="left" >身份证反面照片
+                <input type="file" name="cardBackgroundPhotoPathInp">
+                <g:if test="${preppyInstance.cardBackgroundPhotoPath}">
+                    <g:link action="img1"  controller="api" params="[path:preppyInstance?.cardBackgroundPhotoPath]" target="_blank"><img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance.cardBackgroundPhotoPath])}"  title="点击打开原图" alt="点击打开原图" style="max-height: 50px;"></g:link>
+                </g:if>
+            </td>
+        </tr>
+        <tr>
+            <td height="50" align="left" >户口本首页照片
+                <g:if test="${preppyInstance.hkbPath}">
+                    <g:link action="img1"  controller="api" params="[path:preppyInstance?.hkbPath]" target="_blank"><img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance.hkbPath])}"  title="点击打开原图" alt="点击打开原图" style="max-height: 50px;"></g:link>
+                </g:if>
+            </td>
+        </tr>
+        <tr>
+            <td height="50" align="left" >户口本本人页照片
+                <g:if test="${preppyInstance.hkbksyPath}">
+                    <g:link action="img1"  controller="api" params="[path:preppyInstance?.hkbksyPath]" target="_blank"><img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance.hkbksyPath])}"  title="点击打开原图" alt="点击打开原图" style="max-height: 50px;"></g:link>
+                </g:if>
+            </td>
+        </tr>
+        <tr>
+            <td height="50" align="left" >高中或中专毕业证书照片（已毕业提供）
+                <g:if test="${preppyInstance.byzsPath}">
+                    <g:link action="img1"  controller="api" params="[path:preppyInstance?.byzsPath]" target="_blank"><img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance.byzsPath])}"  title="点击打开原图" alt="点击打开原图" style="max-height: 50px;"></g:link>
+                </g:if>
+            </td>
+        </tr>
+        <tr>
+            <td height="50" align="left" >初中毕业证书照片（挂学籍提供）
+                <g:if test="${preppyInstance.xjzmPath}">
+                    <g:link action="img1"  controller="api" params="[path:preppyInstance?.xjzmPath]" target="_blank"><img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance.xjzmPath])}"  title="点击打开原图" alt="点击打开原图" style="max-height: 50px;"></g:link>
+                </g:if>
+            </td>
+        </tr>
+        <tr>
+            <td height="50" align="left" >其他补充材料照片
+                <g:if test="${preppyInstance.otherPhotoPath}">
+                    <g:link action="img1"  controller="api" params="[path:preppyInstance?.otherPhotoPath]" target="_blank"><img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance.otherPhotoPath])}"  title="点击打开原图" alt="点击打开原图" style="max-height: 50px;"></g:link>
+                </g:if>
+            </td>
+        </tr>
+    </table>
     <table width="750" border="0" align="center" cellpadding="0" cellspacing="0" class="tianxie zbsh">
         <tr>
             <td height="42" align="center" style="background:#5fb9f2;"><strong style="font-size:22px; color:#ffffff;">☆☆☆ 招办审核 ☆☆☆</strong></td>

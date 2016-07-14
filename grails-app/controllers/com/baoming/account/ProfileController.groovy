@@ -15,6 +15,7 @@ class ProfileController {
     def userService
     def provinceService
     def planService
+    def fileService
 
     def index() {
         redirect(action: "edit")
@@ -262,6 +263,43 @@ class ProfileController {
         preppy.qq = params.qq
         preppy.resume = params.resume
         preppy.town = params.town
+
+        def hkbPathFile = request.getFile("hkbPathInp")
+        def hkbksyPathFile = request.getFile("hkbksyPathInp")
+        def cardPhotoPathFile = request.getFile("cardPhotoPathInp")
+        def cardBackgroundPhotoPathFile = request.getFile("cardBackgroundPhotoPathInp")
+        def byzsPathFile = request.getFile("byzsPathInp")
+        def xjzmPathFile = request.getFile("xjzmPathInp")
+        def otherPhotoPathFile = request.getFile("otherPhotoPathInp")
+
+        def hkbPath =hkbPathFile?fileService.upload(hkbPathFile,"preppy"):null
+        def hkbksyPath =hkbksyPathFile?fileService.upload(hkbksyPathFile,"preppy"):null
+        def cardPhotoPath =cardPhotoPathFile?fileService.upload(cardPhotoPathFile,"preppy"):null
+        def cardBackgroundPhotoPath =cardBackgroundPhotoPathFile?fileService.upload(cardBackgroundPhotoPathFile,"preppy"):null
+        def byzsPath =byzsPathFile?fileService.upload(byzsPathFile,"preppy"):null
+        def xjzmPath =xjzmPathFile?fileService.upload(xjzmPathFile,"preppy"):null
+        def otherPhotoPath =otherPhotoPathFile?fileService.upload(otherPhotoPathFile,"preppy"):null
+        if(hkbPath){
+            preppy.hkbPath=hkbPath
+        }
+        if(hkbksyPath){
+            preppy.hkbksyPath=hkbksyPath
+        }
+        if(cardPhotoPath){
+            preppy.cardPhotoPath=cardPhotoPath
+        }
+        if(cardBackgroundPhotoPath){
+            preppy.cardBackgroundPhotoPath=cardBackgroundPhotoPath
+        }
+        if(byzsPath){
+            preppy.byzsPath=byzsPath
+        }
+        if(xjzmPath){
+            preppy.xjzmPath=xjzmPath
+        }
+        if(otherPhotoPath){
+            preppy.otherPhotoPath=otherPhotoPath
+        }
 
         def juniorStart_year = params.get("juniorStart_year")
         def juniorStart_month = params.get("juniorStart_month")

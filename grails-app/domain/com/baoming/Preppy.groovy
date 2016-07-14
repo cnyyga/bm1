@@ -59,8 +59,10 @@ class Preppy {
     String hkbPath //户口本首页
     String hkbksyPath//户口本考生页
     String cardPhotoPath//身份证照片
-    String byzsPath//高中（中职）毕业证书
-    String xjzmPath//学籍证明（本省在校中职生）
+    String cardBackgroundPhotoPath//身份证照片背面
+    String byzsPath//高中（中职）毕业证书 高中或中专毕业证书照片（已毕业提供）
+    String xjzmPath//学籍证明（本省在校中职生）or 初中毕业证书照片（挂学籍提供）
+    String otherPhotoPath//其他补充材料照片
 
     Resume resume //简历
     String remark //备注1
@@ -99,8 +101,10 @@ class Preppy {
         hkbPath nullable: true
         hkbksyPath nullable: true
         cardPhotoPath nullable: true
+        cardBackgroundPhotoPath nullable: true
         byzsPath nullable: true
         xjzmPath nullable: true
+        otherPhotoPath nullable: true
         remark nullable: true
         remark1 nullable: true
         remark2 nullable: true

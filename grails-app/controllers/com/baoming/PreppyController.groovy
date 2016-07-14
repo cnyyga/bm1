@@ -73,7 +73,10 @@ class PreppyController {
                 eq('plan',plan)
             }
             if(params.reviewStatus) {
-                eq('reviewStatus',Preppy.ReviewStatus."${params.reviewStatus}")
+                or {
+                    isNull('reviewStatus')
+                    eq('reviewStatus',Preppy.ReviewStatus."${params.reviewStatus}")
+                }
             }
             ge('dateCreated', startDate)
             lt('dateCreated', endDate)
@@ -164,14 +167,18 @@ class PreppyController {
         def hkbPathFile = request.getFile("hkbPathInp")
         def hkbksyPathFile = request.getFile("hkbksyPathInp")
         def cardPhotoPathFile = request.getFile("cardPhotoPathInp")
+        def cardBackgroundPhotoPathFile = request.getFile("cardBackgroundPhotoPathInp")
         def byzsPathFile = request.getFile("byzsPathInp")
         def xjzmPathFile = request.getFile("xjzmPathInp")
+        def otherPhotoPathFile = request.getFile("otherPhotoPathInp")
 
         def hkbPath =hkbPathFile?fileService.upload(hkbPathFile,"preppy"):null
         def hkbksyPath =hkbksyPathFile?fileService.upload(hkbksyPathFile,"preppy"):null
         def cardPhotoPath =cardPhotoPathFile?fileService.upload(cardPhotoPathFile,"preppy"):null
+        def cardBackgroundPhotoPath =cardBackgroundPhotoPathFile?fileService.upload(cardBackgroundPhotoPathFile,"preppy"):null
         def byzsPath =byzsPathFile?fileService.upload(byzsPathFile,"preppy"):null
         def xjzmPath =xjzmPathFile?fileService.upload(xjzmPathFile,"preppy"):null
+        def otherPhotoPath =otherPhotoPathFile?fileService.upload(otherPhotoPathFile,"preppy"):null
         if(hkbPath){
             preppyInstance.hkbPath=hkbPath
         }
@@ -181,11 +188,17 @@ class PreppyController {
         if(cardPhotoPath){
             preppyInstance.cardPhotoPath=cardPhotoPath
         }
+        if(cardBackgroundPhotoPath){
+            preppyInstance.cardBackgroundPhotoPath=cardBackgroundPhotoPath
+        }
         if(byzsPath){
             preppyInstance.byzsPath=byzsPath
         }
         if(xjzmPath){
             preppyInstance.xjzmPath=xjzmPath
+        }
+        if(otherPhotoPath){
+            preppyInstance.otherPhotoPath=otherPhotoPath
         }
 
         def c  = Preppy.countByNumber(preppyInstance.number)
@@ -375,14 +388,18 @@ class PreppyController {
         def hkbPathFile = request.getFile("hkbPathInp")
         def hkbksyPathFile = request.getFile("hkbksyPathInp")
         def cardPhotoPathFile = request.getFile("cardPhotoPathInp")
+        def cardBackgroundPhotoPathFile = request.getFile("cardBackgroundPhotoPathInp")
         def byzsPathFile = request.getFile("byzsPathInp")
         def xjzmPathFile = request.getFile("xjzmPathInp")
+        def otherPhotoPathFile = request.getFile("otherPhotoPathInp")
 
         def hkbPath =hkbPathFile?fileService.upload(hkbPathFile,"preppy"):null
         def hkbksyPath =hkbksyPathFile?fileService.upload(hkbksyPathFile,"preppy"):null
         def cardPhotoPath =cardPhotoPathFile?fileService.upload(cardPhotoPathFile,"preppy"):null
+        def cardBackgroundPhotoPath =cardBackgroundPhotoPathFile?fileService.upload(cardBackgroundPhotoPathFile,"preppy"):null
         def byzsPath =byzsPathFile?fileService.upload(byzsPathFile,"preppy"):null
         def xjzmPath =xjzmPathFile?fileService.upload(xjzmPathFile,"preppy"):null
+        def otherPhotoPath =otherPhotoPathFile?fileService.upload(otherPhotoPathFile,"preppy"):null
         if(hkbPath){
             preppyInstance.hkbPath=hkbPath
         }
@@ -392,11 +409,17 @@ class PreppyController {
         if(cardPhotoPath){
             preppyInstance.cardPhotoPath=cardPhotoPath
         }
+        if(cardBackgroundPhotoPath){
+            preppyInstance.cardBackgroundPhotoPath=cardBackgroundPhotoPath
+        }
         if(byzsPath){
             preppyInstance.byzsPath=byzsPath
         }
         if(xjzmPath){
             preppyInstance.xjzmPath=xjzmPath
+        }
+        if(otherPhotoPath){
+            preppyInstance.otherPhotoPath=otherPhotoPath
         }
 
         def juniorStart_year = params.get("juniorStart_year")
