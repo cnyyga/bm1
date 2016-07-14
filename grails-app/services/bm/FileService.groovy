@@ -13,7 +13,7 @@ class FileService {
             def suffix1 = fileName1.substring(fileName1.lastIndexOf('.'))
             def storeName1 = "${UUID.randomUUID().toString()}${suffix1}"
             def url1 = grailsApplication.config.baoming.image.storage.path
-            storeName1 = "${modelName}/${cal.get(Calendar.MONTH)+1}/${cal.get(Calendar.DATE)}/${storeName1}"
+            storeName1 = "${modelName}/${cal.get(Calendar.YEAR)}/${cal.get(Calendar.MONTH)+1}/${cal.get(Calendar.DATE)}/${storeName1}"
             def storageFilePath1 = url1 +'/'+storeName1
             def f1 = new File(storageFilePath1)
             if(!f1.exists()) {

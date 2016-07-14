@@ -55,7 +55,7 @@ class ProfileController {
             return
         }
 
-        if (passwordnew.length>16 || passwordnew.length<6) {
+        if (passwordnew.length()>16 || passwordnew.length()<6) {
             flash.message = message(code: 'operator.password.len.error.message')
             render(view: view)
             return

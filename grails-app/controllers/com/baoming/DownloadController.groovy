@@ -83,7 +83,15 @@ class DownloadController {
             }
             def districts
             try {
-                districts = teacher?.teacherDistricts*.district
+                def tds = teacher?.teacherDistricts
+                districts = tds.findAll {
+                    try {
+                        it.district
+                        return true
+                    } catch (e) {
+                        return false
+                    }
+                }
             } catch (e) {
                 log.error("districts is null,userId:${userId},error:${e.message}")
                 flash.message = message(code: 'download.city.null.message')

@@ -72,7 +72,11 @@ class ApiController {
     def districtOfCityOpts() {
         def selectedId = params.selectedId
         selectedId = selectedId.tokenize(",")
-        def citys = City.list()
+        def citys = City.createCriteria().list {
+            province{
+                eq('status',Province.Status.ENABLED)
+            }
+        }
         def opts =  "<option value=''>${message(code: 'default.select.zd.message')}</option>"
         if(!citys) {
             render opts
