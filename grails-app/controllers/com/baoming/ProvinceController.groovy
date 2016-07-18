@@ -24,8 +24,19 @@ class ProvinceController {
         def total
         def obj
         if (!t || t == 'province') {
-            list = Province.list(params)
-            total =  Province.count()
+            if(!params.status){
+                params.status = 'ENABLED'
+            }
+            list = Province.createCriteria().list(params) {
+                if(params.status){
+                    eq('status',Province.Status."${params.status}")
+                }
+            }
+            total =  Province.createCriteria().count{
+                if(params.status){
+                    eq('status',Province.Status."${params.status}")
+                }
+            }
         }
         if(t == 'city') {
             obj = Province.findByCode(params.id)

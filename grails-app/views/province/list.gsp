@@ -32,6 +32,7 @@
             </li>
         </ul>
     </div>
+
     <g:if test="${flash.message}">
         <div class="alert alert-error">${flash.message}</div>
     </g:if>
@@ -51,7 +52,19 @@
             <div class="box-header well" data-original-title>
                 <h2> <g:message code="default.list.label" args="[entityName]" /></h2>
             </div>
+
             <div class="box-content">
+                <div class="span12 well">
+                    <g:form action="list" name="searchForm"  >
+                        <div class="bm-search">
+                            <label class="search-lb">状态 ：</label>
+                            <g:select name="status" value="${params.status?:'ENABLED'}" optionValue="label" from="${com.baoming.Province.Status.values()}" />
+                        </div>
+                        <div class="span2">
+                            <g:submitButton name="sub" value="${message(code:'default.button.search.label')}" class="btn btn-small btn-primary" />
+                        </div>
+                    </g:form>
+                </div><!--/span-->
                 <table class="table table-bordered table-striped table-condensed">
                     <thead>
                     <tr>
@@ -102,7 +115,7 @@
                     </tbody>
                 </table>
                 <div class="pagination pagination-centered">
-                    <g:paginate total="${provinceInstanceTotal}" params="${[id:params.id,t:params.t]}" />
+                    <g:paginate total="${provinceInstanceTotal}" params="${[id:params.id,t:params.t,status:params.status]}" />
                 </div>
             </div>
         </div><!--/span-->

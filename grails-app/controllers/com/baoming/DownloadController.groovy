@@ -23,6 +23,7 @@ class DownloadController {
         if (file && !file.empty) {
             def fileName = file.originalFilename
             def suffix = fileName.substring(fileName.lastIndexOf('.'))
+            suffix = suffix.toLowerCase()
             if(a.count(suffix) == 0)   {
                 flash.message = message(code: 'download.alert.label')
                 redirect(action: 'index')
@@ -92,6 +93,7 @@ class DownloadController {
                         return false
                     }
                 }
+
             } catch (e) {
                 log.error("districts is null,userId:${userId},error:${e.message}")
                 flash.message = message(code: 'download.city.null.message')
@@ -104,6 +106,7 @@ class DownloadController {
                 redirect(action: 'index')
                 return
             }
+            districts = districts.collect {it.district}
 
             def outputStream
             try {
