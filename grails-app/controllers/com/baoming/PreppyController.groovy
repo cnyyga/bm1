@@ -95,7 +95,14 @@ class PreppyController {
                 eq('plan',plan)
             }
             if(params.reviewStatus) {
-                eq('reviewStatus',Preppy.ReviewStatus."${params.reviewStatus}")
+                if(params.reviewStatus == 'NO_AUDIT'){
+                    or {
+                        isNull('reviewStatus')
+                        eq('reviewStatus',Preppy.ReviewStatus."${params.reviewStatus}")
+                    }
+                }else{
+                    eq('reviewStatus',Preppy.ReviewStatus."${params.reviewStatus}")
+                }
             }
             ge('dateCreated', startDate)
             lt('dateCreated', endDate)
