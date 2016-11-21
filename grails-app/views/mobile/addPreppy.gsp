@@ -98,6 +98,8 @@
             <div>
                 <button type="submit" class="btn btn-primary">${message(code: 'default.button.update.label')}</button>
                 <button type="reset" class="btn">${message(code: 'default.button.reset.label')}</button>
+                <g:link action="createStu"  controller="mobile" class="btn">${message(code: 'default.button.back.label')}${message(code: 'student.create.stu.type.title')}</g:link>
+
             </div>
          </g:uploadForm>
     </div>

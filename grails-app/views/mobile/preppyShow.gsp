@@ -61,7 +61,9 @@
                 </fieldset></div>
         <div>
         <button type="button" class="btn btn-primary" onclick="javascript:location.href='${createLink(controller: 'mobile',action: 'addPreppy')}'"><g:message code="student.mobile.create.preppy.title"/> </button>
-    </div>
+            <g:link action="createStu"  controller="mobile" class="btn">${message(code: 'default.button.back.label')}${message(code: 'student.create.stu.type.title')}</g:link>
+
+        </div>
     </div>
 </div>
 </body>

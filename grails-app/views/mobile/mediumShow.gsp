@@ -27,6 +27,8 @@
         <g:render template="/medium/show"/>
         <div>
         <button type="button" class="btn btn-primary" onclick="javascript:location.href='${createLink(controller: 'mobile',action: 'addMedium')}'"><g:message code="student.mobile.create.medium.title"/> </button>
+        <g:link action="createStu"  controller="mobile" class="btn">${message(code: 'default.button.back.label')}${message(code: 'student.create.stu.type.title')}</g:link>
+
     </div>
     </div>
 </div>

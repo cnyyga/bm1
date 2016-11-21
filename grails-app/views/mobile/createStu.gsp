@@ -38,7 +38,7 @@
 <div class="page-content gradient" >
     <div class="page-body select-body">
         <dl class="top code clearfix">
-            <dt><label for="type">选择类别</label></dt>
+            <dt><label for="type"><g:message code="student.create.stu.type.title"/> </label></dt>
             <dd>
                 <g:select name="type" id="selectType" class="input-text" from="[[id:1,label:'高中生'],[id:2,label:'旁听生'],[id:3,label:'中专生']]" optionKey="id" optionValue="label"/>
             </dd>

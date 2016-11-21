@@ -38,6 +38,8 @@
         <g:render template="/student/newshow"/>
         <div>
         <button type="button" class="btn btn-primary" onclick="javascript:location.href='${createLink(controller: 'mobile',action: 'addStu')}'"><g:message code="student.create.high.title"/> </button>
+        <g:link action="createStu" controller="mobile" class="btn">${message(code: 'default.button.back.label')}${message(code: 'student.create.stu.type.title')}</g:link>
+
     </div>
     </div>
 </div>
