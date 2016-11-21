@@ -7,6 +7,7 @@ import com.baoming.Province
 import com.baoming.City
 import com.baoming.District
 import com.baoming.Resume
+import com.bm.utils.MyNetUtils
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 import org.apache.commons.io.FileUtils
 
@@ -233,6 +234,10 @@ class ProfileController {
         def user = User.get(userId)
         if(!user){
             flash.message = message(code: 'default.save.failure.label')
+            if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
+                redirect(action: 'info',controller: 'mobile')
+                return
+            }
             redirect(action: 'preppy')
             return
         }
@@ -240,11 +245,19 @@ class ProfileController {
         def preppy = Preppy.findByNumber(username)
         if(!preppy){
             flash.message = message(code: 'default.save.failure.label')
+            if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
+                redirect(action: 'info',controller: 'mobile')
+                return
+            }
             redirect(action: 'preppy')
             return
         }
         if(preppy.reviewStatus && preppy.reviewStatus != Preppy.ReviewStatus.NO_AUDIT){
             flash.message = '已经审核无法修改资料'
+            if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
+                redirect(action: 'info',controller: 'mobile')
+                return
+            }
             redirect(action: 'preppy')
             return
         }
@@ -348,10 +361,18 @@ class ProfileController {
         if(!preppy.save()){
             log.error(preppy.errors)
             flash.message = message(code: 'default.save.failure.label')
-            render(view: "preppy", model: [preppy: preppy])
+            def view = "preppy"
+            if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
+                view = "/mobile/info"
+            }
+            render(view: view, model: [preppy: preppy])
             return
         }
         flash.message = message(code: 'default.save.success.label')
+        if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
+            redirect(action: 'info',controller: 'mobile')
+            return
+        }
         redirect(action: 'preppy')
     }
 }

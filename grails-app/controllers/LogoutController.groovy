@@ -1,3 +1,4 @@
+import com.bm.utils.MyNetUtils
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 
 class LogoutController {
@@ -21,8 +22,16 @@ class LogoutController {
             }
         }
         if(stu){
+            if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
+                redirect(controller: 'mobile',action: 'studentLogin');
+                return
+            }
             redirect(controller: 'stu',action: 'index')
         }else{
+            if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
+                redirect(controller: 'mobile',action: 'teacherLogin');
+                return
+            }
             redirect(controller: 'login',action: 'auth')
         }
     }

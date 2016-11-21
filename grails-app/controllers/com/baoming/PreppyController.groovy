@@ -3,6 +3,7 @@ package com.baoming
 import com.baoming.account.Role
 import com.baoming.account.Teacher
 import com.baoming.account.User
+import com.bm.utils.MyNetUtils
 import grails.converters.JSON
 import grails.plugin.jxl.builder.ExcelBuilder
 import org.apache.commons.io.IOUtils
@@ -215,7 +216,11 @@ class PreppyController {
         def c  = Preppy.countByNumber(preppyInstance.number)
         if(c > 0){
             flash.message = '身份证号已经存在'
-            render(view: "create", model: [preppyInstance: preppyInstance,provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()])
+            def view = "create"
+            if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
+                view = "/mobile/addPreppy"
+            }
+            render(view: view, model: [preppyInstance: preppyInstance,provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()])
             return
         }
         if (SpringSecurityUtils.ifNotGranted(Role.AUTHORITY_TEACHER)) {
@@ -283,7 +288,11 @@ class PreppyController {
         }
         preppyInstance.validate()
         if (!preppyInstance.save(flush: true)) {
-            render(view: "create", model: [preppyInstance: preppyInstance,provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()])
+            def view = "create"
+            if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
+                view = "/mobile/addPreppy"
+            }
+            render(view: view, model: [preppyInstance: preppyInstance,provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()])
             return
         }
 
@@ -304,9 +313,12 @@ class PreppyController {
             redirect(action: "list")
             return
         }
+        def view = "show"
+        if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
+            view = "/mobile/preppyShow"
+        }
 
-
-        [preppyInstance: preppyInstance,provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()]
+        render(view: view,model: [preppyInstance: preppyInstance,provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()])
     }
 
     def edit(Long id) {

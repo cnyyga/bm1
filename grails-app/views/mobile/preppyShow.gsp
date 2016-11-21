@@ -1,0 +1,68 @@
+<html>
+<head>
+    <meta name='layout' content='mainMobile'/>
+    <title><g:message code="student.mobile.preppy.show.title"/></title>
+
+    <style>
+        .select-body{
+            background:none;
+            border:0;
+        }
+        .form-horizontal .control-label {
+            width: 100px;
+        }
+        .form-horizontal .controls {
+            margin-left: 120px;
+        }
+    </style>
+
+</head>
+
+<body>
+<div class="page-title select-title">
+    <h2><g:message code="student.mobile.preppy.show.title"/></h2>
+</div>
+<div class="page-content gradient" >
+    <div class="page-body select-body">
+        <div class="form-horizontal">
+            <fieldset>
+        <div class="control-group">
+            <label class="control-label" for="name">
+                <g:message code="preppy.name.label" default="Name" />
+                <span class="required-indicator">*</span>
+            </label>
+
+            <div class="controls">
+                ${preppyInstance?.name}
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="name">
+                <g:message code="preppy.number.label" default="Name" />
+                <span class="required-indicator">*</span>
+            </label>
+
+            <div class="controls">
+                ${preppyInstance?.number}
+            </div>
+        </div>
+
+
+        <div class="control-group">
+            <label class="control-label" for="name">
+                <g:message code="preppy.deposit.label" default="Name" />
+                <span class="required-indicator">*</span>
+            </label>
+
+            <div class="controls">
+                ${preppyInstance?.deposit}元
+            </div>
+        </div>
+                </fieldset></div>
+        <div>
+        <button type="button" class="btn btn-primary" onclick="javascript:location.href='${createLink(controller: 'mobile',action: 'addPreppy')}'"><g:message code="student.mobile.create.preppy.title"/> </button>
+    </div>
+    </div>
+</div>
+</body>
+</html>

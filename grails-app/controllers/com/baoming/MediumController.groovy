@@ -4,6 +4,7 @@ import com.baoming.account.Role
 import com.baoming.account.Student
 import com.baoming.account.Teacher
 import com.baoming.account.User
+import com.bm.utils.MyNetUtils
 import grails.converters.JSON
 import grails.plugin.jxl.builder.ExcelBuilder
 import org.apache.commons.io.FileUtils
@@ -127,7 +128,11 @@ class MediumController {
         }
 
         if (!mediumInstance.save(flush: true)) {
-            render(view: "create", model: [mediumInstance: mediumInstance,provinces:provinceService.getProvinces()])
+            def view = "create"
+            if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
+                view = "/mobile/addMedium"
+            }
+            render(view: view, model: [mediumInstance: mediumInstance,provinces:provinceService.getProvinces()])
             return
         }
 
@@ -142,8 +147,11 @@ class MediumController {
             redirect(action: "list")
             return
         }
-
-        [mediumInstance: mediumInstance]
+        def view = "show"
+        if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
+            view = "/mobile/mediumShow"
+        }
+        render(view: view,model: [mediumInstance: mediumInstance])
     }
 
     def edit(Long id) {

@@ -1,6 +1,7 @@
 package com.baoming.account
 
 import com.baoming.Plan
+import com.bm.utils.MyNetUtils
 import org.springframework.dao.DataIntegrityViolationException
 import com.baoming.Province
 import com.baoming.City
@@ -69,7 +70,11 @@ class StudentController {
             studentInstance = Student.get(id)
             if(!studentInstance){
                 flash.message = '学生不存在'
-                render(view: 'createNew', model: [studentInstance: studentInstance,planIds:planIds])
+                def view = "createNew"
+                if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
+                    view = "/mobile/addStu"
+                }
+                render(view: view, model: [studentInstance: studentInstance,planIds:planIds])
                 return
             }
             studentInstance.reviewStatus = Student.ReviewStatus."${params.reviewStatus}"
@@ -79,7 +84,11 @@ class StudentController {
             if(!studentInstance.save()) {
                 log.error(studentInstance.errors)
                 flash.message = message(code: 'student.updated.audit.failure.message', args: [message(code: 'student.label', default: 'Student'), studentInstance.name])
-                render(view: 'createNew', model: [studentInstance: studentInstance,planIds:planIds])
+                def view = "createNew"
+                if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
+                    view = "/mobile/addStu"
+                }
+                render(view:view, model: [studentInstance: studentInstance,planIds:planIds])
                 return
             }
             flash.message = message(code: 'student.updated.audit.message', args: [message(code: 'student.label', default: 'Student'), studentInstance.name])
@@ -138,7 +147,11 @@ class StudentController {
 
         if(msg) {
             flash.message = msg
-            render(view: 'createNew', model: [studentInstance: studentInstance,planIds:planIds])
+            def view = "createNew"
+            if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
+                view = "/mobile/addStu"
+            }
+            render(view: view, model: [studentInstance: studentInstance,planIds:planIds])
             return
         }
         def scoreStr = ''
@@ -151,7 +164,11 @@ class StudentController {
         }
         if(scoreStr) {
             flash.message = "高考分数未达到填报专业【${scoreStr}】分数要求，添加失败。 "
-            render(view: 'createNew', model: [studentInstance: studentInstance,planIds:planIds])
+            def view = "createNew"
+            if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
+                view = "/mobile/addStu"
+            }
+            render(view: view, model: [studentInstance: studentInstance,planIds:planIds])
             return
         }
 
@@ -199,7 +216,11 @@ class StudentController {
         }
 
         if ( u?.status == 0){
-            render(view: "createNew", model: [studentInstance: studentInstance,planIds:planIds])
+            def view = "createNew"
+            if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
+                view = "/mobile/addStu"
+            }
+            render(view: view, model: [studentInstance: studentInstance,planIds:planIds])
             return
         }
 
@@ -313,7 +334,12 @@ class StudentController {
             return
         }
 
-        [studentInstance: studentInstance]
+        def view = "show"
+        if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
+            view = "/mobile/stuShow"
+        }
+
+        render(view:view,model: [studentInstance: studentInstance])
     }
 
     def edit(Long id) {
@@ -874,4 +900,5 @@ class StudentController {
         }
         render(([status: '1', reviewStatusId:studentInstance.reviewStatus?.id,reviewStatusLab:studentInstance.reviewStatus?.label] as JSON) as String)
     }
+
 }

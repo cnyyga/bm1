@@ -1,3 +1,4 @@
+import com.bm.utils.MyNetUtils
 import grails.converters.JSON
 
 import javax.servlet.http.Cookie
@@ -42,6 +43,7 @@ class LoginController {
      * Show the login page.
      */
     def auth = {
+
         def cookie = new Cookie("studentLogin","yes")
         cookie.setPath("/")
         cookie.setMaxAge(0)
@@ -54,7 +56,12 @@ class LoginController {
             return
         }
 
+
+
         String view = 'auth'
+        if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
+            view = '/mobile/auth'
+        }
         String postUrl = "${request.contextPath}${config.apf.filterProcessesUrl}"
         render view: view, model: [postUrl: postUrl,
                 rememberMeParameter: config.rememberMe.parameter]
@@ -78,9 +85,19 @@ class LoginController {
             redirect action: 'full', params: params
         }
         if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_STUDENT)) {
+            if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
+                redirect(controller: 'mobile',action: 'info')
+                return
+            }
             redirect(controller: 'profile',action: 'preppy')
             return
         }
+
+        def view = 'denied'
+        if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
+            view = '/mobile/denied'
+        }
+        render(view: view)
     }
 
     /**
@@ -88,7 +105,12 @@ class LoginController {
      */
     def full = {
         def config = SpringSecurityUtils.securityConfig
-        render view: 'auth', params: params,
+
+        def view = 'auth'
+        if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
+            view = '/mobile/auth'
+        }
+        render view: view, params: params,
                 model: [hasCookie: authenticationTrustResolver.isRememberMe(SCH.context?.authentication),
                         postUrl: "${request.contextPath}${config.apf.filterProcessesUrl}"]
     }
@@ -124,6 +146,23 @@ class LoginController {
         }
         else {
             flash.message = msg
+            def a =  session['userLoginType']
+            if(a == 'student'){
+                redirect action: 'studentLogin',controller: 'mobile', params: params
+                return
+            }else if(a == 'teacher'){
+                redirect action: 'teacherLogin', controller: 'mobile',params: params
+                return
+            }
+            if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
+                if(session.studentLogin){
+                    redirect action: 'studentLogin',controller: 'mobile', params: params
+                    return
+                }else {
+                    redirect action: 'teacherLogin', controller: 'mobile',params: params
+                    return
+                }
+            }
             if(session.studentLogin){
                 redirect action: 'index',controller: 'stu', params: params
                 return
@@ -147,9 +186,18 @@ class LoginController {
     }
 
     def dispatch = {
+        println(request.getHeader("user-agent"))
         if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_STUDENT)) {
+            if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
+                redirect controller: 'mobile',action: 'info'
+                return ;
+            }
             redirect controller: 'profile',action: 'preppy'
         } else {
+            if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
+                redirect controller: 'mobile',action: 'createStu'
+                return ;
+            }
             redirect controller: 'home'
         }
     }

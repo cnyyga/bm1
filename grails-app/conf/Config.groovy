@@ -172,6 +172,12 @@ grails.plugins.springsecurity.interceptUrlMap = [
         '/logout/**': ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/stu/**': ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/workPlan/**': ['ROLE_ADMIN','ROLE_FINANCE','ROLE_TEACHER'],
+        '/mobile/createStu/**': ['ROLE_ADMIN','ROLE_FINANCE','ROLE_TEACHER'],
+        '/mobile/createStu/**': ['ROLE_ADMIN','ROLE_FINANCE','ROLE_TEACHER'],
+        '/mobile/addStu/**': ['ROLE_ADMIN','ROLE_FINANCE','ROLE_TEACHER'],
+        '/mobile/addPreppy/**': ['ROLE_ADMIN','ROLE_FINANCE','ROLE_TEACHER'],
+        '/mobile/addMedium/**': ['ROLE_ADMIN','ROLE_FINANCE','ROLE_TEACHER'],
+        '/mobile/info/**': ['ROLE_STUDENT'],
 ]
 
 grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/login/dispatch'

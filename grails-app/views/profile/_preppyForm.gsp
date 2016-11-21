@@ -3,7 +3,12 @@
 .select-min,#age{
     width: 50px;
 }
-#birthday_year,#birthday_month,#birthday_day,#deposit{
+#birthday_year,#birthday_month,#birthday_day,
+#juniorStart_year,#juniorStart_month,#juniorStart_day,
+#juniorEnd_year,#juniorEnd_month,#juniorEnd_day,
+#highStart_year,#highStart_month,#highStart_day,
+#highEnd_year,#highEnd_month,#highEndday,
+#deposit{
     width: 80px;
 }
 </style>
@@ -177,7 +182,7 @@
 
                 cal.set(Calendar.MONTH,8)
             %>
-            <g:message code="preppy.resume.high.label" default="high" />
+            <g:message code="preppy.resume.high.label" default="high" />(中职)
             <g:datePicker name="highStart" value="${preppyInstance?.resume?.highStart ?: cal.time}" precision="month"
                           years="${startYear..year}"/>起--
             <%
@@ -186,10 +191,104 @@
             %>
             <g:datePicker name="highEnd" value="${preppyInstance?.resume?.highEnd ?: cal.time}" precision="month"
                           years="${startYear..year}"/>止
-            <g:textField name="highSchool" value="${preppyInstance?.resume?.highSchool}"  placeholder="学校名称（中职须注明专业）"/>
+            <g:textField name="highSchool" value="${preppyInstance?.resume?.highSchool}"  placeholder="学校名称"/>
             <g:textField name="highAuthenticator" value="${preppyInstance?.resume?.highAuthenticator}"  placeholder="证明人"/>
         </div>
 
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="parentPhone">
+            中职专业
+        </label>
+
+        <div class="controls">
+            <g:textField name="zzzy" value="${preppyInstance?.resume?.zzzy}" maxlength="16"/>（注：中职学生填写此项）
+        </div>
+    </div>
+    <h5 style="text-align: center">上传证明</h5>
+    <div class="control-group">
+        <label class="control-label" for="parentPhone">
+            身份证正面照片
+        </label>
+
+        <div class="controls">
+            <input type="file" name="cardPhotoPathInp">
+            <g:if test="${preppyInstance.cardPhotoPath}">
+                <g:link action="img1"  controller="api" params="[path:preppyInstance?.cardPhotoPath]" target="_blank"><img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance.cardPhotoPath])}" title="点击打开原图" alt="点击打开原图" style="max-height: 50px;"></g:link>
+            </g:if>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="parentPhone">
+            身份证反面照片
+        </label>
+
+        <div class="controls">
+            <input type="file" name="cardBackgroundPhotoPathInp">
+            <g:if test="${preppyInstance.cardBackgroundPhotoPath}">
+                <g:link action="img1"  controller="api" params="[path:preppyInstance?.cardBackgroundPhotoPath]" target="_blank"><img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance.cardBackgroundPhotoPath])}"  title="点击打开原图" alt="点击打开原图" style="max-height: 50px;"></g:link>
+            </g:if>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="parentPhone">
+            户口本首页照片
+        </label>
+
+        <div class="controls">
+            <input type="file" name="hkbPathInp">
+            <g:if test="${preppyInstance.hkbPath}">
+                <g:link action="img1"  controller="api" params="[path:preppyInstance?.hkbPath]" target="_blank"><img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance.hkbPath])}"  title="点击打开原图" alt="点击打开原图" style="max-height: 50px;"></g:link>
+            </g:if>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="parentPhone">
+            户口本本人页照片
+        </label>
+
+        <div class="controls">
+            <input type="file" name="hkbksyPathInp">
+            <g:if test="${preppyInstance.hkbksyPath}">
+                <g:link action="img1"  controller="api" params="[path:preppyInstance?.hkbksyPath]" target="_blank"><img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance.hkbksyPath])}"  title="点击打开原图" alt="点击打开原图" style="max-height: 50px;"></g:link>
+            </g:if>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="parentPhone">
+            高中或中专毕业证书照片（已毕业提供）
+        </label>
+
+        <div class="controls">
+            <input type="file" name="byzsPathInp">
+            <g:if test="${preppyInstance.byzsPath}">
+                <g:link action="img1"  controller="api" params="[path:preppyInstance?.byzsPath]" target="_blank"><img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance.byzsPath])}"  title="点击打开原图" alt="点击打开原图" style="max-height: 50px;"></g:link>
+            </g:if>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="parentPhone">
+            初中毕业证书照片（挂学籍提供）
+        </label>
+
+        <div class="controls">
+            <input type="file" name="xjzmPathInp">
+            <g:if test="${preppyInstance.xjzmPath}">
+                <g:link action="img1"  controller="api" params="[path:preppyInstance?.xjzmPath]" target="_blank"><img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance.xjzmPath])}"  title="点击打开原图" alt="点击打开原图" style="max-height: 50px;"></g:link>
+            </g:if>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="parentPhone">
+            其他补充材料照片
+        </label>
+
+        <div class="controls">
+            <input type="file" name="otherPhotoPathInp">
+            <g:if test="${preppyInstance.otherPhotoPath}">
+                <g:link action="img1"  controller="api" params="[path:preppyInstance?.otherPhotoPath]" target="_blank"><img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance.otherPhotoPath])}"  title="点击打开原图" alt="点击打开原图" style="max-height: 50px;"></g:link>
+            </g:if>
+        </div>
     </div>
 </div>
 
