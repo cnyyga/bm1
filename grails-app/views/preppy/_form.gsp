@@ -23,6 +23,31 @@
             &nbsp;</td>
     </tr>
     <tr>
+        <td height="50">户籍地区：
+        <g:select id="province" name="provinceId" from="${provinces}" optionKey="code" optionValue="name" required="" value="${preppyInstance?.province?.code}" noSelection="['':'请选择']"/>
+        省&nbsp;
+        <g:select id="city" name="cityId" from="" optionKey="id" required="" class="many-to-one"/>
+        &nbsp;市&nbsp;
+        <g:select id="district" name="districtId" from="" optionKey="id" required="" class="many-to-one"/>
+        县（区）
+        <g:textField name="town" value="${preppyInstance?.town}" placeholder="${message(code: 'preppy.town.label')}"/>
+        乡镇</td>
+    </tr>
+    <tr>
+        <td height="50">性<span class="f_20">&nbsp; &nbsp;&nbsp;&nbsp;</span><span class="f_20">&nbsp;&nbsp;</span>别：
+
+            <label>
+                <input name="gender" type="radio" id="radio" value="${com.baoming.account.User.Gender.MALE.name()}" <g:if test="${!preppyInstance?.gender?.name() || preppyInstance?.gender?.name() == com.baoming.account.User.Gender.MALE.name()}">checked="checked"</g:if> />
+                ${com.baoming.account.User.Gender.MALE.label}&nbsp; &nbsp;&nbsp;
+                <input type="radio" name="gender" id="radio2" value="${com.baoming.account.User.Gender.FEMALE.name()}" <g:if test="${preppyInstance?.gender?.name() == com.baoming.account.User.Gender.FEMALE.name()}">checked="checked"</g:if>/>
+                ${com.baoming.account.User.Gender.FEMALE.label} </label></td>
+    </tr>
+    <tr>
+        <td height="50">保证金缴纳方式：
+        <g:select name="family" from="${com.baoming.Preppy.DepoistType.values()}" class="sel_gray" optionValue="label" value="${preppyInstance?.depositType}"/>
+        </td>
+    </tr>
+    <tr>
         <td height="50">缴纳保证金：&nbsp;
             <g:if test="${!preppyInstance.reviewStatus || preppyInstance?.reviewStatus == com.baoming.Preppy.ReviewStatus.NO_AUDIT }">
                 <g:textField name="deposit" value="${preppyInstance?.deposit}" size="10" class="sel_gray"/>
@@ -51,15 +76,7 @@
         <g:select name="studentCateories" from="${Preppy.StudentCateories.values()}" optionValue="label" value="${preppyInstance?.studentCateories}" attr-sel="${preppyInstance?.studentCateories}" noSelection="['':'请选择']"/>
 </td>
     </tr>
-    <tr>
-        <td height="50">性<span class="f_20">&nbsp; &nbsp;&nbsp;&nbsp;</span><span class="f_20">&nbsp;&nbsp;</span>别：
 
-            <label>
-                <input name="gender" type="radio" id="radio" value="${com.baoming.account.User.Gender.MALE.name()}" <g:if test="${!preppyInstance?.gender?.name() || preppyInstance?.gender?.name() == com.baoming.account.User.Gender.MALE.name()}">checked="checked"</g:if> />
-                ${com.baoming.account.User.Gender.MALE.label}&nbsp; &nbsp;&nbsp;
-                <input type="radio" name="gender" id="radio2" value="${com.baoming.account.User.Gender.FEMALE.name()}" <g:if test="${preppyInstance?.gender?.name() == com.baoming.account.User.Gender.FEMALE.name()}">checked="checked"</g:if>/>
-            ${com.baoming.account.User.Gender.FEMALE.label} </label></td>
-    </tr>
     <tr>
         <td height="50">民<span class="f_20">&nbsp; &nbsp;&nbsp;&nbsp;</span><span class="f_20">&nbsp;&nbsp;</span>族：
         <g:select name="nation.id" from="${com.baoming.Nation.findAll()}" class="sel_gray" optionValue="name" optionKey="id" required="" value="${preppyInstance?.nation?.id}" noSelection="['':'请选择']"/>
@@ -76,17 +93,7 @@
         <g:datePicker name="birthday" value="${preppyInstance?.birthday}" precision="day"
                       years="${startYear..(year-10)}" default="none" noSelection="['':'请选择']"/>
     </tr>
-    <tr>
-        <td height="50">户籍地区：
-        <g:select id="province" name="provinceId" from="${provinces}" optionKey="code" optionValue="name" required="" value="${preppyInstance?.province?.code}" noSelection="['':'请选择']"/>
-        省&nbsp;
-        <g:select id="city" name="cityId" from="" optionKey="id" required="" class="many-to-one"/>
-            &nbsp;市&nbsp;
-        <g:select id="district" name="districtId" from="" optionKey="id" required="" class="many-to-one"/>
-            县（区）
-        <g:textField name="town" value="${preppyInstance?.town}" placeholder="${message(code: 'preppy.town.label')}"/>
-            乡镇</td>
-    </tr>
+
     <tr>
         <td height="50">详细地址：
             <g:textField name="address" value="${preppyInstance?.address}" size="80" class="sel_gray" />
@@ -207,7 +214,7 @@
         </td>
     </tr>
     <tr>
-        <td height="50" align="left" >高中或中专毕业证书照片（已毕业提供）
+        <td height="50" align="left" >高中/中专或初中毕业证书照片
             <input type="file" name="byzsPathInp">
             <g:if test="${preppyInstance.byzsPath}">
                 <g:link action="img1"  controller="api" params="[path:preppyInstance?.byzsPath]" target="_blank"><img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance.byzsPath])}"  title="点击打开原图" alt="点击打开原图" style="max-height: 50px;"></g:link>
@@ -215,7 +222,7 @@
         </td>
     </tr>
     <tr>
-        <td height="50" align="left" >初中毕业证书照片（挂学籍提供）
+        <td height="50" align="left" >高校录取通知书（若已被其它高校录取请上传）
             <input type="file" name="xjzmPathInp">
             <g:if test="${preppyInstance.xjzmPath}">
                 <g:link action="img1"  controller="api" params="[path:preppyInstance?.xjzmPath]" target="_blank"><img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance.xjzmPath])}"  title="点击打开原图" alt="点击打开原图" style="max-height: 50px;"></g:link>
@@ -223,7 +230,7 @@
         </td>
     </tr>
     <tr>
-        <td height="50" align="left" >其他补充材料照片
+        <td height="50" align="left" >手持身份证照片
             <input type="file" name="otherPhotoPathInp">
             <g:if test="${preppyInstance.otherPhotoPath}">
                 <g:link action="img1"  controller="api" params="[path:preppyInstance?.otherPhotoPath]" target="_blank"><img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance.otherPhotoPath])}"  title="点击打开原图" alt="点击打开原图" style="max-height: 50px;"></g:link>

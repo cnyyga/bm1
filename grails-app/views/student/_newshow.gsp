@@ -207,16 +207,16 @@
 
 <div class="control-group">
     <label class="control-label">
-        <g:message code="student.admissionTicketNumber.pic.label" default="Pic"/>
+        <g:message code="student.cardNo.pic.label" default="Pic"/>
     </label>
 
     <div class="controls">
 
         <span class="property-value" aria-labelledby="description-label">
-            <g:if test="${studentInstance?.admissionTicketPic}">
+            <g:if test="${studentInstance?.cardNoPic}">
                 <div style="position: relative;height: 100px;">
-                    <g:link action="img"  controller="api" id="${studentInstance?.admissionTicketPic}"  target="_blank">
-                        <img src="${createLink(controller: 'api',action: 'img',id: studentInstance?.admissionTicketPic)}" title="点击查看原图" style="height: 100px;" />
+                    <g:link action="img"  controller="api" id="${studentInstance?.cardNoPic}"  target="_blank">
+                        <img src="${createLink(controller: 'api',action: 'img',id: studentInstance?.cardNoPic)}" title="点击查看原图" style="height: 100px;" />
                     </g:link>
                 </div>
             </g:if>
@@ -224,6 +224,63 @@
 
     </div>
  </div>
+    <div class="control-group">
+        <label class="control-label">
+            <g:message code="student.admissionTicketNumber.pic.label" default="Pic"/>
+        </label>
+
+        <div class="controls">
+
+            <span class="property-value" aria-labelledby="description-label">
+                <g:if test="${studentInstance?.admissionTicketPic}">
+                    <div style="position: relative;height: 100px;">
+                        <g:link action="img"  controller="api" id="${studentInstance?.admissionTicketPic}"  target="_blank">
+                            <img src="${createLink(controller: 'api',action: 'img',id: studentInstance?.admissionTicketPic)}" title="点击查看原图" style="height: 100px;" />
+                        </g:link>
+                    </div>
+                </g:if>
+            </span>
+
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">
+            <g:message code="student.agreement.pic.label" default="Pic"/>
+        </label>
+
+        <div class="controls">
+
+            <span class="property-value" aria-labelledby="description-label">
+                <g:if test="${studentInstance?.agreementPic}">
+                    <div style="position: relative;height: 100px;">
+                        <g:link action="img"  controller="api" id="${studentInstance?.agreementPic}"  target="_blank">
+                            <img src="${createLink(controller: 'api',action: 'img',id: studentInstance?.agreementPic)}" title="点击查看原图" style="height: 100px;" />
+                        </g:link>
+                    </div>
+                </g:if>
+            </span>
+
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">
+            <g:message code="student.payment.docPic.label" default="Pic"/>
+        </label>
+
+        <div class="controls">
+
+            <span class="property-value" aria-labelledby="description-label">
+                <g:if test="${studentInstance?.payment?.docPic}">
+                    <div style="position: relative;height: 100px;">
+                        <g:link action="img"  controller="api" id="${studentInstance?.payment?.docPic}"  target="_blank">
+                            <img src="${createLink(controller: 'api',action: 'img',id: studentInstance?.payment?.docPic)}" title="点击查看原图" style="height: 100px;" />
+                        </g:link>
+                    </div>
+                </g:if>
+            </span>
+
+        </div>
+    </div>
 
     <div class="control-group">
         <label class="control-label">

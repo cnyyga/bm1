@@ -133,6 +133,31 @@
                 &nbsp;</td>
         </tr>
         <tr>
+            <td height="50">户籍地区：
+            <g:select id="province" name="provinceId" from="${provinces}" optionKey="code" optionValue="name" required="" value="${preppyInstance?.province?.code}" noSelection="['':'请选择']"/>
+            省&nbsp;
+            <g:select id="city" name="cityId" from="" optionKey="id" required="" class="many-to-one"/>
+            &nbsp;市&nbsp;
+            <g:select id="district" name="districtId" from="" optionKey="id" required="" class="many-to-one"/>
+            县（区）
+            <g:textField name="town" value="${preppyInstance?.town}" placeholder="${message(code: 'preppy.town.label')}"/>
+            乡镇</td>
+        </tr>
+        <tr>
+            <td height="50">性<span class="f_20">&nbsp; &nbsp;&nbsp;&nbsp;</span><span class="f_20">&nbsp;&nbsp;</span>别：
+
+                <label>
+                    <input name="gender" type="radio" id="radio" value="${com.baoming.account.User.Gender.MALE.name()}" <g:if test="${!preppyInstance?.gender?.name() || preppyInstance?.gender?.name() == com.baoming.account.User.Gender.MALE.name()}">checked="checked"</g:if> />
+                    ${com.baoming.account.User.Gender.MALE.label}&nbsp; &nbsp;&nbsp;
+                    <input type="radio" name="gender" id="radio2" value="${com.baoming.account.User.Gender.FEMALE.name()}" <g:if test="${preppyInstance?.gender?.name() == com.baoming.account.User.Gender.FEMALE.name()}">checked="checked"</g:if>/>
+                    ${com.baoming.account.User.Gender.FEMALE.label} </label></td>
+        </tr>
+        <tr>
+            <td height="50">保证金缴纳方式：
+            <g:select name="depositType" from="${com.baoming.Preppy.DepoistType.values()}" class="sel_gray" optionValue="label" value="${preppyInstance?.depositType}"/>
+            </td>
+        </tr>
+        <tr>
             <td height="50">缴纳保证金：&nbsp;
             <g:if test="${!preppyInstance.reviewStatus || preppyInstance.reviewStatus == com.baoming.Preppy.ReviewStatus.NO_AUDIT }">
                 <g:textField name="deposit" value="${preppyInstance?.deposit}" size="10" class="sel_gray"/>
@@ -147,29 +172,21 @@
         <tr>
             <td height="42" align="center" style="background:#5fb9f2;"><strong style="font-size:22px; color:#ffffff;">☆☆☆ 学生填写 ☆☆☆</strong></td>
         </tr>
-
-        <tr>
-            <td height="50" align="center"><strong >（请选择你的身份，只能选一个，必须真实有效。 如选错，将无法取得我院学籍。 )</strong></td>
-        </tr>
         <tr>
             <td height="50">户籍地：
             <g:select name="family" from="${com.baoming.Preppy.Family.values()}" class="sel_gray" optionValue="label" value="${preppyInstance?.family}" noSelection="['':'请选择']"/>
             </td>
         </tr>
         <tr>
+            <td height="50" align="center"><strong >（请选择你的身份，只能选一个，必须真实有效。 如选错，将无法取得我院学籍。 )</strong></td>
+        </tr>
+
+        <tr>
             <td height="50">考生类型：
             <g:select name="studentCateories" from="${Preppy.StudentCateories.values()}" optionValue="label" value="${preppyInstance?.studentCateories}" attr-sel="${preppyInstance?.studentCateories}" noSelection="['':'请选择']"/>
             </td>
         </tr>
-        <tr>
-            <td height="50">性<span class="f_20">&nbsp; &nbsp;&nbsp;&nbsp;</span><span class="f_20">&nbsp;&nbsp;</span>别：
 
-                <label>
-                    <input name="gender" type="radio" id="radio" value="${com.baoming.account.User.Gender.MALE.name()}" <g:if test="${!preppyInstance?.gender?.name() || preppyInstance?.gender?.name() == com.baoming.account.User.Gender.MALE.name()}">checked="checked"</g:if> />
-                    ${com.baoming.account.User.Gender.MALE.label}&nbsp; &nbsp;&nbsp;
-                    <input type="radio" name="gender" id="radio2" value="${com.baoming.account.User.Gender.FEMALE.name()}" <g:if test="${preppyInstance?.gender?.name() == com.baoming.account.User.Gender.FEMALE.name()}">checked="checked"</g:if>/>
-                    ${com.baoming.account.User.Gender.FEMALE.label} </label></td>
-        </tr>
         <tr>
             <td height="50">民<span class="f_20">&nbsp; &nbsp;&nbsp;&nbsp;</span><span class="f_20">&nbsp;&nbsp;</span>族：
             <g:select name="nation.id" from="${com.baoming.Nation.findAll()}" class="sel_gray" optionValue="name" optionKey="id" required="" value="${preppyInstance?.nation?.id}" noSelection="['':'请选择']"/>
@@ -186,17 +203,7 @@
             <g:datePicker name="birthday" value="${preppyInstance?.birthday ?: cal.time}" precision="day"
                           years="${startYear..(year-10)}"/>
         </tr>
-        <tr>
-            <td height="50">户籍地区：
-            <g:select id="province" name="provinceId" from="${provinces}" optionKey="code" optionValue="name" required="" value="${preppyInstance?.province?.code}" noSelection="['':'请选择']"/>
-            省&nbsp;
-            <g:select id="city" name="cityId" from="" optionKey="id" required="" class="many-to-one"/>
-            &nbsp;市&nbsp;
-            <g:select id="district" name="districtId" from="" optionKey="id" required="" class="many-to-one"/>
-            县（区）
-            <g:textField name="town" value="${preppyInstance?.town}" placeholder="${message(code: 'preppy.town.label')}"/>
-            乡镇</td>
-        </tr>
+
         <tr>
             <td height="50">详细地址：
             <g:textField name="address" value="${preppyInstance?.address}" size="80" class="sel_gray" />

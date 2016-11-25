@@ -171,7 +171,21 @@ class StudentController {
             render(view: view, model: [studentInstance: studentInstance,planIds:planIds])
             return
         }
-
+        def file = request.getFile("paymentDocPicInp")
+        if (file && !file.empty) {
+            def fileName = file.originalFilename
+            def suffix = fileName.substring(fileName.lastIndexOf('.'))
+            def storeName = "payment_"+studentInstance.number + suffix
+            def url = grailsApplication.config.baoming.image.storage.path
+            def storageFilePath = url +'/'+storeName
+            def f = new File(storageFilePath)
+            if(!f.exists()) {
+                FileUtils.forceMkdir(f)
+            }
+            file.transferTo(f)
+            studentInstance.payment.docPic = storeName
+            studentInstance.payment.docDate = new Date()
+        }
         if(file1 &&  !file1.empty) {
             def cal = Calendar.instance
             def fileName1 = file1.originalFilename
@@ -186,6 +200,35 @@ class StudentController {
             file1.transferTo(f1)
             studentInstance.admissionTicketPic = storeName1
         }
+        def file2 = request.getFile("cardNoPicInp")
+        if (file2 && !file2.empty) {
+            def fileName = file2.originalFilename
+            def suffix = fileName.substring(fileName.lastIndexOf('.'))
+            def storeName = "card_"+studentInstance.number + suffix
+            def url = grailsApplication.config.baoming.image.storage.path
+            def storageFilePath = url +'/'+storeName
+            def f = new File(storageFilePath)
+            if(!f.exists()) {
+                FileUtils.forceMkdir(f)
+            }
+            file2.transferTo(f)
+            studentInstance.cardNoPic = storeName
+        }
+        def file3 = request.getFile("agreementPicInp")
+        if (file3 && !file3.empty) {
+            def fileName = file3.originalFilename
+            def suffix = fileName.substring(fileName.lastIndexOf('.'))
+            def storeName = "argeement_"+studentInstance.number + suffix
+            def url = grailsApplication.config.baoming.image.storage.path
+            def storageFilePath = url +'/'+storeName
+            def f = new File(storageFilePath)
+            if(!f.exists()) {
+                FileUtils.forceMkdir(f)
+            }
+            file3.transferTo(f)
+            studentInstance.agreementPic = storeName
+        }
+
 
         if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)) {
             //teacher = Teacher.get(userId as Long)

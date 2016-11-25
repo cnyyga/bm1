@@ -116,7 +116,7 @@ class MediumController {
             def cal = Calendar.instance
             def fileName1 = file.originalFilename
             def suffix1 = fileName1.substring(fileName1.lastIndexOf('.'))
-            def storeName1 = "admission_ticket_${cal.timeInMillis}${suffix1}"
+            def storeName1 = "voucher_${cal.timeInMillis}${suffix1}"
             def url1 = grailsApplication.config.baoming.image.storage.path
             def storageFilePath1 = url1 +'/'+storeName1
             def f1 = new File(storageFilePath1)
@@ -125,6 +125,51 @@ class MediumController {
             }
             file.transferTo(f1)
             mediumInstance.voucherPath = storeName1
+        }
+        def file1 = request.getFile("cardNoPathInp")
+        if(file1 &&  !file1.empty) {
+            def cal = Calendar.instance
+            def fileName1 = file1.originalFilename
+            def suffix1 = fileName1.substring(fileName1.lastIndexOf('.'))
+            def storeName1 = "medium_card_${cal.timeInMillis}${suffix1}"
+            def url1 = grailsApplication.config.baoming.image.storage.path
+            def storageFilePath1 = url1 +'/'+storeName1
+            def f1 = new File(storageFilePath1)
+            if(!f1.exists()) {
+                FileUtils.forceMkdir(f1)
+            }
+            file1.transferTo(f1)
+            mediumInstance.cardNoPath = storeName1
+        }
+        def file2 = request.getFile("admissionPathInp")
+        if(file2 &&  !file2.empty) {
+            def cal = Calendar.instance
+            def fileName1 = file2.originalFilename
+            def suffix1 = fileName1.substring(fileName1.lastIndexOf('.'))
+            def storeName1 = "medium_admission_${cal.timeInMillis}${suffix1}"
+            def url1 = grailsApplication.config.baoming.image.storage.path
+            def storageFilePath1 = url1 +'/'+storeName1
+            def f1 = new File(storageFilePath1)
+            if(!f1.exists()) {
+                FileUtils.forceMkdir(f1)
+            }
+            file2.transferTo(f1)
+            mediumInstance.admissionPath = storeName1
+        }
+        def file3 = request.getFile("agreementPathInp")
+        if(file3 &&  !file3.empty) {
+            def cal = Calendar.instance
+            def fileName1 = file3.originalFilename
+            def suffix1 = fileName1.substring(fileName1.lastIndexOf('.'))
+            def storeName1 = "medium_agreement_${cal.timeInMillis}${suffix1}"
+            def url1 = grailsApplication.config.baoming.image.storage.path
+            def storageFilePath1 = url1 +'/'+storeName1
+            def f1 = new File(storageFilePath1)
+            if(!f1.exists()) {
+                FileUtils.forceMkdir(f1)
+            }
+            file3.transferTo(f1)
+            mediumInstance.agreementPath = storeName1
         }
 
         if (!mediumInstance.save(flush: true)) {

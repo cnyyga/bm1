@@ -35,6 +35,7 @@ class Preppy {
     PreppyPlan preppyPlan//所属科目组  -2016
     Plan plan //申请就读专业 -2016
     BigDecimal deposit//缴纳保证金-2016
+    DepoistType depositType//缴纳保证金-2016
     String phone//学生手机 -2016
     String parentPhone//家长手机 -2016
     String address//家庭住址 -2016
@@ -60,9 +61,9 @@ class Preppy {
     String hkbksyPath//户口本考生页
     String cardPhotoPath//身份证照片
     String cardBackgroundPhotoPath//身份证照片背面
-    String byzsPath//高中（中职）毕业证书 高中或中专毕业证书照片（已毕业提供）
-    String xjzmPath//学籍证明（本省在校中职生）or 初中毕业证书照片（挂学籍提供）
-    String otherPhotoPath//其他补充材料照片
+    String byzsPath// 高中/中专或初中毕业证书照片
+    String xjzmPath//高校录取通知书（若已被其它高校录取请上传）
+    String otherPhotoPath//手持身份证照片
 
     Resume resume //简历
     String remark //备注1
@@ -73,6 +74,7 @@ class Preppy {
     Date lastUpdated //-2016
 
     static constraints = {
+        depositType nullable: true
         code(nullable: true)
         csCode(nullable: true)
         name()
@@ -267,6 +269,23 @@ class Preppy {
         String label
 
         CollegeSignUp(Integer id,String label){
+            this.id = id
+            this.label = label
+        }
+    }
+
+    enum DepoistType{
+        //江苏普高、江苏中职、外省
+        NONE(1,'未缴费'),
+        BZR (2,'交中学班主任'),
+        ZB (3,'在招办交费'),
+        YHZZ (4,'银行转账'),
+        ZSLS (5,'招生老师收费');
+
+        Integer id
+        String label
+
+        DepoistType(Integer id,String label){
             this.id = id
             this.label = label
         }

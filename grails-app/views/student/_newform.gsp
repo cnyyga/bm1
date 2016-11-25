@@ -146,21 +146,84 @@
             </div>
         </div>
         <div class="control-group">
+            <label class="control-label" for="payment.type">
+                <g:message code="student.payment.amount.label" default="type" />
+            </label>
+            <div class="controls">
+                <g:textField name="payment.amount" value="${studentInstance?.payment?.amount}" />
+            </div>
+        </div>
+
+<div class="control-group">
+    <label class="control-label" for="admissionTicketPicInp">
+        <g:message code="student.cardNo.pic.label" default="admissionTicketNumberPic" />
+    </label>
+
+    <div class="controls">
+        <g:if test="${studentInstance?.cardNoPic}">
+            <div style="position: relative;height: 100px;">
+                <g:link action="img"  controller="api" id="${studentInstance?.cardNoPic}"  target="_blank">
+                    <img src="${createLink(controller: 'api',action: 'img',id: studentInstance?.cardNoPic)}" title="点击查看原图" style="height: 100px;" />
+                    <a href="javascript:void 0" class="cardNo-del-pic"><g:message code="default.button.delete.label"/></a>
+                </g:link>
+            </div>
+        </g:if>
+        <g:hiddenField name="cardNoPic" value="${studentInstance?.cardNoPic}"/>
+        <input type="file" name="cardNoPicInp" id="cardNoPicInp" />
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label" for="admissionTicketPicInp">
+        <g:message code="student.admissionTicketNumber.pic.label" default="admissionTicketNumberPic" />
+    </label>
+
+    <div class="controls">
+        <g:if test="${studentInstance?.admissionTicketPic}">
+            <div style="position: relative;height: 100px;">
+                <g:link action="img"  controller="api" id="${studentInstance?.admissionTicketPic}"  target="_blank">
+                    <img src="${createLink(controller: 'api',action: 'img',id: studentInstance?.admissionTicketPic)}" title="点击查看原图" style="height: 100px;" />
+                    <a href="javascript:void 0" class="admissionTicketPic-del-pic"><g:message code="default.button.delete.label"/></a>
+                </g:link>
+            </div>
+        </g:if>
+        <g:hiddenField name="admissionTicketPic" value="${studentInstance?.admissionTicketPic}"/>
+        <input type="file" name="admissionTicketPicInp" id="admissionTicketPicInp" />
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label" for="admissionTicketPicInp">
+        <g:message code="student.agreement.pic.label" default="admissionTicketNumberPic" />
+    </label>
+
+    <div class="controls">
+        <g:if test="${studentInstance?.agreementPic}">
+            <div style="position: relative;height: 100px;">
+                <g:link action="img"  controller="api" id="${studentInstance?.agreementPic}"  target="_blank">
+                    <img src="${createLink(controller: 'api',action: 'img',id: studentInstance?.agreementPic)}" title="点击查看原图" style="height: 100px;" />
+                    <a href="javascript:void 0" class="agreementPic-del-pic"><g:message code="default.button.delete.label"/></a>
+                </g:link>
+            </div>
+        </g:if>
+        <g:hiddenField name="agreementPic" value="${studentInstance?.agreementPic}"/>
+        <input type="file" name="agreementPicInp" id="agreementPicInp" />
+    </div>
+</div>
+        <div class="control-group">
             <label class="control-label" for="admissionTicketPicInp">
-                <g:message code="student.admissionTicketNumber.pic.label" default="admissionTicketNumberPic" />
+                <g:message code="student.payment.docPic.label" default="admissionTicketNumberPic" />
             </label>
 
             <div class="controls">
-                <g:if test="${studentInstance?.admissionTicketPic}">
+                <g:if test="${studentInstance?.payment?.docPic}">
                     <div style="position: relative;height: 100px;">
-                        <g:link action="img"  controller="api" id="${studentInstance?.admissionTicketPic}"  target="_blank">
-                            <img src="${createLink(controller: 'api',action: 'img',id: studentInstance?.admissionTicketPic)}" title="点击查看原图" style="height: 100px;" />
+                        <g:link action="img"  controller="api" id="${studentInstance?.payment?.docPic}"  target="_blank">
+                            <img src="${createLink(controller: 'api',action: 'img',id: studentInstance?.payment?.docPic)}" title="点击查看原图" style="height: 100px;" />
                             <a href="javascript:void 0" class="admissionTicketPic-del-pic"><g:message code="default.button.delete.label"/></a>
                         </g:link>
                     </div>
                 </g:if>
-                <g:hiddenField name="admissionTicketPic" value="${studentInstance?.admissionTicketPic}"/>
-                <input type="file" name="admissionTicketPicInp" id="admissionTicketPicInp" /> <g:message code="student.admissionTicketNumber.pic.message"/>
+                <g:hiddenField name="payment.docPic" value="${studentInstance?.payment?.docPic}"/>
+                <input type="file" name="paymentDocPicInp" id="paymentDocPicInp" />
             </div>
         </div>
         <div class="control-group">

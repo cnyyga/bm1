@@ -256,7 +256,7 @@
     </div>
     <div class="control-group">
         <label class="control-label" for="parentPhone">
-            高中或中专毕业证书照片（已毕业提供）
+            <g:message code="preppy.byzsPath.label"/>
         </label>
 
         <div class="controls">
@@ -268,7 +268,7 @@
     </div>
     <div class="control-group">
         <label class="control-label" for="parentPhone">
-            初中毕业证书照片（挂学籍提供）
+            <g:message code="preppy.xjzmPath.label"/>
         </label>
 
         <div class="controls">
@@ -280,7 +280,7 @@
     </div>
     <div class="control-group">
         <label class="control-label" for="parentPhone">
-            其他补充材料照片
+            <g:message code="preppy.otherPhotoPath.label"/>
         </label>
 
         <div class="controls">

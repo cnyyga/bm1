@@ -86,6 +86,50 @@
 
             <div class="control-group">
                 <label class="control-label" for="name">
+                    <g:message code="preppy.family.label" default="Name" />
+                    <span class="required-indicator">*</span>
+                </label>
+
+                <div class="controls">
+                    <g:select id="province" name="provinceId" from="${provinces}" optionKey="code" optionValue="name" required="" value="${preppyInstance?.province?.code}" noSelection="['':'请选择']"/>
+                    省&nbsp;
+                    <g:select id="city" name="cityId" from="" optionKey="id" required="" class="many-to-one"/>
+                    &nbsp;市&nbsp;
+                    <g:select id="district" name="districtId" from="" optionKey="id" required="" class="many-to-one"/>
+                    县（区）
+                    <g:textField name="town" value="${preppyInstance?.town}" placeholder="${message(code: 'preppy.town.label')}"/>
+                    乡镇                </div>
+            </div>
+
+
+            <div class="control-group">
+                <label class="control-label" for="name">
+                    <g:message code="preppy.gender.label" default="Name" />
+                    <span class="required-indicator">*</span>
+                </label>
+
+                <div class="controls">
+                    <label>
+                        <input name="gender" type="radio" id="radio" value="${com.baoming.account.User.Gender.MALE.name()}" <g:if test="${!preppyInstance?.gender?.name() || preppyInstance?.gender?.name() == com.baoming.account.User.Gender.MALE.name()}">checked="checked"</g:if> />
+                        ${com.baoming.account.User.Gender.MALE.label}&nbsp; &nbsp;&nbsp;
+                        <input type="radio" name="gender" id="radio2" value="${com.baoming.account.User.Gender.FEMALE.name()}" <g:if test="${preppyInstance?.gender?.name() == com.baoming.account.User.Gender.FEMALE.name()}">checked="checked"</g:if>/>
+                        ${com.baoming.account.User.Gender.FEMALE.label} </label>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="name">
+                    <g:message code="preppy.depositType.label" default="Name" />
+                    <span class="required-indicator">*</span>
+                </label>
+
+                <div class="controls">
+                    <g:select name="depositType" from="${com.baoming.Preppy.DepoistType.values()}" class="sel_gray" optionValue="label" value="${preppyInstance?.depositType}"/>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="name">
                     <g:message code="preppy.deposit.label" default="Name" />
                     <span class="required-indicator">*</span>
                 </label>
@@ -104,5 +148,7 @@
          </g:uploadForm>
     </div>
 </div>
+<g:hiddenField name="cityUrl" value="${createLink(action: 'cityOpts',controller: 'api')}" title="${preppyInstance?.city?.code?:params.cityId}"  />
+<g:hiddenField name="districtUrl" value="${createLink(action: 'districtOpts',controller: 'api')}"  title="${preppyInstance?.district?.code?:params.districtId}" />
 </body>
 </html>

@@ -55,7 +55,9 @@ class Student extends User{
     Integer artsScore //美术省统考成绩
     Integer sportsScore//体育省统考成绩
 
-    String admissionTicketPic //照片
+    String admissionTicketPic //准考证
+    String cardNoPic //身份证图片
+    String agreementPic //协议照片
 
     Teacher teacher
 
@@ -107,6 +109,8 @@ class Student extends User{
         reviewStatus nullable: true
         admissionTicketPic nullable: true
         studentCateories nullable: true
+        cardNoPic nullable: true
+        agreementPic nullable: true
     }
 
     static mapping = {

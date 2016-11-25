@@ -140,22 +140,84 @@
                 </div>
             </div>
         </g:if>
-        <g:if test="${mediumInstance?.voucherPath}">
-            <div class="control-group">
-                <label class="control-label">
-                    <g:message code="medium.voucherPath.label" default="Voucher Path" />
-                </label>
-                <div class="controls">
 
-                    <span class="property-value" aria-labelledby="voucherPath-label">
-                        <g:link action="img"  controller="api" id="${mediumInstance?.voucherPath}"  target="_blank">
-                            <img src="${createLink(controller: 'api',action: 'img',id: mediumInstance?.voucherPath)}" style="height: 100px;"/>
-                        </g:link>
-                    </span>
 
-                </div>
+        <div class="control-group">
+            <label class="control-label" for="gender">
+                <g:message code="medium.depositType.label" default="Gender" />
+            </label>
+
+            <div class="controls">
+                ${mediumInstance?.depositType?.label}
             </div>
-        </g:if>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="gender">
+                <g:message code="medium.deposit.label" default="Gender" />
+            </label>
+
+            <div class="controls">
+                ${mediumInstance?.deposit}
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">
+                <g:message code="medium.cardNoPath.label" default="Voucher Path" />
+            </label>
+            <div class="controls">
+
+                <span class="property-value" aria-labelledby="cardNoPath-label">
+                    <g:link action="img"  controller="api" id="${mediumInstance?.cardNoPath}"  target="_blank">
+                        <img src="${createLink(controller: 'api',action: 'img',id: mediumInstance?.cardNoPath)}" style="height: 100px;"/>
+                    </g:link>
+                </span>
+
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                <g:message code="medium.admissionPath.label" default="Voucher Path" />
+            </label>
+            <div class="controls">
+
+                <span class="property-value" aria-labelledby="admissionPath-label">
+                    <g:link action="img"  controller="api" id="${mediumInstance?.admissionPath}"  target="_blank">
+                        <img src="${createLink(controller: 'api',action: 'img',id: mediumInstance?.admissionPath)}" style="height: 100px;"/>
+                    </g:link>
+                </span>
+
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                <g:message code="medium.voucherPath.label" default="Voucher Path" />
+            </label>
+            <div class="controls">
+
+                <span class="property-value" aria-labelledby="voucherPath-label">
+                    <g:link action="img"  controller="api" id="${mediumInstance?.voucherPath}"  target="_blank">
+                        <img src="${createLink(controller: 'api',action: 'img',id: mediumInstance?.voucherPath)}" style="height: 100px;"/>
+                    </g:link>
+                </span>
+
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                <g:message code="medium.agreementPath.label" default="Voucher Path" />
+            </label>
+            <div class="controls">
+
+                <span class="property-value" aria-labelledby="agreementPath-label">
+                    <g:link action="img"  controller="api" id="${mediumInstance?.agreementPath}"  target="_blank">
+                        <img src="${createLink(controller: 'api',action: 'img',id: mediumInstance?.agreementPath)}" style="height: 100px;"/>
+                    </g:link>
+                </span>
+
+            </div>
+        </div>
     %{--
         <g:if test="${mediumInstance?.admission}">
         <div class="control-group">

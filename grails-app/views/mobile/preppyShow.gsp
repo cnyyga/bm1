@@ -47,8 +47,39 @@
             </div>
         </div>
 
+                <div class="control-group">
+                    <label class="control-label" for="name">
+                        <g:message code="preppy.family.label" default="Name" />
+                    </label>
 
-        <div class="control-group">
+                    <div class="controls">
+                        ${preppyInstance?.province?.name}
+                        ${preppyInstance?.city?.name}
+                        ${preppyInstance?.district?.name}
+                        ${preppyInstance?.town}
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="name">
+                        <g:message code="preppy.gender.label" default="Name" />
+                    </label>
+
+                    <div class="controls">
+                        ${preppyInstance?.gender?.label}
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="name">
+                        <g:message code="preppy.depositType.label" default="Name" />
+                    </label>
+
+                    <div class="controls">
+                        ${preppyInstance?.depositType?.label}
+                    </div>
+                </div>
+
+                <div class="control-group">
             <label class="control-label" for="name">
                 <g:message code="preppy.deposit.label" default="Name" />
                 <span class="required-indicator">*</span>

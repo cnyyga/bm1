@@ -93,7 +93,7 @@ $(function(){
                 isIdCardNo:true,
                 required: true
             },
-            gener:{
+            gender:{
                 required: true
             },
             districtId:{
@@ -117,6 +117,11 @@ $(function(){
                 maxlength:256
             }
              ,
+            deposit:{
+                required: false,
+                number:true
+            }
+            ,
             voucherPathInp:{
                 required:function(){
                     return !$("#voucherPath").val()

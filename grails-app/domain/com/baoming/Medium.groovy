@@ -22,7 +22,13 @@ class Medium {
     Plan plan //大学拟就读专业
     Teacher teacher  //推荐老师
     String description //备注
-    String voucherPath //凭证
+    String voucherPath //预交费凭证
+    String cardNoPath //身份证
+    String admissionPath //准考证
+    String agreementPath //协议
+
+    DepositType depositType//缴费方式
+    BigDecimal deposit //缴费金额
 
     Student.Admission admission = Student.Admission.NO   //录取状态
     Student.Registration registration = Student.Registration.NO //报到 状态
@@ -47,7 +53,27 @@ class Medium {
         reviewStatus()
         reviewDate(nullable: true)
         description()
+        cardNoPath(nullable: true)
+        admissionPath(nullable: true)
+        agreementPath(nullable: true)
         reviewPerson(nullable: true)
     }
 
+
+    enum DepositType{
+        //江苏普高、江苏中职、外省
+        NONE(1,'未缴费'),
+        BZR (2,'交中学班主任'),
+        ZB (3,'在招办交费'),
+        YHZZ (4,'银行转账'),
+        ZSLS (5,'招生老师收费');
+
+        Integer id
+        String label
+
+        DepositType(Integer id,String label){
+            this.id = id
+            this.label = label
+        }
+    }
 }

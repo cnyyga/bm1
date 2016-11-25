@@ -123,10 +123,68 @@
     </div>
 </div>
          </sec:ifAllGranted>
+
+
 <div class="control-group">
-	<label class="control-label" for="voucherPath">
-		<g:message code="medium.voucherPath.label" default="Voucher Path" />
+    <label class="control-label" for="gender">
+        <g:message code="medium.depositType.label" default="Gender" />
+    </label>
+
+    <div class="controls">
+        <g:select name="depositType" from="${Medium.DepositType?.values()}"  optionValue="label" value="${mediumInstance?.depositType}"/>
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label" for="gender">
+        <g:message code="medium.deposit.label" default="Gender" />
+    </label>
+
+    <div class="controls">
+        <g:textField name="deposit" value="${mediumInstance?.deposit}"/>
+    </div>
+</div>
+
+<div class="control-group">
+	<label class="control-label" for="cardNoPath">
+		<g:message code="medium.cardNoPath.label" default="Voucher Path" />
 	</label>
+
+    <div class="controls">
+
+        <g:if test="${mediumInstance?.cardNoPath}">
+            <div style="position: relative;height: 100px;">
+                <g:link action="img"  controller="api" id="${mediumInstance?.cardNoPath}"  target="_blank">
+                    <img src="${createLink(controller: 'api',action: 'img',id: mediumInstance?.cardNoPath)}" title="点击查看原图" style="height: 100px;" />
+                </g:link>
+            </div>
+        </g:if>
+        <g:hiddenField name="cardNoPath" value="${mediumInstance?.cardNoPath}"/>
+        <input type="file" name="cardNoPathInp" id="cardNoPathInp" />
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label" for="admissionPath">
+        <g:message code="medium.admissionPath.label" default="Voucher Path" />
+    </label>
+
+    <div class="controls">
+
+        <g:if test="${mediumInstance?.admissionPath}">
+            <div style="position: relative;height: 100px;">
+                <g:link action="img"  controller="api" id="${mediumInstance?.admissionPath}"  target="_blank">
+                    <img src="${createLink(controller: 'api',action: 'img',id: mediumInstance?.admissionPath)}" title="点击查看原图" style="height: 100px;" />
+                </g:link>
+            </div>
+        </g:if>
+        <g:hiddenField name="admissionPath" value="${mediumInstance?.admissionPath}"/>
+        <input type="file" name="admissionPathInp" id="admissionPathInp" />
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label" for="voucherPath">
+        <g:message code="medium.voucherPath.label" default="Voucher Path" />
+    </label>
 
     <div class="controls">
 
@@ -139,6 +197,24 @@
         </g:if>
         <g:hiddenField name="voucherPath" value="${mediumInstance?.voucherPath}"/>
         <input type="file" name="voucherPathInp" id="voucherPathInp" />
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label" for="agreementPath">
+        <g:message code="medium.agreementPath.label" default="Voucher Path" />
+    </label>
+
+    <div class="controls">
+
+        <g:if test="${mediumInstance?.agreementPath}">
+            <div style="position: relative;height: 100px;">
+                <g:link action="img"  controller="api" id="${mediumInstance?.agreementPath}"  target="_blank">
+                    <img src="${createLink(controller: 'api',action: 'img',id: mediumInstance?.agreementPath)}" title="点击查看原图" style="height: 100px;" />
+                </g:link>
+            </div>
+        </g:if>
+        <g:hiddenField name="agreementPath" value="${mediumInstance?.agreementPath}"/>
+        <input type="file" name="agreementPathInp" id="agreementPathInp" />
     </div>
 </div>
 
