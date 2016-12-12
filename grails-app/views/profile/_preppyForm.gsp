@@ -33,35 +33,6 @@
     </div>
 </div>
 
-<div class="control-group">
-    <label class="control-label" for="family"><g:message code="preppy.family.label"/> <span class="required-indicator">*</span>
-    </label>
-
-    <div class="controls">
-        <g:select name="family" from="${Preppy.Family.values()}" readonly="" optionValue="label" value="${preppyInstance?.family}"/>
-
-    </div>
-</div>
-
-<div class="control-group">
-    <label class="control-label" for="studentCateories"><g:message code="preppy.studentCateories.label"/> <span class="required-indicator">*</span>
-    </label>
-
-    <div class="controls">
-        <g:select name="studentCateories" from="${Preppy.StudentCateories.values()}" optionValue="label" value="${preppyInstance?.studentCateories}" attr-sel="${preppyInstance?.studentCateories}"/>
-
-    </div>
-</div>
-
-<div class="control-group">
-    <label class="control-label" for="gender">
-        <g:message code="preppy.gender.label" default="Gender" />
-    </label>
-
-    <div class="controls">
-        <g:select name="gender" from="${com.baoming.account.User$Gender?.values()}" keys="${com.baoming.account.User$Gender.values()*.name()}" optionValue="label" required="" value="${preppyInstance?.gender?.name()}"/>
-    </div>
-</div>
 
 <div class="control-group">
     <label class="control-label" for="gender">
@@ -90,6 +61,64 @@
     </div>
 </div>
 
+
+<div class="control-group">
+    <label class="control-label" for="family"><g:message code="preppy.family.label"/> <span class="required-indicator">*</span>
+    </label>
+
+    <div class="controls">
+        <g:each in="${com.baoming.Preppy.Family.values()}" var="t">
+            <label class="radio-inline">
+                <input type="radio" name="family" id="family" value="${t.name()}" <g:if test="${preppyInstance?.family?.id==t.id}">checked</g:if>/>  ${t.label}
+            </label>
+        </g:each>
+    </div>
+</div>
+
+
+<div class="control-group">
+    <label class="control-label" for="family"><g:message code="preppy.type.label"/> <span class="required-indicator">*</span>
+    </label>
+
+    <div class="controls">
+        <g:each in="${com.baoming.Preppy.Type.values()}" var="t">
+            <label class="radio-inline">
+                <input type="radio" name="type" id="type" value="${t.name()}" <g:if test="${preppyInstance?.type?.id==t.id}">checked</g:if>/>  ${t.label}
+            </label>
+        </g:each>
+
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label" for="family"><g:message code="preppy.leiBei.label"/> <span class="required-indicator">*</span>
+    </label>
+
+    <div class="controls">
+        <g:each in="${com.baoming.Preppy.LeiBie.values()}" var="t">
+            <label class="radio-inline">
+                <input type="radio" name="leiBie" id="leiBie" value="${t.name()}" <g:if test="${preppyInstance?.leiBie?.id==t.id}">checked</g:if>/>  ${t.label}
+            </label>
+        </g:each>
+
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label" for="family"><g:message code="preppy.beforeFamily.label"/> <span class="required-indicator">*</span>
+    </label>
+
+    <div class="controls">
+        <label class="radio-inline">
+            <input type="radio" name="beforeFamily" id="beforeFamily" value="1" <g:if test="${preppyInstance?.beforeFamily}">checked</g:if>/> <g:message code="default.boolean.true"/>
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="beforeFamily" id="beforeFamily1" value="0" <g:if test="${!preppyInstance?.beforeFamily}">checked</g:if>/> <g:message code="default.boolean.false"/>
+        </label>
+
+    </div>
+</div>
+
 <div class="control-group">
     <label class="control-label" for="district">
         <g:message code="medium.district.label" default="District" />
@@ -102,6 +131,32 @@
         <g:textField name="town" value="${preppyInstance?.town}" placeholder="${message(code: 'preppy.town.label')}"/>
     </div>
 </div>
+
+
+%{--<div class="control-group">
+    <label class="control-label" for="studentCateories"><g:message code="preppy.studentCateories.label"/> <span class="required-indicator">*</span>
+    </label>
+
+    <div class="controls">
+        <g:select name="studentCateories" from="${Preppy.StudentCateories.values()}" optionValue="label" value="${preppyInstance?.studentCateories}" attr-sel="${preppyInstance?.studentCateories}"/>
+
+    </div>
+</div>--}%
+
+%{--<div class="control-group">
+    <label class="control-label" for="gender">
+        <g:message code="preppy.gender.label" default="Gender" />
+    </label>
+
+    <div class="controls">
+        <g:select name="gender" from="${com.baoming.account.User$Gender?.values()}" keys="${com.baoming.account.User$Gender.values()*.name()}" optionValue="label" required="" value="${preppyInstance?.gender?.name()}"/>
+    </div>
+</div>--}%
+
+
+
+
+
 
 <div class="control-group">
     <label class="control-label" for="address">
@@ -288,6 +343,10 @@
             <g:if test="${preppyInstance.otherPhotoPath}">
                 <g:link action="img1"  controller="api" params="[path:preppyInstance?.otherPhotoPath]" target="_blank"><img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance.otherPhotoPath])}"  title="点击打开原图" alt="点击打开原图" style="max-height: 50px;"></g:link>
             </g:if>
+            <p>
+                <img src=""/>
+                <g:img file="preppy_cardno.png"/>
+            </p>
         </div>
     </div>
 </div>

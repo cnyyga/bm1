@@ -41,7 +41,15 @@
 	<g:select name="gender" from="${com.baoming.account.User$Gender?.values()}"  optionValue="label" value="${mediumInstance?.gender}"/>
     </div>
 </div>
+<div class="control-group">
+    <label class="control-label" for="code">
+        <g:message code="medium.secondaryPlan.label" default="Code" />
+    </label>
 
+    <div class="controls">
+        <g:textField name="secondaryPlan" value="${mediumInstance?.secondaryPlan}"/>
+    </div>
+</div>
 <div class="control-group">
 	<label class="control-label" for="mediumPlan">
 		<g:message code="medium.mediumPlan.label" default="Medium Plan" />

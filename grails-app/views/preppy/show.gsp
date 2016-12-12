@@ -182,8 +182,33 @@
         </tr>
 
         <tr>
-            <td height="50">考生类型：
-            <g:select name="studentCateories" from="${Preppy.StudentCateories.values()}" optionValue="label" value="${preppyInstance?.studentCateories}" attr-sel="${preppyInstance?.studentCateories}" noSelection="['':'请选择']"/>
+            <td height="50"><g:message code="preppy.type.label"/> ：
+                <g:each in="${com.baoming.Preppy.Type.values()}" var="t">
+                    <label class="radio-inline">
+                        <input type="radio" name="type" id="type" value="${t.name()}" <g:if test="${preppyInstance?.type?.id==t.id}">checked</g:if>/>  ${t.label}
+                    </label>
+                </g:each>
+            </td>
+        </tr>
+
+        <tr>
+            <td height="50"><g:message code="preppy.leiBei.label"/> ：
+                <g:each in="${com.baoming.Preppy.LeiBie.values()}" var="t">
+                    <label class="radio-inline">
+                        <input type="radio" name="type" id="type" value="${t.name()}" <g:if test="${preppyInstance?.leiBei?.id==t.id}">checked</g:if>/>  ${t.label}
+                    </label>
+                </g:each>
+            </td>
+        </tr>
+
+        <tr>
+            <td height="50"><g:message code="preppy.beforeFamily.label"/> ：
+                <label class="radio-inline">
+                    <input type="radio" name="type" id="type" value="1" <g:if test="${preppyInstance?.beforeFamily}">checked</g:if>/> <g:message code="default.boolean.true"/>
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="type" id="type" value="0" <g:if test="${!preppyInstance?.beforeFamily}">checked</g:if>/> <g:message code="default.boolean.false"/>
+                </label>
             </td>
         </tr>
 

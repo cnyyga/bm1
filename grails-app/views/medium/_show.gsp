@@ -54,6 +54,19 @@
             </div>
         </g:if>
 
+        <g:if test="${mediumInstance?.secondaryPlan}">
+            <div class="control-group">
+                <label class="control-label">
+                    <g:message code="medium.secondaryPlan.label" default="Medium Plan" />
+                </label>
+                <div class="controls">
+
+                    <span class="property-value" aria-labelledby="mediumPlan-label">${mediumInstance?.secondaryPlan}</span>
+
+                </div>
+            </div>
+        </g:if>
+
         <g:if test="${mediumInstance?.mediumPlan}">
             <div class="control-group">
                 <label class="control-label">

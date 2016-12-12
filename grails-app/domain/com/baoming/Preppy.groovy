@@ -49,6 +49,7 @@ class Preppy {
     //////old/////////////
     Family family//户籍类型 -2016
     Family studentFamily//学籍类型
+    boolean beforeFamily//以前是否有江苏学籍
     CollegeType collegeType =  CollegeType.HIGH //高考类型
     Status status = Status.DROP //上学状态
     String qq //-2016
@@ -56,6 +57,7 @@ class Preppy {
     String counselor//辅导员
     String counselorPhone//辅导员电话
     Teacher teacher  //推荐老师 -2016
+    LeiBie leiBie  //学生类别 -2016
     ///////
     String hkbPath //户口本首页
     String hkbksyPath//户口本考生页
@@ -131,6 +133,8 @@ class Preppy {
         town nullable: true
         counselor nullable: true
         counselorPhone nullable: true
+        leiBie nullable: true
+        beforeFamily nullable: true
     }
 
     static embedded = ['resume']
@@ -165,9 +169,9 @@ class Preppy {
     }
 
     enum Type {
-        FRESH(1,'应届生'),
-        PREVIONS  (2,'往届生 ') ,
-        DROPOUT (3,'肄业生')
+        FRESH(1,'应届生(在一年内可以获得高中、中专中技毕业证书)'),
+        PREVIONS  (2,'往届生(已获得毕业证书) ') ,
+        DROPOUT (3,'非应非往')
 
         Integer id
         String label
@@ -187,6 +191,19 @@ class Preppy {
         String label
 
         SchoolType(Integer id,String label){
+            this.id = id
+            this.label = label
+        }
+    }
+
+    enum LeiBie {
+        SECONDARY(1,'高中生'),
+        INDUSTRIAL(2,'中专、中技生 ')
+
+        Integer id
+        String label
+
+        LeiBie(Integer id,String label){
             this.id = id
             this.label = label
         }

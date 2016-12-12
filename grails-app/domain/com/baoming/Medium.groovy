@@ -18,6 +18,7 @@ class Medium {
     City studentCity //市
     Province studentProvince//省
 
+    String secondaryPlan//中专专业
     MediumPlan mediumPlan //原中专科目组
     Plan plan //大学拟就读专业
     Teacher teacher  //推荐老师
@@ -57,6 +58,7 @@ class Medium {
         admissionPath(nullable: true)
         agreementPath(nullable: true)
         reviewPerson(nullable: true)
+        secondaryPlan(nullable: true)
     }
 
 
