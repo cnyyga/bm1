@@ -262,13 +262,23 @@ class ProfileController {
             return
         }
         preppy.family =Preppy.Family."${params.family}"
-        preppy.studentCateories = Preppy.StudentCateories."${params.studentCateories}"
-        preppy.gender = User.Gender."${params.gender}"
+        preppy.type =Preppy.Type."${params.type}"
+        preppy.leiBie =Preppy.LeiBie."${params.leiBie}"
+       // preppy.studentCateories = Preppy.StudentCateories."${params.studentCateories}"
+        if(params.gender){
+            preppy.gender = User.Gender."${params.gender}"
+        }
         preppy.nation = Nation.get(params.long("nation.id"))
         preppy.birthday = params.birthday
-        preppy.district = District.findByCode(params.districtId)
-        preppy.city = City.findByCode(params.cityId)
-        preppy.province = Province.findByCode(params.provinceId)
+        if(params.districtId){
+            preppy.district = District.findByCode(params.districtId)
+        }
+        if(params.cityId){
+            preppy.city = City.findByCode(params.cityId)
+        }
+        if(params.provinceId){
+            preppy.province = Province.findByCode(params.provinceId)
+        }
         preppy.address = params.address
         preppy.plan = Plan.get(params.long("plan.id"))
         preppy.phone = params.phone

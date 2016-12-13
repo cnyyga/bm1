@@ -173,7 +173,7 @@
     </label>
 
     <div class="controls plan-area">
-        <select id="planId" name="plan.id"></select>
+        <g:select name="plan.id" id="planId" from="${com.baoming.Plan.findAllByStatus(com.baoming.Plan.Status.RUNNING)}" value="${preppyInstance?.plan?.id}" optionValue="name" optionKey="id"/>
     </div>
 </div>
 

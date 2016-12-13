@@ -49,7 +49,7 @@ class MobileController {
                                    rememberMeParameter: config.rememberMe.parameter]
     }
 
-    //Ñ§ÉúÒ³Ãæ
+    //æ—å¬ç”Ÿä¿¡æ¯é¡µé¢
     def info(){
         def userId = springSecurityService.authentication.principal?.id
         def user = User.get(userId)
@@ -69,24 +69,24 @@ class MobileController {
          preppyPlans:planService.getPreppyPlans()]
     }
 
-    //ÀÏÊ¦´´½¨Ñ§ÉúµÄÑ¡ÔñÀàĞÍÒ³Ãæ
+    //åˆ›å»ºå­¦ç”Ÿé¡µé¢
     def createStu() {
 
     }
 
-    //Ìí¼ÓÆÕ¸ßÉú
+    //æ·»åŠ æ™®é€šç”Ÿ
     def addStu() {
 
         [studentInstance: new Student(params),plans:planService.getStuPlans(),provinces:provinceService.getProvinces(),studentTypes:studentTypeService.getStudentTypes()]
     }
 
-    //Ìí¼ÓÅÔÌıÉú
+    //æ·»åŠ æ—å¬ç”Ÿ
     def addPreppy() {
         [preppyInstance: new Preppy(params),provinces:provinceService.getProvinces(),
          preppyPlans:planService.getPreppyPlans()]
     }
 
-    //Ìí¼ÓÖĞÖ°Éú
+    //æ·»åŠ ä¸­ä¸“ç”Ÿ
     def addMedium() {
         [mediumInstance: new Medium(params),provinces:provinceService.getProvinces(),mediumPlans:planService.getMediumPlans()]
     }

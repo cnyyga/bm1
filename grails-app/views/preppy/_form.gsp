@@ -1,4 +1,4 @@
-<%@ page import="com.baoming.Preppy" %>
+<%@ page import="com.baoming.Plan; com.baoming.Preppy" %>
 <table width="750" border="0" align="center" cellpadding="0" cellspacing="0" class="tianxie lstx" >
     <tr>
         <td height="42" align="center" style="background:#5fb9f2;"><strong style="font-size:22px; color:#ffffff;">☆☆☆ 招生老师填写 ☆☆☆</strong></td>
@@ -44,7 +44,7 @@
     </tr>
     <tr>
         <td height="50">保证金缴纳方式：
-        <g:select name="family" from="${com.baoming.Preppy.DepoistType.values()}" class="sel_gray" optionValue="label" value="${preppyInstance?.depositType}"/>
+        <g:select name="depositType" from="${com.baoming.Preppy.DepoistType.values()}" class="sel_gray" optionValue="label" value="${preppyInstance?.depositType}"/>
         </td>
     </tr>
     <tr>
@@ -73,9 +73,9 @@
     </tr>
     <tr>
         <td height="50"><g:message code="preppy.type.label"/> ：
-            <g:each in="${com.baoming.Preppy.Type.values()}" var="t">
+            <g:each in="${com.baoming.Preppy.Type.values()}" var="t" status="i">
                 <label class="radio-inline">
-                    <input type="radio" name="type" id="type" value="${t.name()}" <g:if test="${preppyInstance?.type?.id==t.id}">checked</g:if>/>  ${t.label}
+                    <input type="radio" name="type" id="type${i}" value="${t.name()}" <g:if test="${preppyInstance?.type?.id==t.id}">checked</g:if>/>  ${t.label}
                 </label>
             </g:each>
         </td>
@@ -83,9 +83,9 @@
 
     <tr>
         <td height="50"><g:message code="preppy.leiBei.label"/> ：
-            <g:each in="${com.baoming.Preppy.LeiBie.values()}" var="t">
+            <g:each in="${com.baoming.Preppy.LeiBie.values()}" var="t" status="i">
                 <label class="radio-inline">
-                    <input type="radio" name="leiBie" id="leiBie" value="${t.name()}" <g:if test="${preppyInstance?.leiBie?.id==t.id}">checked</g:if>/>  ${t.label}
+                    <input type="radio" name="leiBie" id="leiBie${i}" value="${t.name()}" <g:if test="${preppyInstance?.leiBie?.id==t.id}">checked</g:if>/>  ${t.label}
                 </label>
             </g:each>
         </td>
@@ -94,10 +94,10 @@
     <tr>
         <td height="50"><g:message code="preppy.beforeFamily.label"/> ：
             <label class="radio-inline">
-                <input type="radio" name="beforeFamily" id="beforeFamily" value="1" <g:if test="${preppyInstance?.beforeFamily}">checked</g:if>/> <g:message code="default.boolean.true"/>
+                <input type="radio" name="beforeFamily" id="beforeFamily1" value="1" <g:if test="${preppyInstance?.beforeFamily}">checked</g:if>/> <g:message code="default.boolean.true"/>
             </label>
             <label class="radio-inline">
-                <input type="radio" name="beforeFamily" id="beforeFamily1" value="0" <g:if test="${!preppyInstance?.beforeFamily}">checked</g:if>/> <g:message code="default.boolean.false"/>
+                <input type="radio" name="beforeFamily" id="beforeFamily0" value="0" <g:if test="${!preppyInstance?.beforeFamily}">checked</g:if>/> <g:message code="default.boolean.false"/>
             </label>
         </td>
     </tr>
@@ -126,7 +126,7 @@
     </tr>
     <tr>
         <td height="50"><p >申请就读专业：
-            <select id="plan.id" name="plan.id" class="sel_gray"></select>
+            <g:select name="plan.id" from="${com.baoming.Plan.findAllByStatus(com.baoming.Plan.Status.RUNNING)}" value="${preppyInstance?.plan?.id}" optionValue="name" optionKey="id"/>
             </td>
     </tr>
     <tr>

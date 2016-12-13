@@ -95,7 +95,7 @@
 
     </div>
 </div>
-
+%{--
 <div class="control-group">
     <label class="control-label">
         <g:message code="middleSchool.label" default="Middle School"/>
@@ -138,6 +138,7 @@
 
         </div>
     </div>
+--}%
 
     <div class="control-group">
         <label class="control-label">
@@ -192,18 +193,16 @@
         </div>
     </div>
 
-<div class="control-group">
-    <label class="control-label">
-        <g:message code="student.description.label" default="Description"/>
-    </label>
-
-    <div class="controls">
-
-        <span class="property-value" aria-labelledby="description-label"><g:fieldValue bean="${studentInstance}"
-                                                                                       field="description"/></span>
-
+    <div class="control-group">
+        <label class="control-label">
+            <g:message code="student.payment.amount.label" default="type" />
+        </label>
+        <div class="controls">
+            <span class="property-value">
+                ${studentInstance?.payment?.amount}
+            </span>
+        </div>
     </div>
-</div>
 
 <div class="control-group">
     <label class="control-label">
@@ -281,7 +280,18 @@
 
         </div>
     </div>
+    <div class="control-group">
+        <label class="control-label">
+            <g:message code="student.description.label" default="Description"/>
+        </label>
 
+        <div class="controls">
+
+            <span class="property-value" aria-labelledby="description-label"><g:fieldValue bean="${studentInstance}"
+                                                                                           field="description"/></span>
+
+        </div>
+    </div>
     <div class="control-group">
         <label class="control-label">
             <g:message code="student.recommend.teacher.label" default="recommend"/>

@@ -193,6 +193,9 @@ $(function(){
     });
     setPlans($("#studentCateories").val());
     function setPlans(type) {
+        if(!type || type == ''){
+            return;
+        }
         var _url = $("#preppyPlanUrl").val();
         var _selected =   $("#preppyPlanUrl").attr("title");
         var _txt =   $("#preppyPlanUrl").attr("select-txt");

@@ -56,40 +56,6 @@
                 <g:select id="district" name="districtId" from="${[]}"  value="" class="many-to-one"/>
             </div>
         </div>
-        <sec:ifNotGranted roles="ROLE_TEACHER">
-            <%
-                def userService = grailsApplication.mainContext.getBean("userService");
-            %>
-            <div class="control-group">
-                <label class="control-label" for="combobox">
-                    <g:message code="student.recommend.teacher.label" default="Description" />
-                </label>
-
-                <div class="controls">
-                    %{--<g:select name="teacherId" from="${teachers}" data-rel="chosen" optionValue="name" optionKey="id"  value="${studentInstance?.teacher?.id}"  noSelection="${['':'请选择']}"/>--}%
-                    <div class="ui-widget">
-                        <select id="combobox" name="teacherId">
-                            <option value="">请选择</option>
-                            <%  def studTeacherId
-                                try {
-                                 studTeacherId = studentInstance.teacher?.id
-                            }catch (Exception e){
-
-                            }%>
-                            <g:each in="${userService.getTeachers()}" var="teah">
-                                <g:if test="${studTeacherId == teah.id}">
-                                    <option value="${teah.id}" title="${teah.name}${com.bm.utils.PinyinUtils.getPinyin(teah.name)}" selected="true" >${teah.name}</option>
-                                </g:if>
-                                <g:else>
-                                    <option value="${teah.id}" title="${teah.name}${com.bm.utils.PinyinUtils.getPinyin(teah.name)}" >${teah.name}</option>
-                                </g:else>
-                            </g:each>
-                        </select>
-                    </div>
-
-                </div>
-            </div>
-        </sec:ifNotGranted>
         <div class="control-group">
             <label class="control-label" for="studentType.id">
                 <g:message code="studentType.label" default="StudentType" />
@@ -257,7 +223,42 @@
             </div>
         </div>
     </sec:ifAnyGranted>
-    <g:render template="/student/reviewForm"/>
+<sec:ifNotGranted roles="ROLE_TEACHER">
+    <%
+        def userService = grailsApplication.mainContext.getBean("userService");
+    %>
+    <div class="control-group">
+        <label class="control-label" for="combobox">
+            <g:message code="student.recommend.teacher.label" default="Description" />
+        </label>
+
+        <div class="controls">
+            %{--<g:select name="teacherId" from="${teachers}" data-rel="chosen" optionValue="name" optionKey="id"  value="${studentInstance?.teacher?.id}"  noSelection="${['':'请选择']}"/>--}%
+            <div class="ui-widget">
+                <select id="combobox" name="teacherId">
+                    <option value="">请选择</option>
+                    <%  def studTeacherId
+                    try {
+                        studTeacherId = studentInstance.teacher?.id
+                    }catch (Exception e){
+
+                    }%>
+                    <g:each in="${userService.getTeachers()}" var="teah">
+                        <g:if test="${studTeacherId == teah.id}">
+                            <option value="${teah.id}" title="${teah.name}${com.bm.utils.PinyinUtils.getPinyin(teah.name)}" selected="true" >${teah.name}</option>
+                        </g:if>
+                        <g:else>
+                            <option value="${teah.id}" title="${teah.name}${com.bm.utils.PinyinUtils.getPinyin(teah.name)}" >${teah.name}</option>
+                        </g:else>
+                    </g:each>
+                </select>
+            </div>
+
+        </div>
+    </div>
+</sec:ifNotGranted>
+
+<g:render template="/student/reviewForm"/>
 <g:hiddenField name="cityUrl" value="${createLink(action: 'cityOpts',controller: 'api')}" title="${studentInstance?.city?.code?:params.cityId}"  />
 <g:hiddenField name="districtUrl" value="${createLink(action: 'districtOpts',controller: 'api')}"  title="${studentInstance?.district?.code?:params.districtId}" />
 <g:hiddenField name="schoolUrl" value="${createLink(action: 'schoolOpts',controller: 'api')}"  title="${studentInstance?.middleSchool?.id}" />

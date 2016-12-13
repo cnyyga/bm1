@@ -183,9 +183,9 @@
 
         <tr>
             <td height="50"><g:message code="preppy.type.label"/> ：
-                <g:each in="${com.baoming.Preppy.Type.values()}" var="t">
+                <g:each in="${com.baoming.Preppy.Type.values()}" var="t" status="i">
                     <label class="radio-inline">
-                        <input type="radio" name="type" id="type" value="${t.name()}" <g:if test="${preppyInstance?.type?.id==t.id}">checked</g:if>/>  ${t.label}
+                        <input type="radio" name="type" id="type${i}" value="${t.name()}" <g:if test="${preppyInstance?.type?.id==t.id}">checked="checked"</g:if>/>  ${t.label}
                     </label>
                 </g:each>
             </td>
@@ -193,9 +193,9 @@
 
         <tr>
             <td height="50"><g:message code="preppy.leiBei.label"/> ：
-                <g:each in="${com.baoming.Preppy.LeiBie.values()}" var="t">
+                <g:each in="${com.baoming.Preppy.LeiBie.values()}" var="t" status="i">
                     <label class="radio-inline">
-                        <input type="radio" name="type" id="type" value="${t.name()}" <g:if test="${preppyInstance?.leiBei?.id==t.id}">checked</g:if>/>  ${t.label}
+                        <input type="radio" name="leiBie" id="leiBie${i}" value="${t.name()}" <g:if test="${preppyInstance?.leiBie?.id==t.id}">checked="checked"</g:if>/>  ${t.label}
                     </label>
                 </g:each>
             </td>
@@ -204,10 +204,10 @@
         <tr>
             <td height="50"><g:message code="preppy.beforeFamily.label"/> ：
                 <label class="radio-inline">
-                    <input type="radio" name="type" id="type" value="1" <g:if test="${preppyInstance?.beforeFamily}">checked</g:if>/> <g:message code="default.boolean.true"/>
+                    <input type="radio" name="beforeFamily" id="beforeFamily1" value="1" <g:if test="${preppyInstance?.beforeFamily}">checked</g:if>/> <g:message code="default.boolean.true"/>
                 </label>
                 <label class="radio-inline">
-                    <input type="radio" name="type" id="type" value="0" <g:if test="${!preppyInstance?.beforeFamily}">checked</g:if>/> <g:message code="default.boolean.false"/>
+                    <input type="radio" name="beforeFamily" id="beforeFamily0" value="0" <g:if test="${!preppyInstance?.beforeFamily}">checked</g:if>/> <g:message code="default.boolean.false"/>
                 </label>
             </td>
         </tr>
@@ -236,7 +236,7 @@
         </tr>
         <tr>
             <td height="50"><p >申请就读专业：
-                <select id="planId" name="plan.id" class="sel_gray"></select>
+            <g:select name="plan.id" from="${com.baoming.Plan.findAllByStatus(com.baoming.Plan.Status.RUNNING)}" value="${preppyInstance?.plan?.id}" optionValue="name" optionKey="id"/>
             </td>
         </tr>
         <tr>

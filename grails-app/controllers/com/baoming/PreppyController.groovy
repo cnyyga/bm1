@@ -286,6 +286,12 @@ class PreppyController {
                 }
             }
         }
+
+        if(params.leiBie){
+            preppyInstance.leiBie = Preppy.LeiBie."${params.leiBie}"
+        }
+
+
         preppyInstance.validate()
         if (!preppyInstance.save(flush: true)) {
             def view = "create"
@@ -332,6 +338,7 @@ class PreppyController {
         [preppyInstance: preppyInstance,provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()]
     }
 
+    @Transactional
     def update(Long id) {
 
         def preppyInstance = Preppy.get(id)
@@ -343,6 +350,7 @@ class PreppyController {
         def oldReviewStatus = preppyInstance.reviewStatus
 
         preppyInstance.properties = params
+
         def userId = springSecurityService.authentication.principal?.id
         def teacher
         if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)) {
@@ -373,10 +381,10 @@ class PreppyController {
         }
 
         def province = params.provinceId?Province.findByCode(params.provinceId):null
-        if(province && province.name.count('江苏') > 0) {
-            preppyInstance.family = Preppy.Family.JIANGSU
-        }    else{
-            preppyInstance.family = Preppy.Family.OTHER
+        if(params.family) {
+            preppyInstance.family = Preppy.Family."${params.family}"
+        }else{
+            //preppyInstance.family = Preppy.Family.OTHER
         }
         if(params.cityId){
             preppyInstance.city = City.findByCode(params.cityId)
@@ -403,7 +411,6 @@ class PreppyController {
         if(params.studentDistrictId){
             preppyInstance.studentDistrict = District.findByCode(params.studentDistrictId)
         }
-
         def academicScores = params.list('academicScore')
         academicScores = academicScores.join(",")
         preppyInstance.academicScore = academicScores
@@ -510,6 +517,10 @@ class PreppyController {
                     preppyInstance.csCode=codes[1]
                 }
             }
+        }
+
+        if(params.leiBie){
+            preppyInstance.leiBie = Preppy.LeiBie."${params.leiBie}"
         }
 
         if (!preppyInstance.save(flush: true)) {

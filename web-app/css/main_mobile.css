@@ -11,7 +11,8 @@ body {
 
 input, textarea {
     font-size: 12px;
-    padding: 3px
+    padding: 3px;
+    width: 98%;
 }
 
 table, td {
@@ -22,7 +23,8 @@ table, td {
 }
 
 select {
-    font-size: 12px
+    font-size: 12px;
+    width: 98%;
 }
 
 div {
