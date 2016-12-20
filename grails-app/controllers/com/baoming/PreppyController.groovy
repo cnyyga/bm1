@@ -114,7 +114,7 @@ class PreppyController {
 
     def create() {
         [preppyInstance: new Preppy(params),provinces:provinceService.getProvinces(),
-                preppyPlans:planService.getPreppyPlans()]
+                preppyPlans:planService.getPreppyPlans(),plans:planService.getPreppyPlanPlans()]
     }
 
     @Transactional
@@ -291,7 +291,9 @@ class PreppyController {
             preppyInstance.leiBie = Preppy.LeiBie."${params.leiBie}"
         }
 
-
+        if(params.beforeFamily){
+            preppyInstance.beforeFamily = params.boolean("beforeFamily");
+        }
         preppyInstance.validate()
         if (!preppyInstance.save(flush: true)) {
             def view = "create"
@@ -335,7 +337,7 @@ class PreppyController {
             return
         }
 
-        [preppyInstance: preppyInstance,provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()]
+        [preppyInstance: preppyInstance,provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans(),plans:planService.getPreppyPlanPlans()]
     }
 
     @Transactional
@@ -350,6 +352,10 @@ class PreppyController {
         def oldReviewStatus = preppyInstance.reviewStatus
 
         preppyInstance.properties = params
+
+        if(params.beforeFamily){
+            preppyInstance.beforeFamily = params.boolean("beforeFamily");
+        }
 
         def userId = springSecurityService.authentication.principal?.id
         def teacher

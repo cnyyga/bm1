@@ -60,7 +60,7 @@ class PlanService {
         def plans = Plan.createCriteria().list {
             eq("status",(Plan.Status.RUNNING))
             planUses {
-                gt("flg",PlanUse.USE_FLG_PREPPY)
+                ge("flg",PlanUse.USE_FLG_PREPPY)
             }
         }
         return plans.unique()

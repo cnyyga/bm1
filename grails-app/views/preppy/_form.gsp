@@ -94,10 +94,10 @@
     <tr>
         <td height="50"><g:message code="preppy.beforeFamily.label"/> ：
             <label class="radio-inline">
-                <input type="radio" name="beforeFamily" id="beforeFamily1" value="1" <g:if test="${preppyInstance?.beforeFamily}">checked</g:if>/> <g:message code="default.boolean.true"/>
+                <input type="radio" name="beforeFamily" id="beforeFamily1" value="true" <g:if test="${preppyInstance?.beforeFamily==true}">checked</g:if>/> <g:message code="default.boolean.true"/>
             </label>
             <label class="radio-inline">
-                <input type="radio" name="beforeFamily" id="beforeFamily0" value="0" <g:if test="${!preppyInstance?.beforeFamily}">checked</g:if>/> <g:message code="default.boolean.false"/>
+                <input type="radio" name="beforeFamily" id="beforeFamily0" value="false" <g:if test="${preppyInstance?.beforeFamily==false}">checked</g:if>/> <g:message code="default.boolean.false"/>
             </label>
         </td>
     </tr>
@@ -126,7 +126,7 @@
     </tr>
     <tr>
         <td height="50"><p >申请就读专业：
-            <g:select name="plan.id" from="${com.baoming.Plan.findAllByStatus(com.baoming.Plan.Status.RUNNING)}" value="${preppyInstance?.plan?.id}" optionValue="name" optionKey="id"/>
+            <g:select name="plan.id" from="${plans}" value="${preppyInstance?.plan?.id}" optionValue="name" optionKey="id"/>
             </td>
     </tr>
     <tr>

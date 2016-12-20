@@ -251,6 +251,7 @@
         </div>
 
     </div>
+</div>
     <div class="control-group">
         <label class="control-label" for="parentPhone">
             中职专业
@@ -345,11 +346,24 @@
             </g:if>
             <p>
                 <img src=""/>
-                <g:img file="preppy_cardno.png"/>
+                示例：<g:img file="preppy_cardno.png"/>
             </p>
         </div>
     </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-4 col-sm-4">
+            <b style="color: #a94442">错误示例</b>
+            <g:img file="u540.JPG" />
+        </div>
+        <div class="col-xs-4 col-sm-4">
+            <b class="text-info">正确示例</b>
+            <g:img file="u542.JPG"/>
+        </div>
+    </div>
 </div>
+
+
 
 <g:hiddenField name="cityUrl" value="${createLink(action: 'cityOpts',controller: 'api')}" title="${preppyInstance?.city?.code?:params.cityId}"  />
 <g:hiddenField name="districtUrl" value="${createLink(action: 'districtOpts',controller: 'api')}"  title="${preppyInstance?.district?.code?:params.districtId}" />

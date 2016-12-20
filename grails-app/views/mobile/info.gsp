@@ -2,6 +2,7 @@
 <head>
     <meta name='layout' content='mainMobile'/>
     <title><g:message code="student.mobile.preppy.stu.title"/></title>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap-row.css')}" type="text/css">
     <g:javascript src="jquery-1.8.3.js"/>
     <g:javascript src="jquery.validate.min.js"/>
     <g:javascript src="card.js"/>
