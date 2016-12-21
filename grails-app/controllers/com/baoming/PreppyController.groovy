@@ -326,7 +326,7 @@ class PreppyController {
             view = "/mobile/preppyShow"
         }
 
-        render(view: view,model: [preppyInstance: preppyInstance,provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()])
+        render(view: view,model: [preppyInstance: preppyInstance,provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans(),plans:planService.getPreppyPlanPlans()])
     }
 
     def edit(Long id) {

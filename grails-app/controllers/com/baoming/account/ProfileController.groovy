@@ -226,7 +226,7 @@ class ProfileController {
             return
         }
         [preppyInstance:preppy,provinces:provinceService.getProvinces(),
-         preppyPlans:planService.getPreppyPlans()]
+         preppyPlans:planService.getPreppyPlans(),plans:planService.getPreppyPlanPlans()]
     }
 
     def savePreppy() {
@@ -263,7 +263,9 @@ class ProfileController {
         }
         preppy.family =Preppy.Family."${params.family}"
         preppy.type =Preppy.Type."${params.type}"
-        preppy.leiBie =Preppy.LeiBie."${params.leiBie}"
+        if(params.leiBie){
+            preppy.leiBie =Preppy.LeiBie."${params.leiBie}"
+        }
        // preppy.studentCateories = Preppy.StudentCateories."${params.studentCateories}"
         if(params.gender){
             preppy.gender = User.Gender."${params.gender}"
@@ -366,7 +368,9 @@ class ProfileController {
         resume.zzzy=zzzy
         resume.highAuthenticator=highAuthenticator
         preppy.resume=resume
-
+        if(params.beforeFamily){
+            preppy.beforeFamily = params.boolean("beforeFamily")
+        }
 
         if(!preppy.save()){
             log.error(preppy.errors)

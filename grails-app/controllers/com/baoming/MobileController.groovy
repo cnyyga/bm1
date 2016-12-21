@@ -66,7 +66,7 @@ class MobileController {
             return
         }
         [preppyInstance:preppy,provinces:provinceService.getProvinces(),
-         preppyPlans:planService.getPreppyPlans()]
+         preppyPlans:planService.getPreppyPlans(),plans:planService.getPreppyPlanPlans()]
     }
 
     //创建学生页面

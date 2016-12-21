@@ -150,6 +150,15 @@ $(function(){
                 required: true
             },birthday_day:{
                 required: true
+            },
+            type:{
+                required: true
+            },
+            leiBie:{
+                required: true
+            },
+            beforeFamily:{
+                required: true
             }
 
         },

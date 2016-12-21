@@ -62,7 +62,7 @@
 </div>
 
 
-<div class="control-group">
+<div class="control-group" style="border-top: dashed 1px #ccc;border-bottom: dashed 1px #ccc;">
     <label class="control-label" for="family"><g:message code="preppy.family.label"/> <span class="required-indicator">*</span>
     </label>
 
@@ -76,7 +76,7 @@
 </div>
 
 
-<div class="control-group">
+<div class="control-group" style="border-bottom: dashed 1px #ccc;">
     <label class="control-label" for="family"><g:message code="preppy.type.label"/> <span class="required-indicator">*</span>
     </label>
 
@@ -90,7 +90,7 @@
     </div>
 </div>
 
-<div class="control-group">
+<div class="control-group" style="border-bottom: dashed 1px #ccc;">
     <label class="control-label" for="family"><g:message code="preppy.leiBei.label"/> <span class="required-indicator">*</span>
     </label>
 
@@ -104,16 +104,16 @@
     </div>
 </div>
 
-<div class="control-group">
+<div class="control-group" style="border-bottom: dashed 1px #ccc;">
     <label class="control-label" for="family"><g:message code="preppy.beforeFamily.label"/> <span class="required-indicator">*</span>
     </label>
 
     <div class="controls">
         <label class="radio-inline">
-            <input type="radio" name="beforeFamily" id="beforeFamily" value="1" <g:if test="${preppyInstance?.beforeFamily}">checked</g:if>/> <g:message code="default.boolean.true"/>
+            <input type="radio" name="beforeFamily" id="beforeFamily" value="true" <g:if test="${preppyInstance?.beforeFamily == true}">checked</g:if>/> <g:message code="default.boolean.true"/>
         </label>
         <label class="radio-inline">
-            <input type="radio" name="beforeFamily" id="beforeFamily1" value="0" <g:if test="${!preppyInstance?.beforeFamily}">checked</g:if>/> <g:message code="default.boolean.false"/>
+            <input type="radio" name="beforeFamily" id="beforeFamily1" value="false" <g:if test="${preppyInstance?.leiBie && preppyInstance?.beforeFamily == false}">checked</g:if>/> <g:message code="default.boolean.false"/>
         </label>
 
     </div>
@@ -173,7 +173,7 @@
     </label>
 
     <div class="controls plan-area">
-        <g:select name="plan.id" id="planId" from="${com.baoming.Plan.findAllByStatus(com.baoming.Plan.Status.RUNNING)}" value="${preppyInstance?.plan?.id}" optionValue="name" optionKey="id"/>
+        <g:select name="plan.id" id="planId" from="${plans}" value="${preppyInstance?.plan?.id}" optionValue="name" optionKey="id"/>
     </div>
 </div>
 

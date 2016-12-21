@@ -177,6 +177,15 @@ $(function(){
             },
             birthday_day:{
                 required: true
+            },
+            type:{
+                required: true
+            },
+            leiBie:{
+                required: true
+            },
+            beforeFamily:{
+                required: true
             }
         },
         highlight: function(label) {
