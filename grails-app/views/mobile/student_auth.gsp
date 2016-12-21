@@ -11,6 +11,44 @@
             color: #cccccc;
         }
     </style>
+    <script type="text/javascript">
+        $(function(){
+            $("form").submit(function () {
+                var username = $("#username").val();
+                var password = $("#password").val();
+                if(!username || username.trim() == ""){
+                    $("#username").css("border-color","#a94442");
+                    alert("请输入身份证号");
+                    $("#username").focus();
+                    return false;
+                }
+                var len = username.length;
+                if(len !=18){
+                    $("#username").css("border-color","#a94442");
+                    alert("请输入正确的18位身份证号");
+                    $("#username").focus();
+                    return false;
+                }
+
+                if(!password || password.trim().length <1){
+                    $("#password").css("border-color","#a94442");
+                    alert("请输入密码");
+                    $("#password").focus();
+                    return false;
+                }
+            });
+
+            $("#username").keyup(function () {
+                var len = $(this).val().length;
+                console.log(len)
+                if(len == 18){
+                    $(this).css("border-color","#3c763d");
+                }else{
+                    $(this).css("border-color","#a94442");
+                }
+            })
+        })
+    </script>
 </head>
 
 <body>
