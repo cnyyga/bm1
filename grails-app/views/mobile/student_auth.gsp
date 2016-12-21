@@ -23,7 +23,7 @@
                     return false;
                 }
                 var len = username.length;
-                if(len !=18){
+                if(len !=18 && len !=15){
                     $("#username").css("border-color","#a94442");
                     alert("请输入正确的18位身份证号");
                     $("#username").focus();
