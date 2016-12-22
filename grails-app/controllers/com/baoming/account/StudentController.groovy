@@ -36,7 +36,13 @@ class StudentController {
         def userId = springSecurityService.authentication.principal?.id
         params.max = Math.min(max ?: 10, 100)
         def map = userService.getStudents(userId as Long,params)
-        [studentInstanceList: map?.students, studentInstanceTotal: map?.total,plans:planService.getStuPlans()]
+
+        def view = "list"
+        if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
+            view = "/mobile/stuList"
+        }
+
+        render (view: view,model: [studentInstanceList: map?.students, studentInstanceTotal: map?.total,plans:planService.getStuPlans()])
     }
 
     def createNew(Long id) {

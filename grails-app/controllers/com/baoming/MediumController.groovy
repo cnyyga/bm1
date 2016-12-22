@@ -76,8 +76,12 @@ class MediumController {
             ge('dateCreated', startDate)
             lt('dateCreated', endDate)
         }
+        def view = "list"
+        if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
+            view = "/mobile/mediumList"
+        }
+        render(view: view,model: [mediumInstanceList: list, mediumInstanceTotal: total])
 
-        [mediumInstanceList: list, mediumInstanceTotal: total]
     }
 
     def create() {

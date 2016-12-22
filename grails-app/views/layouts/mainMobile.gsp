@@ -22,7 +22,13 @@
 
 </head>
 <body>
+<nav role="navigation" class="navbar">
+    <div class="container bm-header">
+        <g:img file="header.png"/>
+    </div>
+</nav>
 <div id="container" class="clearfix">
+
     <g:layoutBody/>
 </div>
 

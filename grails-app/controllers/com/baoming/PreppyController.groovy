@@ -108,8 +108,11 @@ class PreppyController {
             ge('dateCreated', startDate)
             lt('dateCreated', endDate)
         }
-
-        [preppyInstanceList: list, preppyInstanceTotal: total,preppyPlans:planService.getPreppyPlans()]
+        def view = "list"
+        if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
+            view = "/mobile/preppyList"
+        }
+        render(view: view,model: [preppyInstanceList: list, preppyInstanceTotal: total,preppyPlans:planService.getPreppyPlans()])
     }
 
     def create() {

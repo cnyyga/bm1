@@ -91,8 +91,10 @@
         </div>
                 </fieldset></div>
         <div>
-        <button type="button" class="btn btn-primary" onclick="javascript:location.href='${createLink(controller: 'mobile',action: 'addPreppy')}'"><g:message code="student.mobile.create.preppy.title"/> </button>
-            <g:link action="createStu"  controller="mobile" class="btn">${message(code: 'default.button.back.label')}${message(code: 'student.create.stu.type.title')}</g:link>
+        <button type="button" class="btn btn-primary btn-lg btn-block" onclick="javascript:location.href='${createLink(controller: 'mobile',action: 'addPreppy')}'"><g:message code="student.mobile.create.preppy.title"/> </button>
+            <g:set var="entityName" value="${message(code: 'preppy.label', default: 'Student')}" />
+            <button type="button" class="btn btn-info btn-lg btn-block" onclick="javascript:location.href='${createLink(controller: 'preppy',action: 'list')}'">${message(code: 'default.button.back.label')}<g:message code="default.list.label" args="[entityName]" /> </button>
+            <button type="button" class="btn btn-default btn-lg btn-block" onclick="javascript:location.href='${createLink(controller: 'mobile',action: 'createStu')}'">${message(code: 'default.button.back.label')}${message(code: 'student.create.stu.type.title')} </button>
 
         </div>
     </div>

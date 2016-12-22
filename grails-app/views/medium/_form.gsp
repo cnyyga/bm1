@@ -262,7 +262,7 @@
 	</label>
 
     <div class="controls">
-        <g:textArea name="description" rows="5" cols="" style="width: 50%">${mediumInstance?.description}</g:textArea>
+        <g:textArea name="description" rows="5" cols="" >${mediumInstance?.description}</g:textArea>
     </div>
 </div>
 
