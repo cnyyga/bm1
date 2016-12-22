@@ -6,7 +6,6 @@
     .select-title{
         width: 120px;
         color:#575757;
-        margin-top: 3px;
     }
 
     .select-body{
