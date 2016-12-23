@@ -62,7 +62,9 @@
             <a href="${createLink(controller: 'preppy',action: 'list')}"><g:message code="default.list.label" args="[message(code: 'preppy.label')]"/></a>
             <a href="${createLink(controller: 'medium',action: 'list    ')}"><g:message code="default.list.label" args="[message(code: 'medium.label')]"/></a>
         </div>
-        <button style="margin-top: 20px;" type="button" class="btn btn-default btn-lg btn-block" onclick="">${message(code: 'default.button.back.label')}${message(code: 'student.select.title')}</button>
+        <button style="margin-top: 20px;" type="button" class="btn btn-default btn-lg btn-block" onclick="javascript:location.href='${createLink(controller: 'mobile',action: 'index')}'">
+            ${message(code: 'default.button.back.label')}${message(code: 'student.select.title')}
+        </button>
 
     </div>
 </div>
