@@ -144,7 +144,7 @@
                     </tbody>
                 </table>
                 <div class="pagination pagination-centered">
-                    <g:paginate total="${mediumInstanceTotal}" />
+                    <g:paginate total="${mediumInstanceTotal}" params="[year:params.year]" />
                 </div>
             </div>
         </div><!--/span-->

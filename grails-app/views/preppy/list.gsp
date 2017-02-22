@@ -227,7 +227,7 @@
                     </tbody>
                 </table>
                 <div class="pagination pagination-centered">
-                    <g:paginate total="${preppyInstanceTotal}" params="[name:params.name,planId:params.planId,reviewStatus:params.reviewStatus,teacherId:params.teacherId]" />
+                    <g:paginate total="${preppyInstanceTotal}" params="[year:params.year,name:params.name,planId:params.planId,reviewStatus:params.reviewStatus,teacherId:params.teacherId]" />
                 </div>
             </div>
         </div><!--/span-->

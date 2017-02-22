@@ -293,7 +293,7 @@
     </tr>
     <tr>
         <td height="50" align="left" ><span class="f_20">&nbsp; &nbsp;&nbsp;&nbsp;</span><span class="f_20">&nbsp;</span>备注3：
-            <g:textField name="remark2" value="${preppyInstance?.remark2}" size="80" class="sel_gray1"/><label class="error" style="font-size: 12px;">（取得学籍的年份等其他内容）</label></td>
+            <g:textField name="remark2" value="${preppyInstance?.remark2}" size="80" class="sel_gray1"/><label class="error" style="font-size: 12px;">（入学年份、取得学籍年份等其他内容）</label></td>
     </tr>
     <tr>
         <td height="50" align="left" >5、推荐人：
