@@ -86,6 +86,12 @@ class MobileController {
          preppyPlans:planService.getPreppyPlans()]
     }
 
+    //添加旁听生
+    def editPreppy(Long id) {
+        render(view: 'editPreppy',model: [preppyInstance: Preppy.get(id),provinces:provinceService.getProvinces(),
+         preppyPlans:planService.getPreppyPlans()]);
+    }
+
     //添加中专生
     def addMedium() {
         [mediumInstance: new Medium(params),provinces:provinceService.getProvinces(),mediumPlans:planService.getMediumPlans()]

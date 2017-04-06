@@ -533,7 +533,11 @@ class PreppyController {
         }
 
         if (!preppyInstance.save(flush: true)) {
-            render(view: "edit", model: [preppyInstance: preppyInstance,provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()])
+            def view = "edit"
+            if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
+                view = "/mobile/editPreppy"
+            }
+            render(view: view, model: [preppyInstance: preppyInstance,provinces:provinceService.getProvinces(),preppyPlans:planService.getPreppyPlans()])
             return
         }
 
