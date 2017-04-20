@@ -8,7 +8,12 @@
 <html xmlns="http://www.w3.org/1999/html">
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'student.label', default: 'Student')}" />
+        <g:if test="${params.regType == 1 || params.regType == '1'}">
+            <g:set var="entityName" value="${message(code: 'student.label', default: 'Student')}" />
+        </g:if>
+        <g:else>
+            <g:set var="entityName" value="${message(code: 'student.reg.label', default: 'Student')}" />
+        </g:else>
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
         <g:javascript src="district_select.js"/>
         <g:javascript src="export.js"/>
@@ -59,7 +64,9 @@
     </g:if>
     <div>
         <sec:ifNotGranted roles="${Role.AUTHORITY_FINANCE}">
-         <g:link action="createNew"  class="btn btn-small btn-primary"><i class="icon-chevron-left icon-white"></i><g:message code="default.add.label" args="[entityName]" /></g:link>
+            <g:if test="${params.regType == 1 || params.regType == '1'}">
+                <g:link action="createNew" params="[regType:params.regType]"  class="btn btn-small btn-primary"><i class="icon-chevron-left icon-white"></i><g:message code="default.add.label" args="[entityName]" /></g:link>
+            </g:if>
         </sec:ifNotGranted>
     </div>
     <div class="row-fluid sortable">
@@ -229,13 +236,13 @@
                             </td>
 
                             <td class="center">
-                                    <g:link class="btn btn-success" action="show" id="${studentInstance.id}">
+                                    <g:link class="btn btn-success" action="show" id="${studentInstance.id}" params="[regType:params.regType]">
                                         <i class="icon-zoom-in icon-white"></i>
                                         <g:message code="default.button.view.label" default="View" />
                                     </g:link>
 
                             <sec:ifAllGranted roles="${Role.AUTHORITY_ADMIN}">
-                                    <g:link class="btn btn-info" action="createNew" id="${studentInstance.id}">
+                                    <g:link class="btn btn-info" action="createNew" id="${studentInstance.id}" params="[regType:params.regType]">
                                         <i class="icon-edit icon-white"></i>
                                         <g:message code="default.button.edit.label" default="Edit" />
                                     </g:link>

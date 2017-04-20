@@ -4,7 +4,12 @@
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'student.label', default: 'Student')}" />
+        <g:if test="${params.regType == 1 || params.regType == '1'}">
+            <g:set var="entityName" value="${message(code: 'student.label', default: 'Student')}" />
+        </g:if>
+        <g:else>
+            <g:set var="entityName" value="${message(code: 'student.reg.label', default: 'Student')}" />
+        </g:else>
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 
         <style type="text/css">
@@ -47,7 +52,7 @@
                 <a href="${createLink(uri: '/')}">Home</a> <span class="divider">/</span>
             </li>
             <li>
-                <g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link>
+                <g:link class="list" action="list" params="[regType:params.regType]"><g:message code="default.list.label" args="[entityName]" /></g:link>
             </li>
         </ul>
     </div>
@@ -69,7 +74,7 @@
             <div class="form-actions">
                 <g:form>
                     <g:hiddenField name="id" value="${studentInstance?.id}" />
-                    <g:link class="btn btn-info" action="createNew" id="${studentInstance?.id}">
+                    <g:link class="btn btn-info" action="createNew" id="${studentInstance?.id}"  params="[regType:params.regType]">
                         <i class="icon-edit icon-white"></i>
                         <g:message code="default.button.edit.label" default="Edit" />
                     </g:link>

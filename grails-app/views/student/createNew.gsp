@@ -3,7 +3,13 @@
 <html>
 	<head>
 		<meta name="layout" content="main">
-        <g:set var="entityName" value="${message(code: 'student.create.new.label', default: 'Student')}" />
+        <g:if test="${params.regType == 1 || params.regType == '1'}">
+            <g:set var="entityName" value="${message(code: 'student.create.new.label', default: 'Student')}" />
+        </g:if>
+        <g:else>
+            <g:set var="entityName" value="${message(code: 'default.edit.label', default: 'Student',args: [message(code: 'student.reg.label')])}" />
+        </g:else>
+
         <sec:ifAllGranted roles="${Role.AUTHORITY_FINANCE}">
             <g:set var="entityName" value="${message(code: 'student.review.label', default: 'Student')}" />
         </sec:ifAllGranted>

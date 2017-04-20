@@ -90,6 +90,10 @@
                     out.print(studentInstance?.district?.name)
                 } catch (Exception e) {
                 }
+                try {
+                    out.print(studentInstance?.middleSchool?.name)
+                } catch (Exception e) {
+                }
                 %>
             </span>
 

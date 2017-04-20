@@ -56,6 +56,8 @@
                 <g:select id="district" name="districtId" from="${[]}"  value="" class="many-to-one"/>
             </div>
         </div>
+
+    <g:if test="${params.regType == 1 || params.regType == '1' || studentInstance?.regType == 1}">
         <div class="control-group">
             <label class="control-label" for="studentType.id">
                 <g:message code="studentType.label" default="StudentType" />
@@ -65,6 +67,20 @@
                 <g:select from="${studentTypes}" name="studentType.id" optionKey="id" optionValue="name" value="${studentInstance?.studentType?.id}" />
             </div>
         </div>
+    </g:if>
+    <g:else>
+        <div class="control-group">
+            <label class="control-label" for="studentType.id">
+                <g:message code="studentType.label" default="StudentType" />
+                <span class="required-indicator">*</span>
+            </label>
+            <div class="controls">
+                <g:select name="studentCateories" from="${com.baoming.account.Student.StudentCateories.values()}" optionValue="label" value="${studentInstance?.studentCateories}"/>
+
+            </div>
+        </div>
+    </g:else>
+
 <div class="control-group">
     <label class="control-label" for="qq">
         <g:message code="student.qq.label" default="QQ" />

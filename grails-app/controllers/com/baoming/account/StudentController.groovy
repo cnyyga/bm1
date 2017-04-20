@@ -80,7 +80,7 @@ class StudentController {
                 if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
                     view = "/mobile/addStu"
                 }
-                render(view: view, model: [studentInstance: studentInstance,planIds:planIds])
+                render(view: view, model: [studentInstance: studentInstance,planIds:planIds,regType:params.regType?:studentInstance.regType])
                 return
             }
             studentInstance.reviewStatus = Student.ReviewStatus."${params.reviewStatus}"
@@ -94,11 +94,11 @@ class StudentController {
                 if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
                     view = "/mobile/addStu"
                 }
-                render(view:view, model: [studentInstance: studentInstance,planIds:planIds])
+                render(view:view, model: [studentInstance: studentInstance,planIds:planIds,regType:params.regType?:studentInstance.regType])
                 return
             }
             flash.message = message(code: 'student.updated.audit.message', args: [message(code: 'student.label', default: 'Student'), studentInstance.name])
-            redirect(action: "show", id: studentInstance.id)
+            redirect(action: "show", id: studentInstance.id,params: [regType:params.regType?:studentInstance.regType])
             return
         }
 
@@ -274,7 +274,7 @@ class StudentController {
         }
 
         flash.message = id?message(code: 'student.updated.message', args: [message(code: 'student.label', default: 'Student'), studentInstance.name]):message(code: 'default.created.message', args: [message(code: 'student.label', default: 'Student'), studentInstance.id])
-        redirect(action: "show", id: studentInstance.id)
+        redirect(action: "show", id: studentInstance.id,params: [regType:params.regType?:studentInstance.regType])
 
     }
 

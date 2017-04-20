@@ -30,7 +30,7 @@ class RegController {
 
         if(!params.middleSchoolId){
             flash.message = "请选择毕业中学"
-            render(view: 'index', model: [student: student,planIds:planId])
+            render(view: 'index', model: [student: student,planIds:planId,planIds:planId,plans:planService.getStuPlans(),provinces:provinceService.getProvinces()])
             return
         }
 
