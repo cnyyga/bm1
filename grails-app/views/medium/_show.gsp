@@ -152,6 +152,28 @@
             </div>
         </g:if>
 
+        <div class="control-group">
+            <label class="control-label">
+                <g:message code="medium.qq.label" default="qq" />
+            </label>
+            <div class="controls">
+
+                <span class="property-value" aria-labelledby="number-label"><g:fieldValue bean="${mediumInstance}" field="qq"/></span>
+
+            </div>
+        </div>
+
+
+        <div class="control-group">
+            <label class="control-label">
+                <g:message code="medium.phone.label" default="phone" />
+            </label>
+            <div class="controls">
+
+                <span class="property-value" aria-labelledby="number-label"><g:fieldValue bean="${mediumInstance}" field="phone"/></span>
+
+            </div>
+        </div>
 
         <div class="control-group">
             <label class="control-label" for="gender">

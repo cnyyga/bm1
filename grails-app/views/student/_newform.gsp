@@ -65,6 +65,22 @@
                 <g:select from="${studentTypes}" name="studentType.id" optionKey="id" optionValue="name" value="${studentInstance?.studentType?.id}" />
             </div>
         </div>
+<div class="control-group">
+    <label class="control-label" for="qq">
+        <g:message code="student.qq.label" default="QQ" />
+    </label>
+    <div class="controls">
+        <g:textField name="qq" value="${studentInstance?.qq}"/>
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label" for="phone">
+        <g:message code="student.phone.label" default="phone" />
+    </label>
+    <div class="controls">
+        <g:textField name="phone" value="${studentInstance?.phone}"/>
+    </div>
+</div>
         <div class="control-group">
             <label class="control-label" for="score">
                 <g:message code="student.score.label" default="Score" />

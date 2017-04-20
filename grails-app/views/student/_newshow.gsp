@@ -113,7 +113,7 @@
 
     </div>
 </div>
-
+--}%
     <div class="control-group">
         <label class="control-label">
             <g:message code="student.phone.label" default="phone"/>
@@ -138,7 +138,7 @@
 
         </div>
     </div>
---}%
+
 
     <div class="control-group">
         <label class="control-label">

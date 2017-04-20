@@ -85,6 +85,27 @@
 
 
 <div class="control-group">
+    <label class="control-label" for="gender">
+        <g:message code="medium.qq.label" default="qq" />
+    </label>
+
+    <div class="controls">
+        <g:textField name="qq" value="${mediumInstance?.qq}"/>
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label" for="gender">
+        <g:message code="medium.phone.label" default="phone" />
+    </label>
+
+    <div class="controls">
+        <g:textField name="phone" value="${mediumInstance?.phone}"/>
+    </div>
+</div>
+
+
+<div class="control-group">
 <label class="control-label" for="studentDistrict">
     <g:message code="medium.studentDistrict.label" default="Student District" />
 </label>
