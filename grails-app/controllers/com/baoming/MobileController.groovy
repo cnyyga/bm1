@@ -77,6 +77,8 @@ class MobileController {
     //添加普通生
     def addStu() {
 
+        params.regType = 1
+
         [studentInstance: new Student(params),plans:planService.getStuPlans(),provinces:provinceService.getProvinces(),studentTypes:studentTypeService.getStudentTypes()]
     }
 
