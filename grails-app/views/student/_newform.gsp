@@ -54,6 +54,9 @@
                 <g:select id="province" name="provinceId" from="${provinces}" optionValue="name" optionKey="code"  value="${studentInstance?.province?.code?:params.provinceId}" noSelection="['': '请选择']" class="many-to-one"/>
                 <g:select id="city" name="cityId" from="${[]}"  value="" class="many-to-one"/>
                 <g:select id="district" name="districtId" from="${[]}"  value="" class="many-to-one"/>
+                <g:if test="${params.regType == 0 || params.regType == '0' || studentInstance?.regType == 0}">
+                    <g:select name="middleSchoolId" from="${[]}"  noSelection="['': '请选择']"/>
+                </g:if>
             </div>
         </div>
 

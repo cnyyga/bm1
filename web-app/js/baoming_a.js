@@ -38,7 +38,7 @@ $(function(){
     function schoolOpts(cityId) {
         var schoolUrl = $("#schoolUrl").val();
         var selectedId =  $("#schoolUrl").attr("title")
-        $("#middleSchooleId").load(schoolUrl+"?id="+cityId+"&selected="+selectedId);
+        $("#middleSchoolId").load(schoolUrl+"?id="+cityId+"&selected="+selectedId);
     }
 
     $('#editForm').validate({
