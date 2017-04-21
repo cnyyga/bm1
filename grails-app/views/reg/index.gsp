@@ -138,14 +138,13 @@
             </li>--}%
 
             <li class="middleSchoolId">
-                <label class="reg_tit"><g:message code="middleSchool.label"/>：<span class="required-indicator">*</span></label>
+                <label class="reg_tit"><g:message code="student.district.label"/>：<span class="required-indicator">*</span></label>
 
                 <div class="reg_element">
                     <span class="inp_box">
                         <g:select id="province" name="provinceId" from="${provinces}" optionValue="name" optionKey="code"  value="${student?.province?.code}" noSelection="['': '请选择']" class="many-to-one"/>
                         <g:select id="city" name="cityId" from="${[]}"  value="" class="many-to-one"/>
                         <g:select id="district" name="districtId" from="${[]}"  value="" class="many-to-one"/>
-                        <g:select name="middleSchoolId" from="${[]}"  noSelection="['': '请选择']"/>
                     </span>
                 </div>
             </li>
