@@ -40,7 +40,9 @@ class RegController {
         student.province=province
         student.city = city
         student.district=district
-        student.middleSchool = MiddleSchool.get(params.middleSchoolId)
+        if(params.middleSchoolId){
+            student.middleSchool = MiddleSchool.get(params.middleSchoolId)
+        }
 
 
         if(!planId || planId.empty){
