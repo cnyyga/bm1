@@ -28,11 +28,11 @@ class RegController {
         student.password = '111111'
 
 
-        if(!params.middleSchoolId){
+       /* if(!params.middleSchoolId){
             flash.message = "请选择毕业中学"
             render(view: 'index', model: [student: student,planIds:planId,planIds:planId,plans:planService.getStuPlans(),provinces:provinceService.getProvinces()])
             return
-        }
+        }*/
 
         def province = Province.findByCode(params.provinceId)
         def city = City.findByCode(params.cityId)

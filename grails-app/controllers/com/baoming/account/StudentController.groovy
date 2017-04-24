@@ -355,8 +355,9 @@ class StudentController {
         studentInstance.province = Province.findByCode(params.provinceId)
         studentInstance.city = City.findByCode(params.cityId)
         studentInstance.district = District.findByCode(params.districtId)
-        studentInstance.middleSchool = MiddleSchool.get(params.long('middleSchoolId'))
-
+        if(params.middleSchoolId){
+            studentInstance.middleSchool = MiddleSchool.get(params.long('middleSchoolId'))
+        }
         def u = userService.saveStudent(studentInstance,planIds)
 
         if ( u.status == 0){
@@ -493,7 +494,9 @@ class StudentController {
             teacher = Teacher.get(params.long('teacherId'))
         }
         studentInstance.teacher = teacher
-        studentInstance.middleSchool = MiddleSchool.get(params.long('middleSchoolId'))
+        if(params.middleSchoolId){
+            studentInstance.middleSchool = MiddleSchool.get(params.long('middleSchoolId'))
+        }
         def s = userService.updateStudent(studentInstance,planIds)
         if (s.status == 0) {
             flash.message = s.msg
