@@ -76,8 +76,8 @@
         <script>
             $(function(){
                 <sec:ifAllGranted roles="${Role.AUTHORITY_TEACHER}">
-                    $(".xstx input").attr("disabled",true);
-                    $(".xstx select").attr("disabled",true);
+                    //$(".xstx input").attr("disabled",true);
+                    //$(".xstx select").attr("disabled",true);
                     $(".zbsh input").attr("disabled",true);
                     $(".zbsh select").attr("disabled",true);
                 </sec:ifAllGranted>
