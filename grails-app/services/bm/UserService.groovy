@@ -37,7 +37,7 @@ class UserService {
         def endDate = params.date('endDate', 'yyyy-MM-dd')
         def cal = Calendar.instance
         cal.clearTime()
-        if (!year) {
+        if (!year && !params.name) {
             cal.set(Calendar.DAY_OF_YEAR, 1)
             cal.set(Calendar.MONTH, 0)
             startDate = cal.time
@@ -105,8 +105,12 @@ class UserService {
                     eq('plan', plan)
                 }
             }
-            if (params.name)
-                like('name', "%${params.name}%")
+            if (params.name){
+                or{
+                    like('name', "%${params.name}%")
+                    eq("number",params.name)
+                }
+            }
 
             if (teacher) {
                 eq('teacher', teacher)

@@ -36,10 +36,10 @@ class PreppyController {
         def startDate
         def endDate
         params.max = Math.min(max ?: 10, 100)
-        params.sort = "id";
+        params.sort = "id"
         params.order = "desc"
 
-        if (!year) {
+        if (!year&&!name) {
             cal.set(Calendar.DAY_OF_YEAR, 1)
             cal.set(Calendar.MONTH, 0)
             startDate = cal.time
@@ -68,7 +68,10 @@ class PreppyController {
             if (teacher)
                 eq('teacher', teacher)
             if (name) {
-                like('name', "%${name}%")
+                or{
+                    like('name', "%${name}%")
+                    eq("number",name)
+                }
             }
             if(plan){
                 eq('plan',plan)
@@ -83,14 +86,21 @@ class PreppyController {
                     eq('reviewStatus',Preppy.ReviewStatus."${params.reviewStatus}")
                 }
             }
-            ge('dateCreated', startDate)
-            lt('dateCreated', endDate)
+            if(startDate){
+                ge('dateCreated', startDate)
+            }
+            if(endDate){
+                lt('dateCreated', endDate)
+            }
         }
         total = Preppy.createCriteria().count {
             if (teacher)
                 eq('teacher', teacher)
             if (name) {
-                like('name', "%${name}%")
+                or{
+                    like('name', "%${name}%")
+                    eq("number",name)
+                }
             }
             if(plan){
                 eq('plan',plan)
@@ -644,7 +654,7 @@ class PreppyController {
         def cal = Calendar.instance
         def startDate
         def endDate
-        if (!year) {
+        if (!year&&!name) {
             cal.set(Calendar.DAY_OF_YEAR, 1)
             cal.set(Calendar.MONTH, 0)
             startDate = cal.time
@@ -668,7 +678,10 @@ class PreppyController {
             if (teacher)
                 eq('teacher', teacher)
             if (name) {
-                like('name', "%${name}%")
+                or{
+                    like('name', "%${name}%")
+                    eq("number",name)
+                }
             }
             ge('dateCreated', startDate)
             lt('dateCreated', endDate)

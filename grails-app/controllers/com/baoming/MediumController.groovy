@@ -38,7 +38,7 @@ class MediumController {
         params.sort = params.sort?:'id'
         params.order = params.order?:'desc'
 
-        if (!year) {
+        if (!year && !name) {
             cal.set(Calendar.DAY_OF_YEAR, 1)
             cal.set(Calendar.MONTH, 0)
             startDate = cal.time
@@ -62,7 +62,10 @@ class MediumController {
             if (teacher)
                 eq('teacher', teacher)
             if (name) {
-                like('name', "%${name}%")
+                or{
+                    like('name', "%${name}%")
+                    eq("number",name)
+                }
             }
             ge('dateCreated', startDate)
             lt('dateCreated', endDate)
@@ -71,7 +74,10 @@ class MediumController {
             if (teacher)
                 eq('teacher', teacher)
             if (name) {
-                like('name', "%${name}%")
+                or{
+                    like('name', "%${name}%")
+                    eq("number",name)
+                }
             }
             ge('dateCreated', startDate)
             lt('dateCreated', endDate)

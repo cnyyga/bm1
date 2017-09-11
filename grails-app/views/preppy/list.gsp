@@ -13,7 +13,11 @@
             $(function(){
                 $("#exportBtn").click(function(){
                     var _year = $("#year").val();
+                    var name = $("#name").val();
                     var _url = "${createLink(action: 'exp')}?year="+_year
+                    if(name){
+                        _url += "&name="+name;
+                    }
                     window.open(_url)
                 })
 
@@ -57,10 +61,10 @@
                                 def year = cal.get(Calendar.YEAR)
                             %>
                             <g:set var="thisYear" value="${year}"/>
-                            <g:select name="year" from="${(year-10)..year}" value="${params.year?:year}" class="input-small"/>
+                            <g:select name="year" from="${(year-10)..year}" value="${params.year?:year}" class="input-small" noSelection="['':'']"/>
                         </div>
                         <div class="bm-search">
-                            <label class="search-lb"><g:message code="student.name.label"/> ：</label>
+                            <label class="search-lb"><g:message code="student.name.label"/>/<g:message code="student.number.label"/> ：</label>
                             <g:textField name="name"  value="${params.name}"/>
                         </div>
                         <div class="bm-search">

@@ -51,10 +51,10 @@
                                 def cal = Calendar.instance
                                 def year = cal.get(Calendar.YEAR)
                             %>
-                            <g:select name="year" from="${(year-10)..year}" value="${params.year?:year}" class="input-small"/>
+                            <g:select name="year" from="${(year-10)..year}" value="${params.year?:year}" class="input-small" noSelection="${['':'请选择']}"/>
                         </div>
                         <div class="bm-search">
-                            <label class="search-lb"><g:message code="student.name.label"/> ：</label>
+                            <label class="search-lb"><g:message code="student.name.label"/>/<g:message code="student.number.label"/> ：</label>
                             <g:textField name="name"  value="${params.name}"/>
                         </div>
 
