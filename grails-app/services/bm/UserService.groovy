@@ -37,12 +37,12 @@ class UserService {
         def endDate = params.date('endDate', 'yyyy-MM-dd')
         def cal = Calendar.instance
         cal.clearTime()
-        if (!year && !params.name) {
-            cal.set(Calendar.DAY_OF_YEAR, 1)
+        if (!year) {
+           /* cal.set(Calendar.DAY_OF_YEAR, 1)
             cal.set(Calendar.MONTH, 0)
             startDate = cal.time
             cal.add(Calendar.YEAR, 1)
-            endDate = cal.time
+            endDate = cal.time*/
         } else {
             cal.time = year
             cal.add(Calendar.YEAR, 1)

@@ -38,12 +38,12 @@ class MediumController {
         params.sort = params.sort?:'id'
         params.order = params.order?:'desc'
 
-        if (!year && !name) {
-            cal.set(Calendar.DAY_OF_YEAR, 1)
+        if (!year) {
+          /*  cal.set(Calendar.DAY_OF_YEAR, 1)
             cal.set(Calendar.MONTH, 0)
             startDate = cal.time
             cal.add(Calendar.YEAR, 1)
-            endDate = cal.time
+            endDate = cal.time*/
         } else {
             cal.time = year
             cal.add(Calendar.YEAR, 1)
