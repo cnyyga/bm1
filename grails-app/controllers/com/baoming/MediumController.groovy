@@ -38,12 +38,12 @@ class MediumController {
         params.sort = params.sort?:'id'
         params.order = params.order?:'desc'
 
-        if (!year) {
-          /*  cal.set(Calendar.DAY_OF_YEAR, 1)
+        if (!year && !name) {
+            cal.set(Calendar.DAY_OF_YEAR, 1)
             cal.set(Calendar.MONTH, 0)
             startDate = cal.time
             cal.add(Calendar.YEAR, 1)
-            endDate = cal.time*/
+            endDate = cal.time
         } else {
             cal.time = year
             cal.add(Calendar.YEAR, 1)
@@ -67,8 +67,12 @@ class MediumController {
                     eq("number",name)
                 }
             }
-            ge('dateCreated', startDate)
-            lt('dateCreated', endDate)
+            if(startDate){
+                ge('dateCreated', startDate)
+            }
+            if(endDate){
+                lt('dateCreated', endDate)
+            }
         }
         total = Medium.createCriteria().count {
             if (teacher)
@@ -79,8 +83,12 @@ class MediumController {
                     eq("number",name)
                 }
             }
-            ge('dateCreated', startDate)
-            lt('dateCreated', endDate)
+            if(startDate){
+                ge('dateCreated', startDate)
+            }
+            if(endDate){
+                lt('dateCreated', endDate)
+            }
         }
         def view = "list"
         if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
@@ -312,9 +320,10 @@ class MediumController {
         def userId = springSecurityService.authentication.principal?.id
         def year = params.date('year', 'yyyy')
         def cal = Calendar.instance
+        def name = params.name
         def startDate
         def endDate
-        if (!year) {
+        if (!year && !name) {
             cal.set(Calendar.DAY_OF_YEAR, 1)
             cal.set(Calendar.MONTH, 0)
             startDate = cal.time
@@ -336,13 +345,22 @@ class MediumController {
             teacher = Teacher.get(params.long('teacherId'))
         }
         def list = Medium.createCriteria().list {
-            if (teacher){
+            if (teacher) {
                 eq('teacher', teacher)
             }
-            ge('dateCreated', startDate)
-            lt('dateCreated', endDate)
+            if (name) {
+                or {
+                    like('name', "%${name}%")
+                    eq("number", name)
+                }
+            }
+            if (startDate) {
+                ge('dateCreated', startDate)
+            }
+            if (endDate) {
+                lt('dateCreated', endDate)
+            }
         }
-
         def titles = [message(code: 'medium.name.label'),message(code: 'medium.code.label'),message(code: 'medium.number.label'),
                       message(code: 'medium.gender.label'),message(code: 'mediumPlan.label'),message(code: 'medium.plan.label'),
                       message(code: 'medium.district.label'),message(code: 'medium.studentDistrict.label'),message(code: 'medium.teacher.label'),
