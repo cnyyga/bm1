@@ -57,6 +57,10 @@
             <sec:access controller="workPlan">
             <li class="${params.controller == 'workPlan'?'active':''}"><a class="ajax-link" href="${createLink(controller: 'workPlan')}"><i class="icon-flag"></i><span class="hidden-tablet">  ${message(code: 'workPlan.label')}</span></a></li>
             </sec:access>
+            <sec:access controller="admission">
+                <li class="${params.controller == 'admission'?'active':''}"><a class="ajax-link" href="${createLink(controller: 'admission')}"><i class="icon-user"></i><span class="hidden-tablet">  ${message(code: 'default.manager.label',args: ["${message(code: 'admission.label')}"])}</span></a></li>
+            </sec:access>
+
             <sec:ifAllGranted roles="${Role.AUTHORITY_ADMIN}">
             <li class="nav-header hidden-tablet">
                 ${message(code: 'default.manager.label',args: ["${message(code: 'user.label')}"])}
@@ -74,7 +78,6 @@
                 <sec:access controller="department">
                     <li class="${params.controller == 'department'?'active':''}"><a class="ajax-link" href="${createLink(controller: 'department')}"><i class="icon-user"></i><span class="hidden-tablet">  ${message(code: 'default.manager.label',args: ["${message(code: 'department.label')}"])}</span></a></li>
                 </sec:access>
-
 
             <li class="nav-header hidden-tablet">
                 ${message(code: 'default.manager.label',args: ["${message(code: 'default.menu.sys.label')}"])}
