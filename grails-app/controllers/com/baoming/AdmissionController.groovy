@@ -15,7 +15,19 @@ class AdmissionController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        [admissionInstanceList: Admission.list(params), admissionInstanceTotal: Admission.count()]
+        params.sort = 'id'
+        params.order = 'desc'
+        def closure =  {
+            if(params.name){
+                or{
+                    'like'('name',"%${params.name}%")
+                    eq('idNo',params.name)
+                }
+            }
+        }
+        def count = Admission.createCriteria().count(closure)
+        def list = count>0?Admission.createCriteria().list(params,closure):[]
+        [admissionInstanceList:list, admissionInstanceTotal: count]
     }
 
     def create() {

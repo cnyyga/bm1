@@ -21,6 +21,26 @@
     <g:if test="${flash.message}">
         <div class="alert alert-error">${flash.message}</div>
     </g:if>
+
+<div class="row-fluid sortable">
+    <div class="box span12">
+        <div class="box-header well" data-original-title>
+            <h2> <g:message code="default.list.label" args="[entityName]" /></h2>
+            </div>
+            <div class="box-content">
+                <div class="span12 well">
+<g:form action="list" name="searchForm"  >
+    <g:hiddenField name="regType" value="${params.regType}"/>
+    <div class="bm-search">
+        <label class="search-lb"><g:message code="student.name.label"/>/<g:message code="student.number.label"/> ：</label>
+        <g:textField name="name"  value="${params.name}"/>
+    </div>
+    <div class="span2">
+
+        <g:submitButton name="sub" value="${message(code:'default.button.search.label')}" class="btn btn-small btn-primary" />
+    </div>
+</g:form></div></div></div></div>
+
     <div>
          <g:link action="create"  class="btn btn-small btn-primary"><i class="icon-chevron-left icon-white"></i><g:message code="default.add.label" args="[entityName]" /></g:link>
         <g:link  action="importFile" class="btn btn-small btn-primary import"><i class="icon-book icon-white"></i><g:message code="default.button.import.label" /></g:link>
@@ -84,7 +104,7 @@
                     </tbody>
                 </table>
                 <div class="pagination pagination-centered">
-                    <g:paginate total="${admissionInstanceTotal}" />
+                    <g:paginate total="${admissionInstanceTotal}" params="[name:params.name]" />
                 </div>
             </div>
         </div><!--/span-->
