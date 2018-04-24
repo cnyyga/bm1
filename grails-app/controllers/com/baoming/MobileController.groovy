@@ -15,7 +15,8 @@ class MobileController {
     def index() {}
 
     def studentLogin(){
-        session['userLoginType']="student"
+        render("")
+       /* session['userLoginType']="student"
         def cookie = new Cookie("studentLogin","yes")
         cookie.setPath("/")
         cookie.setMaxAge(0)
@@ -31,7 +32,7 @@ class MobileController {
         String view = 'student_auth'
         String postUrl = "${request.contextPath}${config.apf.filterProcessesUrl}"
         render view: view, model: [postUrl: postUrl,
-                                   rememberMeParameter: config.rememberMe.parameter]
+                                   rememberMeParameter: config.rememberMe.parameter]*/
     }
 
     def teacherLogin(){

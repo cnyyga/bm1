@@ -44,10 +44,10 @@ class LoginController {
      */
     def auth = {
 
-        def cookie = new Cookie("studentLogin","yes")
-        cookie.setPath("/")
-        cookie.setMaxAge(0)
-        response.addCookie(cookie)
+        //def cookie = new Cookie("studentLogin","yes")
+        //cookie.setPath("/")
+        //cookie.setMaxAge(0)
+        //response.addCookie(cookie)
 
         def config = SpringSecurityUtils.securityConfig
 
@@ -86,10 +86,10 @@ class LoginController {
         }
         if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_STUDENT)) {
             if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
-                redirect(controller: 'mobile',action: 'info')
-                return
+                //redirect(controller: 'mobile',action: 'info')
+                //return
             }
-            redirect(controller: 'profile',action: 'preppy')
+            redirect(controller: 'logout')
             return
         }
 
@@ -189,10 +189,10 @@ class LoginController {
         println(request.getHeader("user-agent"))
         if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_STUDENT)) {
             if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
-                redirect controller: 'mobile',action: 'info'
-                return ;
+                //redirect controller: 'mobile',action: 'info'
+                //return ;
             }
-            redirect controller: 'profile',action: 'preppy'
+            redirect controller: 'logout'
         } else {
             if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
                 redirect controller: 'mobile',action: 'createStu'
