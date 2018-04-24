@@ -240,6 +240,11 @@
             </td>
         </tr>
         <tr>
+            <td height="50"><p > <g:message code="topupStatus.label" default="type" />：
+            <g:select name="topupStatus" value="${preppyInstance?.topupStatus}" from="${com.bm.TopupStatus.values()}" optionValue="label" noSelection="${['':'未选择']}" />
+            </td>
+        </tr>
+        <tr>
             <td height="50">学生手机：
                 <g:textField name="phone" value="${preppyInstance?.phone}"  size="20" class="sel_gray1" />
                 家长手机：

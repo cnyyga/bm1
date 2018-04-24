@@ -91,6 +91,17 @@
             </div>
         </g:if>
 
+        <div class="control-group">
+            <label class="control-label">
+                <g:message code="topupStatus.label" default="Plan" />
+            </label>
+            <div class="controls">
+
+                <span class="property-value" aria-labelledby="plan-label">${mediumInstance?.topupStatus?.label?:'未选择'}</span>
+
+            </div>
+        </div>
+
         <g:if test="${mediumInstance?.teacher}">
             <div class="control-group">
                 <label class="control-label">

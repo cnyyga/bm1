@@ -121,6 +121,15 @@
                 <g:select name="planId" id="planId"  value="${(sps && sps[0])?sps[0]:''}" noSelection="${['':'请选择']}" from="${plans}" optionValue="name" optionKey="id" />
             </div>
         </div>
+
+<div class="control-group">
+    <label class="control-label" for="payment.type">
+        <g:message code="topupStatus.label" default="type" />
+    </label>
+    <div class="controls">
+        <g:select name="topupStatus" value="${studentInstance?.topupStatus}" from="${com.bm.TopupStatus.values()}" optionValue="label" noSelection="${['':'未选择']}" />
+    </div>
+</div>
         %{--<div class="control-group">
             <label class="control-label" for="planId2">
                 <g:message code="student.plans.label" default="Student Plans" />2

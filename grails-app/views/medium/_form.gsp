@@ -69,7 +69,14 @@
 	<g:select id="plan" name="plan.id" from="${plans}" optionKey="id" optionValue="name" required="" value="${mediumInstance?.plan?.id}" class="many-to-one"/>
     </div>
 </div>
-
+<div class="control-group">
+    <label class="control-label" for="payment.type">
+        <g:message code="topupStatus.label" default="type" />
+    </label>
+    <div class="controls">
+        <g:select name="topupStatus" value="${mediumInstance?.topupStatus}" from="${com.bm.TopupStatus.values()}" optionValue="label" noSelection="${['':'未选择']}" />
+    </div>
+</div>
 <div class="control-group">
     <label class="control-label" for="district">
         <g:message code="medium.district.label" default="District" />

@@ -183,6 +183,18 @@
             </div>
         </div>
     </g:each>
+
+    <div class="control-group">
+        <label class="control-label">
+            <g:message code="topupStatus.label" default="type" />
+        </label>
+        <div class="controls">
+            <span class="property-value">
+                ${studentInstance?.topupStatus?.label?:"未选择"}
+            </span>
+        </div>
+    </div>
+
     <div class="control-group">
         <label class="control-label">
             <g:message code="student.payment.type.label" default="type" />
