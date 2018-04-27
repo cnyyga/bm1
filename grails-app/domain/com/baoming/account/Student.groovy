@@ -65,7 +65,7 @@ class Student extends User{
     Payment payment
 
     StudentType studentType //  考生类别
-    TopupStatus topupStatus = TopupStatus.NO//是否有专接本意向
+    TopupStatus topupStatus//是否有专接本意向
     ReviewStatus reviewStatus = ReviewStatus.NO_AUDIT //付费状态
     User reviewPerson  //审核人
     Date reviewDate //审核日期

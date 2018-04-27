@@ -67,7 +67,7 @@ class Preppy {
     String byzsPath// 高中/中专或初中毕业证书照片
     String xjzmPath//高校录取通知书（若已被其它高校录取请上传）
     String otherPhotoPath//手持身份证照片
-    TopupStatus topupStatus = TopupStatus.NO//是否有专接本意向
+    TopupStatus topupStatus//是否有专接本意向
     Resume resume //简历
     String remark //备注1
     String remark1//备注2

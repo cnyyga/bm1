@@ -41,7 +41,7 @@ class Medium {
 
     User reviewPerson  //审核人
     Date reviewDate //审核日期
-    TopupStatus topupStatus = TopupStatus.NO//是否有专接本意向
+    TopupStatus topupStatus//是否有专接本意向
     Date dateCreated
     Date lastUpdated
     static constraints = {
