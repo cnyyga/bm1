@@ -7,6 +7,8 @@ import com.bm.utils.MyNetUtils
 import grails.converters.JSON
 import grails.plugin.jxl.builder.ExcelBuilder
 import org.apache.commons.io.IOUtils
+import org.apache.commons.lang.RandomStringUtils
+import org.apache.commons.lang.math.RandomUtils
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.transaction.annotation.Transactional
@@ -323,7 +325,7 @@ class PreppyController {
 
         def user = new User();
         user.username = preppyInstance.number
-        user.password = params.password
+        user.password = params.password?:"${user.username}"
         user.enabled=true
         userService.saveUser(user,Role.AUTHORITY_STUDENT)
 

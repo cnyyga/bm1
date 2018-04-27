@@ -17,11 +17,11 @@
             </g:else>
             &nbsp;</td>
     </tr>
-    <tr>
+ %{--   <tr>
         <td height="50">登陆密码：&nbsp;
             <input name="password" type="text"  class="inp_gray" id="password" size="40" />
             &nbsp;</td>
-    </tr>
+    </tr>--}%
     <tr>
         <td height="50">户籍地区：
         <g:select id="province" name="provinceId" from="${provinces}" optionKey="code" optionValue="name" required="" value="${preppyInstance?.province?.code}" noSelection="['':'请选择']"/>
