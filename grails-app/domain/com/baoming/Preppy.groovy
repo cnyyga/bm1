@@ -136,6 +136,7 @@ class Preppy {
         counselorPhone nullable: true
         leiBie nullable: true
         beforeFamily nullable: true
+        topupStatus nullable: true
     }
 
     static embedded = ['resume']

@@ -63,6 +63,7 @@ class Medium {
         agreementPath(nullable: true)
         reviewPerson(nullable: true)
         secondaryPlan(nullable: true)
+        topupStatus(nullable: true)
         qq(nullable: true)
         phone(nullable: true)
     }

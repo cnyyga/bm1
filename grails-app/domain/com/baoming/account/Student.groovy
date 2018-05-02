@@ -112,6 +112,7 @@ class Student extends User{
         studentCateories nullable: true
         cardNoPic nullable: true
         agreementPic nullable: true
+        topupStatus nullable: true
     }
 
     static mapping = {
