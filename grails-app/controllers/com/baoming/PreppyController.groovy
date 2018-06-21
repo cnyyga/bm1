@@ -714,7 +714,14 @@ class PreppyController {
                       message(code: 'preppy.phone.label'),
                       message(code: 'preppy.parentPhone.label'),
                       message(code: 'preppy.qq.label'),
-                      message(code: 'preppy.resume.label'),
+                      //message(code: 'preppy.resume.label'),
+                      message(code: 'preppy.resume.juniorTime.label'),
+                      message(code: 'preppy.resume.juniorSchoolName.label'),
+                      message(code: 'preppy.resume.juniorAuth.label'),
+                      message(code: 'preppy.resume.highTime.label'),
+                      message(code: 'preppy.resume.highSchoolName.label'),
+                      message(code: 'preppy.resume.highAuth.label'),
+                      message(code: 'preppy.resume.highZzzy.label'),
 
                       message(code: 'preppy.reviewStatus.label'),
                       message(code: 'preppy.collegeSignUp.label'),
@@ -747,26 +754,19 @@ class PreppyController {
                         } catch (e) {
                             log.error(e.message)
                         }
-                        def resume = ''
 
-                        resume += '初中'+de?.resume?.juniorStart?.format("yyyy年MM月")
-                        resume += '-'
-                        resume += de?.resume?.juniorEnd?.format("yyyy年MM月")
-                        resume += ' '
-                        resume += de?.resume?.juniorSchool
-                        resume += ' '
-                        resume += de?.resume?.juniorAuthenticator
-                        resume += '\r\n'
-                        resume += '高中'+de?.resume?.highStart?.format("yyyy年MM月")
-                        resume += '-'
-                        resume += de?.resume?.highEnd?.format("yyyy年MM月")
-                        resume += ' '
-                        resume += de?.resume?.highSchool
-                        if(de?.resume?.zzzy){
-                            resume += "("+de?.resume?.zzzy+")"
-                        }
-                        resume += ' '
-                        resume += de?.resume?.highAuthenticator
+                        def juniorTime = de?.resume?.juniorStart?.format("yyyy年MM月")
+                        juniorTime += '-'
+                        juniorTime += de?.resume?.juniorEnd?.format("yyyy年MM月")
+                        def juniorSchool = de?.resume?.juniorSchool
+                        def juniorAuthenticator = de?.resume?.juniorAuthenticator
+
+                        def highTime = de?.resume?.highStart?.format("yyyy年MM月")
+                        highTime += '-'
+                        highTime += de?.resume?.highEnd?.format("yyyy年MM月")
+                        def highSchool = de?.resume?.highSchool
+                        def highAuthenticator = de?.resume?.highAuthenticator
+                        def zzzy = de?.resume?.zzzy?:''
 
                         cell(0,kk,de.code?:'')
                         cell(1,kk,de.csCode?:'')
@@ -785,21 +785,28 @@ class PreppyController {
                         cell(13,kk,de.phone?:'')
                         cell(14,kk,de.parentPhone?:'')
                         cell(15,kk,de.qq?:'')
-                        cell(16,kk,resume?:'')
 
-                        cell(17,kk,de.reviewStatus?.label?:'')
-                        cell(18,kk,de.collegeSignUp?.label?:'')
-                        cell(19,kk,de.preppyPlan?.name?:'')
-                        cell(20,kk,de.remark?:'')
-                        cell(21,kk,de.remark1?:'')
-                        cell(22,kk,de.remark2?:'')
+                        cell(16,kk,juniorTime?:'')
+                        cell(17,kk,juniorSchool?:'')
+                        cell(18,kk,juniorAuthenticator?:'')
+                        cell(19,kk,highTime?:'')
+                        cell(20,kk,highSchool?:'')
+                        cell(21,kk,zzzy?:'')
+                        cell(22,kk,highAuthenticator?:'')
+
+                        cell(23,kk,de.reviewStatus?.label?:'')
+                        cell(24,kk,de.collegeSignUp?.label?:'')
+                        cell(25,kk,de.preppyPlan?.name?:'')
+                        cell(26,kk,de.remark?:'')
+                        cell(27,kk,de.remark1?:'')
+                        cell(28,kk,de.remark2?:'')
 
                         try {
-                            cell(23,kk,de.teacher?.name?:'')
+                            cell(29,kk,de.teacher?.name?:'')
                         } catch (Exception e) {
-                            cell(23,kk,'')
+                            cell(29,kk,'')
                         }
-                        cell(24,kk,de.dateCreated.format('yyyy-MM-dd HH:mm:ss'))
+                        cell(30,kk,de.dateCreated.format('yyyy-MM-dd HH:mm:ss'))
                     }
                 }
             }
