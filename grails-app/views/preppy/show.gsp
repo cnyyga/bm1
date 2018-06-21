@@ -127,6 +127,11 @@
             </g:else>
             &nbsp;</td>
         </tr>
+        <tr>
+            <td height="50"><p >申请就读专业：
+            <g:select name="plan.id" from="${plans}" value="${preppyInstance?.plan?.id}" optionValue="name" optionKey="id"/>
+            </td>
+        </tr>
 %{--        <tr>
             <td height="50">登陆密码：&nbsp;
                 <input name="password" type="text"  class="inp_gray" id="password" size="40" />
@@ -234,11 +239,7 @@
             <g:textField name="address" value="${preppyInstance?.address}" size="80" class="sel_gray" />
             </td>
         </tr>
-        <tr>
-            <td height="50"><p >申请就读专业：
-            <g:select name="plan.id" from="${plans}" value="${preppyInstance?.plan?.id}" optionValue="name" optionKey="id"/>
-            </td>
-        </tr>
+
         <tr>
             <td height="50"><p > <g:message code="topupStatus.label" default="type" />：
             <g:select name="topupStatus" value="${preppyInstance?.topupStatus}" from="${com.bm.TopupStatus.values()}" optionValue="label" noSelection="${['':'未选择']}" />
