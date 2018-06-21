@@ -791,8 +791,8 @@ class PreppyController {
                         cell(18,kk,juniorAuthenticator?:'')
                         cell(19,kk,highTime?:'')
                         cell(20,kk,highSchool?:'')
-                        cell(21,kk,zzzy?:'')
-                        cell(22,kk,highAuthenticator?:'')
+                        cell(21,kk,highAuthenticator?:'')
+                        cell(22,kk,zzzy?:'')
 
                         cell(23,kk,de.reviewStatus?.label?:'')
                         cell(24,kk,de.collegeSignUp?.label?:'')
