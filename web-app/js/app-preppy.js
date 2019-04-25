@@ -50,6 +50,32 @@ $(function(){
         $("#studentDistrict").load(districtUrl+"?id="+cityId+"&selected="+selectedId);
     }
 
+    ////////
+
+    $("#receiverProvince").change(function(){
+        var t = $(this);
+        receiverCityOpts(t.val())
+    })
+
+    $("#receiverCity").change(function(){
+        var t = $(this);
+        receiverDistOpts(t.val());
+    })
+
+    receiverCityOpts($("#receiverProvince").val());
+    function receiverCityOpts(provinceId) {
+        var cityUrl = $("#cityUrl").val();
+        var selectedId =  $("#receiverCityVal").val();
+        $("#receiverCity").load(cityUrl+"?id="+provinceId+"&selected="+selectedId,function(){
+            receiverDistOpts($("#receiverCity").val());
+        });
+    }
+    function receiverDistOpts(cityId) {
+        var districtUrl = $("#districtUrl").val();
+        var selectedId =  $("#receiverDistrictVal").val();
+        $("#receiverDistrict").load(districtUrl+"?id="+cityId+"&selected="+selectedId);
+    }
+
     $('#editForm').validate({
         rules: {
             name: {
@@ -60,131 +86,27 @@ $(function(){
                 required: true,
                 isIdCardNo:true
             },
-            password:{
-                required: function(){
-                    var _id= $("#id").val();
-                    return (!_id ||_id == '')
-                },
-                maxlength:16
-            },
-            'plan.id':{
-                required: true
-            }  ,
             phone:{
                 required: true,
-                phoneCN:true,
                 maxlength:11
             }  ,
             parentPhone:{
                 required: true,
-                phoneCN:true,
                 maxlength:11
             }  ,
-            'nation.id':{
-                required: true
-            }  ,
-            province:{
-                required: true
-            }  ,
-            city:{
-                required: true
-            }  ,
-            district:{
-                required: true
-            }  ,
-            town:{
-                required: true,
-                maxlength:50
-            }  ,
-            juniorSchool:{
-                required: true,
-                maxlength:80
-            },
-            juniorAuthenticator:{
-                required: true,
-                maxlength:80
-            } ,
-            highSchool:{
-                required: true,
-                maxlength:80
-            },
-            highAuthenticator:{
-                required: true,
-                maxlength:80
-            }
-            ,
-            address:{
-                required: true,
-                maxlength:80
-            }
-            ,
-            qq:{
-                required: true,
-                digits:true,
-                maxlength:20
-            }
-            ,
-            'preppyPlan.id':{
-                required: true
-            }
-            ,
-            combobox:{
-                required: true
-            }
-            ,
-            juniorStart_year:{
-                required: true
-            }
-            ,
-            juniorStart_month:{
-                required: true
-            }
-            ,
-            juniorEnd_year:{
-                required: true
-            }
-            ,
-            juniorEnd_month:{
-                required: true
-            }
-            ,
-            highStart_year:{
-                required: true
-            }
-            ,
-            highStart_month:{
-                required: true
-            }
-            ,
-            highEnd_year:{
-                required: true
-            }
-            ,
-            highEnd_month:{
+            familyType:{
                 required: true
             },
-            family:{
+            reviewStatus:{
                 required: true
             },
-            studentCateories:{
+            exStatus:{
                 required: true
             },
-            birthday_year:{
+            school:{
                 required: true
             },
-            birthday_month:{
-                required: true
-            },
-            birthday_day:{
-                required: true
-            },
-            type:{
-                required: true
-            },
-            leiBie:{
-                required: true
-            },
-            beforeFamily:{
+            sendType:{
                 required: true
             }
         },
@@ -255,7 +177,7 @@ $(function(){
     }) ;
     setage($("#birthday_year").val());
     function setage(year){
-         var thisyear= $("#age").attr("this-year-attr");
+        var thisyear= $("#age").attr("this-year-attr");
         $("#age").val(thisyear-year);
     }
 
@@ -265,23 +187,23 @@ $(function(){
         _show_material($(this).val());
     });
     function _show_material(rsval) {
-        var id=-1;
-        if(rsval == 'JSPG'){
-            id=2;
-        }else if(rsval == 'JSZZ'){
-            id=3;
-        }else if(rsval == 'GJSZZ'){
-            id=4;
+        if(rsval == 'GJSZZ'){
+            $(".sccl").show();
+            return;
         }
-        $(".material-content").hide();
-        $(".material-content li").hide();
-        $(".material-content li").each(function(){
-            var _class = $(this).attr("class");
-            if(_class.indexOf(id) != -1){
-                $(this).show();
-                $(".material-content").show();
-            }
-        })
+        $(".sccl").hide();
+    }
+
+    _show_recevie($("#sendType").val());
+    $("#sendType").change(function(){
+        _show_recevie($(this).val());
+    });
+    function _show_recevie(rsval) {
+        if(rsval != 'EXPRESS'){
+            $(".receiver-ele").hide();
+            return;
+        }
+        $(".receiver-ele").show();
     }
 
 })
