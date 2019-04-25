@@ -188,6 +188,16 @@ class PreppyController {
             preppyInstance.studentDistrict = District.findByCode(params.studentDistrictId)
         }
 
+        if(params.receiverProvinceId){
+            preppyInstance.receiverProvince= Province.findByCode(params.receiverProvinceId)
+        }
+        if(params.receiverCityId){
+            preppyInstance.receiverCity = City.findByCode(params.receiverCityId)
+        }
+        if(params.receiverDistrictId){
+            preppyInstance.receiverDistrict = District.findByCode(params.receiverDistrictId)
+        }
+
         def academicScores = params.list('academicScore')
         if(academicScores){
             academicScores = academicScores.join(",")
@@ -202,6 +212,7 @@ class PreppyController {
         def byzsPathFile = request.getFile("byzsPathInp")
         def xjzmPathFile = request.getFile("xjzmPathInp")
         def otherPhotoPathFile = request.getFile("otherPhotoPathInp")
+        def payPhotoFile = request.getFile("payPhotoPathInp")
 
         def hkbPath =hkbPathFile?fileService.upload(hkbPathFile,"preppy"):null
         def hkbksyPath =hkbksyPathFile?fileService.upload(hkbksyPathFile,"preppy"):null
@@ -210,6 +221,7 @@ class PreppyController {
         def byzsPath =byzsPathFile?fileService.upload(byzsPathFile,"preppy"):null
         def xjzmPath =xjzmPathFile?fileService.upload(xjzmPathFile,"preppy"):null
         def otherPhotoPath =otherPhotoPathFile?fileService.upload(otherPhotoPathFile,"preppy"):null
+        def payPhotoPath =payPhotoFile?fileService.upload(payPhotoFile,"preppy"):null
         if(hkbPath){
             preppyInstance.hkbPath=hkbPath
         }
@@ -231,7 +243,9 @@ class PreppyController {
         if(otherPhotoPath){
             preppyInstance.otherPhotoPath=otherPhotoPath
         }
-
+        if(payPhotoPath){
+            preppyInstance.payPhoto=payPhotoPath
+        }
         def c  = Preppy.countByNumber(preppyInstance.number)
         if(c > 0){
             flash.message = '身份证号已经存在'
@@ -315,6 +329,7 @@ class PreppyController {
         }
         preppyInstance.validate()
         if (!preppyInstance.save(flush: true)) {
+            println(preppyInstance.errors)
             def view = "create"
             if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
                 view = "/mobile/addPreppy"
@@ -436,6 +451,15 @@ class PreppyController {
         if(params.studentDistrictId){
             preppyInstance.studentDistrict = District.findByCode(params.studentDistrictId)
         }
+        if(params.receiverProvinceId){
+            preppyInstance.receiverProvince= Province.findByCode(params.receiverProvinceId)
+        }
+        if(params.receiverCityId){
+            preppyInstance.receiverCity = City.findByCode(params.receiverCityId)
+        }
+        if(params.receiverDistrictId){
+            preppyInstance.receiverDistrict = District.findByCode(params.receiverDistrictId)
+        }
         def academicScores = params.list('academicScore')
         academicScores = academicScores.join(",")
         preppyInstance.academicScore = academicScores
@@ -447,6 +471,7 @@ class PreppyController {
         def byzsPathFile = request.getFile("byzsPathInp")
         def xjzmPathFile = request.getFile("xjzmPathInp")
         def otherPhotoPathFile = request.getFile("otherPhotoPathInp")
+        def payPhotoFile = request.getFile("payPhotoPathInp")
 
         def hkbPath =hkbPathFile?fileService.upload(hkbPathFile,"preppy"):null
         def hkbksyPath =hkbksyPathFile?fileService.upload(hkbksyPathFile,"preppy"):null
@@ -455,6 +480,8 @@ class PreppyController {
         def byzsPath =byzsPathFile?fileService.upload(byzsPathFile,"preppy"):null
         def xjzmPath =xjzmPathFile?fileService.upload(xjzmPathFile,"preppy"):null
         def otherPhotoPath =otherPhotoPathFile?fileService.upload(otherPhotoPathFile,"preppy"):null
+        def payPhotoPath =payPhotoFile?fileService.upload(payPhotoFile,"preppy"):null
+
         if(hkbPath){
             preppyInstance.hkbPath=hkbPath
         }
@@ -476,7 +503,9 @@ class PreppyController {
         if(otherPhotoPath){
             preppyInstance.otherPhotoPath=otherPhotoPath
         }
-
+        if(payPhotoPath){
+            preppyInstance.payPhoto=payPhotoPath
+        }
         def juniorStart_year = params.get("juniorStart_year")
         def juniorStart_month = params.get("juniorStart_month")
         def juniorEnd_year = params.get("juniorEnd_year")
@@ -549,6 +578,7 @@ class PreppyController {
         }
 
         if (!preppyInstance.save(flush: true)) {
+            println(preppyInstance.errors)
             def view = "edit"
             if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
                 view = "/mobile/editPreppy"
@@ -701,37 +731,38 @@ class PreppyController {
                       message(code: 'preppy.csCode.label'),
                       message(code: 'preppy.name.label'),
                       message(code: 'preppy.number.label'),
-                      message(code: 'preppy.deposit.label'),
-
-                      message(code: 'preppy.family.label'),
-                      message(code: 'preppy.studentCateories.label'),
-                      message(code: 'preppy.gender.label'),
-                      message(code: 'nation.label'),
-                      message(code: 'preppy.birthday.label'),
-                      message(code: 'medium.district.label'),
-                      message(code: 'preppy.address.label'),
-                      message(code: 'preppy.plan.label'),
                       message(code: 'preppy.phone.label'),
                       message(code: 'preppy.parentPhone.label'),
-                      message(code: 'preppy.qq.label'),
-                      //message(code: 'preppy.resume.label'),
-                      message(code: 'preppy.resume.juniorTime.label'),
+                      message(code: 'preppy.sendType.label'),
+                      message(code: 'preppy.school.label'),
+                      message(code: 'preppy.receiverFamily.label'),
+                      message(code: 'preppy.receiverAddress.label'),
+                      message(code: 'preppy.receiver.label'),
+                      message(code: 'preppy.receivePhone.label'),
+                      message(code: 'preppy.cardPhotoPath.label'),
+                      message(code: 'preppy.cardBackgroundPhotoPath.label'),
+                      message(code: 'preppy.payPhoto.label'),
+                      message(code: 'preppy.reviewStatus.label'),
+                      message(code: 'preppy.exStatus.label'),
+                      message(code: 'preppy.exDate.label'),
+                      message(code: 'preppy.counselor.label'),
+                      message(code: 'preppy.counselorPhone.label'),
+                      message(code: 'preppy.remark.label'),
+                      message(code: 'nation.label'),
+                      message(code: 'preppy.birthday.label'),
+                      message(code: 'politicalStatus.label'),
+                      message(code: 'preppy.familyType.label'),
+                      message(code: 'preppy.family.label'),
+                      message(code: 'preppy.address.label'),
                       message(code: 'preppy.resume.juniorSchoolName.label'),
                       message(code: 'preppy.resume.juniorAuth.label'),
-                      message(code: 'preppy.resume.highTime.label'),
-                      message(code: 'preppy.resume.highSchoolName.label'),
-                      message(code: 'preppy.resume.highAuth.label'),
-                      message(code: 'preppy.resume.highZzzy.label'),
-
-                      message(code: 'preppy.reviewStatus.label'),
-                      message(code: 'preppy.collegeSignUp.label'),
-                      message(code: 'preppyPlan.label'),
-                      message(code: 'preppy.remark.label')+"1",
-                      message(code: 'preppy.remark.label')+"2",
-                      message(code: 'preppy.remark.label')+"3",
-
+                      message(code: 'preppy.hkbPath.label'),
+                      message(code: 'preppy.hkbksyPath.label'),
+                      message(code: 'preppy.xjzmPath.label'),
+                      message(code: 'preppy.byzsPath.label'),
                       message(code: 'preppy.teacher.label'),
-                      message(code: 'default.dateCreated.label')]
+                      message(code: 'default.dateCreated.label')
+                ]
         def outputStream
         try {
 
@@ -755,58 +786,58 @@ class PreppyController {
                             log.error(e.message)
                         }
 
-                        def juniorTime = de?.resume?.juniorStart?.format("yyyy年MM月")
-                        juniorTime += '-'
-                        juniorTime += de?.resume?.juniorEnd?.format("yyyy年MM月")
+                        def receiverDistrict = ''
+                        try {
+                            receiverDistrict = de.receiverProvince?.name?:''
+                            receiverDistrict += de.receiverCity?.name?:''
+                            receiverDistrict += de.receiverDistrict?.name?:''
+                            receiverDistrict += de.receiverTown?:''
+                        } catch (e) {
+                            log.error(e.message)
+                        }
+
                         def juniorSchool = de?.resume?.juniorSchool
                         def juniorAuthenticator = de?.resume?.juniorAuthenticator
-
-                        def highTime = de?.resume?.highStart?.format("yyyy年MM月")
-                        highTime += '-'
-                        highTime += de?.resume?.highEnd?.format("yyyy年MM月")
-                        def highSchool = de?.resume?.highSchool
-                        def highAuthenticator = de?.resume?.highAuthenticator
-                        def zzzy = de?.resume?.zzzy?:''
 
                         cell(0,kk,de.code?:'')
                         cell(1,kk,de.csCode?:'')
                         cell(2,kk,de.name?:'')
                         cell(3,kk,de.number?:'')
-                        cell(4,kk,de.deposit?:'')
-
-                        cell(5,kk,de.family?.label?:'')
-                        cell(6,kk,de.studentCateories?.label?:'')
-                        cell(7,kk,de.gender?.label?:'')
-                        cell(8,kk,de.nation?.name?:'')
-                        cell(9,kk,de.birthday?de.birthday.format('yyyy-MM-dd'):'')
-                        cell(10,kk,district?:'')
-                        cell(11,kk,de.address?:'')
-                        cell(12,kk,de.plan?.name?:'')
-                        cell(13,kk,de.phone?:'')
-                        cell(14,kk,de.parentPhone?:'')
-                        cell(15,kk,de.qq?:'')
-
-                        cell(16,kk,juniorTime?:'')
-                        cell(17,kk,juniorSchool?:'')
-                        cell(18,kk,juniorAuthenticator?:'')
-                        cell(19,kk,highTime?:'')
-                        cell(20,kk,highSchool?:'')
-                        cell(21,kk,highAuthenticator?:'')
-                        cell(22,kk,zzzy?:'')
-
-                        cell(23,kk,de.reviewStatus?.label?:'')
-                        cell(24,kk,de.collegeSignUp?.label?:'')
-                        cell(25,kk,de.preppyPlan?.name?:'')
-                        cell(26,kk,de.remark?:'')
-                        cell(27,kk,de.remark1?:'')
-                        cell(28,kk,de.remark2?:'')
-
+                        cell(4,kk,de.phone?:'')
+                        cell(5,kk,de.parentPhone?:'')
+                        cell(6,kk,de.sendType?.label?:'')
+                        cell(7,kk,de.school?:'')
+                        cell(8,kk,receiverDistrict)
+                        cell(9,kk,de.receiverAddress?:'')
+                        cell(10,kk,de.receiver?:'')
+                        cell(11,kk,de.receivePhone?:'')
+                        cell(12,kk,de.cardPhotoPath?:'')
+                        cell(13,kk,de.cardBackgroundPhotoPath?:'')
+                        cell(14,kk,de.payPhoto?:'')
+                        cell(15,kk,de.reviewStatus?.label?:'')
+                        cell(16,kk,de.exStatus?.label?:'')
+                        cell(17,kk,de.exDate?de.exDate.format('yyyy-MM-dd'):'')
+                        cell(18,kk,de.counselor?:'')
+                        cell(19,kk,de.counselorPhone?:'')
+                        cell(20,kk,de.remark?:'')
+                        cell(21,kk,de.nation?.name?:'')
+                        cell(22,kk,de.birthday?de.birthday.format('yyyy-MM-dd'):'')
+                        cell(23,kk,de.politicalStatus?.name?:'')
+                        cell(24,kk,de.familyType?.label?:'')
+                        cell(25,kk,district)
+                        cell(26,kk,de.address?:'')
+                        cell(27,kk,juniorSchool?:'')
+                        cell(28,kk,juniorAuthenticator?:'')
+                        cell(29,kk,de.hkbPath?:'')
+                        cell(30,kk,de.hkbksyPath?:'')
+                        cell(31,kk,de.xjzmPath?:'')
+                        cell(32,kk,de.byzsPath?:'')
                         try {
-                            cell(29,kk,de.teacher?.name?:'')
+                            cell(33,kk,de.teacher?.name?:'')
                         } catch (Exception e) {
-                            cell(29,kk,'')
+                            cell(33,kk,'')
                         }
-                        cell(30,kk,de.dateCreated.format('yyyy-MM-dd HH:mm:ss'))
+                        cell(34,kk,de.dateCreated.format('yyyy-MM-dd HH:mm:ss'))
                     }
                 }
             }

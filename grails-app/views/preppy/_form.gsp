@@ -9,24 +9,24 @@
     </tr>
     <tr>
         <td height="50">身份证号：&nbsp;
-            <g:if test="${!preppyInstance.reviewStatus || preppyInstance?.reviewStatus == com.baoming.Preppy.ReviewStatus.NO_AUDIT }">
-                <g:textField name="number" value="${preppyInstance?.number}"  class="inp_gray" size="40" />
-            </g:if>
-            <g:else>
-                <g:textField name="number" value="${preppyInstance?.number} " class="inp_gray" size="40"  readonly="readonly"/>
-            </g:else>
-            &nbsp;</td>
+        <g:if test="${!preppyInstance.reviewStatus || preppyInstance?.reviewStatus == com.baoming.Preppy.ReviewStatus.NO_AUDIT }">
+            <g:textField name="number" value="${preppyInstance?.number}"  class="inp_gray" size="40" />
+        </g:if>
+        <g:else>
+            <g:textField name="number" value="${preppyInstance?.number} " class="inp_gray" size="40"  readonly="readonly"/>
+        </g:else>
+        &nbsp;</td>
     </tr>
     <tr>
         <td height="50"><p >申请就读专业：
         <g:select name="plan.id" from="${plans}" value="${preppyInstance?.plan?.id}" optionValue="name" optionKey="id"/>
         </td>
     </tr>
- %{--   <tr>
-        <td height="50">登陆密码：&nbsp;
-            <input name="password" type="text"  class="inp_gray" id="password" size="40" />
-            &nbsp;</td>
-    </tr>--}%
+    %{--   <tr>
+           <td height="50">登陆密码：&nbsp;
+               <input name="password" type="text"  class="inp_gray" id="password" size="40" />
+               &nbsp;</td>
+       </tr>--}%
     <tr>
         <td height="50">户籍地区：
         <g:select id="province" name="provinceId" from="${provinces}" optionKey="code" optionValue="name" required="" value="${preppyInstance?.province?.code}" noSelection="['':'请选择']"/>
@@ -54,13 +54,13 @@
     </tr>
     <tr>
         <td height="50">缴纳保证金：&nbsp;
-            <g:if test="${!preppyInstance.reviewStatus || preppyInstance?.reviewStatus == com.baoming.Preppy.ReviewStatus.NO_AUDIT }">
-                <g:textField name="deposit" value="${preppyInstance?.deposit}" size="10" class="sel_gray"/>
-            </g:if>
-            <g:else>
-                <g:textField name="deposit" value="${preppyInstance?.deposit} "  size="10" class="sel_gray" readonly="readonly"/>
-            </g:else>
-            元 </td>
+        <g:if test="${!preppyInstance.reviewStatus || preppyInstance?.reviewStatus == com.baoming.Preppy.ReviewStatus.NO_AUDIT }">
+            <g:textField name="deposit" value="${preppyInstance?.deposit}" size="10" class="sel_gray"/>
+        </g:if>
+        <g:else>
+            <g:textField name="deposit" value="${preppyInstance?.deposit} "  size="10" class="sel_gray" readonly="readonly"/>
+        </g:else>
+        元 </td>
     </tr>
 </table>
 <table width="750" border="0" align="center" cellpadding="0" cellspacing="0" class="tianxie xstx">
@@ -110,7 +110,7 @@
     <tr>
         <td height="50">民<span class="f_20">&nbsp; &nbsp;&nbsp;&nbsp;</span><span class="f_20">&nbsp;&nbsp;</span>族：
         <g:select name="nation.id" from="${com.baoming.Nation.findAll()}" class="sel_gray" optionValue="name" optionKey="id" required="" value="${preppyInstance?.nation?.id}" noSelection="['':'请选择']"/>
-</td>
+        </td>
     </tr>
     <tr>
         <td height="50">出生日期：
@@ -126,7 +126,7 @@
 
     <tr>
         <td height="50">详细地址：
-            <g:textField name="address" value="${preppyInstance?.address}" size="80" class="sel_gray" />
+        <g:textField name="address" value="${preppyInstance?.address}" size="80" class="sel_gray" />
         </td>
     </tr>
 
@@ -138,9 +138,9 @@
     <tr>
         <td height="50">学生手机：
         <g:textField name="phone" value="${preppyInstance?.phone}"  size="20" class="sel_gray1" />
-            家长手机：
-            <g:textField name="parentPhone" value="${preppyInstance?.parentPhone}" size="20" class="sel_gray1" />
-            学生QQ：
+        家长手机：
+        <g:textField name="parentPhone" value="${preppyInstance?.parentPhone}" size="20" class="sel_gray1" />
+        学生QQ：
             <g:textField name="qq" value="${preppyInstance?.qq}" size="15" class="sel_gray1"/></td>
     </tr>
     <tr>
@@ -152,20 +152,20 @@
                     cal.set(Calendar.MONTH,8)
                 %>
                 <td>初中
-            <g:datePicker name="juniorStart" value="${preppyInstance?.resume?.juniorStart}" precision="month"
-                          years="${startYear..year}" class="sel_gray1" noSelection="['':'请选择']" default="none"/>
-            <%
-                cal.add(Calendar.YEAR,3);
-                cal.set(Calendar.MONTH,6)
-            %>
-            起至<g:datePicker name="juniorEnd" value="${preppyInstance?.resume?.juniorEnd}" precision="month"
-                            years="${startYear..year}"  class="sel_gray1" noSelection="['':'请选择']" default="none"/></td>
+                <g:datePicker name="juniorStart" value="${preppyInstance?.resume?.juniorStart}" precision="month"
+                              years="${startYear..year}" class="sel_gray1" noSelection="['':'请选择']" default="none"/>
+                <%
+                    cal.add(Calendar.YEAR,3);
+                    cal.set(Calendar.MONTH,6)
+                %>
+                起至<g:datePicker name="juniorEnd" value="${preppyInstance?.resume?.juniorEnd}" precision="month"
+                                years="${startYear..year}"  class="sel_gray1" noSelection="['':'请选择']" default="none"/></td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
                 <td>初中校名：
                 <g:textField name="juniorSchool" value="${preppyInstance?.resume?.juniorSchool}"  size="40" class="sel_gray" />
-                    证明人：
+                证明人：
                 <g:textField name="juniorAuthenticator" value="${preppyInstance?.resume?.juniorAuthenticator}"   size="20" class="sel_gray1" />
             </tr>
             <tr>
@@ -175,22 +175,22 @@
                     cal.set(Calendar.MONTH,8)
                 %>
                 <td>高中(中职)<span class="f_20">&nbsp;</span>
-                <g:datePicker name="highStart" value="${preppyInstance?.resume?.highStart}" precision="month"
-                              years="${startYear..year}"  class="sel_gray1" noSelection="['':'请选择']" default="none"/>
-                <%
-                    cal.add(Calendar.YEAR,3);
-                    cal.set(Calendar.MONTH,6)
-                %>
-                起至
-                <g:datePicker name="highEnd" value="${preppyInstance?.resume?.highEnd}" precision="month"
-                              years="${startYear..year}"  class="sel_gray1" noSelection="['':'请选择']" default="none"/></td>
+                    <g:datePicker name="highStart" value="${preppyInstance?.resume?.highStart}" precision="month"
+                                  years="${startYear..year}"  class="sel_gray1" noSelection="['':'请选择']" default="none"/>
+                    <%
+                        cal.add(Calendar.YEAR,3);
+                        cal.set(Calendar.MONTH,6)
+                    %>
+                    起至
+                    <g:datePicker name="highEnd" value="${preppyInstance?.resume?.highEnd}" precision="month"
+                                  years="${startYear..year}"  class="sel_gray1" noSelection="['':'请选择']" default="none"/></td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
                 <td>高中(中职)校名：
                 <g:textField name="highSchool" value="${preppyInstance?.resume?.highSchool}"  size="33" class="sel_gray"/>
-                    证明人：
-                <g:textField name="highAuthenticator" value="${preppyInstance?.resume?.highAuthenticator}" size="20" class="sel_gray1" /></td>
+                证明人：
+                    <g:textField name="highAuthenticator" value="${preppyInstance?.resume?.highAuthenticator}" size="20" class="sel_gray1" /></td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
@@ -201,11 +201,11 @@
         </table></td>
     </tr>
     <sec:ifAllGranted roles="${com.baoming.account.Role.AUTHORITY_STUDENT}">
-    <tr>
-        <td>
-            <div style="text-align: center;color:red">【所有信息填写完毕，请点击最下方“保存修改”】</div>
-        </td>
-    </tr>
+        <tr>
+            <td>
+                <div style="text-align: center;color:red">【所有信息填写完毕，请点击最下方“保存修改”】</div>
+            </td>
+        </tr>
     </sec:ifAllGranted>
 </table>
 <table width="750" border="0" align="center" cellpadding="0" cellspacing="0">
@@ -281,7 +281,7 @@
     </tr>
     <tr class="zhongzhi">
         <td height="50" align="left" ><p >2、2017年高考报名
-            <g:select name="collegeSignUp" from="${com.baoming.Preppy$CollegeSignUp?.values()}"  optionValue="label" required="" value="${preppyInstance?.collegeSignUp?.name()}" class="sel_gray1" noSelection="['':'请选择']"/>
+        <g:select name="collegeSignUp" from="${com.baoming.Preppy$CollegeSignUp?.values()}"  optionValue="label" required="" value="${preppyInstance?.collegeSignUp?.name()}" class="sel_gray1" noSelection="['':'请选择']"/>
             <font style="font-size:14px;"> （注：非江苏户籍学生全部选“钟山学院”，江苏户籍任选）</font> </p></td>
     </tr>
     <tr class="zhongzhi">

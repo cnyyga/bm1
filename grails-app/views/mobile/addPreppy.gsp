@@ -13,20 +13,8 @@
     <g:javascript src="app-preppy.js"/>
     <script>
         $(function(){
-            <sec:ifAllGranted roles="${Role.AUTHORITY_TEACHER}">
-            $(".xstx input").attr("disabled",true);
-            $(".xstx select").attr("disabled",true);
-            $(".zbsh input").attr("disabled",true);
-            $(".zbsh select").attr("disabled",true);
-            </sec:ifAllGranted>
-            <sec:ifAllGranted roles="${Role.AUTHORITY_FINANCE}">
-            $(".xstx input").attr("disabled",true);
-            $(".xstx select").attr("disabled",true);
-            $(".lstx input").attr("disabled",true);
-            $(".lstx select").attr("disabled",true);
-            </sec:ifAllGranted>
-        })
 
+        })
     </script>
     <style>
         .select-body{
@@ -55,52 +43,9 @@
                 </label>
 
                 <div class="controls">
-                    <g:textField name="name" maxlength="32"  value="${preppyInstance?.name}"/>
+                    <g:textField name="name" maxlength="32" require=""  value="${preppyInstance?.name}"/>
                 </div>
             </div>
-            <div class="control-group">
-                <label class="control-label" for="name">
-                    <g:message code="preppy.number.label" default="Name" />
-                    <span class="required-indicator">*</span>
-                </label>
-
-                <div class="controls">
-                    <g:if test="${!preppyInstance.reviewStatus || preppyInstance?.reviewStatus == com.baoming.Preppy.ReviewStatus.NO_AUDIT }">
-                        <g:textField name="number" value="${preppyInstance?.number}"   size="40" />
-                    </g:if>
-                    <g:else>
-                        <g:textField name="number" value="${preppyInstance?.number} " size="40"  readonly="readonly"/>
-                    </g:else>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="name">
-                    <g:message code="user.password.label" default="Name" />
-                    <span class="required-indicator">*</span>
-                </label>
-
-                <div class="controls">
-                    <input name="password" type="text"  class="inp_gray" id="password" size="40" />
-                </div>
-            </div>
-
-            <div class="control-group">
-                <label class="control-label" for="name">
-                    <g:message code="preppy.family.label" default="Name" />
-                    <span class="required-indicator">*</span>
-                </label>
-
-                <div class="controls">
-                    <g:select id="province" name="provinceId" from="${provinces}" optionKey="code" optionValue="name" required="" value="${preppyInstance?.province?.code}" noSelection="['':'请选择']"/>
-                    省&nbsp;
-                    <g:select id="city" name="cityId" from="" optionKey="id" required="" class="many-to-one"/>
-                    &nbsp;市&nbsp;
-                    <g:select id="district" name="districtId" from="" optionKey="id" required="" class="many-to-one"/>
-                    县（区）
-                    <g:textField name="town" value="${preppyInstance?.town}" placeholder="${message(code: 'preppy.town.label')}"/>
-                    乡镇                </div>
-            </div>
-
 
             <div class="control-group">
                 <label class="control-label" for="name">
@@ -119,23 +64,150 @@
 
             <div class="control-group">
                 <label class="control-label" for="name">
-                    <g:message code="preppy.depositType.label" default="Name" />
+                    <g:message code="preppy.number.label" default="Name" />
                     <span class="required-indicator">*</span>
                 </label>
 
                 <div class="controls">
-                    <g:select name="depositType" from="${com.baoming.Preppy.DepoistType.values()}" class="sel_gray" optionValue="label" value="${preppyInstance?.depositType}"/>
+                    <g:if test="${!preppyInstance.reviewStatus || preppyInstance?.reviewStatus == com.baoming.Preppy.ReviewStatus.NO_AUDIT }">
+                        <g:textField name="number" value="${preppyInstance?.number}"   size="40" require=""/>
+                    </g:if>
+                    <g:else>
+                        <g:textField name="number" value="${preppyInstance?.number} " size="40"  readonly="readonly"/>
+                    </g:else>
                 </div>
             </div>
 
             <div class="control-group">
                 <label class="control-label" for="name">
-                    <g:message code="preppy.deposit.label" default="Name" />
+                    <g:message code="preppy.phone.label" default="Name" />
                     <span class="required-indicator">*</span>
                 </label>
 
                 <div class="controls">
-                    <g:textField name="deposit" value="${preppyInstance?.deposit}" size="10" class="sel_gray"/>元
+                    <g:textField name="phone" maxlength="32" require="" value="${preppyInstance?.phone}"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="name">
+                    <g:message code="preppy.parentPhone.label" default="Name" />
+                    <span class="required-indicator">*</span>
+                </label>
+
+                <div class="controls">
+                    <g:textField name="parentPhone" maxlength="32"  require="" value="${preppyInstance?.parentPhone}"/>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="name">
+                    <g:message code="preppy.school.label" default="Name" />
+                    <span class="required-indicator">*</span>
+                </label>
+
+                <div class="controls">
+                    <g:textField name="school" maxlength="32" require="" value="${preppyInstance?.school}"/>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="name">
+                    <g:message code="preppy.sendType.label" default="Name" />
+                    <span class="required-indicator">*</span>
+                </label>
+
+                <div class="controls">
+                    <label>
+                        <g:select  name="sendType" from="${com.baoming.Preppy.SendType.values()}" optionValue="label" required="" value="${preppyInstance?.sendType}" noSelection="['':'请选择']"/>
+                    </label>
+                </div>
+            </div>
+
+            <div class="control-group receiver-ele">
+                <label class="control-label" for="name">
+                    <g:message code="preppy.receiverFamily.label" default="Name" />
+                </label>
+
+                <div class="controls">
+                    <g:hiddenField name="receiverCityVal" value="${preppyInstance?.receiverCity?.code}"/>
+                    <g:hiddenField name="receiverDistrictVal" value="${preppyInstance?.receiverDistrict?.code}"/>
+                    <g:select id="receiverProvince" name="receiverProvinceId" from="${provinces}" optionKey="code" optionValue="name" value="${preppyInstance?.receiverProvince?.code}" noSelection="['':'请选择']"/>
+                    省&nbsp;
+                    <g:select id="receiverCity" name="receiverCityId" from="" optionKey="id"  class="many-to-one"/>
+                    &nbsp;市&nbsp;
+                    <g:select id="receiverDistrict" name="receiverDistrictId" from="" optionKey="id"  class="many-to-one"/>
+                    县（区）
+                    <g:textField name="receiverTown" value="${preppyInstance?.receiverTown}" placeholder="${message(code: 'preppy.town.label')}"/>
+                    乡镇                </div>
+            </div>
+
+            <div class="control-group receiver-ele">
+                <label class="control-label" for="name">
+                    <g:message code="preppy.receiverAddress.label" default="receiverAddress" />
+                </label>
+
+                <div class="controls">
+                    <g:textField name="receiverAddress"  value="${preppyInstance?.receiverAddress}"/>
+                </div>
+            </div>
+            <div class="control-group receiver-ele">
+                <label class="control-label" for="name">
+                    <g:message code="preppy.receiver.label" default="receiver" />
+                </label>
+
+                <div class="controls">
+                    <g:textField name="receiver" maxlength="32"  value="${preppyInstance?.receiver}"/>
+                </div>
+            </div>
+            <div class="control-group receiver-ele">
+                <label class="control-label" for="name">
+                    <g:message code="preppy.receivePhone.label" default="receivePhone" />
+                </label>
+
+                <div class="controls">
+                    <g:textField name="receivePhone" maxlength="32"  value="${preppyInstance?.receivePhone}"/>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="name">
+                    <g:message code="preppy.cardPhotoPath.label" default="Name" />
+                    <span class="required-indicator">*</span>
+                </label>
+
+                <div class="controls">
+                    <input type="file" name="cardPhotoPathInp">
+                    <g:if test="${preppyInstance.cardPhotoPath}">
+                        <g:link action="img1"  controller="api" params="[path:preppyInstance?.cardPhotoPath]" target="_blank"><img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance.cardPhotoPath])}" title="点击打开原图" alt="点击打开原图" style="max-height: 50px;"></g:link>
+                    </g:if>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="name">
+                    <g:message code="preppy.cardBackgroundPhotoPath.label" default="Name" />
+                    <span class="required-indicator">*</span>
+                </label>
+
+                <div class="controls">
+                    <input type="file" name="cardBackgroundPhotoPathInp">
+                    <g:if test="${preppyInstance.cardBackgroundPhotoPath}">
+                        <g:link action="img1"  controller="api" params="[path:preppyInstance?.cardBackgroundPhotoPath]" target="_blank"><img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance.cardBackgroundPhotoPath])}"  title="点击打开原图" alt="点击打开原图" style="max-height: 50px;"></g:link>
+                    </g:if>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="name">
+                    <g:message code="preppy.payPhoto.label" default="Name" />
+                    <span class="required-indicator">*</span>
+                </label>
+
+                <div class="controls">
+                    <input type="file" name="payPhotoPathInp">
+                    <g:if test="${preppyInstance.payPhoto}">
+                        <g:link action="img1"  controller="api" params="[path:preppyInstance?.payPhoto]" target="_blank"><img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance.payPhoto])}"  title="点击打开原图" alt="点击打开原图" style="max-height: 50px;"></g:link>
+                    </g:if>
                 </div>
             </div>
 

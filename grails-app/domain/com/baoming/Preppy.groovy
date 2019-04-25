@@ -35,8 +35,8 @@ class Preppy {
     String middlePlan //原就读专业
     PreppyPlan preppyPlan//所属科目组  -2016
     Plan plan //申请就读专业 -2016
-    BigDecimal deposit//缴纳保证金-2016
-    DepoistType depositType//缴纳保证金-2016
+    BigDecimal deposit = BigDecimal.ZERO//缴纳保证金-2016
+    DepoistType depositType = DepoistType.NONE//缴纳保证金-2016
     String phone//学生手机 -2016
     String parentPhone//家长手机 -2016
     String address//家庭住址 -2016
@@ -64,19 +64,39 @@ class Preppy {
     String hkbksyPath//户口本考生页
     String cardPhotoPath//身份证照片
     String cardBackgroundPhotoPath//身份证照片背面
-    String byzsPath// 高中/中专或初中毕业证书照片
-    String xjzmPath//高校录取通知书（若已被其它高校录取请上传）
+    String byzsPath// 高中/中专毕业证书照片
+    String xjzmPath//高校录取通知书（若已被其它高校录取请上传） 2019-初中毕业证书照片
     String otherPhotoPath//手持身份证照片
-    TopupStatus topupStatus//是否有专接本意向
+    TopupStatus topupStatus = TopupStatus.NO//是否有专接本意向
+    SendType sendType//通知书发放形式 2019
+    String receiver//收件人 2019
+    String receivePhone//收件人手机 2019
+    District receiverDistrict//收件人在地区 2019
+    City receiverCity //收件人市 2019
+    Province receiverProvince//收件人省 2019
+    String receiverAddress//收件人住址 -2019
+    String receiverTown//镇 2019
+    ExStatus exStatus//异动 2019
     Resume resume //简历
     String remark //备注1
     String remark1//备注2
     String remark2//备注3
+    String payPhoto//预缴费照片 2019
+    Date exDate //异动日期 2019
+    PoliticalStatus politicalStatus //政治面貌 2019
+    FamilyType familyType //户口性质 2019
 
     Date dateCreated
     Date lastUpdated //-2016
 
     static constraints = {
+        familyType nullable: true
+        politicalStatus nullable: true
+        receiverTown nullable: true
+        receiverAddress nullable: true
+        receiverProvince nullable: true
+        receiverCity nullable: true
+        receiverDistrict nullable: true
         depositType nullable: true
         code(nullable: true)
         csCode(nullable: true)
@@ -137,6 +157,12 @@ class Preppy {
         leiBie nullable: true
         beforeFamily nullable: true
         topupStatus nullable: true
+        sendType nullable: true
+        receiver nullable: true
+        receivePhone nullable: true
+        payPhoto nullable: true
+        exStatus nullable: true
+        exDate nullable: true
     }
 
     static embedded = ['resume']
@@ -224,6 +250,19 @@ class Preppy {
         }
     }
 
+    enum FamilyType {
+        CZ(1,'城镇'),
+        NC(2,'农村')
+
+        Integer id
+        String label
+
+        FamilyType(Integer id,String label){
+            this.id = id
+            this.label = label
+        }
+    }
+
     enum Status {
         GRADUATE(1,'已毕业'),
         STUDENT(2,'在读'),
@@ -253,6 +292,21 @@ class Preppy {
             this.label = label
         }
     }
+
+    enum ExStatus{
+        ZZY(1,'转专业'),
+        JJ(2,'降级'),
+        ZZPT(3,'终止旁听')
+
+        Integer id
+        String label
+
+        ExStatus(Integer id,String label){
+            this.id = id
+            this.label = label
+        }
+    }
+
     enum StudentCateories {
         //江苏普高、江苏中职、外省
         SG(1,'江苏普高'),
@@ -305,6 +359,20 @@ class Preppy {
         String label
 
         DepoistType(Integer id,String label){
+            this.id = id
+            this.label = label
+        }
+    }
+
+    enum SendType{
+        EXPRESS(1,'EMS快递邮寄'),
+        TEACHER (2,'招生老师领取'),
+        PRINT (3,'报到当天打印');
+
+        Integer id
+        String label
+
+        SendType(Integer id,String label){
             this.id = id
             this.label = label
         }

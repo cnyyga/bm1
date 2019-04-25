@@ -7,11 +7,11 @@
         <g:javascript src="jquery-1.8.3.js"/>
         <g:javascript src="jquery-ui-1.9.2.custom.min.js"  />
         <g:javascript src="jquery.chosen.min.js"  />
+        <g:javascript src="tj.js"/>
         <g:javascript src="jquery.validate.min.js"/>
         <g:javascript src="card.js"/>
         <g:javascript src="additional-methods.js"/>
         <g:javascript src="messages_zh.js"/>
-        <g:javascript src="tj.js"/>
         <g:javascript src="app-preppy.js"/>
         <style type="text/css">
         .sel_gray1 {font-size:14px; font-family:"微软雅黑";}

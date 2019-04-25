@@ -67,32 +67,8 @@
                             <label class="search-lb"><g:message code="student.name.label"/>/<g:message code="student.number.label"/> ：</label>
                             <g:textField name="name"  value="${params.name}"/>
                         </div>
-                        <div class="bm-search">
-                            <label class="search-lb"><g:message code="preppy.plan.label"/> ：</label>
-                            <g:select name="planId" from="${com.baoming.PreppyPlanDetail.findAll()*.plan.unique()}" optionKey="id" optionValue="name" value="${params.planId}" noSelection="['':'']"/>
-                        </div>
-                        <sec:ifNotGranted roles="${Role.AUTHORITY_TEACHER}">
-                        <div class="bm-search">
-                            <label class="search-lb"><g:message code="preppy.teacher.label"/> ：</label>
 
 
-                            <%
-                                def userService = grailsApplication.mainContext.getBean("userService");
-                            %>
-                            <select id="combobox" name="teacherId">
-                                <option value="">请选择</option>
-
-                                <g:set var="studTeacherId" value="${params.teacherId}"/>
-                                <g:each in="${userService.getTeachers()}" var="teah">
-                                    <g:if test="${studTeacherId == teah.id}">
-                                        <option value="${teah.id}" title="${teah.name}${com.bm.utils.PinyinUtils.getPinyin(teah.name)}" selected="true" >${teah.name}</option>
-                                    </g:if>
-                                    <g:else>
-                                        <option value="${teah.id}" title="${teah.name}${com.bm.utils.PinyinUtils.getPinyin(teah.name)}" >${teah.name}</option>
-                                    </g:else>
-                                </g:each>
-                            </select>
-                        </div></sec:ifNotGranted>
                         <div class="bm-search">
                             <label class="search-lb"><g:message code="preppy.reviewStatus.label"/> ：</label>
                             <g:select name="reviewStatus" from="${com.baoming.Preppy$ReviewStatus?.values()}"  optionValue="label" noSelection="['':'']" value="${params.reviewStatus}"/>
@@ -118,9 +94,6 @@
 
                         <th><g:message code="preppy.birthday.label" default="number" /></th>
 
-                        <th><g:message code="preppy.studentCateories.label" default="collegeType" /></th>
-                        <th><g:message code="preppy.teacher.label" default="teacher" /></th>
-
                         <th><g:message code="preppy.reviewStatus.label" default="reviewStatus" /></th>
 
                        %{-- <th>报警</th>--}%
@@ -140,15 +113,6 @@
                             
                             <td class="center"><g:if test="${preppyInstance.birthday}"><g:formatDate date="${preppyInstance.birthday}" format="yyyy-MM-dd"/></g:if> </td>
                             
-                            <td class="center">${preppyInstance.studentCateories?.label}</td>
-                            <td class="center">
-                                <%
-                                    try{
-                                        println(preppyInstance.teacher?.name)
-                                    }catch (e){}
-                                    %>
-                            </td>
-
                             <td class="center" id="studentTd${preppyInstance.id}">
                                 <span class="label  ${preppyInstance.reviewStatus == Preppy.ReviewStatus.NO_AUDIT ?'label-important':(preppyInstance.reviewStatus == Preppy.ReviewStatus.GJSZZ?'label-success':'label-warning')}">
                                     ${preppyInstance.reviewStatus?.label?:message(code: 'home.student.auditing.message')}
