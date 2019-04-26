@@ -67,14 +67,29 @@
                             <label class="search-lb"><g:message code="student.name.label"/>/<g:message code="student.number.label"/> ：</label>
                             <g:textField name="name"  value="${params.name}"/>
                         </div>
-
-
                         <div class="bm-search">
                             <label class="search-lb"><g:message code="preppy.reviewStatus.label"/> ：</label>
                             <g:select name="reviewStatus" from="${com.baoming.Preppy$ReviewStatus?.values()}"  optionValue="label" noSelection="['':'']" value="${params.reviewStatus}"/>
-
                         </div>
-
+                        <sec:ifNotGranted roles="${Role.AUTHORITY_TEACHER}">
+                            <div class="bm-search">
+                                <label class="search-lb"><g:message code="preppy.teacher.label"/> ：</label>
+                                <%
+                                    def userService = grailsApplication.mainContext.getBean("userService");
+                                %>
+                                <select id="combobox" name="teacherId">
+                                    <option value="">请选择</option>
+                                    <g:set var="studTeacherId" value="${params.teacherId}"/>
+                                    <g:each in="${userService.getTeachers()}" var="teah">
+                                        <g:if test="${studTeacherId == teah.id}">
+                                            <option value="${teah.id}" title="${teah.name}${com.bm.utils.PinyinUtils.getPinyin(teah.name)}" selected="true" >${teah.name}</option>
+                                        </g:if>
+                                        <g:else>
+                                            <option value="${teah.id}" title="${teah.name}${com.bm.utils.PinyinUtils.getPinyin(teah.name)}" >${teah.name}</option>
+                                        </g:else>
+                                    </g:each>
+                                </select>
+                            </div></sec:ifNotGranted>
                         <div class="span2">
                             <g:submitButton name="sub" value="${message(code:'default.button.search.label')}" class="btn btn-small btn-primary" />
                             <input type="button" name='exportBtn' id="exportBtn" value="${message(code:'default.button.export.label')}" class="btn btn-small btn-inverse"   />
