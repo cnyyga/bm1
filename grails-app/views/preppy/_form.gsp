@@ -54,7 +54,7 @@
         <td height="50"><g:message code="preppy.receiverFamily.label" default="Name" />：
         <g:hiddenField name="receiverCityVal" value="${preppyInstance?.receiverCity?.code}"/>
         <g:hiddenField name="receiverDistrictVal" value="${preppyInstance?.receiverDistrict?.code}"/>
-        <g:select id="receiverProvince" name="receiverProvinceId" from="${provinces}" optionKey="code" optionValue="name"  value="${preppyInstance?.province?.code}" noSelection="['':'请选择']"/>
+        <g:select id="receiverProvince" name="receiverProvinceId" from="${provinces}" optionKey="code" optionValue="name"  value="${preppyInstance?.receiverProvince?.code}" noSelection="['':'请选择']"/>
         省&nbsp;
         <g:select id="receiverCity" name="receiverCityId" from="" optionKey="id"  class="many-to-one"/>
         &nbsp;市&nbsp;
@@ -65,7 +65,7 @@
     </tr>
     <tr class="receiver-ele">
         <td height="50">  <g:message code="preppy.receiverAddress.label" default="Name" />：
-            <g:textField name="receiverAddress" value="${preppyInstance?.receiverAddress}"  size="40" class="sel_gray1" /></td>
+            <g:textField name="receiverAddress" value="${preppyInstance?.receiverAddress}"  size="40" class="sel_gray1" /><b class="red">(详细到门牌号)</b></td>
     </tr>
     <tr class="receiver-ele">
         <td height="50"> <g:message code="preppy.receiver.label" default="Name" />：
@@ -106,13 +106,13 @@
     </tr>
     <tr>
         <td height="50" align="left" >审核：
-        <g:select name="reviewStatus" from="${com.baoming.Preppy$ReviewStatus?.values()}"  optionValue="label" required="" value="${preppyInstance?.reviewStatus?.name()}"  class="sel_gray1" noSelection="['':'请选择']"/>
+        <g:select name="reviewStatus" from="${com.baoming.Preppy$ReviewStatus?.values()}"  optionValue="label" value="${preppyInstance?.reviewStatus?.name()}"  class="sel_gray1" noSelection="['':'请选择']"/>
 
         </td>
     </tr>
     <tr>
         <td height="50" align="left" ><p ><g:message code="preppy.exStatus.label" default="Name" />：
-        <g:select name="exStatus" from="${com.baoming.Preppy$ExStatus?.values()}"  optionValue="label" required="" value="${preppyInstance?.exStatus?.name()}" class="sel_gray1" noSelection="['':'请选择']"/>
+        <g:select name="exStatus" from="${com.baoming.Preppy$ExStatus?.values()}"  optionValue="label" value="${preppyInstance?.exStatus?.name()}" class="sel_gray1" noSelection="['':'请选择']"/>
         </p></td>
     </tr>
 
@@ -139,7 +139,7 @@
         <%
             def userService = grailsApplication.mainContext.getBean("userService");
         %>
-            <select id="combobox11" name="teacherId">
+            <select id="combobox" name="teacherId">
                 <option value="">请选择</option>
                 <g:set var="studTeacherId" value="${preppyInstance.teacher?.id}"/>
                 <g:each in="${userService.getTeachers()}" var="teah">
@@ -162,7 +162,7 @@
 
     <tr>
         <td height="50">民<span class="f_20">&nbsp; &nbsp;&nbsp;&nbsp;</span><span class="f_20">&nbsp;&nbsp;</span>族：
-        <g:select name="nation.id" from="${com.baoming.Nation.findAll()}" class="sel_gray" optionValue="name" optionKey="id" required="" value="${preppyInstance?.nation?.id}" noSelection="['':'请选择']"/>
+        <g:select name="nation.id" from="${com.baoming.Nation.findAll()}" class="sel_gray" optionValue="name" optionKey="id"  value="${preppyInstance?.nation?.id}" noSelection="['':'请选择']"/>
         </td>
     </tr>
     <tr>
@@ -175,7 +175,7 @@
 
     <tr>
         <td height="50"><g:message code="politicalStatus.label"/>：
-        <g:select name="politicalStatus.id" from="${com.baoming.PoliticalStatus.findAll()}" class="sel_gray" optionValue="name" optionKey="id" required="" value="${preppyInstance?.politicalStatus?.id}" noSelection="['':'请选择']"/>
+        <g:select name="politicalStatus.id" from="${com.baoming.PoliticalStatus.findAll()}" class="sel_gray" optionValue="name" optionKey="id" value="${preppyInstance?.politicalStatus?.id}" noSelection="['':'请选择']"/>
         </td>
     </tr>
 
@@ -187,11 +187,13 @@
 
     <tr>
         <td height="50"><g:message code="preppy.family.label"/>：
-        <g:select id="province" name="provinceId" from="${provinces}" optionKey="code" optionValue="name" required="" value="${preppyInstance?.province?.code}" noSelection="['':'请选择']"/>
+        <g:hiddenField name="cityVal" value="${preppyInstance?.city?.code}"/>
+        <g:hiddenField name="districtVal" value="${preppyInstance?.district?.code}"/>
+        <g:select id="province" name="provinceId" from="${provinces}" optionKey="code" optionValue="name" value="${preppyInstance?.province?.code}" noSelection="['':'请选择']"/>
         省&nbsp;
-        <g:select id="city" name="cityId" from="" optionKey="id" required="" class="many-to-one"/>
+        <g:select id="city" name="cityId" from="" optionKey="id"  class="many-to-one"/>
         &nbsp;市&nbsp;
-        <g:select id="district" name="districtId" from="" optionKey="id" required="" class="many-to-one"/>
+        <g:select id="district" name="districtId" from="" optionKey="id"  class="many-to-one"/>
         县（区）
         <g:textField name="town" value="${preppyInstance?.town}" placeholder="${message(code: 'preppy.town.label')}"/>
         乡镇</td>
@@ -199,7 +201,7 @@
 
     <tr>
         <td height="50"><g:message code="preppy.address.label"/>：
-        <g:textField name="address" value="${preppyInstance?.address}" size="80" class="sel_gray" />
+        <g:textField name="address" value="${preppyInstance?.address}" size="80" class="sel_gray" /><b class="red">(详细到门牌号)</b>
         </td>
     </tr>
 

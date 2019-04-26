@@ -94,13 +94,7 @@ $(function(){
                 required: true,
                 maxlength:11
             }  ,
-            familyType:{
-                required: true
-            },
             reviewStatus:{
-                required: true
-            },
-            exStatus:{
                 required: true
             },
             school:{

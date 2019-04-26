@@ -74,15 +74,13 @@
         </style>
         <script>
             $(function(){
-                <sec:ifAllGranted roles="${Role.AUTHORITY_TEACHER}">
-                $(".xstx input").attr("disabled",true);
-                $(".xstx select").attr("disabled",true);
+                <sec:ifNotGranted roles="${Role.AUTHORITY_FINANCE}">
                 $(".zbsh input").attr("disabled",true);
                 $(".zbsh select").attr("disabled",true);
-                </sec:ifAllGranted>
+                </sec:ifNotGranted>
                 <sec:ifAllGranted roles="${Role.AUTHORITY_FINANCE}">
-                $(".xstx input").attr("disabled",true);
-                $(".xstx select").attr("disabled",true);
+                $(".sccl input").attr("disabled",true);
+                $(".sccl select").attr("disabled",true);
                 $(".lstx input").attr("disabled",true);
                 $(".lstx select").attr("disabled",true);
                 </sec:ifAllGranted>

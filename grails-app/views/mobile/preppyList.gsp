@@ -11,6 +11,9 @@
 </div>
 <div class="page-content gradient" >
     <div class="page-body page-list">
+        <g:if test="${flash.message}">
+            <div class="alert alert-error">${flash.message}</div>
+        </g:if>
         <div style="padding-bottom: 5px;">
             <g:link action="addPreppy" controller="mobile"  class="btn btn-primary btn-lg">
                 <g:message code="default.new.label" args="[entityName]" />

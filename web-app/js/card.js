@@ -65,23 +65,8 @@ var idCardNoUtil = {
         }
     },
 
-
     checkIdCardNo: function(idCardNo){
-        if(idCardNo.length==15 || idCardNo.length==18){
-             return true ;
-        }
-        return false;
-//15位和18位身份证号码的基本校验
-        var check = /^\d{15}|(\d{17}(\d|x|X))$/.test(idCardNo);
-        if(!check) return false;
-//判断长度为15位或18位
-        if(idCardNo.length==15){
-            return idCardNoUtil.check15IdCardNo(idCardNo);
-        }else if(idCardNo.length==18){
-            return idCardNoUtil.check18IdCardNo(idCardNo);
-        }else{
-            return false;
-        }
+        return idCardNo && idCardNo.trim().length==18;
     },
 
 //校验15位的身份证号码

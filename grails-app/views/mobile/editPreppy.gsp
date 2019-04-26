@@ -27,6 +27,10 @@
 </head>
 
 <body>
+<%
+    def cal = Calendar.instance
+    def year = cal.get(Calendar.YEAR)
+%>
 <div class="page-title select-title">
     <h2><g:message code="student.mobile.create.preppy.title"/></h2>
 </div>
@@ -138,13 +142,13 @@
                     &nbsp;市&nbsp;
                     <g:select id="receiverDistrict" name="receiverDistrictId" from="" optionKey="code"  class="many-to-one"/>
                     县（区）
-                    <g:textField name="receiverTown" value="${preppyInstance?.receiverTown}" placeholder="${message(code: 'preppy.receiverTown.label')}"/>
+                    <g:textField name="receiverTown" value="${preppyInstance?.receiverTown}" placeholder="${message(code: 'preppy.town.label')}"/>
                     乡镇                </div>
             </div>
 
             <div class="control-group receiver-ele">
                 <label class="control-label" for="name">
-                    <g:message code="preppy.receiverAddress.label" default="receiverAddress" />
+                    <g:message code="preppy.receiverAddress.label" default="receiverAddress" /><b class="red">(详细到门牌号)</b>
                 </label>
 
                 <div class="controls">
@@ -211,7 +215,160 @@
                     </g:if>
                 </div>
             </div>
+            <!--审核后可填写-->
+            <g:if test="${preppyInstance.reviewStatus?.id == com.baoming.Preppy.ReviewStatus.GJSZZ.id}">
+                <div class="control-group">
+                    <label class="control-label" for="name">
+                        <g:message code="nation.label" default="nation" />
+                    </label>
 
+                    <div class="controls">
+                        <label>
+                            <g:select name="nation.id" from="${com.baoming.Nation.findAll()}" class="sel_gray" optionValue="name" optionKey="id"  value="${preppyInstance?.nation?.id}" noSelection="['':'请选择']"/>
+                        </label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="name">
+                        <g:message code="preppy.birthday.label" default="nation" />
+                    </label>
+
+                    <div class="controls">
+                        <label>
+                            <g:set var="startYear" value="${year-25}"/>
+                            <g:datePicker name="birthday" value="${preppyInstance?.birthday}" precision="day"
+                                          years="${startYear..(year-10)}" default="none" noSelection="['':'请选择']"/>                    </label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="name">
+                        <g:message code="politicalStatus.label" default="politicalStatus" />
+                    </label>
+
+                    <div class="controls">
+                        <label>
+                            <g:select name="politicalStatus.id" from="${com.baoming.PoliticalStatus.findAll()}" class="sel_gray" optionValue="name" optionKey="id" value="${preppyInstance?.politicalStatus?.id}" noSelection="['':'请选择']"/>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="name">
+                        <g:message code="preppy.familyType.label" default="familyType" />
+                    </label>
+
+                    <div class="controls">
+                        <label>
+                            <g:select name="familyType" from="${com.baoming.Preppy.FamilyType.values()}" class="sel_gray" optionValue="label" value="${preppyInstance?.familyType}" noSelection="['':'请选择']"/>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="name">
+                        <g:message code="preppy.family.label" default="family" />
+                    </label>
+
+                    <div class="controls">
+                        <label>
+                            <g:hiddenField name="cityVal" value="${preppyInstance?.city?.code}"/>
+                            <g:hiddenField name="districtVal" value="${preppyInstance?.district?.code}"/>
+                            <g:select id="province" name="provinceId" from="${provinces}" optionKey="code" optionValue="name" value="${preppyInstance?.province?.code}" noSelection="['':'请选择']"/>
+                            省&nbsp;
+                            <g:select id="city" name="cityId" from="" class="many-to-one"/>
+                            &nbsp;市&nbsp;
+                            <g:select id="district" name="districtId" from="" class="many-to-one"/>
+                            县（区）
+                            <g:textField name="town" value="${preppyInstance?.town}" placeholder="${message(code: 'preppy.town.label')}"/>
+                            乡镇                    </label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="name">
+                        <g:message code="preppy.address.label" default="address" /><b class="red">(详细到门牌号)</b>
+                    </label>
+
+                    <div class="controls">
+                        <label>
+                            <g:textField name="address" value="${preppyInstance?.address}"  />
+                        </label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="name">
+                        <g:message code="preppy.resume.juniorSchoolName.label" default="address" />
+                    </label>
+
+                    <div class="controls">
+                        <label>
+                            <g:textField name="juniorSchool" value="${preppyInstance?.resume?.juniorSchool}"   />
+                        </label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="name">
+                        <g:message code="preppy.resume.juniorAuth.label" default="address" />
+                    </label>
+
+                    <div class="controls">
+                        <label>
+                            <g:textField name="juniorAuthenticator" value="${preppyInstance?.resume?.juniorAuthenticator}"   />
+                        </label>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="name">
+                        <g:message code="preppy.hkbPath.label" default="Name" />
+                    </label>
+
+                    <div class="controls">
+                        <input type="file" name="hkbPathInp">
+                        <g:if test="${preppyInstance.hkbPath}">
+                            <g:link action="img1"  controller="api" params="[path:preppyInstance?.hkbPath]" target="_blank"><img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance.hkbPath])}"  title="点击打开原图" alt="点击打开原图" style="max-height: 50px;"></g:link>
+                        </g:if>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="name">
+                        <g:message code="preppy.hkbksyPath.label" default="Name" />
+                    </label>
+
+                    <div class="controls">
+                        <input type="file" name="hkbksyPathInp">
+                        <g:if test="${preppyInstance.hkbksyPath}">
+                            <g:link action="img1"  controller="api" params="[path:preppyInstance?.hkbksyPath]" target="_blank"><img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance.hkbksyPath])}"  title="点击打开原图" alt="点击打开原图" style="max-height: 50px;"></g:link>
+                        </g:if>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="name">
+                        <g:message code="preppy.byzsPath.label" default="Name" />
+                    </label>
+
+                    <div class="controls">
+                        <input type="file" name="byzsPathInp">
+                        <g:if test="${preppyInstance.byzsPath}">
+                            <g:link action="img1"  controller="api" params="[path:preppyInstance?.byzsPath]" target="_blank"><img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance.byzsPath])}"  title="点击打开原图" alt="点击打开原图" style="max-height: 50px;"></g:link>
+                        </g:if>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="name">
+                        <g:message code="preppy.xjzmPath.label" default="Name" />
+                    </label>
+
+                    <div class="controls">
+                        <input type="file" name="xjzmPathInp">
+                        <g:if test="${preppyInstance.xjzmPath}">
+                            <g:link action="img1"  controller="api" params="[path:preppyInstance?.xjzmPath]" target="_blank"><img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance.xjzmPath])}"  title="点击打开原图" alt="点击打开原图" style="max-height: 50px;"></g:link>
+                        </g:if>
+                    </div>
+                </div>
+            </g:if>
             <div>
                 <button type="submit" class="btn btn-primary btn-lg btn-block">${message(code: 'default.button.update.label')}</button>
                 <g:set var="entityName" value="${message(code: 'preppy.label', default: 'Student')}" />

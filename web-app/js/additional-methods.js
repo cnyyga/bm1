@@ -447,7 +447,7 @@ jQuery.validator.addMethod("stringCheck", function(value, element) {
 //身份证号码验证
 jQuery.validator.addMethod("isIdCardNo", function(value, element) {
     return this.optional(element) || idCardNoUtil.checkIdCardNo(value);
-}, "请正确输入您的身份证号码15或18位");
+}, "请正确输入您的身份证号码");
 //邮政编码验证
 jQuery.validator.addMethod("isZipCode", function(value, element) {
     var tel = /^[0-9]{6}$/;

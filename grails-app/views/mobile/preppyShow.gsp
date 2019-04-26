@@ -171,7 +171,144 @@
                         </g:if>
                     </div>
                 </div>
+                <!--审核后可填写-->
+                <div class="control-group">
+                    <label class="control-label" for="name">
+                        <g:message code="nation.label" default="nation" />
+                    </label>
 
+                    <div class="controls">
+                        <label>
+                            ${preppyInstance?.nation?.name}                        </label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="name">
+                        <g:message code="preppy.birthday.label" default="nation" />
+                    </label>
+
+                    <div class="controls">
+                        <label>
+                            <g:formatDate date="${preppyInstance?.birthday}" format="yyyy-MM-dd"/>  </label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="name">
+                        <g:message code="politicalStatus.label" default="politicalStatus" />
+                    </label>
+
+                    <div class="controls">
+                        <label>
+                            ${preppyInstance?.politicalStatus?.name}                           </label>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="name">
+                        <g:message code="preppy.familyType.label" default="familyType" />
+                    </label>
+
+                    <div class="controls">
+                        <label>
+                            ${preppyInstance?.familyType?.label}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="name">
+                        <g:message code="preppy.family.label" default="family" />
+                    </label>
+
+                    <div class="controls">
+                        <label>
+                            ${preppyInstance?.province?.name}省&nbsp;
+                            ${preppyInstance?.city?.name}&nbsp;市&nbsp;
+                            ${preppyInstance?.district?.name}县（区）
+                            ${preppyInstance?.town}乡镇</label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="name">
+                        <g:message code="preppy.address.label" default="address" />
+                    </label>
+
+                    <div class="controls">
+                        <label>
+                            ${preppyInstance?.address}
+                        </label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="name">
+                        <g:message code="preppy.resume.juniorSchoolName.label" default="address" />
+                    </label>
+
+                    <div class="controls">
+                        <label>
+                            ${preppyInstance?.resume?.juniorSchool}
+                        </label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="name">
+                        <g:message code="preppy.resume.juniorAuth.label" default="address" />
+                    </label>
+
+                    <div class="controls">
+                        <label>
+                            ${preppyInstance?.resume?.juniorAuthenticator}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="name">
+                        <g:message code="preppy.hkbPath.label" default="Name" />
+                    </label>
+
+                    <div class="controls">
+                        <g:if test="${preppyInstance.hkbPath}">
+                            <g:link action="img1"  controller="api" params="[path:preppyInstance?.hkbPath]" target="_blank"><img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance.hkbPath])}"  title="点击打开原图" alt="点击打开原图" style="max-height: 50px;"></g:link>
+                        </g:if>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="name">
+                        <g:message code="preppy.hkbksyPath.label" default="Name" />
+                    </label>
+
+                    <div class="controls">
+                        <g:if test="${preppyInstance.hkbksyPath}">
+                            <g:link action="img1"  controller="api" params="[path:preppyInstance?.hkbksyPath]" target="_blank"><img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance.hkbksyPath])}"  title="点击打开原图" alt="点击打开原图" style="max-height: 50px;"></g:link>
+                        </g:if>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="name">
+                        <g:message code="preppy.byzsPath.label" default="Name" />
+                    </label>
+
+                    <div class="controls">
+                        <g:if test="${preppyInstance.byzsPath}">
+                            <g:link action="img1"  controller="api" params="[path:preppyInstance?.byzsPath]" target="_blank"><img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance.byzsPath])}"  title="点击打开原图" alt="点击打开原图" style="max-height: 50px;"></g:link>
+                        </g:if>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="name">
+                        <g:message code="preppy.xjzmPath.label" default="Name" />
+                    </label>
+
+                    <div class="controls">
+                        <g:if test="${preppyInstance.xjzmPath}">
+                            <g:link action="img1"  controller="api" params="[path:preppyInstance?.xjzmPath]" target="_blank"><img src="${createLink(controller: 'api',action: 'img1',params: [path:preppyInstance.xjzmPath])}"  title="点击打开原图" alt="点击打开原图" style="max-height: 50px;"></g:link>
+                        </g:if>
+                    </div>
+                </div>
             </fieldset>
         </div>
         <div>

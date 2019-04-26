@@ -394,7 +394,7 @@ class PreppyController {
         def userId = springSecurityService.authentication.principal?.id
         def teacher
         if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)) {
-            if(preppyInstance.reviewStatus && preppyInstance.reviewStatus != Preppy.ReviewStatus.NO_AUDIT){
+            if(preppyInstance.reviewStatus && preppyInstance.reviewStatus != Preppy.ReviewStatus.NO_AUDIT && preppyInstance.reviewStatus != Preppy.ReviewStatus.GJSZZ ){
                 flash.message = '已经审核无法修改资料'
                 redirect(action: 'list')
                 return
