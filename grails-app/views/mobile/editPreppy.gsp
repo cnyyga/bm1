@@ -121,7 +121,7 @@
 
                 <div class="controls">
                     <label>
-                        <g:select name="plan.id" from="${plans}" value="${preppyInstance?.plan?.id}" optionValue="name" optionKey="id" required="">
+                        <g:select name="plan.id" from="${plans}" value="${preppyInstance?.plan?.id}" optionValue="name" optionKey="id" required=""></g:select>
                     </label>
                 </div>
             </div>
