@@ -114,7 +114,17 @@
                     <g:textField name="school" maxlength="32" require="" value="${preppyInstance?.school}"/>
                 </div>
             </div>
+            <div class="control-group">
+                <label class="control-label" for="name">
+                    <g:message code="student.plans.label" default="Plan" />
+                </label>
 
+                <div class="controls">
+                    <label>
+                        <g:select name="plan.id" from="${plans}" value="${preppyInstance?.plan?.id}" optionValue="name" optionKey="id" required="">
+                    </label>
+                </div>
+            </div>
             <div class="control-group">
                 <label class="control-label" for="name">
                     <g:message code="preppy.sendType.label" default="Name" />

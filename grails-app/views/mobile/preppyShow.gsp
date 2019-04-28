@@ -84,7 +84,17 @@
                         ${preppyInstance?.school}
                     </div>
                 </div>
+                <div class="control-group">
+                    <label class="control-label" for="name">
+                        <g:message code="student.plans.label" default="Plan" />
+                    </label>
 
+                    <div class="controls">
+                        <label>
+                            ${preppyInstance?.plan?.name}"
+                        </label>
+                    </div>
+                </div>
                 <div class="control-group">
                     <label class="control-label" for="name">
                         <g:message code="preppy.sendType.label" default="Name" />

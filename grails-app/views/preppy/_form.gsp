@@ -42,7 +42,11 @@
         <td height="50">   <g:message code="preppy.school.label" default="Name" />：
             <g:textField name="school" value="${preppyInstance?.school}"  size="40" class="sel_gray1" /></td>
     </tr>
-
+    <tr>
+        <td height="50"><g:message code="student.plans.label" default="Plan" />：
+        <g:select name="plan.id" from="${plans}" value="${preppyInstance?.plan?.id}" optionValue="name" optionKey="id" required="" noSelection="['':'请选择']"/>
+        </td>
+    </tr>
     <tr>
         <td height="50"><g:message code="preppy.sendType.label" default="Name" />：
         <g:select  name="sendType" from="${com.baoming.Preppy.SendType.values()}" optionValue="label" class="sel_gray" value="${preppyInstance?.sendType}" noSelection="['':'请选择']"/>

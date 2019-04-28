@@ -12,7 +12,9 @@ class MobileController {
     def provinceService
     def studentTypeService
 
-    def index() {}
+    def index() {
+        redirect(action: 'teacherLogin')
+    }
 
     def studentLogin(){
         render("")
@@ -86,13 +88,13 @@ class MobileController {
     //添加旁听生
     def addPreppy() {
         [preppyInstance: new Preppy(params),provinces:provinceService.getProvinces(),
-         preppyPlans:planService.getPreppyPlans()]
+         preppyPlans:planService.getPreppyPlans(),plans:planService.getPreppyPlanPlans()]
     }
 
     //添加旁听生
     def editPreppy(Long id) {
         render(view: 'editPreppy',model: [preppyInstance: Preppy.get(id),provinces:provinceService.getProvinces(),
-         preppyPlans:planService.getPreppyPlans()]);
+         preppyPlans:planService.getPreppyPlans(),plans:planService.getPreppyPlanPlans()]);
     }
 
     //添加中专生

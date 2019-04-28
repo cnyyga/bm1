@@ -116,6 +116,18 @@
 
             <div class="control-group">
                 <label class="control-label" for="name">
+                    <g:message code="student.plans.label" default="Plan" />
+                </label>
+
+                <div class="controls">
+                    <label>
+                        <g:select name="plan.id" from="${plans}" value="${preppyInstance?.plan?.id}" optionValue="name" optionKey="id" required="" noSelection="['':'请选择']"/>
+                    </label>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="name">
                     <g:message code="preppy.sendType.label" default="Name" />
                     <span class="required-indicator">*</span>
                 </label>

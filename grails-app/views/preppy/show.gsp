@@ -129,7 +129,10 @@
             <td height="50">   <g:message code="preppy.school.label" default="Name" />：
             ${preppyInstance?.school}</td>
         </tr>
-
+        <tr>
+            <td height="50"><g:message code="student.plans.label" default="Plan" />：
+            ${preppyInstance?.plan?.name}            </td>
+        </tr>
         <tr>
             <td height="50"><g:message code="preppy.sendType.label" default="Name" />：
             ${preppyInstance?.sendType?.label}
