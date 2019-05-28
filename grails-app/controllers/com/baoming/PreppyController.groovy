@@ -735,6 +735,7 @@ class PreppyController {
                       message(code: 'preppy.parentPhone.label'),
                       message(code: 'preppy.sendType.label'),
                       message(code: 'preppy.school.label'),
+                      message(code: 'student.plans.label'),
                       message(code: 'preppy.receiverFamily.label'),
                       message(code: 'preppy.receiverAddress.label'),
                       message(code: 'preppy.receiver.label'),
@@ -756,12 +757,9 @@ class PreppyController {
                       message(code: 'preppy.address.label'),
                       message(code: 'preppy.resume.juniorSchoolName.label'),
                       message(code: 'preppy.resume.juniorAuth.label'),
-                      message(code: 'preppy.hkbPath.label'),
-                      message(code: 'preppy.hkbksyPath.label'),
-                      message(code: 'preppy.xjzmPath.label'),
-                      message(code: 'preppy.byzsPath.label'),
                       message(code: 'preppy.teacher.label'),
-                      message(code: 'default.dateCreated.label')
+                      message(code: 'default.dateCreated.label'),
+                      message(code: 'preppy.reviewDate.label')
                 ]
         def outputStream
         try {
@@ -807,37 +805,36 @@ class PreppyController {
                         cell(5,kk,de.parentPhone?:'')
                         cell(6,kk,de.sendType?.label?:'')
                         cell(7,kk,de.school?:'')
-                        cell(8,kk,receiverDistrict)
-                        cell(9,kk,de.receiverAddress?:'')
-                        cell(10,kk,de.receiver?:'')
-                        cell(11,kk,de.receivePhone?:'')
-                        cell(12,kk,de.cardPhotoPath?:'')
-                        cell(13,kk,de.cardBackgroundPhotoPath?:'')
-                        cell(14,kk,de.payPhoto?:'')
-                        cell(15,kk,de.reviewStatus?.label?:'')
-                        cell(16,kk,de.exStatus?.label?:'')
-                        cell(17,kk,de.exDate?de.exDate.format('yyyy-MM-dd'):'')
-                        cell(18,kk,de.counselor?:'')
-                        cell(19,kk,de.counselorPhone?:'')
-                        cell(20,kk,de.remark?:'')
-                        cell(21,kk,de.nation?.name?:'')
-                        cell(22,kk,de.birthday?de.birthday.format('yyyy-MM-dd'):'')
-                        cell(23,kk,de.politicalStatus?.name?:'')
-                        cell(24,kk,de.familyType?.label?:'')
-                        cell(25,kk,district)
-                        cell(26,kk,de.address?:'')
-                        cell(27,kk,juniorSchool?:'')
-                        cell(28,kk,juniorAuthenticator?:'')
-                        cell(29,kk,de.hkbPath?:'')
-                        cell(30,kk,de.hkbksyPath?:'')
-                        cell(31,kk,de.xjzmPath?:'')
-                        cell(32,kk,de.byzsPath?:'')
+                        cell(8,kk,de.plan?.name?:'')
+                        cell(9,kk,receiverDistrict)
+                        cell(10,kk,de.receiverAddress?:'')
+                        cell(11,kk,de.receiver?:'')
+                        cell(12,kk,de.receivePhone?:'')
+                        cell(13,kk,de.cardPhotoPath?:'')
+                        cell(14,kk,de.cardBackgroundPhotoPath?:'')
+                        cell(15,kk,de.payPhoto?:'')
+                        cell(16,kk,de.reviewStatus?.label?:'')
+                        cell(17,kk,de.exStatus?.label?:'')
+                        cell(18,kk,de.exDate?de.exDate.format('yyyy-MM-dd'):'')
+                        cell(19,kk,de.counselor?:'')
+                        cell(20,kk,de.counselorPhone?:'')
+                        cell(21,kk,de.remark?:'')
+                        cell(22,kk,de.nation?.name?:'')
+                        cell(23,kk,de.birthday?de.birthday.format('yyyy-MM-dd'):'')
+                        cell(24,kk,de.politicalStatus?.name?:'')
+                        cell(25,kk,de.familyType?.label?:'')
+                        cell(26,kk,district)
+                        cell(27,kk,de.address?:'')
+                        cell(28,kk,juniorSchool?:'')
+                        cell(29,kk,juniorAuthenticator?:'')
+
                         try {
-                            cell(33,kk,de.teacher?.name?:'')
+                            cell(30,kk,de.teacher?.name?:'')
                         } catch (Exception e) {
-                            cell(33,kk,'')
+                            cell(30,kk,'')
                         }
-                        cell(34,kk,de.dateCreated.format('yyyy-MM-dd HH:mm:ss'))
+                        cell(31,kk,de.dateCreated.format('yyyy-MM-dd HH:mm:ss'))
+                        cell(32,kk,de.reviewDate.format('yyyy-MM-dd HH:mm:ss'))
                     }
                 }
             }

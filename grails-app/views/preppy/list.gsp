@@ -110,6 +110,7 @@
                         <th><g:message code="preppy.birthday.label" default="number" /></th>
 
                         <th><g:message code="preppy.reviewStatus.label" default="reviewStatus" /></th>
+                        <th><g:message code="preppy.reviewDate.label" default="reviewDate" /></th>
 
                         <th><g:message code="preppy.teacher.label" default="teacher" /></th>
 
@@ -127,12 +128,13 @@
                             <td class="center">${preppyInstance.number}</td>
                             
                             <td class="center"><g:if test="${preppyInstance.birthday}"><g:formatDate date="${preppyInstance.birthday}" format="yyyy-MM-dd"/></g:if> </td>
-                            
+
                             <td class="center" id="studentTd${preppyInstance.id}">
                                 <span class="label  ${preppyInstance.reviewStatus == Preppy.ReviewStatus.NO_AUDIT ?'label-important':(preppyInstance.reviewStatus == Preppy.ReviewStatus.GJSZZ?'label-success':'label-warning')}">
                                     ${preppyInstance.reviewStatus?.label?:message(code: 'home.student.auditing.message')}
                                 </span>
                             </td>
+                            <td class="center"><g:if test="${preppyInstance.reviewDate}"><g:formatDate date="${preppyInstance.reviewDate}" format="yyyy-MM-dd HH:mm"/></g:if> </td>
 
                             <td class="center">
                                 <%
