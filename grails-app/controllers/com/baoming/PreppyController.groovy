@@ -833,8 +833,8 @@ class PreppyController {
                         } catch (Exception e) {
                             cell(30,kk,'')
                         }
-                        cell(31,kk,de.dateCreated.format('yyyy-MM-dd HH:mm:ss'))
-                        cell(32,kk,de.reviewDate.format('yyyy-MM-dd HH:mm:ss'))
+                        cell(31,kk,de.dateCreated?.format('yyyy-MM-dd HH:mm:ss'))
+                        cell(32,kk,de.reviewDate?.format('yyyy-MM-dd HH:mm:ss'))
                     }
                 }
             }
