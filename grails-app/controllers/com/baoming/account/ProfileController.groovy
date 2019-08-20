@@ -252,15 +252,15 @@ class ProfileController {
             redirect(action: 'preppy')
             return
         }
-        if(preppy.reviewStatus && preppy.reviewStatus != Preppy.ReviewStatus.NO_AUDIT){
-            flash.message = '已经审核无法修改资料'
-            if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
-                redirect(action: 'info',controller: 'mobile')
-                return
-            }
-            redirect(action: 'preppy')
-            return
-        }
+        //if(preppy.reviewStatus && preppy.reviewStatus != Preppy.ReviewStatus.NO_AUDIT){
+            //flash.message = '已经审核无法修改资料'
+           //if(MyNetUtils.checkMobile(request.getHeader("user-agent"))){
+             //   redirect(action: 'info',controller: 'mobile')
+             //   return
+            //}
+            //redirect(action: 'preppy')
+            //return
+        //}
         preppy.family =Preppy.Family."${params.family}"
         preppy.type =Preppy.Type."${params.type}"
         if(params.leiBie){
