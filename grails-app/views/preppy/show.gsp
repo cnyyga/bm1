@@ -299,10 +299,13 @@
             <g:actionSubmit class="btn btn-primary" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
         </sec:ifAllGranted>
         <sec:ifAllGranted roles="${Role.AUTHORITY_TEACHER}">
-            <g:link class="btn btn-info" action="edit" id="${preppyInstance?.id}">
-                <i class="icon-edit icon-white"></i>
-                <g:message code="default.button.edit.label" default="Edit" />
-            </g:link>
+            <g:if test="${!preppyInstance.reviewStatus || preppyInstance.reviewStatus?.name() == com.baoming.Preppy.ReviewStatus.NO_AUDIT.name() || preppyInstance.reviewStatus?.name() == com.baoming.Preppy.ReviewStatus.GJSZZ.name()}">
+                <g:link class="btn btn-info" action="edit" id="${preppyInstance?.id}">
+                    <i class="icon-edit icon-white"></i>
+                    <g:message code="default.button.edit.label" default="Edit" />
+                </g:link>
+            </g:if>
+
         </sec:ifAllGranted>
         <g:link class="btn btn-success" action="xyPrint1" id="${preppyInstance.id}">
             <i class="icon-zoom-in  icon-white"></i>

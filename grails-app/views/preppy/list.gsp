@@ -156,6 +156,8 @@
 
                                 <sec:ifAllGranted roles="${Role.AUTHORITY_TEACHER}">
 
+                                    <g:if test="${!preppyInstance.reviewStatus || preppyInstance.reviewStatus?.name() == com.baoming.Preppy.ReviewStatus.NO_AUDIT.name() || preppyInstance.reviewStatus?.name() == com.baoming.Preppy.ReviewStatus.GJSZZ.name()}">
+
                                         <g:link class="btn btn-info" action="edit" id="${preppyInstance.id}">
                                             <i class="icon-edit icon-white"></i>
                                             <g:message code="default.button.edit.label" default="Edit" />
@@ -165,6 +167,7 @@
                                             <i class="icon-trash icon-white"></i>
                                             <g:message code="default.button.delete.label" default="Delete" />
                                         </g:link>
+                                    </g:if>
 
                                 </sec:ifAllGranted>
 

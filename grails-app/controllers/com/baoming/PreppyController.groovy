@@ -394,11 +394,11 @@ class PreppyController {
         def userId = springSecurityService.authentication.principal?.id
         def teacher
         if (SpringSecurityUtils.ifAllGranted(Role.AUTHORITY_TEACHER)) {
-            //if(preppyInstance.reviewStatus && preppyInstance.reviewStatus != Preppy.ReviewStatus.NO_AUDIT && preppyInstance.reviewStatus != Preppy.ReviewStatus.GJSZZ ){
-            //    flash.message = '已经审核无法修改资料'
-            //    redirect(action: 'list')
-            //    return
-            //}
+            if(preppyInstance.reviewStatus && preppyInstance.reviewStatus != Preppy.ReviewStatus.NO_AUDIT && preppyInstance.reviewStatus != Preppy.ReviewStatus.GJSZZ ){
+                flash.message = '已经审核无法修改资料'
+                redirect(action: 'list')
+                return
+            }
             teacher = Teacher.get(userId)
             preppyInstance.teacher = teacher
         }else{
@@ -903,7 +903,7 @@ class PreppyController {
             redirect(action: "list")
             return
         }
-        if (!params.reviewStatus || params.reviewStatus == Preppy.ReviewStatus.NO_AUDIT.name()) {
+        if (!params.reviewStatus || params.reviewStatus == Preppy.ReviewStatus.NO_AUDIT.name() || params.reviewStatus == Preppy.ReviewStatus.GJSZZ.name()) {
             redirect(action: "edit",id: id)
             return
         }

@@ -85,6 +85,26 @@
                 $(".lstx input").attr("disabled",true);
                 $(".lstx select").attr("disabled",true);
                 </sec:ifAllGranted>
+<sec:ifAllGranted roles="${Role.AUTHORITY_TEACHER}">
+
+               <g:if test="${!preppyInstance.reviewStatus || preppyInstance.reviewStatus?.name() == com.baoming.Preppy.ReviewStatus.NO_AUDIT.name() }">
+
+                </g:if>
+                <g:elseif test="${preppyInstance.reviewStatus?.name() == com.baoming.Preppy.ReviewStatus.GJSZZ.name()}">
+                $(".sccl input").attr("disabled",false);
+                $(".sccl select").attr("disabled",false);
+                $(".lstx input").attr("disabled",true);
+                $(".lstx select").attr("disabled",true);
+                </g:elseif>
+                <g:else>
+                $(".sccl input").attr("disabled",true);
+                $(".sccl select").attr("disabled",true);
+                $(".lstx input").attr("disabled",true);
+                $(".lstx select").attr("disabled",true);
+                </g:else>
+
+
+</sec:ifAllGranted>
                 $("#number").attr("disabled",true);
             })
 
